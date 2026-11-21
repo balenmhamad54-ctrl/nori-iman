@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#081f1a">
+<title>دوعاکانی بارودۆخەکان | نووری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#071a16;
+--panel:#0d2922;
+--gold:#d9b86c;
+--gold2:#f0d99d;
+--text:#f5f2e9;
+--muted:#b7c7bd;
+--line:rgba(217,184,108,.2);
+}
+*{box-sizing:border-box}
+body{
+margin:0;
+background:radial-gradient(ellipse at 80% -10%,#174536 0,transparent 38%),var(--bg);
+color:var(--text);
+font-family:"Noto Sans Arabic",sans-serif;
+line-height:1.85;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1160px,calc(100% - 34px));margin:auto}
+
+.top{padding:25px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+width:48px;height:48px;border:1px solid var(--gold);
+border-radius:16px;display:grid;place-items:center;
+color:var(--gold);font-size:25px;background:#10352b
+}
+.brand strong{font-size:19px;color:var(--gold2)}
+.brand small{display:block;color:var(--muted);font-size:12px}
+
+.hero{text-align:center;padding:38px 0 25px}
+.eyebrow{color:var(--gold);font-size:13px}
+.hero h1{
+font-size:clamp(27px,5vw,43px);
+margin:8px 0;color:var(--gold2)
+}
+.hero p{color:var(--muted);max-width:680px;margin:auto;font-size:14px}
+.hero-art{
+display:inline-block;margin-top:18px;
+color:var(--gold);border:1px solid var(--line);
+background:#0c251e;padding:8px 17px;border-radius:30px;font-size:12px
+}
+
+.toolbar{display:grid;grid-template-columns:1fr auto;gap:12px;margin:20px 0}
+.search{position:relative}
+.search input{
+width:100%;background:#0d2922;border:1px solid var(--line);
+border-radius:15px;padding:14px 45px 14px 15px;color:white;outline:none
+}
+.search span{position:absolute;right:16px;top:8px;color:var(--gold);font-size:22px}
+.fav-toggle{
+border:1px solid var(--line);background:#0d2922;
+color:var(--gold2);border-radius:15px;padding:0 17px
+}
+.fav-toggle.active{background:var(--gold);color:#14251e}
+
+.categories{display:flex;gap:9px;overflow:auto;padding:5px 0 15px}
+.cat{
+white-space:nowrap;border:1px solid var(--line);
+background:#0d2922;color:var(--muted);
+padding:9px 15px;border-radius:30px;font-size:12px
+}
+.cat.active{
+background:linear-gradient(135deg,#d9b86c,#b28b42);
+color:#17251d;border-color:transparent
+}
+.count{color:var(--muted);font-size:12px;margin:8px 2px 13px}
+
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.card{
+background:linear-gradient(145deg,#11362b,#0a231c);
+border:1px solid var(--line);border-radius:20px;
+padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.22)
+}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.tag{
+font-size:11px;color:var(--gold2);
+background:rgba(217,184,108,.1);
+border:1px solid var(--line);padding:5px 10px;border-radius:30px
+}
+.fav{border:0;background:transparent;color:#9baea4;font-size:23px}
+.fav.saved{color:var(--gold)}
+.card h2{font-size:17px;margin:0 0 13px;color:#f7e7bd}
+.arabic{
+font-family:"Amiri",serif;font-size:27px;line-height:2.05;
+text-align:center;color:#fff8e8;margin:12px 0 16px
+}
+.meaning{
+font-size:13px;color:#d4dfd8;background:rgba(0,0,0,.13);
+border-right:2px solid var(--gold);padding:10px 13px;border-radius:8px
+}
+.source{font-size:11px;color:var(--gold2);margin:13px 0}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.action{
+border:1px solid var(--line);background:rgba(217,184,108,.07);
+color:var(--gold2);padding:7px 12px;border-radius:10px;font-size:11px
+}
+.action:hover{background:rgba(217,184,108,.17)}
+.empty{
+grid-column:1/-1;text-align:center;padding:45px 15px;
+border:1px dashed var(--line);border-radius:18px;color:var(--muted)
+}
+.note{
+margin:26px 0;background:#0c251e;border:1px solid var(--line);
+border-radius:17px;padding:17px;color:var(--muted);font-size:12px
+}
+.note strong{color:var(--gold2)}
+footer{
+text-align:center;color:#8fa69a;font-size:11px;
+padding:25px 0 35px;border-top:1px solid var(--line);margin-top:35px
+}
+footer b{color:var(--gold)}
+.toast{
+position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);
+opacity:0;background:#e0c27b;color:#17251d;padding:10px 18px;
+border-radius:30px;font-size:12px;transition:.25s;pointer-events:none
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:700px){
+.wrap{width:calc(100% - 22px)}
+.hero{padding:28px 0 18px}
+.hero p{font-size:12px}
+.toolbar{grid-template-columns:1fr}
+.fav-toggle{padding:10px}
+.cards{grid-template-columns:1fr;gap:12px}
+.card{padding:17px;border-radius:17px}
+.arabic{font-size:25px}
+.card h2{font-size:16px}
+}
+@media(min-width:1000px){
+.cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+
+.home-btn{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:10px 17px;
+border:1px solid rgba(217,184,108,.35);
+border-radius:12px;
+background:linear-gradient(135deg,#173e31,#0b251d);
+color:#f0d99d;
+text-decoration:none;
+font-size:13px;
+font-weight:700;
+transition:.3s;
+}
+.home-btn:hover{
+background:#d9b86c;
+color:#071a16;
+transform:translateY(-2px);
+}
+
+
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<header class="top">
+<div class="wrap brand">
+<div class="brand-mark">۞</div>
+<div>
+<strong>نووری ئیمان</strong>
+<small>بە زانست، دڵ ڕووناک بکەوە</small>
+</div>
+</div>
+</header>
+
+
+<div class="wrap" style="padding-top:18px">
+<a href="index.html" class="home-btn">
+<span>⌂</span>
+گەڕانەوە بۆ پەڕەی سەرەکی
+</a>
+</div>
+
+
+
+
+
+<main class="wrap">
+
+<section class="hero">
+<div class="eyebrow">دوعا و زیکری ڕۆژانە</div>
+<h1>دوعاکانی بارودۆخەکان</h1>
+<p>
+دوعای قورئان و سوننەت بۆ کات و بارودۆخە جیاوازەکانی ژیان؛
+لەگەڵ دەقی عەرەبی، واتای کوردی و سەرچاوە.
+</p>
+<div class="hero-art">✦ بە یادکردنی خوای گەورە دڵەکان ئارام دەگرن ✦</div>
+</section>
+
+<div class="toolbar">
+<label class="search">
+<span>⌕</span>
+<input id="search" type="search" placeholder="گەڕان بە ناوی دوعا...">
+</label>
+<button id="favToggle" class="fav-toggle">☆ دڵخوازەکان</button>
+</div>
+
+<nav id="categories" class="categories"></nav>
+<div id="count" class="count"></div>
+<section id="cards" class="cards"></section>
+
+<aside class="note">
+<strong>تێبینی گرنگ:</strong>
+وەرگێڕانی کوردی بۆ نزیککردنەوەی مانای دوعاکانە.
+سەرچاوەکان لەگەڵ هەر دوعایەک دیاریکراون.
+</aside>
+
+</main>
+
+<footer>
+© نووری ئیمان — <b>بە زانست، دڵ ڕووناک بکەوە</b>
+</footer>
+
+<div id="toast" class="toast">کۆپی کرا</div>
+
+<script>
+const duas = [
+
+{
+id:1,cat:"دوعاکانی قورئان",
+title:"داوای خێری دونیا و دواڕۆژ",
+ar:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+ku:"پەروەردگارمان! لە دونیادا خێرمان پێ ببەخشە، لە دواڕۆژیشدا خێرمان پێ ببەخشە و لە سزای ئاگرمان بپارێزە.",
+src:"قورئان، سورەتی بەقەرە، ئایەتی ٢٠١."
+},
+
+{
+id:2,cat:"دوعاکانی قورئان",
+title:"داوای دڵی نەلار و ڕێنمایی",
+ar:"رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً ۚ إِنَّكَ أَنْتَ الْوَهَّابُ",
+ku:"پەروەردگارمان! دوای ئەوەی ڕێنماییت کردین، دڵەکانمان لە ڕاستی لادا مەبە؛ لە لای خۆتەوە ڕەحمەتێکمان پێ ببەخشە.",
+src:"قورئان، سورەتی ئالی عیمران، ئایەتی ٨."
+},
+
+{
+id:3,cat:"دوعاکانی قورئان",
+title:"دوعای کاتی تەنگانە",
+ar:"لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",
+ku:"هیچ پەرستراوێکی بەحق نییە جگە لە تۆ؛ پاک و بێگەردیت، بەڕاستی من لە ستەمکاران بووم.",
+src:"قورئان، سورەتی ئەنبیا، ئایەتی ٨٧."
+},
+
+{
+id:4,cat:"دوعاکانی قورئان",
+title:"دوعای ئاسانکاری لە قسەکردندا",
+ar:"رَبِّ اشْرَحْ لِي صَدْرِي ۝ وَيَسِّرْ لِي أَمْرِي ۝ وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي ۝ يَفْقَهُوا قَوْلِي",
+ku:"پەروەردگارم! سنگم فراوان بکە، کارەکەم ئاسان بکە، گرێی زمانم بکەرەوە، تاکو قسەکەم تێبگەن.",
+src:"قورئان، سورەتی تاها، ئایەتەکانی ٢٥–٢٨."
+},
+
+{
+id:5,cat:"خەوتن و بەئاگا هاتنەوە",
+title:"دوعای پێش خەوتن",
+ar:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
+ku:"خوایە! بە ناوی تۆ دەخەوم و بەئاگا دەبمەوە.",
+src:"سەحیحی بوخاری، ژمارە ٦٣٢٤."
+},
+
+{
+id:6,cat:"خەوتن و بەئاگا هاتنەوە",
+title:"دوعای بەئاگا هاتنەوە",
+ar:"الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+ku:"سوپاس بۆ خوایەک کە دوای خەوتن زیندووی کردینەوە؛ هەستانەوەش بۆ لای ئەوە.",
+src:"سەحیحی بوخاری، ژمارە ٦٣١٢."
+},
+
+{
+id:7,cat:"خواردن و خواردنەوە",
+title:"دوعای پێش خواردن",
+ar:"بِسْمِ اللَّهِ",
+ku:"بە ناوی خوایە.",
+src:"سەحیحی بوخاری، ژمارە ٥٣٧٦؛ سەحیحی موسلیم، ژمارە ٢٠٢٢."
+},
+
+{
+id:8,cat:"خواردن و خواردنەوە",
+title:"ئەگەر لە سەرەتای خواردن لەبیر چوو",
+ar:"بِسْمِ اللَّهِ أَوَّلَهُ وَآخِرَهُ",
+ku:"بە ناوی خوا لە سەرەتا و کۆتایی.",
+src:"سونەنی ئەبووداود، ژمارە ٣٧٦٧."
+},
+
+{
+id:9,cat:"گەشت و هاتوچۆ",
+title:"دوعای سواری و گەشت",
+ar:"سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ ۝ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنْقَلِبُونَ",
+ku:"پاک و بێگەردە ئەو خوایەی ئەمەی بۆ ئێمە ڕام کرد؛ بەڕاستی ئێمە بۆ لای پەروەردگارمان دەگەڕێینەوە.",
+src:"قورئان، سورەتی زوخروف، ئایەتەکانی ١٣–١٤."
+},
+
+{
+id:10,cat:"خەم و تەنگانە",
+title:"دوعا لە کاتی خەم و پەشێویدا",
+ar:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْجُبْنِ وَالْبُخْلِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ",
+ku:"خوایە! پەنا بە تۆ دەهێنم لە خەم و دڵتەنگی، نەتوانایی و تەمبەڵی، ترسنۆکی و بەخیلی، قورسایی قەرز و زاڵبوونی خەڵک.",
+src:"سەحیحی بوخاری، ژمارە ٦٣٦٩."
+},
+
+{
+id:11,cat:"خەم و تەنگانە",
+title:"دوعای لابردنی تەنگانە",
+ar:"لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ",
+ku:"هیچ پەرستراوێکی بەحق نییە جگە لە خوای گەورە و بەسەبر، پەروەردگاری عەرشی گەورە.",
+src:"سەحیحی بوخاری، ژمارە ٦٣٤٦؛ سەحیحی موسلیم، ژمارە ٢٧٣٠."
+},
+
+{
+id:12,cat:"نەخۆشی و تەندروستی",
+title:"دوعای داوای چاکبوونەوە",
+ar:"اللَّهُمَّ رَبَّ النَّاسِ، أَذْهِبِ الْبَأْسَ، اشْفِ أَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا",
+ku:"خوایە، پەروەردگاری خەڵکی! ئازار لاببە، چاکی بکەوە؛ تۆ چاککەرەویت. هیچ چاکبوونەوەیەک نییە جگە لە چاکبوونەوەی تۆ.",
+src:"سەحیحی بوخاری، ژمارە ٥٦٧٥؛ سەحیحی موسلیم، ژمارە ٢١٩١."
+},
+
+{
+id:13,cat:"باران و کەشوهەوا",
+title:"دوعای داوای بارانی سوودبەخش",
+ar:"اللَّهُمَّ صَيِّبًا نَافِعًا",
+ku:"خوایە! بارانێکی سوودبەخشمان پێ ببەخشە.",
+src:"سەحیحی بوخاری، ژمارە ١٠٣٢."
+},
+
+{
+id:14,cat:"باران و کەشوهەوا",
+title:"دوعای دوای باران",
+ar:"مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ",
+ku:"بە فەزل و ڕەحمەتی خوای گەورە بارانمان بۆ بارێندرا.",
+src:"سەحیحی بوخاری، ژمارە ٨٤٦؛ سەحیحی موسلیم، ژمارە ٧١."
+},
+
+{
+id:15,cat:"لێخۆشبوون و تەوبە",
+title:"سەیدولئیستیغفار",
+ar:"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَىٰ عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+ku:"خوایە، تۆ پەروەردگاری منیت؛ دان بە نیعمەتەکانتدا دەنێم و دان بە گوناهەکەمدا دەنێم؛ لێم خۆش ببە، چونکە هیچ کەسێک گوناه نابەخشێت جگە لە تۆ.",
+src:"سەحیحی بوخاری، ژمارە ٦٣٠٦."
+},
+
+{
+id:16,cat:"چوونە دەرەوە و هاتنە ژوورەوە",
+title:"دوعای چوونە دەرەوەی ماڵ",
+ar:"بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+ku:"بە ناوی خوا؛ پشت بە خوا دەبەستم؛ هیچ توانایەک نییە جگە بە خواوە.",
+src:"سونەنی ئەبووداود، ژمارە ٥٠٩٥."
+},
+
+{
+id:17,cat:"پاکوخاوێنی و نوێژ",
+title:"دوعای چوونە ناو مزگەوت",
+ar:"اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+ku:"خوایە! دەرگاکانی ڕەحمەتت بە ڕوومدا بکەرەوە.",
+src:"سەحیحی موسلیم، ژمارە ٧١٣."
+},
+
+{
+id:18,cat:"پاکوخاوێنی و نوێژ",
+title:"دوعای دەرچوون لە مزگەوت",
+ar:"اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+ku:"خوایە! داوای فەزل و بەخششی خۆت لێ دەکەم.",
+src:"سەحیحی موسلیم، ژمارە ٧١٣."
+},
+
+{
+id:19,cat:"پاکوخاوێنی و نوێژ",
+title:"دوعای دوای ووزوو",
+ar:"أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+ku:"شایەتی دەدەم هیچ پەرستراوێکی بەحق نییە جگە لە خوای تاک و بێهاوتا؛ و شایەتی دەدەم محەممەد بەندە و پێغەمبەری ئەوە.",
+src:"سەحیحی موسلیم، ژمارە ٢٣٤."
+},
+
+{
+id:20,cat:"پاراستن و پەناخواستن",
+title:"پەناخواستن بە وشەکانی خوای گەورە",
+ar:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+ku:"پەنا دەهێنم بە وشە تەواوەکانی خوای گەورە لە خراپەی هەموو ئەوەی خوڵقاندوویەتی.",
+src:"سەحیحی موسلیم، ژمارە ٢٧٠٨."
+}
+
+];
+
+const categories=[
+"هەموویان",
+...new Set(duas.map(d=>d.cat))
+];
+
+let active="هەموویان";
+let onlyFav=false;
+const favorites=new Set();
+
+const cards=document.getElementById("cards");
+const nav=document.getElementById("categories");
+const search=document.getElementById("search");
+const count=document.getElementById("count");
+const favToggle=document.getElementById("favToggle");
+
+function renderCats(){
+nav.innerHTML=categories.map(c=>`
+<button class="cat ${c===active?'active':''}" data-cat="${c}">
+${c}
+</button>`).join("");
+}
+
+function render(){
+const q=search.value.trim().toLowerCase();
+
+const list=duas.filter(d=>
+(active==="هەموویان"||d.cat===active)&&
+(!onlyFav||favorites.has(d.id))&&
+(!q||(d.title+" "+d.cat+" "+d.ku+" "+d.ar+" "+d.src).toLowerCase().includes(q))
+);
+
+count.textContent=`${list.length} دوعا دۆزرایەوە`;
+
+cards.innerHTML=list.length?list.map(d=>`
+<article class="card">
+<div class="card-head">
+<span class="tag">${d.cat}</span>
+<button class="fav ${favorites.has(d.id)?'saved':''}" data-fav="${d.id}">
+${favorites.has(d.id)?"★":"☆"}
+</button>
+</div>
+
+<h2>${d.title}</h2>
+<div class="arabic">${d.ar}</div>
+<p class="meaning">${d.ku}</p>
+<p class="source"><b>سەرچاوە:</b> ${d.src}</p>
+
+<div class="actions">
+<button class="action" data-copy="${d.id}">▣ کۆپیکردنی دوعا</button>
+<button class="action" data-copyall="${d.id}">کۆپیکردنی تەواو</button>
+</div>
+</article>
+`).join(""):`<div class="empty">هیچ دوعایەک نەدۆزرایەوە.</div>`;
+}
+
+function toast(msg){
+const t=document.getElementById("toast");
+t.textContent=msg;
+t.classList.add("show");
+setTimeout(()=>t.classList.remove("show"),1700);
+}
+
+nav.addEventListener("click",e=>{
+const b=e.target.closest("[data-cat]");
+if(!b)return;
+active=b.dataset.cat;
+renderCats();
+render();
+});
+
+search.addEventListener("input",render);
+
+favToggle.addEventListener("click",()=>{
+onlyFav=!onlyFav;
+favToggle.classList.toggle("active",onlyFav);
+favToggle.textContent=onlyFav?"★ تەنها دڵخوازەکان":"☆ دڵخوازەکان";
+render();
+});
+
+cards.addEventListener("click",async e=>{
+
+const f=e.target.closest("[data-fav]");
+if(f){
+const id=Number(f.dataset.fav);
+favorites.has(id)?favorites.delete(id):favorites.add(id);
+render();
+return;
+}
+
+const c=e.target.closest("[data-copy],[data-copyall]");
+if(!c)return;
+
+const d=duas.find(x=>x.id===Number(c.dataset.copy||c.dataset.copyall));
+const all=c.hasAttribute("data-copyall");
+
+const text=all?
+`${d.title}\n${d.ar}\n${d.ku}\nسەرچاوە: ${d.src}`:
+d.ar;
+
+try{
+await navigator.clipboard.writeText(text);
+toast("بە سەرکەوتوویی کۆپی کرا");
+}catch(err){
+const ta=document.createElement("textarea");
+ta.value=text;
+document.body.appendChild(ta);
+ta.select();
+document.execCommand("copy");
+ta.remove();
+toast("کۆپی کرا");
+}
+
+});
+
+renderCats();
+render();
+</script>
+
+<script src="app-shell.js" defer></script>
+</body>
+</html>

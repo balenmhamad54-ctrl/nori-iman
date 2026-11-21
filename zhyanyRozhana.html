@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071d19">
+<title>ژیانی ڕۆژانەی موسڵمان | نوری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#061a17;
+  --panel:#0c2923;
+  --panel2:#10352c;
+  --gold:#dfbd70;
+  --gold2:#f3d99b;
+  --text:#f4f1e8;
+  --muted:#a8b8ae;
+  --line:rgba(223,189,112,.17);
+  --green:#57b98a;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  color:var(--text);
+  font-family:"Noto Sans Arabic",sans-serif;
+  background:
+    radial-gradient(ellipse at 50% -15%,rgba(49,111,83,.32),transparent 55%),
+    var(--bg);
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.container{width:min(1100px,92%);margin:auto}
+header{
+  padding:17px 0;
+  border-bottom:1px solid var(--line);
+  background:rgba(5,23,19,.8);
+  backdrop-filter:blur(14px);
+  position:sticky;top:0;z-index:10;
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--gold2)}
+.brand-icon{
+  width:42px;height:42px;border:1px solid var(--line);
+  border-radius:14px;display:grid;place-items:center;
+  font-size:23px;background:var(--panel)
+}
+.home{
+  border:1px solid var(--line);border-radius:12px;
+  padding:9px 15px;color:var(--gold2);font-size:13px;
+  background:var(--panel)
+}
+.hero{
+  text-align:center;padding:48px 10px 25px;
+}
+.hero-symbol{font-size:38px;color:var(--gold)}
+.hero h1{font-size:clamp(24px,5vw,38px);margin:12px 0;color:var(--gold2)}
+.hero p{color:var(--muted);line-height:2;margin:0 auto;max-width:620px;font-size:14px}
+.date-box{
+  margin:20px auto 0;display:inline-flex;gap:9px;align-items:center;
+  border:1px solid var(--line);padding:9px 17px;border-radius:30px;
+  color:var(--gold2);font-size:13px;background:rgba(12,41,35,.7)
+}
+.progress-card{
+  background:linear-gradient(130deg,#12392e,#0b2822);
+  border:1px solid var(--line);border-radius:22px;
+  padding:22px;margin:15px 0 25px;
+  display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center;
+}
+.progress-card h2{font-size:17px;margin:0 0 7px}
+.progress-card p{font-size:12px;color:var(--muted);margin:0}
+.progress-number{font-size:30px;color:var(--gold2);font-weight:800}
+.progress-track{
+  height:9px;background:#071c17;border-radius:20px;
+  overflow:hidden;margin-top:17px;grid-column:1/-1
+}
+.progress-fill{
+  height:100%;width:0%;border-radius:20px;
+  background:linear-gradient(90deg,#b48b42,#f3d99b);
+  transition:width .3s
+}
+.section-title{
+  display:flex;align-items:center;gap:10px;
+  margin:30px 0 15px;font-size:18px;color:var(--gold2)
+}
+.section-title:after{content:"";height:1px;background:var(--line);flex:1}
+.intro{
+  color:var(--muted);font-size:13px;line-height:2;margin-top:-7px
+}
+.tasks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.task{
+  display:flex;align-items:flex-start;gap:13px;
+  background:linear-gradient(145deg,var(--panel),#09221d);
+  border:1px solid var(--line);border-radius:17px;
+  padding:16px;transition:.2s;min-width:0
+}
+.task.done{border-color:rgba(87,185,138,.55);background:#10352b}
+.task-check{
+  appearance:none;flex:0 0 22px;width:22px;height:22px;
+  border:1.5px solid #8b9d91;border-radius:7px;
+  margin:2px 0 0;position:relative;cursor:pointer;
+}
+.task-check:checked{background:var(--green);border-color:var(--green)}
+.task-check:checked:after{
+  content:"✓";position:absolute;inset:0;display:grid;place-items:center;
+  color:#062018;font-size:15px;font-weight:900
+}
+.task-content{flex:1;min-width:0}
+.task h3{font-size:14px;margin:0 0 6px;font-weight:700}
+.task p{font-size:12px;color:var(--muted);line-height:1.9;margin:0}
+.task.done h3{text-decoration:line-through;color:#a9d6bd}
+.task-icon{font-size:22px;flex:0 0 25px}
+.tip{
+  margin:25px 0;padding:20px;border-radius:18px;
+  border:1px solid var(--line);
+  background:linear-gradient(120deg,rgba(223,189,112,.1),rgba(12,41,35,.8));
+}
+.tip h3{color:var(--gold2);margin:0 0 9px;font-size:15px}
+.tip p{font-size:13px;line-height:2;color:#d5ded7;margin:0}
+.reset-row{display:flex;justify-content:center;margin:25px 0}
+.reset{
+  border:1px solid rgba(230,130,110,.35);color:#e9a997;
+  background:transparent;border-radius:12px;padding:10px 17px;font-size:12px
+}
+footer{
+  text-align:center;border-top:1px solid var(--line);
+  padding:25px 10px;color:var(--muted);font-size:12px;line-height:2
+}
+footer strong{color:var(--gold2)}
+@media(max-width:650px){
+  .tasks{grid-template-columns:1fr}
+  .hero{padding-top:35px}
+  .progress-card{padding:17px}
+  .task{padding:14px}
+  .brand{font-size:14px}
+  .home{padding:8px 11px;font-size:12px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <div class="brand-icon">☪</div>
+      <span>نوری ئیمان</span>
+    </div>
+    <a class="home" href="index.html">⌂ گەڕانەوە بۆ سەرەتا</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <div class="hero-symbol">🌙</div>
+    <h1>ژیانی ڕۆژانەی موسڵمان</h1>
+    <p>
+      هەنگاوێکی بچووک بۆ ڕۆژێکی پڕ لە باوەڕ و کردارە چاکەکان.
+      بە هێواشی و بەردەوامی خۆت لەگەڵ خوا نزیکتر بکەرەوە.
+    </p>
+    <div class="date-box">
+      <span>📅</span>
+      <span id="todayDate">ڕۆژی ئەمڕۆ</span>
+    </div>
+  </section>
+
+  <section class="progress-card">
+    <div>
+      <h2>پێشکەوتنی ئەمڕۆت</h2>
+      <p id="progressText">هێشتا هیچ کردارێک تەواو نەکراوە</p>
+    </div>
+    <div class="progress-number" id="progressNumber">0%</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">🌅 بەیانی</h2>
+    <p class="intro">ڕۆژەکەت بە یادکردنەوەی خوا و نیازی چاک دەست پێ بکە.</p>
+    <div class="tasks" id="morning"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">🕌 لە ماوەی ڕۆژدا</h2>
+    <p class="intro">هەوڵ بدە لە کار و مامەڵەکانتدا ڕەوشتی جوان و ڕاستگۆیی بپارێزیت.</p>
+    <div class="tasks" id="daytime"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">🌇 ئێوارە</h2>
+    <p class="intro">کاتێک بۆ ئارامگرتن، سوپاسگوزاری و پەیوەندی لەگەڵ خوا دابنێ.</p>
+    <div class="tasks" id="evening"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">🤍 ڕەوشت و مامەڵەی جوان</h2>
+    <p class="intro">ئیسـلام تەنها عیبـادەت نییە؛ ڕەوشتی جوانیش بەشێکی گرنگی ژیانی موسڵمانە.</p>
+    <div class="tasks" id="character"></div>
+  </section>
+
+  <div class="tip">
+    <h3>✨ بیرخستنەوەی ئەمڕۆ</h3>
+    <p>
+      بەردەوامی لەسەر کردارە چاکەکان گرنگە، تەنانەت ئەگەر کەمیش بن.
+      خۆت بە کردارەکانی خەڵکی تر مەپێوە؛ هەوڵ بدە ئەمڕۆت لە دوێنێ باشتر بێت.
+    </p>
+  </div>
+
+  <div class="reset-row">
+    <button class="reset" id="resetButton">↻ سفرکردنەوەی نیشانەکانی ئەمڕۆ</button>
+  </div>
+
+</main>
+
+<footer>
+  <strong>نوری ئیمان</strong><br>
+  بە زانست، دڵ ڕووناک بکەوە
+</footer>
+
+<script>
+const dailyTasks = {
+  morning: [
+    {id:"m1",icon:"🤲",title:"نوێژی بەیانی",desc:"نوێژی فەجر لە کاتی خۆیدا ئەنجام بدە."},
+    {id:"m2",icon:"📖",title:"خوێندنەوەی قورئان",desc:"تەنانەت چەند ئایەتێکیش بێت، بە تێڕامان بیخوێنەوە."},
+    {id:"m3",icon:"🌿",title:"ئەزکاری بەیانی",desc:"ئەزکارەکانی بەیانی بخوێنەوە لە سەرچاوەیەکی باوەڕپێکراو."},
+    {id:"m4",icon:"💛",title:"نیازی چاک",desc:"نیازی ئەوە بکە کار و ڕۆژەکەت بۆ ڕەزامەندی خوا بێت."}
+  ],
+  daytime: [
+    {id:"d1",icon:"🕌",title:"نوێژەکانی تر",desc:"نوێژە فەرزەکان لە کاتی خۆیاندا ئەنجام بدە."},
+    {id:"d2",icon:"📚",title:"فێربوونی زانستی ئاینی",desc:"چەند خولەکێک بۆ فێربوونی بابەتێکی دروستی ئاینی تەرخان بکە."},
+    {id:"d3",icon:"🤝",title:"یارمەتیدانی کەسێک",desc:"بە قسەیەکی جوان یان کردارێکی بچووک یارمەتی کەسێک بدە."},
+    {id:"d4",icon:"💧",title:"پاراستنی پاکوخاوێنی",desc:"پاکوخاوێنی جەستە و شوێنی ژیانت بپارێزە."}
+  ],
+  evening: [
+    {id:"e1",icon:"🌆",title:"ئەزکاری ئێوارە",desc:"ئەزکارەکانی ئێوارە بخوێنەوە لە سەرچاوەیەکی باوەڕپێکراو."},
+    {id:"e2",icon:"📗",title:"خوێندنەوە یان گوێگرتن لە قورئان",desc:"کاتێک بۆ قورئان و تێڕامان لە واتای ئایەتەکان دابنێ."},
+    {id:"e3",icon:"🙏",title:"دوعا و داوای لێخۆشبوون",desc:"بە دڵێکی پاک دوعا بکە و داوای لێخۆشبوون بکە."},
+    {id:"e4",icon:"🌙",title:"نوێژی عیشا",desc:"نوێژی عیشا لە کاتی خۆیدا ئەنجام بدە."}
+  ],
+  character: [
+    {id:"c1",icon:"🗣️",title:"قسەی جوان",desc:"لە غەیبەت، درۆ و قسەی ئازاردەر دوور بکەوە."},
+    {id:"c2",icon:"❤️",title:"ڕێزگرتن لە دایک و باوک",desc:"بە قسە و کردار ڕێزیان بگرە و دڵخۆشیان بکە."},
+    {id:"c3",icon:"🍞",title:"سەدەقە و بەخشین",desc:"ئەگەر توانیت، بە شێوەیەک یارمەتی کەسێکی پێویست بدە."},
+    {id:"c4",icon:"🕊️",title:"لێخۆشبوون",desc:"هەوڵ بدە کینە لە دڵتدا نەهێڵیت و لەگەڵ خەڵک بە میهرەبانی مامەڵە بکەیت."}
+  ]
+};
+
+const allTasks = Object.values(dailyTasks).flat();
+const todayKey = new Date().toLocaleDateString("en-CA");
+const storageKey = "nooriImanDaily_" + todayKey;
+
+let completed = {};
+
+try {
+  completed = JSON.parse(localStorage.getItem(storageKey) || "{}") || {};
+} catch {
+  completed = {};
+}
+
+function renderTasks(){
+  Object.entries(dailyTasks).forEach(([section,tasks])=>{
+    const container = document.getElementById(section);
+
+    container.innerHTML = tasks.map(task=>`
+      <label class="task ${completed[task.id] ? "done" : ""}">
+        <span class="task-icon">${task.icon}</span>
+        <span class="task-content">
+          <h3>${task.title}</h3>
+          <p>${task.desc}</p>
+        </span>
+        <input
+          class="task-check"
+          type="checkbox"
+          data-id="${task.id}"
+          ${completed[task.id] ? "checked" : ""}
+          aria-label="تەواوکردنی ${task.title}"
+        >
+      </label>
+    `).join("");
+  });
+
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = allTasks.length;
+  const done = allTasks.filter(task=>completed[task.id]).length;
+  const percent = Math.round((done / total) * 100);
+
+  document.getElementById("progressNumber").textContent = percent + "%";
+  document.getElementById("progressFill").style.width = percent + "%";
+
+  document.getElementById("progressText").textContent =
+    done === total
+      ? "ماشاءالله! هەموو کردارەکانت تەواو کردووە."
+      : `تا ئێستا ${done} لە ${total} کردار تەواو کردووە.`;
+}
+
+document.addEventListener("change",event=>{
+  if(!event.target.matches(".task-check")) return;
+
+  const id = event.target.dataset.id;
+  completed[id] = event.target.checked;
+
+  localStorage.setItem(storageKey,JSON.stringify(completed));
+
+  const card = event.target.closest(".task");
+  card.classList.toggle("done",event.target.checked);
+  updateProgress();
+});
+
+document.getElementById("resetButton").addEventListener("click",()=>{
+  if(!confirm("دڵنیایت دەتەوێت هەموو نیشانەکانی ئەمڕۆ بسڕیتەوە؟")) return;
+
+  completed = {};
+  localStorage.removeItem(storageKey);
+  renderTasks();
+});
+
+const date = new Date();
+document.getElementById("todayDate").textContent =
+  new Intl.DateTimeFormat("ku",{
+    weekday:"long",
+    year:"numeric",
+    month:"long",
+    day:"numeric"
+  }).format(date);
+
+renderTasks();
+</script>
+
+<script src="app-shell.js" defer></script>
+</body>
+</html>

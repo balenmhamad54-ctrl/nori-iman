@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#081c20">
+<title>چیرۆکی پێغەمبەران | نوری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#071a1e;
+ --panel:#102a2d;
+ --panel2:#163a37;
+ --gold:#d6b46a;
+ --gold2:#f0d99c;
+ --text:#f6f1e6;
+ --muted:#b0c1b9;
+ --border:rgba(214,180,106,.23);
+}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ color:var(--text);
+ font-family:'Noto Sans Arabic',sans-serif;
+ background:
+ radial-gradient(ellipse at top,#164039 0%,transparent 50%),
+ linear-gradient(145deg,#061619,#0b2529 60%,#07191c);
+ min-height:100vh;
+}
+header{
+ text-align:center;
+ padding:28px 15px 22px;
+ border-bottom:1px solid var(--border);
+ background:linear-gradient(135deg,#102f2d,#071b20);
+}
+.logo{
+ width:60px;height:60px;
+ display:grid;place-items:center;
+ margin:auto;
+ border:1px solid var(--gold);
+ border-radius:19px;
+ color:var(--gold2);
+ font-size:30px;
+}
+header h1{
+ color:var(--gold2);
+ font-size:25px;
+ margin:12px 0 5px;
+}
+header p{color:var(--muted);font-size:13px;margin:0}
+.container{max-width:1050px;margin:auto;padding:18px 14px 45px}
+.intro{
+ text-align:center;
+ padding:22px 16px;
+ background:linear-gradient(135deg,#153c35,#0c2428);
+ border:1px solid var(--border);
+ border-radius:19px;
+ margin-bottom:18px;
+}
+.intro .ornament{font-size:27px;color:var(--gold)}
+.intro h2{font-size:19px;color:var(--gold2);margin:8px 0}
+.intro p{font-size:13px;color:var(--muted);line-height:2;margin:0}
+.search-box{
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:13px;
+ margin-bottom:13px;
+}
+.search-box input{
+ width:100%;
+ padding:13px;
+ background:#091f22;
+ color:white;
+ border:1px solid var(--border);
+ border-radius:11px;
+ font-family:inherit;
+ font-size:14px;
+ outline:none;
+}
+.search-box input:focus{border-color:var(--gold)}
+.filters{
+ display:flex;
+ gap:8px;
+ overflow-x:auto;
+ padding:3px 1px 13px;
+ scrollbar-width:thin;
+}
+.filter{
+ white-space:nowrap;
+ padding:9px 15px;
+ border:1px solid var(--border);
+ border-radius:20px;
+ background:#102a2d;
+ color:var(--muted);
+ font-family:inherit;
+ font-size:12px;
+ cursor:pointer;
+}
+.filter.active{
+ color:#14251e;
+ background:var(--gold);
+ border-color:var(--gold);
+ font-weight:800;
+}
+.count{
+ color:var(--muted);
+ font-size:12px;
+ margin:0 3px 12px;
+}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:13px;
+}
+.prophet-card{
+ min-width:0;
+ background:linear-gradient(145deg,#123230,#0d2528);
+ border:1px solid var(--border);
+ border-radius:17px;
+ padding:16px;
+ transition:.2s;
+ display:flex;
+ flex-direction:column;
+}
+.prophet-card:hover{
+ border-color:var(--gold);
+ transform:translateY(-3px);
+}
+.card-top{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ margin-bottom:12px;
+}
+.number{
+ width:39px;height:39px;
+ display:grid;place-items:center;
+ border:1px solid var(--gold);
+ border-radius:13px;
+ color:var(--gold2);
+ font-size:13px;
+ flex-shrink:0;
+}
+.prophet-card h3{
+ margin:0;
+ color:var(--gold2);
+ font-size:17px;
+}
+.prophet-card .subtitle{
+ color:var(--muted);
+ font-size:11px;
+ margin-top:4px;
+}
+.summary{
+ color:#dce5dc;
+ font-size:13px;
+ line-height:2;
+ margin:0 0 12px;
+ flex:1;
+}
+.reference{
+ color:var(--gold2);
+ background:rgba(214,180,106,.08);
+ border-radius:9px;
+ padding:9px 10px;
+ font-size:11px;
+ line-height:1.8;
+ margin-bottom:12px;
+}
+.read-btn{
+ width:100%;
+ padding:11px;
+ border:1px solid var(--gold);
+ border-radius:11px;
+ background:linear-gradient(135deg,#b8954e,#e0c47d);
+ color:#17251e;
+ font-family:inherit;
+ font-size:12px;
+ font-weight:800;
+ cursor:pointer;
+}
+.read-btn:active{transform:scale(.98)}
+.empty{
+ grid-column:1/-1;
+ text-align:center;
+ color:var(--muted);
+ padding:30px 10px;
+}
+.modal{
+ position:fixed;
+ inset:0;
+ z-index:20;
+ background:rgba(0,0,0,.78);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:12px;
+}
+.modal.show{display:flex}
+.modal-box{
+ width:100%;
+ max-width:720px;
+ max-height:90vh;
+ overflow-y:auto;
+ background:#102a2d;
+ border:1px solid var(--gold);
+ border-radius:19px;
+ padding:20px;
+ position:relative;
+}
+.close{
+ position:absolute;
+ top:12px;
+ left:12px;
+ width:36px;height:36px;
+ border:1px solid var(--border);
+ border-radius:10px;
+ background:#173a39;
+ color:var(--gold2);
+ font-size:19px;
+ cursor:pointer;
+}
+.modal-title{
+ color:var(--gold2);
+ font-size:24px;
+ margin:10px 40px 5px 0;
+}
+.modal-subtitle{
+ color:var(--muted);
+ font-size:12px;
+ margin-bottom:20px;
+}
+.content-section{margin-top:17px}
+.content-section h3{
+ color:var(--gold2);
+ font-size:15px;
+ border-right:3px solid var(--gold);
+ padding-right:10px;
+}
+.content-section p{
+ color:#e2e8df;
+ font-size:14px;
+ line-height:2.2;
+ white-space:pre-line;
+}
+.lesson{
+ background:rgba(214,180,106,.08);
+ border:1px solid var(--border);
+ border-radius:13px;
+ padding:13px;
+ color:#f1e5c8;
+ font-size:13px;
+ line-height:2;
+}
+.source-note{
+ color:var(--muted);
+ font-size:11px;
+ line-height:2;
+ margin-top:18px;
+ border-top:1px solid var(--border);
+ padding-top:12px;
+}
+.back{
+ display:block;
+ width:max-content;
+ margin:25px auto 0;
+ padding:10px 18px;
+ border:1px solid var(--border);
+ border-radius:11px;
+ color:var(--gold2);
+ text-decoration:none;
+ font-size:13px;
+}
+footer{text-align:center;color:#849a91;font-size:11px;padding:15px}
+@media(max-width:750px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:480px){
+ .container{padding:12px 10px 35px}
+ .grid{grid-template-columns:1fr}
+ .prophet-card{padding:15px}
+ header h1{font-size:22px}
+ .modal-box{padding:16px}
+ .modal-title{font-size:21px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">۞</div>
+ <h1>چیرۆکی پێغەمبەران</h1>
+ <p>ژیان، بانگەواز و وانەکانی پێغەمبەرانی خودا</p>
+</header>
+
+<main class="container">
+
+ <section class="intro">
+  <div class="ornament">﷽</div>
+  <h2>چیرۆکەکان لە ڕووناکی قورئانی پیرۆزدا</h2>
+  <p>
+   لە چیرۆکی پێغەمبەران فێری باوەڕ، ئارامی،
+   خۆڕاگری، ڕاستگۆیی و پشتبەستن بە خوای گەورە دەبین.
+  </p>
+ </section>
+
+ <section class="search-box">
+  <input type="search" id="search" placeholder="گەڕان بە ناوی پێغەمبەر...">
+ </section>
+
+ <div class="filters">
+  <button class="filter active" data-filter="all">هەموویان</button>
+  <button class="filter" data-filter="early">پێغەمبەرانی سەرەتایی</button>
+  <button class="filter" data-filter="ibrahim">خێزانی ئیبراهیم</button>
+  <button class="filter" data-filter="musa">پێغەمبەرانی بەنی ئیسرائیل</button>
+  <button class="filter" data-filter="other">پێغەمبەرانی تر</button>
+ </div>
+
+ <div class="count" id="count">٢٥ پێغەمبەر</div>
+ <section class="grid" id="prophetGrid"></section>
+
+ <a class="back" href="index.html">گەڕانەوە بۆ پەڕەی سەرەکی</a>
+
+</main>
+
+<div class="modal" id="modal">
+ <div class="modal-box">
+  <button class="close" id="closeModal">×</button>
+  <h2 class="modal-title" id="modalTitle"></h2>
+  <div class="modal-subtitle" id="modalSubtitle"></div>
+
+  <div class="content-section">
+   <h3>پوختەی چیرۆک</h3>
+   <p id="modalStory"></p>
+  </div>
+
+  <div class="content-section">
+   <h3>وانە و پەندەکانی چیرۆک</h3>
+   <div class="lesson" id="modalLesson"></div>
+  </div>
+
+  <div class="source-note" id="modalSource"></div>
+ </div>
+</div>
+
+<footer>نوری ئیمان | بە زانست، دڵ ڕووناک بکەوە</footer>
+
+<script>
+const prophets = [
+{
+ name:"ئادەم (علیه السلام)",
+ group:"early",
+ title:"یەکەم مرۆڤ و پێغەمبەر",
+ story:"خوای گەورە ئادەمی لە خاک دروست کرد و ناوی هەموو شتەکانی فێر کرد. فریشتەکان بە فەرمانی خوا کڕنۆشیان بۆ برد، بەڵام ئیبلیس خۆی بە گەورەتر زانی و سەرپێچی کرد. ئادەم و هاوسەرەکەی لە بەهەشت نیشتەجێ بوون، بەڵام دوای خواردن لە دارە قەدەغەکراوەکە تۆبەیان کرد و خوا تۆبەکەی قبوڵ کرد.",
+ lesson:"لە هەڵەکردن دوور نییە مرۆڤ، بەڵام گرنگ ئەوەیە بە ڕاستی تۆبە بکات و بگەڕێتەوە بۆ خوا.",
+ refs:"سوورەتی بەقەرە: ٣٠–٣٩؛ ئەعراف: ١١–٢٧؛ تەها: ١١٥–١٢٣"
+},
+{
+ name:"ئیترس (علیه السلام)",
+ group:"early",
+ title:"پێغەمبەری ڕاستگۆ",
+ story:"قورئانی پیرۆز ئیترسی بە پێغەمبەرێکی ڕاستگۆ وەسف دەکات و دەفەرموێت خوای گەورە پلەیەکی بەرزی پێ بەخشیوە. وردەکارییەکانی ژیانی لە قورئاندا بە درێژی نەهاتوونەتەوە.",
+ lesson:"ڕاستگۆیی، دڵسۆزی و پابەندبوون بە ڕێنمایی خوا لە خاسیەتە گرنگەکانی پێغەمبەرانن.",
+ refs:"سوورەتی مەریەم: ٥٦–٥٧"
+},
+{
+ name:"نوح (علیه السلام)",
+ group:"early",
+ title:"پێغەمبەری خۆڕاگر",
+ story:"نوحی پێغەمبەر ماوەیەکی زۆر گەلەکەی بانگ کرد بۆ پەرستنی خوای تاک. زۆربەی خەڵکەکەی باوەڕیان نەهێنا. بە فەرمانی خوا کەشتییەکی دروست کرد و باوەڕداران لەگەڵیدا ڕزگاریان بوو. لافاوێکی گەورە ڕوویدا و ئەوانەی باوەڕیان نەهێنا، لەناو چوون.",
+ lesson:"لە بانگەوازی چاکەدا پێویستە خۆڕاگر بین و لە سەر ڕێگای ڕاست بەردەوام بین.",
+ refs:"سوورەتی نوح؛ هود: ٢٥–٤٩؛ قەمەر: ٩–١٥"
+},
+{
+ name:"هود (علیه السلام)",
+ group:"early",
+ title:"بانگەوازی گەلی عاد",
+ story:"هود بۆ گەلی عاد نێردرا. گەلەکەی بەهێز بوون، بەڵام خۆیان بە گەورە زانی و لە پەرستنی خوا دوور کەوتنەوە. هود داوای لێکردن تەنها خوای تاک بپەرستن و تۆبە بکەن، بەڵام زۆربەیان ڕەتیکردەوە. لە کۆتاییدا بە بایەکی توند سزا دران.",
+ lesson:"هێز و سامان نابێتە هۆی ڕزگاری ئەگەر مرۆڤ لە خوا دوور بکەوێتەوە.",
+ refs:"سوورەتی هود: ٥٠–٦٠؛ ئەحقاف: ٢١–٢٦"
+},
+{
+ name:"ساڵح (علیه السلام)",
+ group:"early",
+ title:"پێغەمبەری گەلی سەمود",
+ story:"ساڵح بۆ گەلی سەمود نێردرا. نیشانەیەکی ڕوونی خوا، وشترەکە بوو کە بۆ تاقیکردنەوەیان نێردرابوو. پێغەمبەرەکە ئاگاداری کردبوونەوە کە ئازاری مەدەن، بەڵام هەندێکیان وشترەکەیان کوشت و فەرمانی خواش شکێند.",
+ lesson:"نیشانەکانی خوا نابێت بە گاڵتە و سووکایەتی وەربگرین؛ سەرپێچی ئەنجامی خراپی هەیە.",
+ refs:"سوورەتی ئەعراف: ٧٣–٧٩؛ هود: ٦١–٦٨؛ شەمس: ١١–١٥"
+},
+{
+ name:"ئیبراهیم (علیه السلام)",
+ group:"ibrahim",
+ title:"خەلیلی ڕەحمان",
+ story:"ئیبراهیم بە بەڵگەی ڕوون گەلەکەی بانگ کرد بۆ پەرستنی خوای تاک و دژی بتپەرستی وەستا. بۆ تاقیکردنەوەی باوەڕی، لە ئاگر فڕێدرایەوە، بەڵام خوا ئاگرەکەی کردە سارد و سەلامەتی. دواتر بناغەی کەعبەی پیرۆزی لەگەڵ ئیسماعیل بەرز کردەوە.",
+ lesson:"باوەڕی ڕاستەقینە، بوێری لە پێناوی حەق و تەسلیمبوون بە فەرمانی خوا.",
+ refs:"سوورەتی بەقەرە: ١٢٤–١٢٩؛ ئەنبیا: ٥١–٧٠؛ ئیبراهیم: ٣٥–٤١"
+},
+{
+ name:"لوط (علیه السلام)",
+ group:"ibrahim",
+ title:"پێغەمبەری گەلی لوط",
+ story:"لوط بۆ گەلێک نێردرا کە خراپەکارییەکی گەورەیان دەکرد. ئەو بانگی کردنیان بۆ پاکی و ترس لە خوا، بەڵام زۆربەیان گوێیان نەگرت. خوای گەورە لوط و خێزانە باوەڕدارەکەی ڕزگار کرد و گەلەکەی سزایان دا.",
+ lesson:"پاکی، پاراستنی ئەخلاق و گوێڕایەڵی فەرمانی خوا گرنگن.",
+ refs:"سوورەتی هود: ٧٧–٨٣؛ ئەعراف: ٨٠–٨٤"
+},
+{
+ name:"ئیسمـاعیل (علیه السلام)",
+ group:"ibrahim",
+ title:"پێغەمبەری دڵسۆز",
+ story:"ئیسمـاعیل کوڕی ئیبراهیم بوو. قورئان وەفای بە بەڵێن و پابەندبوونی بە نوێژ و زەکات باس دەکات. کاتێک ئیبراهیم لە خەوندا بینی کوڕەکەی سەردەبڕێت، هەردووکیان بە فەرمانی خوا تەسلیم بوون و خوا فیدییەکی بۆ ناردن.",
+ lesson:"گوێڕایەڵی خوا، وەفاداری بە بەڵێن و ئارامی لە کاتی تاقیکردنەوەدا.",
+ refs:"سوورەتی صافات: ١٠٠–١١٣؛ مەریەم: ٥٤–٥٥"
+},
+{
+ name:"ئیسحاق (علیه السلام)",
+ group:"ibrahim",
+ title:"پێغەمبەری ماڵی ئیبراهیم",
+ story:"خوای گەورە بە ئیبراهیم و هاوسەرەکەی مژدەی لەدایکبوونی ئیسحاقی دا، لەگەڵ ئەوەی بە تەمەنی پیربوون گەیشتبوون. ئیسحاق پێغەمبەر بوو و خوای گەورە بەرەکەتی لە نەوەکەیدا دانا.",
+ lesson:"توانای خوا لە سنووری هەژمارەکانی مرۆڤ زیاترە؛ هیچ شتێک لەسەر خوا مەحاڵ نییە.",
+ refs:"سوورەتی هود: ٧١–٧٣؛ صافات: ١١٢–١١٣"
+},
+{
+ name:"یەعقوب (علیه السلام)",
+ group:"ibrahim",
+ title:"باوکی یوسف",
+ story:"یەعقوب پێغەمبەر و باوکی یوسف بوو. کاتێک یوسف لێی جیاکرایەوە، خەم و دڵتەنگییەکی زۆری هەبوو، بەڵام هیوای لە ڕەحمەتی خوا نەبڕی. لە کۆتاییدا خوا خێزانەکەی کۆکردەوە و چاوەکانی ڕووناک بوونەوە.",
+ lesson:"لە تاقیکردنەوەدا ئارام بگرە و هیوای خۆت لە ڕەحمەتی خوا مەبڕە.",
+ refs:"سوورەتی یوسف: ٨٣–٩٨؛ بەقەرە: ١٣٢–١٣٣"
+},
+{
+ name:"یوسف (علیه السلام)",
+ group:"ibrahim",
+ title:"پێغەمبەری خەون و خۆڕاگری",
+ story:"یوسف لە منداڵیدا خەونێکی سەیر بینی. براکانی بە هەستی حەسودی لێیان دوورخستەوە و فڕێیان دایە بیرێک. دواتر لە میسر بووە بەند و لە زیندانیشدا ماوەیەک مایەوە. بە یارمەتی خوا و بە پاکی و دانایی، پلەیەکی بەرزی پێگەیشت و لە کۆتاییدا لەگەڵ خێزانەکەی یەکگرتەوە.",
+ lesson:"پاکدامەنی، لێبوردەیی، خۆڕاگرى و متمانە بە خوا لە هەموو بارودۆخێکدا.",
+ refs:"سوورەتی یوسف: ٤–١٠١"
+},
+{
+ name:"ئەیوب (علیه السلام)",
+ group:"other",
+ title:"نموونەی خۆڕاگری",
+ story:"ئەیوب بە تاقیکردنەوەی نەخۆشی و زیان تووش بوو. بەڵام بە ئارامی و خۆڕاگری ڕوو لە خوای گەورە کرد و داوای ڕەحمەتی کرد. خوا بانگەوازەکەی وەڵام دایەوە و تەندروستی و نیعمەتەکانی پێ گەڕاندەوە.",
+ lesson:"لە کاتی نەخۆشی و ناخۆشیدا سەبر و پاڕانەوە لە خوا لە باشترین ڕەفتارەکانن.",
+ refs:"سوورەتی ئەنبیا: ٨٣–٨٤؛ ص: ٤١–٤٤"
+},
+{
+ name:"شوعەیب (علیه السلام)",
+ group:"other",
+ title:"پێغەمبەری ڕاستگۆیی لە مامەڵەدا",
+ story:"شوعەیب بۆ گەلی مەدیەن نێردرا. ئەوان لە کێش و پێوانەدا نادادپەروەر بوون و مافی خەڵکیان دەخوارد. شوعەیب بانگی کردن بۆ پەرستنی خوا و ڕاستگۆیی لە مامەڵە و کڕین و فرۆشتن، بەڵام زۆربەیان ڕەتیان کردەوە.",
+ lesson:"لە کڕین و فرۆشتن و هەموو مامەڵەیەکدا دادپەروەر و ڕاستگۆ بە.",
+ refs:"سوورەتی هود: ٨٤–٩٥؛ ئەعراف: ٨٥–٩٣"
+},
+{
+ name:"موسا (علیه السلام)",
+ group:"musa",
+ title:"پێغەمبەری بەنی ئیسرائیل",
+ story:"موسا لە سەردەمی فیرعەوندا لەدایک بوو. خوای گەورە لە منداڵیدا پاراستی و دواتر بە پێغەمبەری هەڵبژارد. بە نیشانە و موعجیزەکان بۆ فیرعەون نێردرا تا بەنی ئیسرائیل لە ستەم ڕزگار بکات. بە فەرمانی خوا دەریای بۆ کراوە و موسا و باوەڕداران ڕزگاریان بوو.",
+ lesson:"لە بەرامبەر ستەمدا بوێر بە، بەڵام هەمیشە پشت بە خوا ببەستە.",
+ refs:"سوورەتی قەسەس: ٣–٤٣؛ تەها: ٩–٩٨؛ شوعەرا: ١٠–٦٨"
+},
+{
+ name:"هارون (علیه السلام)",
+ group:"musa",
+ title:"برا و هاوڕێی موسا",
+ story:"هارون برا و یاریدەدەری موسا بوو. موسا لە خوا داوای کرد هارونیش لەگەڵیدا بێت بۆ ئەوەی لە بانگەوازدا یارمەتی بدات. هارون لەگەڵ موسا بۆ بانگکردنی فیرعەون و ڕێنمایی بەنی ئیسرائیل هەوڵی دا.",
+ lesson:"هاوکاری لە کارە چاکەکاندا و یارمەتیدانی یەکتر لە ڕێگای حەقدا.",
+ refs:"سوورەتی تەها: ٢٩–٣٦؛ ئەعراف: ١٤٢–١٥٠"
+},
+{
+ name:"ذولکیفل (علیه السلام)",
+ group:"other",
+ title:"لە خۆڕاگران",
+ story:"ذولکیفل لە قورئاندا لەگەڵ پێغەمبەرانی خۆڕاگر و چاکەکار ناوی هاتووە. قورئان وردەکارییەکی زۆر لەسەر ژیانی نەگێڕاوەتەوە، بۆیە نابێت چیرۆکی پشتڕاستنەکراو بۆی زیاد بکرێت.",
+ lesson:"خۆڕاگری و چاکەکاری خاسیەتێکی بەرزی باوەڕدارانە.",
+ refs:"سوورەتی ئەنبیا: ٨٥–٨٦؛ ص: ٤٨"
+},
+{
+ name:"داود (علیه السلام)",
+ group:"musa",
+ title:"پێغەمبەر و پاشای دادپەروەر",
+ story:"داود بە یارمەتی خوا جالوتی بردەوە و دواتر خوای گەورە پاشایەتی و زەبووری پێ بەخشی. بە دادپەروەری حوکمی دەکرد و لە قورئاندا بە زۆری ستایش کراوە.",
+ lesson:"دەسەڵات و پلە نابێت مرۆڤ لە دادپەروەری و نوێژ و زیکری خوا دوور بخاتەوە.",
+ refs:"سوورەتی بەقەرە: ٢٥١؛ ص: ١٧–٢٦؛ نیسا: ١٦٣"
+},
+{
+ name:"سولەیمان (علیه السلام)",
+ group:"musa",
+ title:"پێغەمبەری پاشای دانا",
+ story:"سولەیمان کوڕی داود بوو. خوای گەورە زانست و دەسەڵاتی پێ بەخشی و فێری زمانی باڵندەکان کرد. چیرۆکی هدهد و شاژنی سەبەئیش لە قورئاندا باس کراوە. سولەیمان هەموو نیعمەتەکانی بە بەخششی خوا دەزانی.",
+ lesson:"نیعمەتەکان بەخششێکن لە لایەن خواوە؛ سوپاسگوزاری و دادپەروەری بکە.",
+ refs:"سوورەتی نەمل: ١٥–٤٤؛ ص: ٣٠–٤٠"
+},
+{
+ name:"ئیلیاس (علیه السلام)",
+ group:"musa",
+ title:"بانگەواز بۆ پەرستنی خوا",
+ story:"ئیلیاس بۆ گەلەکەی نێردرا و داوای لێکردن بۆچی بتێک دەپەرستن و خوای گەورە جێدەهێڵن. بانگی کردن بۆ پەرستنی خوا و دوورکەوتنەوە لە بتپەرستی.",
+ lesson:"تەنها خوای گەورە شایستەی پەرستنە و نابێت هیچ شتێک لە شوێنی ئەو دابنرێت.",
+ refs:"سوورەتی صافات: ١٢٣–١٣٢"
+},
+{
+ name:"ئەلیەسەع (علیه السلام)",
+ group:"musa",
+ title:"پێغەمبەرێکی چاکەکار",
+ story:"ئەلیەسەع لە قورئاندا لە نێو پێغەمبەرانی هەڵبژێردراو و چاکەکار ناوی هاتووە. بەڵام وردەکارییەکانی ژیانی بە درێژی لە قورئاندا نەگێڕدراوەتەوە.",
+ lesson:"چاکەکاری و پابەندبوون بە ڕێگای خوا لە خاسیەتە گرنگەکانن.",
+ refs:"سوورەتی ئەنعام: ٨٦؛ ص: ٤٨"
+},
+{
+ name:"یونس (علیه السلام)",
+ group:"other",
+ title:"پێغەمبەری زیکر و پاڕانەوە",
+ story:"یونس گەلەکەی بانگ کرد، پاشان بە بێ چاوەڕوانی فەرمانی خوا جێی هێشت. لە کەشتییەکدا بوو و بە دەریادا فڕێدرایەوە، ماسییەکی گەورە بە فەرمانی خوا قوتی دا. یونس لە تاریکیدا پاڕایەوە و خوای گەورە ڕزگاری کرد.",
+ lesson:"لە هەموو ناخۆشییەکدا ڕوو لە خوا بکە و بە ڕاستی داوای لێخۆشبوون بکە.",
+ refs:"سوورەتی ئەنبیا: ٨٧–٨٨؛ صافات: ١٣٩–١٤٨"
+},
+{
+ name:"زەکەریا (علیه السلام)",
+ group:"musa",
+ title:"پێغەمبەری پاڕانەوە",
+ story:"زەکەریا پێغەمبەرێکی چاکەکار بوو. لە تەمەنی پیریدا داوای لە خوا کرد منداڵێکی چاکی پێ ببەخشێت. خوای گەورە مژدەی لەدایکبوونی یەحیای پێ دا، هەرچەندە هۆکارە سروشتییەکان ئاسان نەبوون.",
+ lesson:"لە داواکردنی خوادا هیوابڕاو مەبە؛ ڕەحمەتی خوا لە هەموو هۆکارەکان بەرزترە.",
+ refs:"سوورەتی مەریەم: ٢–١١؛ ئەنبیا: ٨٩–٩٠"
+},
+{
+ name:"یەحیا (علیه السلام)",
+ group:"musa",
+ title:"پێغەمبەری پاکدامەن",
+ story:"یەحیا کوڕی زەکەریا بوو. خوای گەورە لە منداڵیدا دانایی و زانستی پێ بەخشی. قورئان بە پاکی، دڵنەرمی، ڕێزگرتن لە دایک و باوک و تەقوای وەسفی دەکات.",
+ lesson:"پاکدامەنی، دڵنەرمی و ڕێزگرتن لە دایک و باوک خاسیەتەکانی مرۆڤی چاکن.",
+ refs:"سوورەتی مەریەم: ١٢–١٥؛ ئالی عیمران: ٣٩"
+},
+{
+ name:"عیسا (علیه السلام)",
+ group:"musa",
+ title:"پێغەمبەری خوا",
+ story:"عیسا بە موعجیزەی خوا بەبێ باوک لە دایک بوو. لە منداڵیدا بە فەرمانی خوا قسەی کرد و خوای گەورە بە ئینجیل و موعجیزەی پشتیوانی کرد. عیسا خەڵکی بانگ کرد بۆ پەرستنی خوای تاک و قورئان ڕوونی دەکاتەوە کە ئەو بەندە و پێغەمبەری خوا بوو.",
+ lesson:"موعجیزەکان نیشانەی توانای خوا و پێویستی بە یەکتاپەرستی و گوێڕایەڵییە.",
+ refs:"سوورەتی مەریەم: ١٦–٣٦؛ ئالی عیمران: ٤٥–٥١؛ مائیدە: ١١٠–١١٧"
+},
+{
+ name:"محەممەد (ﷺ)",
+ group:"other",
+ title:"کۆتا پێغەمبەری خوای گەورە",
+ story:"محەممەد ﷺ لە مەککە لەدایک بوو. لە تەمەنی چل ساڵیدا یەکەم وەحیی بۆ هات و بانگەوازی ئیسلامی دەست پێکرد. لە مەککە و مەدینەدا خەڵکی بانگ کرد بۆ یەکتاپەرستی، دادپەروەری، ڕەحم و ئەخلاقی جوان. قورئانی پیرۆز بۆی دابەزی و ئەو کۆتا پێغەمبەری خوایە.",
+ lesson:"خۆشەویستی پێغەمبەر ﷺ بە شوێنکەوتنی ڕێنماییەکانی، ڕەوشتی جوان و پابەندبوون بە سوننەتەکەی دەردەکەوێت.",
+ refs:"سوورەتی عەلەق: ١–٥؛ ئەنبیا: ١٠٧؛ ئەحزاب: ٤٠؛ تەوبە: ١٢٨"
+}
+];
+
+const grid=document.getElementById("prophetGrid");
+const search=document.getElementById("search");
+const count=document.getElementById("count");
+const modal=document.getElementById("modal");
+
+let activeFilter="all";
+
+function kurdishNumber(n){
+ return String(n).replace(/[0-9]/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+}
+
+function render(){
+ const query=search.value.trim().toLowerCase();
+
+ const filtered=prophets.filter(p=>{
+  const matchesFilter=activeFilter==="all" || p.group===activeFilter;
+  const matchesSearch=p.name.toLowerCase().includes(query) ||
+                      p.title.toLowerCase().includes(query);
+  return matchesFilter && matchesSearch;
+ });
+
+ count.textContent="ژمارەی پێغەمبەران: "+kurdishNumber(filtered.length);
+ grid.innerHTML="";
+
+ if(!filtered.length){
+  grid.innerHTML='<div class="empty">هیچ پێغەمبەرێک بەو ناوە نەدۆزرایەوە.</div>';
+  return;
+ }
+
+ filtered.forEach(p=>{
+  const index=prophets.indexOf(p);
+
+  const card=document.createElement("article");
+  card.className="prophet-card";
+
+  const top=document.createElement("div");
+  top.className="card-top";
+
+  const number=document.createElement("div");
+  number.className="number";
+  number.textContent=kurdishNumber(index+1);
+
+  const titleBox=document.createElement("div");
+  const name=document.createElement("h3");
+  name.textContent=p.name;
+  const subtitle=document.createElement("div");
+  subtitle.className="subtitle";
+  subtitle.textContent=p.title;
+
+  titleBox.append(name,subtitle);
+  top.append(number,titleBox);
+
+  const summary=document.createElement("p");
+  summary.className="summary";
+  summary.textContent=p.story.slice(0,115)+"...";
+
+  const ref=document.createElement("div");
+  ref.className="reference";
+  ref.textContent="سەرچاوە: "+p.refs;
+
+  const button=document.createElement("button");
+  button.className="read-btn";
+  button.textContent="خوێندنەوەی چیرۆک ←";
+  button.addEventListener("click",()=>openStory(index));
+
+  card.append(top,summary,ref,button);
+  grid.appendChild(card);
+ });
+}
+
+function openStory(index){
+ const p=prophets[index];
+
+ document.getElementById("modalTitle").textContent=p.name;
+ document.getElementById("modalSubtitle").textContent=p.title;
+ document.getElementById("modalStory").textContent=p.story;
+ document.getElementById("modalLesson").textContent=p.lesson;
+ document.getElementById("modalSource").textContent=
+  "شوێنی ئایەتەکان بۆ خوێندنەوە و پشتڕاستکردنەوە: "+p.refs+
+  ". ئەم پوختەیە لەسەر بنەمای ئەو ئایەتانە نووسراوە؛ وردەکارییە زیادەکان کە لە قورئاندا نەهاتوون بە دڵنیایی وەک ڕاستی ناخرێنەڕوو.";
+
+ modal.classList.add("show");
+ document.body.style.overflow="hidden";
+}
+
+function closeStory(){
+ modal.classList.remove("show");
+ document.body.style.overflow="";
+}
+
+document.getElementById("closeModal").addEventListener("click",closeStory);
+
+modal.addEventListener("click",e=>{
+ if(e.target===modal) closeStory();
+});
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape") closeStory();
+});
+
+search.addEventListener("input",render);
+
+document.querySelectorAll(".filter").forEach(button=>{
+ button.addEventListener("click",()=>{
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  activeFilter=button.dataset.filter;
+  render();
+ });
+});
+
+render();
+</script>
+
+<script src="app-shell.js" defer></script>
+</body>
+</html>

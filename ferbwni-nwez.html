@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#061d18">
+<title>فێربوونی نوێژ | نووری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+ --bg:#041b15;
+ --bg2:#08271e;
+ --panel:#0b3024;
+ --panel2:#10402f;
+ --gold:#e5bd65;
+ --gold2:#ffdf91;
+ --white:#f8f5e9;
+ --muted:#b0c2b6;
+ --green:#30bd7c;
+ --border:rgba(229,189,101,.32);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:var(--bg);
+ color:var(--white);
+ font-family:'Noto Sans Arabic',sans-serif;
+ min-height:100vh;
+ overflow-x:hidden;
+}
+button,a{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.container{width:min(1450px,96%);margin:auto}
+
+/* HEADER */
+header{
+ min-height:88px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+ padding:12px 20px;
+ border-bottom:1px solid var(--border);
+ background:rgba(4,27,21,.97);
+}
+.brand{display:flex;align-items:center;gap:13px}
+.logo{
+ width:58px;height:58px;
+ border-radius:50%;
+ display:grid;place-items:center;
+ color:var(--gold);
+ font-size:35px;
+ background:linear-gradient(145deg,#153e2e,#061d16);
+ border:1px solid var(--gold);
+}
+.brand h1{font-size:23px;color:var(--gold2)}
+.brand p{font-size:11px;color:var(--muted);margin-top:3px}
+nav{display:flex;align-items:center;gap:7px}
+nav a{
+ padding:12px 15px;
+ border-radius:12px;
+ color:#d7e2d8;
+ font-size:12px;
+ transition:.2s;
+}
+nav a:hover,nav a.active{
+ background:#174331;color:var(--gold2);
+}
+nav i{margin-left:7px;color:var(--gold)}
+.menu-btn{
+ display:none;background:transparent;border:1px solid var(--border);
+ color:var(--gold);padding:10px 13px;border-radius:10px;
+}
+
+/* HERO */
+.hero{
+ min-height:195px;
+ position:relative;
+ overflow:hidden;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ padding:28px 15px;
+ background:
+ radial-gradient(ellipse at 50% 110%,rgba(219,173,78,.22),transparent 45%),
+ linear-gradient(90deg,rgba(3,25,18,.4),rgba(3,25,18,.05),rgba(3,25,18,.4)),
+ linear-gradient(180deg,#174b36,#09291e 85%);
+ border-bottom:1px solid var(--gold);
+}
+.hero:before,.hero:after{
+ content:"☪";
+ position:absolute;
+ color:rgba(239,198,104,.16);
+ font-size:120px;
+}
+.hero:before{right:7%;top:15px}
+.hero:after{left:7%;bottom:-30px}
+.hero-content{position:relative;z-index:1}
+.hero h2{
+ color:var(--gold2);
+ font-size:clamp(27px,4vw,43px);
+ margin-bottom:10px;
+}
+.hero p{color:#f1e9d4;font-size:14px}
+.hero .verse{
+ margin-top:14px;
+ font-family:'Amiri',serif;
+ font-size:22px;
+ color:var(--gold2);
+}
+
+/* PROGRESS */
+.progress-area{
+ padding:13px 20px;
+ background:#08271e;
+ border:1px solid var(--border);
+ border-radius:16px;
+ margin:15px 0;
+ display:flex;
+ align-items:center;
+ gap:15px;
+}
+.progress-area strong{font-size:13px;color:var(--gold2);white-space:nowrap}
+.progress-track{
+ height:11px;background:#031710;
+ flex:1;border-radius:30px;overflow:hidden;
+ border:1px solid rgba(255,255,255,.08);
+}
+.progress-fill{
+ height:100%;width:0%;
+ background:linear-gradient(90deg,#bd8c35,#ffe29a);
+ border-radius:30px;transition:.35s;
+}
+.progress-number{font-size:13px;color:var(--gold2);direction:ltr}
+
+/* MAIN LAYOUT */
+.layout{
+ display:grid;
+ grid-template-columns:220px minmax(0,1fr);
+ gap:15px;
+ align-items:start;
+}
+.sidebar{
+ background:linear-gradient(180deg,#0b3024,#062219);
+ border:1px solid var(--border);
+ border-radius:19px;
+ padding:13px;
+ min-height:580px;
+}
+.sidebar-title{
+ color:var(--gold2);
+ font-size:15px;
+ padding:12px 8px;
+ border-bottom:1px solid var(--border);
+ margin-bottom:10px;
+}
+.side-link{
+ display:flex;align-items:center;gap:12px;
+ padding:14px 12px;
+ margin-bottom:8px;
+ border:1px solid rgba(229,189,101,.2);
+ border-radius:13px;
+ color:#e9eee7;
+ font-size:12px;
+ transition:.2s;
+ background:rgba(255,255,255,.015);
+}
+.side-link i{color:var(--gold);font-size:17px}
+.side-link:hover,.side-link.active{
+ background:linear-gradient(120deg,#e9c36f,#c3933e);
+ color:#082219;
+}
+.side-link:hover i,.side-link.active i{color:#082219}
+
+/* CONTENT */
+.content{min-width:0}
+.lesson-card{
+ display:grid;
+ grid-template-columns:minmax(230px,.8fr) minmax(0,1.4fr);
+ gap:20px;
+ padding:20px;
+ background:
+ radial-gradient(ellipse at 15% 50%,rgba(37,143,91,.22),transparent 45%),
+ linear-gradient(135deg,#10412f,#06251c);
+ border:1px solid #249c68;
+ border-radius:21px;
+ min-height:350px;
+}
+.lesson-image{
+ min-width:0;
+ display:flex;align-items:center;justify-content:center;
+ background:radial-gradient(ellipse,#1b6546 0%,#0c3929 65%,transparent 100%);
+ border-radius:16px;
+ overflow:hidden;
+}
+.lesson-image img{
+ display:block;
+ width:100%;
+ height:310px;
+ object-fit:contain;
+}
+.lesson-info{display:flex;flex-direction:column;justify-content:center;gap:13px}
+.lesson-number{
+ color:var(--gold);
+ font-size:12px;
+ font-weight:700;
+}
+.lesson-info h3{font-size:clamp(19px,2.5vw,27px);color:var(--gold2)}
+.lesson-description{font-size:13px;line-height:2.1;color:#e0e9df}
+.arabic-box{
+ background:#f0f0df;
+ color:#10251b;
+ border-radius:15px;
+ padding:16px;
+ text-align:center;
+ border:2px solid var(--gold);
+}
+.arabic-box .arabic{
+ font-family:'Amiri',serif;
+ font-size:clamp(28px,4vw,42px);
+ line-height:1.7;
+ direction:rtl;
+}
+.arabic-box .meaning{font-size:12px;color:#405347;margin-top:5px}
+.tip-box{
+ background:linear-gradient(110deg,#f5d78e,#e9bb5e);
+ color:#17251a;
+ border-radius:14px;
+ padding:13px 16px;
+ font-size:12px;
+ line-height:2;
+}
+.tip-box strong{display:block;margin-bottom:5px;font-size:13px}
+.tip-box i{margin-left:7px}
+
+/* STEPS */
+.section-heading{
+ display:flex;align-items:center;gap:10px;
+ color:var(--gold2);
+ font-size:17px;
+ margin:22px 0 13px;
+}
+.section-heading i{color:var(--gold)}
+.steps{
+ display:grid;
+ grid-template-columns:repeat(5,minmax(0,1fr));
+ gap:10px;
+}
+.step-card{
+ min-width:0;
+ overflow:hidden;
+ border:1px solid var(--border);
+ border-radius:14px;
+ background:#f4eedc;
+ color:#12251a;
+ text-align:center;
+ position:relative;
+ transition:.2s;
+ cursor:pointer;
+}
+.step-card:hover{transform:translateY(-3px)}
+.step-card.active{
+ border:3px solid var(--gold);
+ box-shadow:0 0 18px rgba(229,189,101,.28);
+}
+.step-card img{
+ width:100%;
+ height:130px;
+ object-fit:contain;
+ display:block;
+ background:#fff;
+}
+.step-card .step-label{
+ padding:9px 3px;
+ font-size:11px;
+ font-weight:800;
+ line-height:1.7;
+}
+.step-number{
+ position:absolute;
+ top:7px;right:7px;
+ width:25px;height:25px;
+ display:grid;place-items:center;
+ background:#0c653b;
+ color:white;
+ border:2px solid #f2d88e;
+ border-radius:50%;
+ font-size:11px;
+}
+
+/* BOTTOM PANELS */
+.bottom-grid{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:12px;
+ margin-top:20px;
+}
+.info-panel{
+ background:linear-gradient(145deg,#0d3929,#062219);
+ border:1px solid var(--gold);
+ border-radius:17px;
+ padding:17px;
+ min-width:0;
+}
+.info-panel h4{
+ color:var(--gold2);
+ font-size:14px;
+ margin-bottom:12px;
+ display:flex;align-items:center;gap:8px;
+}
+.info-panel p{font-size:12px;color:#e3e9df;line-height:2}
+.info-panel .big-arabic{
+ font-family:'Amiri',serif;
+ font-size:23px;
+ text-align:center;
+ color:#fff;
+ line-height:1.8;
+}
+.small-progress{
+ height:8px;background:#031810;border-radius:20px;
+ overflow:hidden;margin:12px 0 7px;
+}
+.small-progress span{
+ display:block;width:0%;height:100%;
+ background:linear-gradient(90deg,#c18d35,#ffdf91);
+ transition:.3s;
+}
+.badge-done{color:#5be0a0;font-size:12px}
+
+/* NAV BUTTONS */
+.controls{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;margin:20px 0;
+}
+.control-btn{
+ border:1px solid var(--gold);
+ background:linear-gradient(120deg,#f4d17e,#c79542);
+ color:#092219;
+ padding:12px 22px;
+ border-radius:12px;
+ font-weight:800;font-size:12px;
+}
+.control-btn:disabled{opacity:.35;cursor:not-allowed}
+.control-btn.secondary{
+ background:transparent;color:var(--gold2);
+}
+.control-btn:hover:not(:disabled){filter:brightness(1.08)}
+.complete-btn{
+ background:#0d4930;color:#a8edc4;
+ border:1px solid #31b77b;
+ padding:12px 17px;border-radius:12px;font-size:12px;
+}
+
+/* QUIZ */
+.quiz{
+ margin-top:25px;
+ background:linear-gradient(140deg,#103b2b,#08271e);
+ border:1px solid var(--border);
+ border-radius:18px;padding:20px;
+}
+.quiz h3{color:var(--gold2);font-size:17px;margin-bottom:15px}
+.quiz-question{font-size:14px;line-height:2;margin-bottom:13px}
+.answers{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.answer{
+ background:#061d16;color:white;
+ border:1px solid var(--border);
+ border-radius:11px;padding:12px;
+ text-align:right;font-size:12px;
+}
+.answer:hover{border-color:var(--gold);color:var(--gold2)}
+.answer.correct{background:#155b39;border-color:#51d492}
+.answer.wrong{background:#642e2a;border-color:#e98d82}
+.quiz-result{margin-top:12px;font-size:12px;color:var(--gold2);line-height:2}
+
+/* FOOTER */
+footer{
+ margin-top:30px;
+ padding:22px 12px;
+ border-top:1px solid var(--border);
+ text-align:center;
+ color:var(--muted);
+ font-size:11px;line-height:2.2;
+}
+footer span{color:var(--gold2)}
+footer a{color:var(--gold2);text-decoration:underline}
+
+/* MOBILE */
+@media(max-width:900px){
+ header{flex-wrap:wrap}
+ nav{width:100%;justify-content:center;flex-wrap:wrap}
+ nav a{padding:9px;font-size:11px}
+ .layout{grid-template-columns:1fr}
+ .sidebar{min-height:auto}
+ .sidebar-links{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+ .side-link{justify-content:center;text-align:center;flex-direction:column;gap:5px;margin:0;padding:10px 4px}
+ .lesson-card{grid-template-columns:minmax(180px,.8fr) minmax(0,1.2fr)}
+}
+@media(max-width:600px){
+ .container{width:94%}
+ header{padding:12px 5px}
+ .brand h1{font-size:18px}
+ .brand p{font-size:9px}
+ .logo{width:44px;height:44px;font-size:27px}
+ nav{display:none}
+ nav.open{display:grid;grid-template-columns:repeat(2,1fr)}
+ .menu-btn{display:block}
+ .hero{min-height:165px}
+ .hero h2{font-size:27px}
+ .hero p{font-size:12px}
+ .hero .verse{font-size:19px}
+ .progress-area{padding:12px 9px;gap:8px}
+ .progress-area strong,.progress-number{font-size:10px}
+ .layout{gap:10px}
+ .sidebar{padding:9px}
+ .sidebar-title{font-size:13px;padding:7px}
+ .sidebar-links{grid-template-columns:repeat(3,1fr)}
+ .side-link{font-size:10px}
+ .side-link i{font-size:16px}
+ .lesson-card{grid-template-columns:1fr;gap:12px;padding:12px}
+ .lesson-image{max-height:240px}
+ .lesson-image img{height:230px}
+ .lesson-info h3{font-size:21px}
+ .lesson-description{font-size:12px}
+ .arabic-box .arabic{font-size:32px}
+ .steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ .step-card img{height:105px}
+ .step-card .step-label{font-size:10px}
+ .bottom-grid{grid-template-columns:1fr}
+ .info-panel{padding:14px}
+ .controls{flex-wrap:wrap}
+ .control-btn{padding:11px 14px}
+ .answers{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+ <div class="brand">
+  <div class="logo"><i class="fa-solid fa-mosque"></i></div>
+  <div>
+   <h1>نووری ئیمان</h1>
+   <p>بە زانست، دڵ ڕووناک بکەوە</p>
+  </div>
+ </div>
+
+ <button class="menu-btn" id="menuBtn">
+  <i class="fa-solid fa-bars"></i>
+ </button>
+
+ <nav id="mainNav">
+  <a href="index.html"><i class="fa-solid fa-house"></i>سەرەکی</a>
+  <a href="#lessons" class="active"><i class="fa-solid fa-book-open"></i>فێربوون</a>
+  <a href="ebadat.html"><i class="fa-solid fa-calendar-check"></i>خشتەی عیبادەت</a>
+  <a href="quran.html"><i class="fa-solid fa-book-quran"></i>قورئان</a>
+  <a href="about.html"><i class="fa-solid fa-circle-info"></i>دەربارە</a>
+ </nav>
+</header>
+
+<section class="hero">
+ <div class="hero-content">
+  <h2>فێربوونی نوێژ</h2>
+  <p>بە هەنگاو فێری نوێژ ببە</p>
+  <div class="verse">﴿وَأَقِيمُوا الصَّلَاةَ﴾</div>
+ </div>
+</section>
+
+<div class="progress-area">
+ <strong>پێشکەوتنت:</strong>
+ <div class="progress-track">
+  <div class="progress-fill" id="mainProgress"></div>
+ </div>
+ <span class="progress-number" id="progressText">0%</span>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+ <div class="sidebar-title">
+  <i class="fa-solid fa-list"></i> بەشەکانی فێربوون
+ </div>
+ <div class="sidebar-links">
+  <a class="side-link active" href="#lessons">
+   <i class="fa-solid fa-play"></i>دەستپێک
+  </a>
+  <a class="side-link" href="#steps">
+   <i class="fa-solid fa-book"></i>هەنگاوەکان
+  </a>
+  <a class="side-link" href="#tips">
+   <i class="fa-solid fa-lightbulb"></i>ئەنجامدان
+  </a>
+  <a class="side-link" href="#dua">
+   <i class="fa-solid fa-hands-praying"></i>دوعا و زیکر
+  </a>
+  <a class="side-link" href="#quiz">
+   <i class="fa-solid fa-circle-question"></i>تاقیکردنەوە
+  </a>
+ </div>
+</aside>
+
+<!-- MAIN -->
+<main class="content" id="lessons">
+
+<section class="lesson-card">
+ <div class="lesson-image">
+  <img id="mainImage" src="https://al-hijra.org.nz/assets/images/salah/salah-2-takbir-360.webp" alt="وێنەی هەنگاوی نوێژ" loading="eager">
+ </div>
+
+ <div class="lesson-info">
+  <div class="lesson-number" id="lessonNumber">هەنگاوی ٢ لە ٩</div>
+  <h3 id="lessonTitle">وەستان و تکبیرة الإحرام</h3>
+  <p class="lesson-description" id="lessonDescription">
+   بە وەستانی ڕاست و ئارام، نوێژەکەت دەست پێ بکە. پاشان دەستەکانت بەرز بکەرەوە و تکبیرة الإحرام بڵێ.
+  </p>
+
+  <div class="arabic-box">
+   <div class="arabic" id="arabicText">اللَّهُ أَكْبَرُ</div>
+   <div class="meaning" id="arabicMeaning">خوا گەورەترە</div>
+  </div>
+
+  <div class="tip-box" id="tips">
+   <strong><i class="fa-solid fa-lightbulb"></i> تێبینی گرنگ</strong>
+   <div id="lessonTip">
+    نیەت لە دڵەوەیە و پێویست ناکات بە دەنگ بیڵێیت. لە کاتی دەستپێکردندا دڵت ئامادەی نوێژ بکە.
+   </div>
+  </div>
+ </div>
+</section>
+
+<h3 class="section-heading" id="steps">
+ <i class="fa-solid fa-shoe-prints"></i> هەنگاوەکانی نوێژ
+</h3>
+
+<div class="steps" id="stepsContainer"></div>
+
+<div class="controls">
+ <button class="control-btn secondary" id="prevBtn">
+  <i class="fa-solid fa-chevron-right"></i> پێشوو
+ </button>
+ <button class="complete-btn" id="completeBtn">
+  <i class="fa-solid fa-check"></i> ئەم هەنگاوە فێربووم
+ </button>
+ <button class="control-btn" id="nextBtn">
+  داهاتوو <i class="fa-solid fa-chevron-left"></i>
+ </button>
+</div>
+
+<!-- BOTTOM INFORMATION -->
+<div class="bottom-grid">
+
+ <section class="info-panel">
+  <h4><i class="fa-solid fa-trophy"></i> پێشکەوتنی تۆ</h4>
+  <p id="completedText">٠ لە ٩ هەنگاو تەواو کراوە</p>
+  <div class="small-progress">
+   <span id="smallProgress"></span>
+  </div>
+  <p id="completedMessage">بەردەوام بە، هەنگاو بە هەنگاو فێر دەبیت.</p>
+ </section>
+
+ <section class="info-panel" id="dua">
+  <h4><i class="fa-solid fa-book-quran"></i> زیکری نوێژ</h4>
+  <div class="big-arabic" id="bottomDua">سُبْحَانَ رَبِّيَ الْعَظِيمِ</div>
+  <p id="bottomMeaning" style="text-align:center">
+   پاک و بێگەردە پەروەردگاری گەورەم
+  </p>
+ </section>
+
+ <section class="info-panel">
+  <h4><i class="fa-solid fa-circle-check"></i> کورتەی فێربوون</h4>
+  <p>نوێژ بە هەنگاوەکان فێر ببە، دوعا و زیکرەکان بە ئارامی بخوێنەوە و گرنگی بە فێربوونی دروست بدە.</p>
+  <p class="badge-done" style="margin-top:8px">
+   <i class="fa-solid fa-star"></i> بەردەوامی لە فێربوون گرنگە
+  </p>
+ </section>
+
+</div>
+
+<!-- QUIZ -->
+<section class="quiz" id="quiz">
+ <h3><i class="fa-solid fa-graduation-cap"></i> تاقیکردنەوەی فێربوونی نوێژ</h3>
+ <p class="quiz-question" id="quizQuestion">بە چی نوێژ دەست پێ دەکەین؟</p>
+ <div class="answers" id="answers"></div>
+ <div class="quiz-result" id="quizResult"></div>
+</section>
+
+</main>
+</div>
+
+<footer>
+ <p>﴿إِنَّ الصَّلَاةَ تَنْهَىٰ عَنِ الْفَحْشَاءِ وَالْمُنكَرِ﴾</p>
+ <p>نووری ئیمان — <span>بە زانست، دڵ ڕووناک بکەوە</span></p>
+ <p>
+  وێنەکانی فێرکاری:
+  <a href="https://al-hijra.org.nz/how-to-pray-salah" target="_blank" rel="noopener">Al-Hijra – How to Pray Salah</a>
+ </p>
+ <p>تکایە پێش بەکارهێرانی بازرگانی و بڵاوکردنەوەی وێنەکان، مۆڵەتی بەکارهێنانیان بپشکنە.</p>
+</footer>
+
+</div>
+
+<script>
+const lessons = [
+{
+ title:"نیەتی نوێژ",
+ short:"نیەت",
+ image:"https://al-hijra.org.nz/assets/images/salah/salah-1-niyyah-360.webp",
+ description:"پێش دەستپێکردنی نوێژ، لە دڵتدا دیاری بکە کام نوێژ ئەنجام دەدەیت و بۆ خوای گەورە نوێژ دەکەیت.",
+ arabic:"النِّيَّةُ فِي الْقَلْبِ",
+ meaning:"نیەت شوێنی لە دڵە، نەک پێویستە بە زمان بیڵێیت.",
+ tip:"نیەت لە دڵەوەیە. جیاوازییە فقهییەکان لە شێوازی دیاریکردنی نیەتدا هەیە."
+},
+{
+ title:"وەستان و تکبیرة الإحرام",
+ short:"تکبیرە",
+ image:"https://al-hijra.org.nz/assets/images/salah/salah-2-takbir-360.webp",
+ description:"بە وەستانی ڕاست و ئارام، دەستەکانت بەرز بکەرەوە و بە دەستپێکردنی نوێژ بڵێ: الله أكبر.",
+ arabic:"اللَّهُ أَكْبَرُ",
+ meaning:"خوا گەورەترە.",
+ tip:"لە کاتی تکبیر دەستەکان بەرز دەکرێنەوە. شوێنی دانانی دەستەکان دوای ئەوە لە مەزهەبەکاندا جیاوازی هەیە."
+},
+{
+ title:"وەستان و خوێندنەوە",
+ short:"خوێندنەوە",
+ image:"https://al-hijra.org.nz/assets/images/salah/salah-3-qiyam-360.webp",
+ description:"لە وەستاندا سوورەتی فاتحە بخوێنەوە و لە ڕکعەتەکانی پێویستدا سوورەتێکی تر یان چەند ئایەتێک بخوێنەوە.",
+ arabic:"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+ meaning:"بە ناوی خوای بەخشندە و میهرەبان.",
+ tip:"فاتحە بە ئارامی و بە ڕێزەوە بخوێنەوە. وردەکاریی خوێندنەوە لە نوێژەکاندا بە پێی مەزهەب جیاوازە."
+},
+{
+ title:"ڕکوع",
+ short:"ڕکوع",
+ image:"https://al-hijra.org.nz/assets/images/salah/salah-4-ruku-360.webp",
+ description:"بە ئارامی بچۆ بۆ ڕکوع، پشتی ڕاست بکەوە و دەستەکانت لەسەر ئەژنۆکانت دابنێ.",
+ arabic:"سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+ meaning:"پاک و بێگەردە پەروەردگاری گەورەم.",
+ tip:"لە ڕکوعدا ئارامی و دڵنیایی بپارێزە. ئەم زیکرە بە ئارامی بخوێنەوە."
+},
+{
+ title:"هەستانەوە لە ڕکوع",
+ short:"هەستانەوە",
+ image:"https://al-hijra.org.nz/assets/images/salah/salah-5-standing-after-ruku-360.webp",
+ description:"لە ڕکوعەوە بە تەواوی هەستەوە و جەستەت ڕاست بکەرەوە.",
+ arabic:"سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ",
+ meaning:"خوای گەورە سوپاسگوزاری قبووڵ دەکات.",
+ tip:"دوای هەستانەوە دەتوانیت بڵێیت: رَبَّنَا وَلَكَ الْحَمْدُ."
+},
+{
+ title:"سوژدە",
+ short:"سوژدە",
+ image:"https://al-hijra.org.nz/assets/images/salah/salah-6-sujood-360.webp",
+ description:"بچۆ بۆ سوژدە و ئەندامەکانی سوژدە بە دروستی لەسەر زەوی دابنێ.",
+ arabic:"سُبْحَانَ رَبِّيَ الْأَعْلَى",
+ meaning:"پاک و بێگەردە پەروەردگاری بەرز و بڵندم.",
+ tip:"لە سوژدەدا ئارامی بپارێزە. پێشانی و لووت و دەست و ئەژنۆ و پەنجەکانی پێ بە شێوەی دروست دابنێ."
+},
+{
+ title:"دانیشتن لەنێوان دوو سوژدە",
+ short:"دانیشتن",
+ image:"https://al-hijra.org.nz/assets/images/salah/salah-7-jalsa-360.webp",
+ description:"لە نێوان دوو سوژدەدا بە ئارامی دابنیشە و دوعای لێخۆشبوون بخوێنەوە.",
+ arabic:"رَبِّ اغْفِرْ لِي",
+ meaning:"ئەی پەروەردگارم، لێم خۆش ببە.",
+ tip:"دانیشتنەکە بە ئارامی ئەنجام بدە، پاشان بۆ سوژدەی دووەم بچۆ."
+},
+{
+ title:"تەحییات و دانیشتنی کۆتایی",
+ short:"تەحییات",
+ image:"https://al-hijra.org.nz/assets/images/salah/salah-7-jalsa-360.webp",
+ description:"لە دانیشتنی کۆتایی، تەحییات و شەهادەت و دەرود بخوێنەوە.",
+ arabic:"التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ",
+ meaning:"هەموو سڵاو و عیبادەت و پاکییەکان بۆ خوای گەورەیە.",
+ tip:"شێوازی دانیشتن و هەندێک وردەکاریی پەنجە لە مەزهەبەکاندا جیاوازی هەیە."
+},
+{
+ title:"سەلامدان",
+ short:"سەلام",
+ image:"https://al-hijra.org.nz/assets/images/salah/salah-8-salam-360.webp",
+ description:"لە کۆتایی نوێژدا بە سەلامدان نوێژەکەت تەواو بکە.",
+ arabic:"السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+ meaning:"ئاشتی و ڕەحمەتی خوای گەورە لەسەرتان بێت.",
+ tip:"سەلامدان بە شێوەی فێرکراو و بە ئارامی ئەنجام بدە."
+}
+];
+
+let current=1;
+let completed=JSON.parse(localStorage.getItem("nooriPrayerLessons")||"[]");
+
+const $=id=>document.getElementById(id);
+
+function renderSteps(){
+ $("stepsContainer").innerHTML="";
+ lessons.forEach((lesson,index)=>{
+  const card=document.createElement("div");
+  card.className="step-card"+(index===current?" active":"");
+  card.innerHTML=`
+   <span class="step-number">${index+1}</span>
+   <img src="${lesson.image}" alt="${lesson.short}" loading="lazy">
+   <div class="step-label">${lesson.short}</div>
+  `;
+  card.addEventListener("click",()=>{
+   current=index;
+   renderLesson();
+  });
+  $("stepsContainer").appendChild(card);
+ });
+}
+
+function renderLesson(){
+ const lesson=lessons[current];
+
+ $("mainImage").src=lesson.image;
+ $("mainImage").alt=lesson.title;
+ $("lessonNumber").textContent=`هەنگاوی ${current+1} لە ${lessons.length}`;
+ $("lessonTitle").textContent=lesson.title;
+ $("lessonDescription").textContent=lesson.description;
+ $("arabicText").textContent=lesson.arabic;
+ $("arabicMeaning").textContent=lesson.meaning;
+ $("lessonTip").textContent=lesson.tip;
+
+ $("prevBtn").disabled=current===0;
+ $("nextBtn").disabled=current===lessons.length-1;
+
+ $("completeBtn").innerHTML=completed.includes(current)
+  ?'<i class="fa-solid fa-check-double"></i> ئەم هەنگاوە فێر بووم'
+  :'<i class="fa-solid fa-check"></i> ئەم هەنگاوە فێربووم';
+
+ $("bottomDua").textContent=lesson.arabic;
+ $("bottomMeaning").textContent=lesson.meaning;
+
+ renderSteps();
+ updateProgress();
+}
+
+function updateProgress(){
+ const percent=Math.round(completed.length/lessons.length*100);
+ $("mainProgress").style.width=percent+"%";
+ $("smallProgress").style.width=percent+"%";
+ $("progressText").textContent=percent+"%";
+ $("completedText").textContent=`${completed.length} لە ${lessons.length} هەنگاو تەواو کراوە`;
+
+ $("completedMessage").textContent=percent===100
+ ? "ماشاءالله! هەموو هەنگاوەکانت تەواو کردووە."
+ : "بەردەوام بە، هەنگاو بە هەنگاو فێر دەبیت.";
+}
+
+$("prevBtn").addEventListener("click",()=>{
+ if(current>0){current--;renderLesson();}
+});
+$("nextBtn").addEventListener("click",()=>{
+ if(current<lessons.length-1){current++;renderLesson();}
+});
+$("completeBtn").addEventListener("click",()=>{
+ if(!completed.includes(current)){
+  completed.push(current);
+  localStorage.setItem("nooriPrayerLessons",JSON.stringify(completed));
+ }
+ updateProgress();
+ renderLesson();
+});
+
+$("menuBtn").addEventListener("click",()=>{
+ $("mainNav").classList.toggle("open");
+});
+
+/* QUIZ */
+const questions=[
+ {
+  q:"بە چی نوێژ دەست پێ دەکەین؟",
+  a:["الله أكبر","سبحان ربي العظيم","السلام عليكم"],
+  correct:0,
+  explain:"تکبیرة الإحرام بە الله أكبر نوێژ دەست پێ دەکات."
+ },
+ {
+  q:"لە ڕکوعدا کام زیکر دەخوێنرێتەوە؟",
+  a:["سبحان ربي الأعلى","سبحان ربي العظيم","رب اغفر لي"],
+  correct:1,
+  explain:"زیکری ناسراوی ڕکوع سبحان ربي العظيم ـە."
+ },
+ {
+  q:"لە سوژدەدا کام زیکر دەخوێنرێتەوە؟",
+  a:["سبحان ربي الأعلى","الله أكبر","سمع الله لمن حمده"],
+  correct:0,
+  explain:"لە سوژدەدا سبحان ربي الأعلى دەخوێنرێتەوە."
+ },
+ {
+  q:"نیەت لە کوێیە؟",
+  a:["لە دڵ","بە دەنگی بەرز","لەسەر زەوی"],
+  correct:0,
+  explain:"نیەت لە دڵدایە و پێویست ناکات بە دەنگ بگوترێت."
+ }
+];
+
+let quizIndex=0;
+function renderQuiz(){
+ const q=questions[quizIndex];
+ $("quizQuestion").textContent=q.q;
+ $("quizResult").textContent="";
+ $("answers").innerHTML="";
+
+ q.a.forEach((answer,index)=>{
+  const btn=document.createElement("button");
+  btn.className="answer";
+  btn.textContent=answer;
+  btn.addEventListener("click",()=>{
+   const buttons=$("answers").querySelectorAll("button");
+   buttons.forEach((b,i)=>{
+    b.disabled=true;
+    if(i===q.correct)b.classList.add("correct");
+    if(i===index && index!==q.correct)b.classList.add("wrong");
+   });
+   $("quizResult").textContent=
+    (index===q.correct?"✓ وەڵامەکەت ڕاستە! ":"✕ وەڵامەکە ڕاست نییە. ")+q.explain;
+
+   setTimeout(()=>{
+    quizIndex=(quizIndex+1)%questions.length;
+    renderQuiz();
+   },2800);
+  });
+  $("answers").appendChild(btn);
+ });
+}
+
+renderLesson();
+renderQuiz();
+</script>
+
+<script src="app-shell.js" defer></script>
+</body>
+</html>

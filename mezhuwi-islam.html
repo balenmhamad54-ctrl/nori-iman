@@ -1,0 +1,1186 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#091c16">
+<title>مێژووی ئیسلام | نوری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#091c16;
+ --surface:#10291f;
+ --surface2:#19392b;
+ --gold:#d9b875;
+ --gold2:#f1dfb2;
+ --text:#f8f3e7;
+ --muted:#c2c9bd;
+ --border:rgba(217,184,117,.25);
+ --shadow:0 16px 40px rgba(0,0,0,.30);
+ --hero-glow:rgba(217,184,117,.12);
+}
+
+body.blue{
+ --bg:#101c2c;
+ --surface:#182d43;
+ --surface2:#23415b;
+ --gold:#c5b17d;
+ --gold2:#f1dfb2;
+ --border:rgba(197,177,125,.27);
+ --hero-glow:rgba(113,164,205,.13);
+}
+
+body.purple{
+ --bg:#21172a;
+ --surface:#30223b;
+ --surface2:#453052;
+ --gold:#d7b77e;
+ --gold2:#f1dfb2;
+ --border:rgba(215,183,126,.27);
+ --hero-glow:rgba(178,130,204,.13);
+}
+
+*{
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+ background:
+ radial-gradient(ellipse at 50% 0%,var(--hero-glow),transparent 48%),
+ var(--bg);
+ color:var(--text);
+ font-family:"Noto Sans Arabic",sans-serif;
+ line-height:1.9;
+ min-height:100vh;
+ transition:background .3s,color .3s;
+ overflow-x:hidden;
+}
+
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+.container{
+ width:min(1120px,93%);
+ margin:auto;
+}
+
+/* HEADER */
+
+header{
+ position:sticky;
+ top:0;
+ z-index:20;
+ background:rgba(9,28,22,.91);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--border);
+}
+
+body.blue header{background:rgba(16,28,44,.92)}
+body.purple header{background:rgba(33,23,42,.92)}
+
+.nav{
+ min-height:72px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ color:var(--gold);
+ font-size:19px;
+ font-weight:800;
+}
+
+.brand-icon{
+ width:43px;
+ height:43px;
+ display:grid;
+ place-items:center;
+ border:1px solid var(--gold);
+ border-radius:14px;
+ background:var(--surface);
+ font-size:23px;
+}
+
+.back{
+ color:var(--muted);
+ font-size:13px;
+ padding:8px 13px;
+ border:1px solid var(--border);
+ border-radius:12px;
+ transition:.2s;
+}
+
+.back:hover{
+ color:var(--gold);
+ background:var(--surface);
+}
+
+/* HERO */
+
+.hero{
+ text-align:center;
+ padding:55px 15px 38px;
+ position:relative;
+}
+
+.hero::before{
+ content:"";
+ position:absolute;
+ width:250px;
+ height:250px;
+ border:1px solid rgba(217,184,117,.08);
+ border-radius:50%;
+ top:15px;
+ left:50%;
+ transform:translateX(-50%);
+ pointer-events:none;
+}
+
+.hero-symbol{
+ font-size:53px;
+ color:var(--gold);
+ line-height:1.3;
+}
+
+.hero h1{
+ font-family:"Amiri",serif;
+ font-size:clamp(32px,5vw,48px);
+ color:var(--gold2);
+ margin:10px 0;
+}
+
+.hero p{
+ max-width:660px;
+ margin:auto;
+ color:var(--muted);
+ font-size:14px;
+}
+
+.hero-line{
+ width:90px;
+ height:2px;
+ background:linear-gradient(90deg,transparent,var(--gold),transparent);
+ margin:20px auto;
+}
+
+/* THEME */
+
+.theme-area{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:12px;
+ margin:20px auto 0;
+}
+
+.theme-label{
+ font-size:12px;
+ color:var(--muted);
+}
+
+.theme-option{
+ display:flex;
+ align-items:center;
+ gap:6px;
+ border:1px solid var(--border);
+ background:var(--surface);
+ color:var(--muted);
+ border-radius:25px;
+ padding:6px 12px;
+ font-size:11px;
+ transition:.2s;
+}
+
+.theme-option.active{
+ border-color:var(--gold);
+ color:var(--gold2);
+ background:var(--surface2);
+}
+
+.theme-dot{
+ width:13px;
+ height:13px;
+ border-radius:50%;
+ display:inline-block;
+}
+
+.green-dot{background:#1c563b}
+.blue-dot{background:#294e77}
+.purple-dot{background:#62416f}
+
+/* MAIN */
+
+.section-title{
+ color:var(--gold2);
+ font-size:21px;
+ margin:25px 0 16px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+}
+
+.section-title::after{
+ content:"";
+ height:1px;
+ flex:1;
+ background:var(--border);
+}
+
+/* SEARCH */
+
+.search-wrap{
+ position:relative;
+ margin:20px 0 17px;
+}
+
+.search-icon{
+ position:absolute;
+ right:16px;
+ top:50%;
+ transform:translateY(-50%);
+ color:var(--gold);
+ font-size:18px;
+}
+
+.search{
+ width:100%;
+ padding:14px 47px 14px 15px;
+ border-radius:15px;
+ border:1px solid var(--border);
+ background:var(--surface);
+ color:var(--text);
+ outline:none;
+ font-size:13px;
+}
+
+.search:focus{
+ border-color:var(--gold);
+ box-shadow:0 0 0 3px rgba(217,184,117,.08);
+}
+
+.search::placeholder{color:#98a89b}
+
+/* FILTER */
+
+.filters{
+ display:flex;
+ gap:9px;
+ flex-wrap:wrap;
+ margin-bottom:22px;
+}
+
+.filter{
+ padding:8px 15px;
+ border-radius:25px;
+ border:1px solid var(--border);
+ background:var(--surface);
+ color:var(--muted);
+ font-size:12px;
+ transition:.2s;
+}
+
+.filter.active{
+ background:linear-gradient(135deg,var(--gold2),var(--gold));
+ color:#19251c;
+ border-color:var(--gold);
+ font-weight:800;
+}
+
+/* CARDS */
+
+.cards{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:18px;
+}
+
+.card{
+ background:linear-gradient(145deg,var(--surface2),var(--surface));
+ border:1px solid var(--border);
+ border-radius:20px;
+ overflow:hidden;
+ box-shadow:var(--shadow);
+ transition:transform .3s,border-color .3s;
+ display:flex;
+ flex-direction:column;
+ min-width:0;
+}
+
+.card:hover{
+ transform:translateY(-5px);
+ border-color:var(--gold);
+}
+
+.card-image{
+ height:190px;
+ position:relative;
+ overflow:hidden;
+ background:var(--surface2);
+}
+
+.card-image img{
+ width:100%;
+ height:100%;
+ display:block;
+ object-fit:cover;
+ transition:transform .5s;
+}
+
+.card:hover .card-image img{
+ transform:scale(1.07);
+}
+
+.card-image::after{
+ content:"";
+ position:absolute;
+ inset:0;
+ background:linear-gradient(
+ to top,
+ rgba(5,17,12,.85),
+ transparent 75%
+ );
+}
+
+.image-number{
+ position:absolute;
+ bottom:12px;
+ right:14px;
+ z-index:2;
+ color:var(--gold2);
+ font-size:12px;
+ font-weight:700;
+}
+
+.card-content{
+ padding:17px;
+ display:flex;
+ flex-direction:column;
+ flex:1;
+}
+
+.card-top{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+}
+
+.period{
+ background:rgba(217,184,117,.12);
+ border:1px solid var(--border);
+ color:var(--gold2);
+ border-radius:20px;
+ padding:4px 10px;
+ font-size:10px;
+}
+
+.card h3{
+ color:var(--gold2);
+ font-size:17px;
+ margin:12px 0 6px;
+}
+
+.card p{
+ color:var(--muted);
+ font-size:12px;
+ line-height:2;
+ margin-bottom:16px;
+ flex:1;
+}
+
+.card button{
+ width:100%;
+ padding:10px;
+ border:1px solid var(--border);
+ border-radius:12px;
+ background:linear-gradient(135deg,var(--gold2),var(--gold));
+ color:#19251c;
+ font-size:12px;
+ font-weight:800;
+ transition:.2s;
+}
+
+.card button:hover{
+ filter:brightness(1.1);
+ transform:translateY(-2px);
+}
+
+.empty{
+ display:none;
+ text-align:center;
+ padding:30px;
+ color:var(--muted);
+ background:var(--surface);
+ border-radius:15px;
+}
+
+/* TIMELINE */
+
+.timeline{
+ border-right:2px solid var(--gold);
+ margin:25px 13px 35px;
+ padding-right:23px;
+ display:grid;
+ gap:18px;
+}
+
+.event{
+ position:relative;
+ background:linear-gradient(145deg,var(--surface2),var(--surface));
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:15px;
+}
+
+.event::before{
+ content:"";
+ position:absolute;
+ right:-31px;
+ top:22px;
+ width:13px;
+ height:13px;
+ background:var(--gold);
+ border-radius:50%;
+ box-shadow:0 0 0 5px var(--bg);
+}
+
+.event strong{
+ color:var(--gold2);
+ font-size:13px;
+}
+
+.event p{
+ color:var(--muted);
+ font-size:12px;
+ margin-top:5px;
+}
+
+/* INFORMATION */
+
+.info{
+ position:relative;
+ overflow:hidden;
+ background:linear-gradient(145deg,var(--surface2),var(--surface));
+ border:1px solid var(--border);
+ border-radius:19px;
+ padding:22px;
+ margin:30px 0;
+}
+
+.info::after{
+ content:"☪";
+ position:absolute;
+ left:15px;
+ bottom:-30px;
+ font-size:100px;
+ color:var(--gold);
+ opacity:.07;
+}
+
+.info h3{
+ color:var(--gold2);
+ margin-bottom:8px;
+ font-size:18px;
+}
+
+.info p{
+ color:var(--muted);
+ font-size:13px;
+}
+
+/* MODAL */
+
+.modal{
+ position:fixed;
+ inset:0;
+ z-index:100;
+ background:rgba(0,0,0,.78);
+ backdrop-filter:blur(8px);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:15px;
+}
+
+.modal.show{display:flex}
+
+.modal-content{
+ width:min(680px,100%);
+ max-height:88vh;
+ overflow-y:auto;
+ background:var(--surface);
+ border:1px solid var(--border);
+ border-radius:21px;
+ padding:22px;
+ box-shadow:0 20px 70px rgba(0,0,0,.5);
+ animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+ from{opacity:0;transform:translateY(15px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+.modal-head{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ border-bottom:1px solid var(--border);
+ padding-bottom:13px;
+ margin-bottom:17px;
+}
+
+.modal-head h2{
+ color:var(--gold2);
+ font-family:"Amiri",serif;
+ font-size:24px;
+}
+
+.close{
+ flex-shrink:0;
+ width:38px;
+ height:38px;
+ border-radius:12px;
+ background:var(--surface2);
+ border:1px solid var(--border);
+ color:var(--gold);
+ font-size:23px;
+}
+
+.modal-content p{
+ color:var(--text);
+ font-size:14px;
+ line-height:2.2;
+ white-space:pre-line;
+}
+
+.modal-source{
+ margin-top:18px;
+ padding:13px;
+ background:var(--surface2);
+ border:1px solid var(--border);
+ border-radius:13px;
+ color:var(--gold2);
+ font-size:12px;
+ line-height:2;
+}
+
+.modal-note{
+ margin-top:12px;
+ color:var(--muted);
+ font-size:11px;
+}
+
+/* FOOTER */
+
+footer{
+ text-align:center;
+ padding:30px 12px;
+ border-top:1px solid var(--border);
+ color:var(--muted);
+ font-size:12px;
+ margin-top:45px;
+}
+
+footer strong{
+ color:var(--gold2);
+ font-size:18px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:580px){
+ .container{width:93%}
+ .nav{min-height:64px}
+ .brand{font-size:16px}
+ .brand-icon{width:38px;height:38px}
+ .back{font-size:11px;padding:7px 9px}
+ .hero{padding:38px 8px 27px}
+ .hero-symbol{font-size:42px}
+ .hero h1{font-size:34px}
+ .hero p{font-size:12px}
+ .cards{grid-template-columns:1fr;gap:15px}
+ .card-image{height:195px}
+ .card-content{padding:15px}
+ .card h3{font-size:16px}
+ .section-title{font-size:18px}
+ .filters{gap:7px}
+ .filter{font-size:11px;padding:7px 11px}
+ .modal-content{padding:17px}
+ .modal-head h2{font-size:20px}
+ .modal-content p{font-size:13px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ *{scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="container nav">
+  <a href="index.html" class="brand">
+   <div class="brand-icon">☪</div>
+   <span>نوری ئیمان</span>
+  </a>
+  <a href="index.html" class="back">↩ گەڕانەوە</a>
+ </div>
+</header>
+
+<section class="hero">
+ <div class="hero-symbol">۞</div>
+ <h1>مێژووی ئیسلام</h1>
+ <div class="hero-line"></div>
+ <p>
+  گەشتێک لە نێو مێژووی پڕشکۆی ئیسلامدا؛
+  لە سەردەمی پێغەمبەری خوا ﷺ تا شارستانیەتی و گەشەی زانست.
+ </p>
+
+ <div class="theme-area">
+  <span class="theme-label">شێوازی دیزاین:</span>
+
+  <button class="theme-option active" data-theme="green">
+   <span class="theme-dot green-dot"></span>
+   سەوزی ئیسلامی
+  </button>
+
+  <button class="theme-option" data-theme="blue">
+   <span class="theme-dot blue-dot"></span>
+   شینی ئاسمانی
+  </button>
+
+  <button class="theme-option" data-theme="purple">
+   <span class="theme-dot purple-dot"></span>
+   مۆری شاهانە
+  </button>
+ </div>
+</section>
+
+<main class="container">
+
+ <h2 class="section-title">📚 سەردەمەکانی مێژووی ئیسلام</h2>
+
+ <div class="search-wrap">
+  <span class="search-icon">⌕</span>
+  <input
+   class="search"
+   id="search"
+   type="search"
+   placeholder="گەڕان بە ناوی سەردەم، ڕووداو یان کەسایەتی..."
+  >
+ </div>
+
+ <div class="filters">
+  <button class="filter active" data-filter="all">هەمووی</button>
+  <button class="filter" data-filter="early">سەرەتای ئیسلام</button>
+  <button class="filter" data-filter="caliph">خەلیفەکان</button>
+  <button class="filter" data-filter="states">دەوڵەتەکان</button>
+  <button class="filter" data-filter="science">زانست و شارستانیەت</button>
+ </div>
+
+ <div class="cards" id="cards">
+
+  <!-- CARD 1 -->
+  <article class="card" data-category="early"
+   data-search="پێش ئیسلام عەرەبستان مەککە قورەیش کەعبە">
+   <div class="card-image">
+    <img
+     src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1000&q=85"
+     alt="بیابانی عەرەبستان"
+     loading="lazy"
+     onerror="this.style.display='none'"
+    >
+    <span class="image-number">01 | پێش ئیسلام</span>
+   </div>
+   <div class="card-content">
+    <div class="card-top">
+     <span class="period">پێش ساڵی ٦١٠ ز</span>
+    </div>
+    <h3>عەرەبستان پێش ئیسلام</h3>
+    <p>ناسینەوەی بارودۆخی کۆمەڵایەتی، ئایینی و ئابووری عەرەبستان پێش هاتنی ئیسلام.</p>
+    <button onclick="showStory(0)">زیاتر بخوێنەوە ←</button>
+   </div>
+  </article>
+
+  <!-- CARD 2 -->
+  <article class="card" data-category="early"
+   data-search="پێغەمبەر محمد وەحی حرا بانگەواز کۆچ مەدینە">
+   <div class="card-image">
+    <img
+     src="https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1000&q=85"
+     alt="تەلارسازی ئیسلامی"
+     loading="lazy"
+     onerror="this.style.display='none'"
+    >
+    <span class="image-number">02 | سەردەمی پێغەمبەر ﷺ</span>
+   </div>
+   <div class="card-content">
+    <div class="card-top">
+     <span class="period">٥٧٠ – ٦٣٢ ز</span>
+    </div>
+    <h3>سەردەمی پێغەمبەر ﷺ</h3>
+    <p>وەحی، بانگەوازی ئیسلام، کۆچ بۆ مەدینە و دامەزراندنی کۆمەڵگای موسڵمانان.</p>
+    <button onclick="showStory(1)">زیاتر بخوێنەوە ←</button>
+   </div>
+  </article>
+
+  <!-- CARD 3 -->
+  <article class="card" data-category="caliph"
+   data-search="ئەبوبەکر عومەر عوسمان عەلی خەلیفە ڕاشیدەکان">
+   <div class="card-image">
+    <img
+     src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1000&q=85"
+     alt="تەلارسازی و کۆڵانی ئیسلامی"
+     loading="lazy"
+     onerror="this.style.display='none'"
+    >
+    <span class="image-number">03 | خەلیفە ڕاشیدەکان</span>
+   </div>
+   <div class="card-content">
+    <div class="card-top">
+     <span class="period">٦٣٢ – ٦٦١ ز</span>
+    </div>
+    <h3>خەلیفە ڕاشیدەکان</h3>
+    <p>سەردەمی ئەبوبەکر، عومەر، عوسمان و عەلی ـ ڕەزای خوایان لێ بێت.</p>
+    <button onclick="showStory(2)">زیاتر بخوێنەوە ←</button>
+   </div>
+  </article>
+
+  <!-- CARD 4 -->
+  <article class="card" data-category="states"
+   data-search="ئەمەوی شام دیمەشق دەوڵەتی ئەمەوی">
+   <div class="card-image">
+    <img
+     src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1000&q=85"
+     alt="مزگەوت و تەلارسازی ئیسلامی"
+     loading="lazy"
+     onerror="this.style.display='none'"
+    >
+    <span class="image-number">04 | دەوڵەتی ئەمەوی</span>
+   </div>
+   <div class="card-content">
+    <div class="card-top">
+     <span class="period">٦٦١ – ٧٥٠ ز</span>
+    </div>
+    <h3>دەوڵەتی ئەمەوی</h3>
+    <p>دەوڵەتێکی گەورەی ئیسلامی کە ناوەندی حکومەتەکەی لە دیمەشق بوو.</p>
+    <button onclick="showStory(3)">زیاتر بخوێنەوە ←</button>
+   </div>
+  </article>
+
+  <!-- CARD 5 -->
+  <article class="card" data-category="states"
+   data-search="عەباسی بغداد بەغدا خەلافەت">
+   <div class="card-image">
+    <img
+     src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1000&q=85"
+     alt="تەلارسازی و کەعبە"
+     loading="lazy"
+     onerror="this.style.display='none'"
+    >
+    <span class="image-number">05 | دەوڵەتی عەباسی</span>
+   </div>
+   <div class="card-content">
+    <div class="card-top">
+     <span class="period">٧٥٠ – ١٢٥٨ ز</span>
+    </div>
+    <h3>دەوڵەتی عەباسی</h3>
+    <p>سەردەمێکی گرنگ لە مێژووی ئیسلام، بە تایبەتی لە بواری زانست و ئەدەبدا.</p>
+    <button onclick="showStory(4)">زیاتر بخوێنەوە ←</button>
+   </div>
+  </article>
+
+  <!-- CARD 6 -->
+  <article class="card" data-category="science"
+   data-search="شارستانیەتی ئیسلامی زانست پزیشکی بیرکاری ئەستێرەناسی">
+   <div class="card-image">
+    <img
+     src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1000&q=85"
+     alt="کتێب و زانست"
+     loading="lazy"
+     onerror="this.style.display='none'"
+    >
+    <span class="image-number">06 | شارستانیەتی ئیسلامی</span>
+   </div>
+   <div class="card-content">
+    <div class="card-top">
+     <span class="period">سەدەکانی ناوەڕاست</span>
+    </div>
+    <h3>شارستانیەتی و زانستی ئیسلامی</h3>
+    <p>بەشداری زانایانی موسڵمان لە پزیشکی، بیرکاری، ئەستێرەناسی و زانستەکانی تر.</p>
+    <button onclick="showStory(5)">زیاتر بخوێنەوە ←</button>
+   </div>
+  </article>
+
+ </div>
+
+ <div class="empty" id="empty">
+  هیچ ئەنجامێک نەدۆزرایەوە.
+ </div>
+
+ <!-- TIMELINE -->
+
+ <h2 class="section-title">⏳ ڕیزبەندی ڕووداوە مێژووییەکان</h2>
+
+ <div class="timeline">
+
+  <div class="event">
+   <strong>٥٧٠ ز ـ بە نزیکەیی</strong>
+   <p>لەدایکبوونی پێغەمبەری خوا محمد ﷺ لە مەککە.</p>
+  </div>
+
+  <div class="event">
+   <strong>٦١٠ ز ـ بە نزیکەیی</strong>
+   <p>دەستپێکردنی وەحی بۆ پێغەمبەر ﷺ.</p>
+  </div>
+
+  <div class="event">
+   <strong>٦٢٢ ز</strong>
+   <p>کۆچی پێغەمبەر ﷺ و موسڵمانان لە مەککە بۆ مەدینە؛ بنەمای ڕۆژژمێری کۆچی.</p>
+  </div>
+
+  <div class="event">
+   <strong>٦٣٠ ز</strong>
+   <p>فەتحی مەککە.</p>
+  </div>
+
+  <div class="event">
+   <strong>٦٣٢ ز</strong>
+   <p>کۆچی دوایی پێغەمبەر ﷺ.</p>
+  </div>
+
+  <div class="event">
+   <strong>٦٦١ ز</strong>
+   <p>دەستپێکردنی دەسەڵاتی ئەمەوییەکان.</p>
+  </div>
+
+  <div class="event">
+   <strong>٧٥٠ ز</strong>
+   <p>دەستپێکردنی دەسەڵاتی عەباسییەکان.</p>
+  </div>
+
+  <div class="event">
+   <strong>١٢٥٨ ز</strong>
+   <p>داگیرکردنی بەغدا لەلایەن هێزە موغۆلییەکان و کۆتاییهاتنی خەلافەتی عەباسی لە بەغدا.</p>
+  </div>
+
+ </div>
+
+ <div class="info">
+  <h3>۞ ئامانجی ئەم بەشە</h3>
+  <p>
+   ئامانجمان ئەوەیە مێژووی ئیسلام بە شێوەیەکی زانستی،
+   ڕێکخراو و ئاسان بۆ خوێندنەوە پێشکەش بکەین.
+   ڕووداوەکان بە پێی سەرچاوەی مێژوویی باس دەکرێن
+   و جیاوازییەکانی نێوان گێڕانەوەکانیش ڕوون دەکرێنەوە.
+  </p>
+ </div>
+
+</main>
+
+<!-- MODAL -->
+
+<div class="modal" id="modal" onclick="closeOutside(event)">
+ <div class="modal-content">
+
+  <div class="modal-head">
+   <h2 id="modalTitle"></h2>
+   <button class="close" onclick="closeModal()" aria-label="داخستن">×</button>
+  </div>
+
+  <p id="modalText"></p>
+
+  <div class="modal-source" id="modalSource"></div>
+
+  <div class="modal-note">
+   تێبینی: ئەم ناوەڕۆکانە پوختەی فێرکاریی مێژوویین.
+  </div>
+
+ </div>
+</div>
+
+<footer>
+ <strong>☪ نوری ئیمان</strong>
+ <p>بە زانست، دڵ ڕووناک بکەوە</p>
+ <p>هەموو مافەکان پارێزراون ©</p>
+</footer>
+
+<script>
+
+/* HISTORY CONTENT */
+
+const stories = [
+
+{
+ title:"عەرەبستان پێش ئیسلام",
+
+ text:`پێش هاتنی ئیسلام، عەرەبستان کۆمەڵگایەکی جیاوازی هەبوو. ژیانی قەبیلەیی و پەیوەندییە خێڵەکییەکان ڕۆڵێکی گرنگیان هەبوو. بازرگانی و گەشتە بازرگانییەکانیش لە ژیانی خەڵکدا گرنگ بوون.
+
+لە مەککەدا کەعبە هەبوو و عەرەبەکان بۆ زیارەت سەردانیان دەکرد. لە هەمان کاتدا بتپەرستی و هەندێک داب و نەریتی نادروست بڵاو بوونەوە. هەروەها جولەکە و مەسیحی و خاوەن باوەڕەکانی تر لە ناوچەکەدا هەبوون.
+
+پەیامی ئیسلام هات بۆ بانگەوازکردن بۆ یەکتاپەرستی، دادپەروەری و چاکە.`,
+
+ source:"سەرچاوەی خوێندنەوە: قورئانی پیرۆز؛ سوورەتی ئیبراهیم، ئایەتی ٣٥؛ سوورەتی نەحل، ئایەتەکانی ٥٨–٥٩."
+},
+
+{
+ title:"سەردەمی پێغەمبەر ﷺ",
+
+ text:`پێغەمبەری خوا محمد ﷺ لە مەککە لەدایک بوو. لە تەمەنی چل ساڵیدا یەکەم وەحی لە ئەشکەوتی حرا پێی گەیشت. بانگەوازی ئیسلام بە نهێنی دەستی پێکرد و دواتر ئاشکرا کرا.
+
+لەبەر ئازار و فشارەکانی مەککە، پێغەمبەر ﷺ و هاوەڵانی کۆچیان کرد بۆ مەدینە. لەوێ کۆمەڵگایەکی ئیسلامی دامەزرا و پەیوەندییە کۆمەڵایەتییەکان ڕێکخران.
+
+لە ساڵی ٨ی کۆچیدا مەککە فەتح کرا. پێغەمبەر ﷺ لە ساڵی ١١ی کۆچیدا کۆچی دوایی کرد.`,
+
+ source:"سەرچاوە: قورئانی پیرۆز؛ سوورەتی ئەلعەلەق، ئەلتەوبە و ئەلفەتح. هەروەها کتێبە متمانەپێکراوەکانی سیرە."
+},
+
+{
+ title:"خەلیفە ڕاشیدەکان",
+
+ text:`دوای کۆچی دوایی پێغەمبەر ﷺ، چوار خەلیفەی ڕاشید سەرکردایەتی کۆمەڵگای موسڵمانانیان کرد:
+
+١. ئەبوبەکر ئەلسی‌دیق ـ ڕەزای خوای لێ بێت.
+٢. عومەر کوڕی خەتتاب ـ ڕەزای خوای لێ بێت.
+٣. عوسمان کوڕی عەففان ـ ڕەزای خوای لێ بێت.
+٤. عەلی کوڕی ئەبی‌تالیب ـ ڕەزای خوای لێ بێت.
+
+لەو سەردەمەدا ڕووداوە سیاسی و کۆمەڵایەتییە گرنگەکان ڕوویان دا. لە سەردەمی عوسماندا نووسخەی قورئان یەکخرا و بۆ ناوچە جیاوازەکان نێردرا.`,
+
+ source:"سەرچاوەی خوێندنەوە: کتێبەکانی سیرە و مێژووی ئیسلام، وەک البدایة والنهایة لابن کثیر."
+},
+
+{
+ title:"دەوڵەتی ئەمەوی",
+
+ text:`دوای کۆتاییهاتنی سەردەمی خەلیفە ڕاشیدەکان، دەسەڵاتی ئەمەوی دەستی پێکرد. ناوەندی حکومەتەکەیان دیمەشق بوو.
+
+لەو سەردەمەدا سنووری دەوڵەتی ئیسلامی فراوان بوو و ناوچەی جیاواز بەشێک بوون لە دەوڵەتەکە. لەگەڵ ئەوەشدا ڕووداوی سیاسی و ناکۆکییە ناوخۆییەکانیش هەبوون.
+
+دەوڵەتی ئەمەوی لە ساڵی ٧٥٠ ز کۆتایی هات و دەسەڵاتی عەباسی جێگای گرتەوە.`,
+
+ source:"سەرچاوەی خوێندنەوە: کتێبە مێژووییەکانی سەردەمی ئەمەوی و خەلافەتی ئیسلامی."
+},
+
+{
+ title:"دەوڵەتی عەباسی",
+
+ text:`دەوڵەتی عەباسی لە ساڵی ٧٥٠ ز دەستی پێکرد. بەغدا لە ساڵی ٧٦٢ ز لەلایەن خەلیفە ئەبوو جەعفەری مەنسوور دامەزرا و دواتر بووە ناوەندێکی گرنگی سیاسی و زانستی.
+
+لە سەدەکانی عەباسیدا زانستەکانی وەک پزیشکی، بیرکاری، ئەستێرەناسی و وەرگێڕانی کتێبەکان گەشەیان کرد. بەڵام دەوڵەتەکە لە ماوەی مێژووی خۆیدا قۆناغی بەهێز و لاوازی تێپەڕاند.
+
+لە ساڵی ١٢٥٨ ز، بەغدا داگیر کرا و خەلافەتی عەباسی لە بەغدا کۆتایی هات.`,
+
+ source:"سەرچاوەی خوێندنەوە: کتێبە مێژووییەکانی خەلافەتی عەباسی و مێژووی بەغدا."
+},
+
+{
+ title:"شارستانیەتی و زانستی ئیسلامی",
+
+ text:`لە سەدەکانی ناوەڕاستدا، زانایانی موسڵمان و خاوەن زانستانی شارستانیەتی ئیسلامی بەشدارییان لە گەشەی زانستدا کرد.
+
+لە بواری بیرکاریدا خوارزمی، لە پزیشکیدا ڕازی و ابن سینا، و لە فیزیا و بینینیدا ابن الهیثم ناویان لە مێژووی زانستدا ماوەتەوە.
+
+زانایان لە ناوچە جیاوازەکاندا کار و توێژینەوەیان کردووە و بەرهەمەکانیان کاریگەرییان لەسەر گەشەی زانست لە جیهاندا هەبووە.
+
+گرنگە ئەم مێژووە بە وردی بخوێنینەوە و بەڵگە و سەرچاوەکانیشمان لەبەرچاو بێت.`,
+
+ source:"سەرچاوەی خوێندنەوە: کتێبەکانی مێژووی زانست و شارستانیەتی ئیسلامی."
+}
+
+/* END STORIES */
+
+];
+
+
+/* OPEN STORY */
+
+function showStory(index){
+
+ const item=stories[index];
+
+ if(!item)return;
+
+ document.getElementById("modalTitle").textContent=item.title;
+
+ document.getElementById("modalText").textContent=item.text;
+
+ document.getElementById("modalSource").textContent=item.source;
+
+ document.getElementById("modal").classList.add("show");
+
+ document.body.style.overflow="hidden";
+}
+
+
+/* CLOSE MODAL */
+
+function closeModal(){
+
+ document.getElementById("modal").classList.remove("show");
+
+ document.body.style.overflow="";
+}
+
+function closeOutside(event){
+
+ if(event.target.id==="modal"){
+  closeModal();
+ }
+}
+
+document.addEventListener("keydown",function(event){
+
+ if(event.key==="Escape"){
+  closeModal();
+ }
+
+});
+
+
+/* THEME SWITCHER */
+
+function setTheme(theme){
+
+ document.body.classList.remove("blue","purple");
+
+ if(theme==="blue"){
+  document.body.classList.add("blue");
+ }
+
+ if(theme==="purple"){
+  document.body.classList.add("purple");
+ }
+
+ document.querySelectorAll(".theme-option").forEach(button=>{
+
+  button.classList.toggle(
+   "active",
+   button.dataset.theme===theme
+  );
+
+ });
+
+ try{
+  localStorage.setItem("nooriHistoryTheme",theme);
+ }catch(error){}
+
+}
+
+
+/* LOAD SAVED THEME */
+
+try{
+
+ const savedTheme=localStorage.getItem("nooriHistoryTheme");
+
+ if(savedTheme==="blue"||savedTheme==="purple"||savedTheme==="green"){
+  setTheme(savedTheme);
+ }
+
+}catch(error){}
+
+
+/* THEME BUTTONS */
+
+document.querySelectorAll(".theme-option").forEach(button=>{
+
+ button.addEventListener("click",function(){
+
+  setTheme(this.dataset.theme);
+
+ });
+
+});
+
+
+/* SEARCH AND FILTER */
+
+const searchInput=document.getElementById("search");
+
+const cards=[...document.querySelectorAll(".card")];
+
+let activeFilter="all";
+
+function filterCards(){
+
+ const term=searchInput.value.trim().toLowerCase();
+
+ let visible=0;
+
+ cards.forEach(card=>{
+
+  const text=(
+   card.dataset.search+" "+card.innerText
+  ).toLowerCase();
+
+  const matchesText=text.includes(term);
+
+  const matchesCategory=
+   activeFilter==="all"||
+   card.dataset.category===activeFilter;
+
+  const show=matchesText&&matchesCategory;
+
+  card.style.display=show?"flex":"none";
+
+  if(show)visible++;
+
+ });
+
+ document.getElementById("empty").style.display=
+  visible===0?"block":"none";
+
+}
+
+searchInput.addEventListener("input",filterCards);
+
+
+/* FILTER BUTTONS */
+
+document.querySelectorAll(".filter").forEach(button=>{
+
+ button.addEventListener("click",function(){
+
+  document.querySelectorAll(".filter").forEach(item=>{
+   item.classList.remove("active");
+  });
+
+  this.classList.add("active");
+
+  activeFilter=this.dataset.filter;
+
+  filterCards();
+
+ });
+
+});
+
+</script>
+
+<script src="app-shell.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#061d18">
+<title>ئەکادیمیای نوری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#061d18;
+ --card:#0b2b23;
+ --card2:#10372d;
+ --gold:#e9c777;
+ --gold2:#f5dfa9;
+ --white:#fff;
+ --muted:#c3d0c9;
+ --border:rgba(233,199,119,.22);
+ --shadow:0 15px 40px rgba(0,0,0,.23);
+}
+body.blue{
+ --bg:#101d30;--card:#182b43;--card2:#213a57;
+ --gold:#e9c777;--gold2:#fff0c9;
+}
+body.light{
+ --bg:#f4f0e5;--card:#fffdf7;--card2:#eee7d5;
+ --gold:#a8792c;--gold2:#8c672a;
+ --white:#17271f;--muted:#647168;
+ --border:rgba(168,121,44,.25);
+ --shadow:0 12px 35px rgba(30,30,20,.08);
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--white);
+ font-family:'Noto Sans Arabic',sans-serif;
+ transition:.3s;overflow-x:hidden;
+}
+button,input{font-family:inherit}
+button{cursor:pointer}
+.container{width:min(1150px,92%);margin:auto}
+header{
+ padding:17px 0;border-bottom:1px solid var(--border);
+ background:rgba(6,29,24,.88);
+ backdrop-filter:blur(15px);
+ position:sticky;top:0;z-index:20;
+}
+body.light header{background:rgba(255,253,247,.9)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{
+ width:47px;height:47px;border-radius:15px;
+ display:grid;place-items:center;
+ background:linear-gradient(145deg,var(--gold),#9e7835);
+ color:#10251c;font-size:25px;
+ box-shadow:0 5px 20px #e9c77730;
+}
+.brand h2{font-size:17px;margin:0;color:var(--gold)}
+.brand small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.nav-actions{display:flex;align-items:center;gap:9px}
+.theme-btn{
+ background:var(--card);color:var(--gold);
+ border:1px solid var(--border);padding:9px 13px;
+ border-radius:12px;font-size:12px;
+}
+.hero{
+ position:relative;overflow:hidden;
+ margin:30px 0 25px;padding:38px 30px;
+ border:1px solid var(--border);border-radius:27px;
+ background:
+ radial-gradient(circle at 85% 20%,#e9c77725,transparent 35%),
+ linear-gradient(120deg,#0d382c,#061d18 75%);
+ box-shadow:var(--shadow);
+}
+body.blue .hero{background:linear-gradient(120deg,#213e5d,#101d30)}
+body.light .hero{background:linear-gradient(120deg,#eee2c6,#fffdf7)}
+.hero:after{
+ content:"۞";position:absolute;left:25px;bottom:-85px;
+ font-family:Amiri;font-size:240px;color:#e9c7770b;
+ pointer-events:none;
+}
+.hero-content{position:relative;z-index:1;max-width:680px}
+.eyebrow{
+ display:inline-block;padding:7px 13px;border-radius:30px;
+ color:var(--gold);background:#e9c77716;
+ border:1px solid var(--border);font-size:11px;
+}
+.hero h1{font-size:clamp(25px,5vw,39px);line-height:1.8;margin:15px 0 8px}
+.hero h1 span{color:var(--gold)}
+.hero p{color:var(--muted);font-size:13px;line-height:2.2;max-width:590px}
+.hero-quote{
+ color:var(--gold2);font-family:Amiri;font-size:22px;
+ margin:17px 0 0;line-height:2;
+}
+.section-head{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:12px;margin:34px 0 17px;
+}
+.section-head h2{font-size:18px;margin:0}
+.section-head h2 span{color:var(--gold)}
+.section-head small{color:var(--muted);font-size:11px}
+.stats{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:13px;
+}
+.stat{
+ background:var(--card);border:1px solid var(--border);
+ border-radius:17px;padding:17px;
+}
+.stat-icon{font-size:22px}
+.stat strong{display:block;color:var(--gold);font-size:23px;margin-top:8px}
+.stat small{color:var(--muted);font-size:11px}
+.progress-card{
+ margin-top:15px;padding:19px;border-radius:18px;
+ background:var(--card);border:1px solid var(--border);
+}
+.progress-top{display:flex;justify-content:space-between;gap:10px;font-size:12px}
+.progress-top strong{color:var(--gold)}
+.progress-track{
+ height:9px;background:var(--card2);border-radius:20px;
+ margin-top:14px;overflow:hidden;
+}
+.progress-fill{
+ height:100%;width:0%;border-radius:20px;
+ background:linear-gradient(90deg,#b28a40,#f5dfa9);
+ transition:width .5s;
+}
+.search{
+ display:flex;align-items:center;gap:10px;
+ padding:13px 16px;background:var(--card);
+ border:1px solid var(--border);border-radius:15px;
+ margin:20px 0;
+}
+.search input{
+ width:100%;background:transparent;border:0;outline:0;
+ color:var(--white);font-size:13px;
+}
+.search input::placeholder{color:var(--muted)}
+.filters{display:flex;gap:8px;overflow-x:auto;padding:3px 0 12px}
+.filter{
+ white-space:nowrap;padding:9px 15px;border-radius:30px;
+ background:var(--card);border:1px solid var(--border);
+ color:var(--muted);font-size:11px;
+}
+.filter.active{background:var(--gold);color:#10251c;border-color:var(--gold)}
+.courses{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;
+}
+.course{
+ overflow:hidden;background:var(--card);
+ border:1px solid var(--border);border-radius:20px;
+ transition:.25s;display:flex;flex-direction:column;
+}
+.course:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.course-art{
+ height:145px;display:grid;place-items:center;
+ position:relative;overflow:hidden;
+ background:radial-gradient(circle,#e9c77730,transparent 65%),var(--card2);
+}
+.course-art:before,.course-art:after{
+ content:"۞";position:absolute;font-family:Amiri;
+ color:#e9c77715;font-size:140px;
+}
+.course-art:before{right:-30px;top:-45px}
+.course-art:after{left:-30px;bottom:-65px}
+.course-symbol{font-size:56px;position:relative;z-index:1;filter:drop-shadow(0 5px 12px #0005)}
+.course-level{
+ position:absolute;top:12px;right:12px;z-index:2;
+ background:#061d18c9;color:#f5dfa9;
+ padding:6px 10px;border-radius:20px;font-size:10px;
+}
+.course-body{padding:17px;display:flex;flex-direction:column;flex:1}
+.course-body h3{font-size:15px;margin:0 0 9px;color:var(--gold2)}
+.course-body p{font-size:11px;color:var(--muted);line-height:2;margin:0 0 13px}
+.course-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:auto;padding:10px 0}
+.course button,.primary{
+ width:100%;border:0;border-radius:12px;padding:12px;
+ background:linear-gradient(100deg,#c49a4e,#f0d99f);
+ color:#10251c;font-weight:800;font-size:12px;
+}
+.course button:hover,.primary:hover{filter:brightness(1.08)}
+.daily{
+ display:grid;grid-template-columns:1fr auto;align-items:center;gap:15px;
+ background:linear-gradient(110deg,var(--card2),var(--card));
+ border:1px solid var(--border);padding:20px;border-radius:19px;
+}
+.daily h3{font-size:15px;color:var(--gold);margin:0 0 7px}
+.daily p{font-size:11px;line-height:2;color:var(--muted);margin:0}
+.daily-icon{font-size:45px}
+.quiz-box{
+ margin-top:35px;background:var(--card);
+ border:1px solid var(--border);border-radius:22px;padding:23px;
+}
+.quiz-box h2{margin:0;color:var(--gold);font-size:18px}
+.quiz-box>p{color:var(--muted);font-size:12px;line-height:2}
+.question{
+ background:var(--card2);padding:17px;border-radius:15px;margin-top:15px;
+}
+.question h3{font-size:14px;line-height:2;margin:0 0 13px}
+.answer{
+ display:block;width:100%;text-align:right;padding:12px;
+ border:1px solid var(--border);border-radius:11px;
+ background:transparent;color:var(--white);
+ margin-top:8px;font-size:12px;
+}
+.answer:hover{border-color:var(--gold)}
+.answer.correct{background:#1c6843;color:white;border-color:#47b77b}
+.answer.wrong{background:#793b35;color:white;border-color:#d77a70}
+.result{font-size:12px;margin-top:13px;color:var(--gold)}
+footer{
+ margin-top:45px;padding:27px 10px;text-align:center;
+ border-top:1px solid var(--border);color:var(--muted);font-size:11px;line-height:2.3;
+}
+footer strong{color:var(--gold)}
+.modal{
+ display:none;position:fixed;inset:0;z-index:100;
+ background:#000b;backdrop-filter:blur(8px);
+ align-items:center;justify-content:center;padding:16px;
+}
+.modal.show{display:flex}
+.modal-content{
+ width:min(650px,100%);max-height:85vh;overflow:auto;
+ background:var(--card);border:1px solid var(--border);
+ border-radius:22px;padding:23px;
+}
+.modal-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.modal-top h2{color:var(--gold);font-size:19px}
+.close{
+ background:var(--card2);color:var(--gold);border:0;
+ border-radius:10px;width:38px;height:38px;font-size:20px;
+}
+.lesson-text{font-size:13px;line-height:2.5;color:var(--muted);white-space:pre-line}
+.lesson-text strong{color:var(--gold)}
+.lesson-note{
+ border-right:3px solid var(--gold);padding:12px;
+ background:var(--card2);border-radius:10px;margin:15px 0;
+ font-size:12px;line-height:2;
+}
+@media(max-width:800px){
+ .courses{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+ .container{width:93%}
+ header{padding:12px 0}
+ .brand h2{font-size:14px}
+ .brand small{font-size:9px}
+ .brand-icon{width:40px;height:40px}
+ .theme-btn{padding:8px 10px;font-size:10px}
+ .hero{padding:27px 20px;margin-top:20px}
+ .hero h1{font-size:26px}
+ .hero-quote{font-size:19px}
+ .stats{gap:8px}
+ .stat{padding:12px 9px}
+ .stat strong{font-size:19px}
+ .stat small{font-size:9px}
+ .courses{grid-template-columns:1fr 1fr;gap:10px}
+ .course-art{height:112px}
+ .course-symbol{font-size:43px}
+ .course-body{padding:12px}
+ .course-body h3{font-size:12px}
+ .course-body p{font-size:10px}
+ .course-meta{font-size:9px}
+ .course button{font-size:10px;padding:10px 5px}
+ .section-head h2{font-size:15px}
+ .daily{padding:15px}
+}
+@media(max-width:350px){
+ .courses{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<header>
+ <div class="container nav">
+  <div class="brand">
+   <div class="brand-icon">۞</div>
+   <div>
+    <h2>ئەکادیمیای نوری ئیمان</h2>
+    <small>زانست، ڕێگای ڕووناکییە</small>
+   </div>
+  </div>
+  <div class="nav-actions">
+   <button class="theme-btn" onclick="changeTheme()">🎨 گۆڕینی ڕەنگ</button>
+  </div>
+ </div>
+</header>
+
+<main class="container">
+
+ <section class="hero">
+  <div class="hero-content">
+   <span class="eyebrow">✦ شوێنی فێربوون و گەشەکردنی ئیمان</span>
+   <h1>بە زانست، <span>دڵت ڕووناک</span> بکەرەوە</h1>
+   <p>
+    بەخێربێیت بۆ ئەکادیمیای نوری ئیمان؛ شوێنێک بۆ فێربوونی
+    قورئان، عەقیدە، سیرە و زانستە ئیسلامییەکان بە شێوەیەکی ئاسان و ڕێکخراو.
+   </p>
+   <div class="hero-quote">﴿وَقُل رَّبِّ زِدْنِي عِلْمًا﴾</div>
+  </div>
+ </section>
+
+ <div class="section-head">
+  <h2>📊 پێشکەوتنی <span>فێربوون</span></h2>
+  <small>هەنگاو بە هەنگاو</small>
+ </div>
+
+ <section class="stats">
+  <div class="stat">
+   <div class="stat-icon">📚</div>
+   <strong id="doneCount">0</strong>
+   <small>وانەی تەواوکراو</small>
+  </div>
+  <div class="stat">
+   <div class="stat-icon">🎓</div>
+   <strong>6</strong>
+   <small>بەشی فێربوون</small>
+  </div>
+  <div class="stat">
+   <div class="stat-icon">⭐</div>
+   <strong id="percent">0%</strong>
+   <small>ڕێژەی پێشکەوتن</small>
+  </div>
+ </section>
+
+ <div class="progress-card">
+  <div class="progress-top">
+   <span>پێشکەوتنی گشتیی تۆ</span>
+   <strong id="progressText">0 لە 6 وانە</strong>
+  </div>
+  <div class="progress-track">
+   <div class="progress-fill" id="progressFill"></div>
+  </div>
+ </div>
+
+ <div class="section-head">
+  <h2>📖 وانەکانی <span>ئەکادیمیا</span></h2>
+  <small>وانەکەت هەڵبژێرە</small>
+ </div>
+
+ <div class="search">
+  <span>🔎</span>
+  <input id="searchInput" type="search" placeholder="گەڕان بەدوای وانەیەکدا..." oninput="renderCourses()">
+ </div>
+
+ <div class="filters">
+  <button class="filter active" onclick="setFilter('all',this)">هەموو وانەکان</button>
+  <button class="filter" onclick="setFilter('belief',this)">عەقیدە</button>
+  <button class="filter" onclick="setFilter('quran',this)">قورئان</button>
+  <button class="filter" onclick="setFilter('worship',this)">عیبادەت</button>
+  <button class="filter" onclick="setFilter('history',this)">مێژوو</button>
+ </div>
+
+ <section class="courses" id="courses"></section>
+
+ <div class="section-head">
+  <h2>🌙 وانەی <span>ئەمڕۆ</span></h2>
+  <small>بەردەوام بە لە فێربوون</small>
+ </div>
+
+ <section class="daily">
+  <div>
+   <h3>گرنگی فێربوونی زانستی ئایینی</h3>
+   <p>
+    فێربوونی زانست بە هەنگاوی بچووک دەست پێ دەکات.
+    هەموو ڕۆژێک کاتێک بۆ خوێندنەوە تەرخان بکە.
+   </p>
+  </div>
+  <div class="daily-icon">📜</div>
+ </section>
+
+ <section class="quiz-box">
+  <h2>🧠 تاقیکردنەوەی زانیاری</h2>
+  <p>بە وەڵامدانەوەی پرسیارەکان زانیارییەکانت تاقی بکەرەوە.</p>
+  <div id="quiz"></div>
+ </section>
+
+</main>
+
+<footer>
+ <strong>ئەکادیمیای نوری ئیمان</strong><br>
+ بە زانست، دڵ ڕووناک بکەوە<br>
+ </footer>
+
+<div class="modal" id="lessonModal" onclick="if(event.target===this)closeLesson()">
+ <div class="modal-content">
+  <div class="modal-top">
+   <h2 id="modalTitle">ناونیشانی وانە</h2>
+   <button class="close" onclick="closeLesson()">×</button>
+  </div>
+  <div class="lesson-text" id="modalText"></div>
+  <div class="lesson-note">
+   📌 تێبینی: ئەم وانەیە بۆ فێربوونی سەرەتاییە. بۆ فێربوونی وردی حوکمەکان، پێویستە بگەڕێیتەوە بۆ سەرچاوە باوەڕپێکراوەکان و زانایانی پسپۆڕ.
+  </div>
+  <button class="primary" id="completeBtn" onclick="completeLesson()">✓ وانەکەم تەواو کرد</button>
+ </div>
+</div>
+
+<script>
+const lessons=[
+ {
+  id:1,category:"belief",icon:"🤲",level:"سەرەتایی",
+  title:"بنەماکانی باوەڕ",
+  desc:"ناسینی شەش بنەمای باوەڕ و واتای هەر یەکێکیان.",
+  time:"8 خولەک",
+  text:`شەش بنەمای باوەڕ لە ئیسلامدا ئەمانەن:
+
+١. باوەڕ بە خوای گەورە.
+٢. باوەڕ بە فریشتەکان.
+٣. باوەڕ بە کتێبە ئاسمانییەکان.
+٤. باوەڕ بە پێغەمبەران.
+٥. باوەڕ بە ڕۆژی دوایی.
+٦. باوەڕ بە قەدەری خوا، خێر و شەڕی.
+
+ئەم بنەمایانە لە فەرموودەی جبرائیلدا باس کراون؛ لە صحیح موسلیمدا هاتوون.`
+ },
+ {
+  id:2,category:"quran",icon:"📖",level:"سەرەتایی",
+  title:"فێربوونی خوێندنەوەی قورئان",
+  desc:"دەستپێکردن بە خوێندنەوەی قورئان و گرنگی تەجوید.",
+  time:"12 خولەک",
+  text:`قورئانی پیرۆز پەیامی خوای گەورەیە کە بۆ ڕێنمایی مرۆڤایەتی دابەزیوە.
+
+بۆ فێربوونی خوێندنەوەی دروست:
+١. فێری پیتە عەرەبییەکان ببە.
+٢. مەخرجی پیتەکان بە مامۆستایەکی شارەزا فێر ببە.
+٣. یاساکانی تەجوید بە هێواشی فێر ببە.
+٤. ڕۆژانە بەردەوام بە خوێندنەوە بکە.
+
+تێبینی: ئەم پەڕەیە جێگرەوەی مامۆستای تەجوید نییە.`
+ },
+ {
+  id:3,category:"worship",icon:"🕌",level:"سەرەتایی",
+  title:"فێربوونی نوێژی پێنج کات",
+  desc:"ناسینی نوێژە فەرزەکان و گرنگی نوێژ.",
+  time:"10 خولەک",
+  text:`نوێژی پێنج کات لە ڕۆژ و شەودا فەرزە.
+
+١. بەیانی: دوو ڕکعەت.
+٢. نیوەڕۆ: چوار ڕکعەت.
+٣. عەسر: چوار ڕکعەت.
+٤. مەغریب: سێ ڕکعەت.
+٥. عیشا: چوار ڕکعەت.
+
+بۆ فێربوونی شێوازی دروستی نوێژ، پێویستە هەموو مەرج و ڕوکنەکانی لە سەرچاوەی فقهی باوەڕپێکراو فێر ببیت.`
+ },
+ {
+  id:4,category:"history",icon:"🌙",level:"مامناوەند",
+  title:"ژیانی پێغەمبەر ﷺ",
+  desc:"ناسینی ژیانی پێغەمبەری ئیسلام و وانەکانی سیرە.",
+  time:"15 خولەک",
+  text:`پێغەمبەر محەممەد ﷺ لە مەککە لە ساڵی ٥٧٠ی زایینی لەدایک بوو.
+
+لە تەمەنی ٤٠ ساڵیدا یەکەم وەحی پێ گەیشت. پاشان بانگەوازی ئیسلامی دەست پێ کرد.
+
+لە ساڵی ٦٢٢ی زایینی کۆچی بۆ مەدینە کرد. لەوێ کۆمەڵگایەکی ئیسلامی دامەزراند.
+
+لە ساڵی ٦٣٢ی زایینی کۆچی دوایی کرد.`
+ },
+ {
+  id:5,category:"belief",icon:"✨",level:"سەرەتایی",
+  title:"ناساندنی تەوحید",
+  desc:"واتای یەکتاپەرستی و گرنگی پەرستنی خوای تاک.",
+  time:"9 خولەک",
+  text:`تەوحید واتە تاکدانانی خوای گەورە لە پەرستن و تایبەتمەندییەکانی.
+
+خوای گەورە دەفەرموێت:
+
+﴿قُلْ هُوَ اللَّهُ أَحَدٌ﴾
+
+واتە: بڵێ ئەو خوایە یەکتایە.
+
+سەرچاوە: سوورەتی ئیخلاص، ئایەتی ١.`
+ },
+ {
+  id:6,category:"worship",icon:"🤍",level:"سەرەتایی",
+  title:"ڕۆژوو و مانگی ڕەمەزان",
+  desc:"ناسینی گرنگی ڕۆژوو و بنەما سەرەتاییەکانی.",
+  time:"11 خولەک",
+  text:`ڕۆژووی مانگی ڕەمەزان یەکێکە لە پێنج پایەی ئیسلام.
+
+خوای گەورە دەفەرموێت:
+
+﴿يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ﴾
+
+سەرچاوە: سوورەتی بەقەرە، ئایەتی ١٨٣.
+
+ڕۆژوو عیبادەتێکە کە لە سپێدە تا خۆرئاوابوون بە مەبەستی نزیکبوونەوە لە خوا ئەنجام دەدرێت.`
+ }
+];
+
+let filter="all";
+let activeLesson=null;
+let completed=JSON.parse(localStorage.getItem("nooriAcademyDone")||"[]");
+
+function renderCourses(){
+ const q=document.getElementById("searchInput").value.trim().toLowerCase();
+ const list=lessons.filter(l=>
+  (filter==="all"||l.category===filter)&&
+  (l.title.toLowerCase().includes(q)||l.desc.toLowerCase().includes(q))
+ );
+ document.getElementById("courses").innerHTML=list.map(l=>`
+  <article class="course">
+   <div class="course-art">
+    <span class="course-level">${l.level}</span>
+    <span class="course-symbol">${l.icon}</span>
+   </div>
+   <div class="course-body">
+    <h3>${l.title}</h3>
+    <p>${l.desc}</p>
+    <div class="course-meta">
+     <span>◷ ${l.time}</span>
+     <span>${completed.includes(l.id)?"✓ تەواوکراوە":"📘 وانە"}</span>
+    </div>
+    <button onclick="openLesson(${l.id})">${completed.includes(l.id)?"دووبارە خوێندنەوە":"دەست پێ بکە ←"}</button>
+   </div>
+  </article>
+ `).join("")||"<p>هیچ وانەیەک نەدۆزرایەوە.</p>";
+}
+function setFilter(value,el){
+ filter=value;
+ document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+ el.classList.add("active");
+ renderCourses();
+}
+function openLesson(id){
+ activeLesson=lessons.find(l=>l.id===id);
+ document.getElementById("modalTitle").textContent=activeLesson.title;
+ document.getElementById("modalText").textContent=activeLesson.text;
+ document.getElementById("completeBtn").style.display=
+ completed.includes(id)?"none":"block";
+ document.getElementById("lessonModal").classList.add("show");
+}
+function closeLesson(){
+ document.getElementById("lessonModal").classList.remove("show");
+}
+function completeLesson(){
+ if(!activeLesson)return;
+ if(!completed.includes(activeLesson.id)){
+  completed.push(activeLesson.id);
+  localStorage.setItem("nooriAcademyDone",JSON.stringify(completed));
+ }
+ updateProgress();
+ renderCourses();
+ closeLesson();
+}
+function updateProgress(){
+ const count=completed.length;
+ const percent=Math.round(count/lessons.length*100);
+ document.getElementById("doneCount").textContent=count;
+ document.getElementById("percent").textContent=percent+"%";
+ document.getElementById("progressText").textContent=count+" لە "+lessons.length+" وانە";
+ document.getElementById("progressFill").style.width=percent+"%";
+}
+const themes=["","blue","light"];
+let themeIndex=0;
+function changeTheme(){
+ themeIndex=(themeIndex+1)%themes.length;
+ document.body.classList.remove("blue","light");
+ if(themes[themeIndex])document.body.classList.add(themes[themeIndex]);
+ localStorage.setItem("nooriAcademyTheme",themes[themeIndex]);
+}
+const savedTheme=localStorage.getItem("nooriAcademyTheme");
+if(savedTheme==="blue"||savedTheme==="light"){
+ document.body.classList.add(savedTheme);
+ themeIndex=themes.indexOf(savedTheme);
+}
+
+const questions=[
+ {q:"چەند بنەمای باوەڕ هەیە؟",a:["پێنج","شەش","حەوت"],correct:1},
+ {q:"کام سوورەت بە (قُلْ هُوَ اللَّهُ أَحَدٌ) دەست پێ دەکات؟",a:["الفاتحة","الإخلاص","الفلق"],correct:1},
+ {q:"چەند نوێژی فەرز لە ڕۆژ و شەودا هەیە؟",a:["سێ","چوار","پێنج"],correct:2}
+];
+let qi=0,score=0;
+function showQuestion(){
+ const box=document.getElementById("quiz");
+ if(qi>=questions.length){
+  box.innerHTML=`<div class="question"><h3>تاقیکردنەوە تەواو بوو 🎉</h3><p>ئەنجامی تۆ: ${score} لە ${questions.length}</p><button class="primary" onclick="restartQuiz()">دووبارە تاقی بکەرەوە</button></div>`;
+  return;
+ }
+ const q=questions[qi];
+ box.innerHTML=`
+  <div class="question">
+   <small style="color:var(--gold)">پرسیاری ${qi+1} لە ${questions.length}</small>
+   <h3>${q.q}</h3>
+   ${q.a.map((a,i)=>`<button class="answer" onclick="answerQuestion(${i},this)">${a}</button>`).join("")}
+   <div class="result" id="answerResult"></div>
+  </div>`;
+}
+function answerQuestion(index,button){
+ const q=questions[qi];
+ const buttons=document.querySelectorAll(".answer");
+ buttons.forEach((b,i)=>{
+  b.disabled=true;
+  if(i===q.correct)b.classList.add("correct");
+ });
+ if(index===q.correct){
+  score++;
+  document.getElementById("answerResult").textContent="✓ وەڵامەکەت دروستە، ئافەرین!";
+ }else{
+  button.classList.add("wrong");
+  document.getElementById("answerResult").textContent="وەڵامی دروست: "+q.a[q.correct];
+ }
+ const next=document.createElement("button");
+ next.className="primary";
+ next.style.marginTop="14px";
+ next.textContent=qi===questions.length-1?"بینینی ئەنجام":"پرسیاری داهاتوو ←";
+ next.onclick=()=>{qi++;showQuestion()};
+ document.querySelector(".question").appendChild(next);
+}
+function restartQuiz(){qi=0;score=0;showQuestion()}
+
+renderCourses();
+updateProgress();
+showQuestion();
+</script>
+<script src="app-shell.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#04201a">
+<meta name="description" content="نوری ئیمان — ئەپی ئیسلامی کوردی">
+<title>نووری ئیمان</title>
+
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="نوری ئیمان">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+
+<script>
+/* سپلاش تەنها کاتێک ئەپەکە دەکرێتەوە پیشان دەدرێت، نەک لە هەر گەڕانەوەیەک بۆ مینۆ */
+try { if (sessionStorage.getItem("ni_splash_done")) document.documentElement.classList.add("no-splash"); } catch (e) {}
+</script>
+
+<style>
+/* ——— سێ ڕەنگی ئیسلامی: سەوزی زمرود، زێڕ، عاجی ——— */
+:root{
+  --emerald-deep:#04201a;
+  --emerald:#0a3b2d;
+  --emerald-light:#157050;
+  --gold:#e9c777;
+  --gold-deep:#b8892f;
+  --ivory:#f7f3e8;
+  --muted:#b9ccc0;
+  --line:rgba(233,199,119,.26);
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{
+  min-height:100vh;min-height:100dvh;
+  background:
+    radial-gradient(ellipse 70% 40% at 85% 0%,rgba(21,112,80,.45),transparent 70%),
+    radial-gradient(ellipse 60% 35% at 5% 60%,rgba(233,199,119,.07),transparent 70%),
+    var(--emerald-deep);
+  color:var(--ivory);
+  font-family:"Noto Sans Arabic",system-ui,sans-serif;
+  line-height:1.8;
+  overflow-x:clip;
+}
+body.locked{overflow:hidden;height:100dvh}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:12px}
+
+/* ═════════ سپلاش ═════════ */
+.splash{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:
+    radial-gradient(circle at 50% 38%,#12644a 0%,#0a3b2d 38%,#04201a 80%);
+  overflow:hidden;
+  animation:splashOut .5s ease-in 3.5s forwards;
+}
+html.no-splash .splash{display:none}
+.splash::before{ /* شێوازی ئەندازەیی زۆر کاڵ */
+  content:"";position:absolute;inset:-20%;opacity:.07;
+  background:
+    repeating-conic-gradient(from 0deg at 50% 50%,var(--gold) 0 2deg,transparent 2deg 15deg);
+  -webkit-mask-image:radial-gradient(circle,#000 0,transparent 65%);
+  mask-image:radial-gradient(circle,#000 0,transparent 65%);
+  animation:spin 40s linear infinite;
+}
+.splash-icon{width:min(46vmin,230px);height:auto;position:relative;filter:drop-shadow(0 0 28px rgba(233,199,119,.35))}
+.splash-icon .halo{transform-origin:256px 256px;opacity:0;animation:halo 1.6s ease-out .6s forwards}
+.splash-icon .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.3s cubic-bezier(.6,.1,.3,1) .1s forwards}
+.splash-icon .draw.d2{animation-delay:.35s}
+.splash-icon .ring{opacity:0;animation:fade .6s ease-out 1s forwards}
+.splash-icon .fillbg{opacity:0;animation:fade .8s ease-out .9s forwards}
+.splash-icon .moon{transform-origin:256px 262px;transform:scale(.2) rotate(-70deg);opacity:0;animation:moon .9s cubic-bezier(.2,1.2,.3,1) 1.05s forwards}
+.splash-icon .star{transform-box:fill-box;transform-origin:center;transform:scale(0);animation:pop .6s cubic-bezier(.2,1.5,.4,1) 1.7s forwards}
+
+.splash-title{
+  font-family:"Aref Ruqaa","Noto Sans Arabic",serif;
+  font-weight:700;
+  font-size:clamp(46px,13vw,88px);
+  line-height:1.5;
+  padding:0 .15em;
+  color:transparent;
+  background:linear-gradient(100deg,#fff0b8 0%,#e9c777 40%,#b8892f 70%,#fff0b8 100%);
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  /* نووسین لە ڕاستەوە بۆ چەپ، وەک دەستنووس */
+  clip-path:inset(-10% 0 -10% 100%);
+  animation:write 1.5s cubic-bezier(.45,.05,.3,1) 1.4s forwards, shine 1.4s linear 2.7s forwards;
+  filter:drop-shadow(0 2px 14px rgba(233,199,119,.25));
+}
+.splash-sub{
+  color:var(--muted);font-size:clamp(13px,3.6vw,16px);letter-spacing:.02em;
+  opacity:0;transform:translateY(8px);animation:rise .6s ease-out 2.7s forwards;
+}
+.splash-bar{
+  position:absolute;inset-inline:0;bottom:calc(34px + var(--safe-b));margin-inline:auto;
+  width:min(62vw,260px);height:4px;border-radius:4px;background:rgba(233,199,119,.18);overflow:hidden;
+}
+.splash-bar i{display:block;height:100%;width:100%;transform-origin:100% 50%;transform:scaleX(0);
+  background:linear-gradient(270deg,var(--gold),#fff0b8);border-radius:4px;animation:load 3.9s linear forwards}
+
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fade{to{opacity:1}}
+@keyframes halo{0%{opacity:0;transform:scale(.6)}60%{opacity:1}100%{opacity:.9;transform:scale(1)}}
+@keyframes moon{to{transform:scale(1) rotate(0);opacity:1}}
+@keyframes pop{to{transform:scale(1)}}
+@keyframes write{to{clip-path:inset(-10% 0 -10% 0)}}
+@keyframes shine{from{background-position:100% 0}to{background-position:0 0}}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes load{to{transform:scaleX(1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes splashOut{to{opacity:0;visibility:hidden}}
+
+/* ═════════ مینۆ ═════════ */
+.app{max-width:1240px;margin:0 auto;padding:0 clamp(14px,4vw,32px) calc(48px + var(--safe-b))}
+
+.topbar{
+  position:sticky;top:0;z-index:20;
+  padding:calc(12px + var(--safe-t)) 0 12px;
+  background:linear-gradient(var(--emerald-deep) 70%,rgba(4,32,26,0));
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:48px;height:48px;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.brand h1{font-family:"Aref Ruqaa","Noto Sans Arabic",serif;font-size:30px;line-height:1.3;color:var(--gold);font-weight:700}
+.brand small{display:block;color:var(--muted);font-size:12px;line-height:1.4}
+.brand .grow{flex:1;min-width:0}
+.install{
+  display:none;align-items:center;gap:6px;white-space:nowrap;
+  border:1px solid var(--gold);background:rgba(233,199,119,.1);color:var(--gold);
+  padding:8px 14px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;
+}
+.install.show{display:inline-flex}
+.install:hover{background:var(--gold);color:var(--emerald-deep)}
+
+.search{position:relative;margin-top:12px}
+.search input{
+  width:100%;height:50px;padding:0 48px 0 16px;border-radius:16px;
+  border:1px solid var(--line);background:rgba(255,255,255,.05);
+  font-size:15px;transition:border-color .2s,background .2s;
+}
+.search input::placeholder{color:#8fa89a}
+.search input:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.08)}
+.search svg{position:absolute;inset-inline-start:auto;right:16px;top:14px;width:22px;height:22px;color:var(--gold);pointer-events:none}
+
+.intro{
+  margin:18px 0 6px;padding:18px 20px;border-radius:22px;
+  border:1px solid var(--line);
+  background:
+    linear-gradient(120deg,rgba(21,112,80,.55),rgba(10,59,45,.4));
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
+.intro p{font-size:15px;color:var(--ivory);max-width:46ch}
+.intro b{color:var(--gold)}
+.intro a{
+  background:linear-gradient(135deg,#f3d98a,#d1a24a);color:#1b2a10;font-weight:800;font-size:14px;
+  padding:10px 18px;border-radius:999px;
+}
+
+.group{margin-top:28px}
+.group h2{
+  display:flex;align-items:center;gap:12px;font-size:19px;font-weight:700;color:var(--gold);margin-bottom:14px;
+}
+.group h2::after{content:"";flex:1;height:1px;background:linear-gradient(270deg,var(--line),transparent)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
+@media(min-width:980px){.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}}
+
+.card{
+  position:relative;display:flex;flex-direction:column;gap:6px;min-height:138px;
+  padding:16px 14px 14px;border-radius:22px;overflow:hidden;
+  border:1px solid var(--line);
+  background:linear-gradient(160deg,rgba(21,112,80,.42),rgba(10,59,45,.55) 60%,rgba(6,38,29,.7));
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.card::after{ /* نیشانەی ئەندازەیی لە گۆشەدا */
+  content:"";position:absolute;left:-26px;top:-26px;width:78px;height:78px;
+  border:1px solid rgba(233,199,119,.22);transform:rotate(45deg);border-radius:10px;
+}
+.card::before{
+  content:"";position:absolute;left:-14px;top:-14px;width:54px;height:54px;
+  border:1px solid rgba(233,199,119,.14);transform:rotate(45deg);border-radius:8px;
+}
+.card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.card:active{transform:scale(.98)}
+.ico{
+  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:23px;line-height:1;
+  background:radial-gradient(circle at 35% 30%,rgba(233,199,119,.3),rgba(233,199,119,.08));
+  border:1px solid rgba(233,199,119,.5);
+}
+.card strong{font-size:16px;line-height:1.5;margin-top:4px;color:var(--ivory)}
+.card span.d{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+.empty{display:none;text-align:center;padding:48px 16px;color:var(--muted)}
+.empty.show{display:block}
+.empty b{display:block;color:var(--gold);font-size:18px;margin-bottom:4px}
+
+footer{margin-top:44px;text-align:center;color:#8fa89a;font-size:13px}
+
+/* دیالۆگی ڕێنمایی دامەزراندن لە ئایفۆن */
+dialog{
+  margin:auto;max-width:min(92vw,380px);padding:22px;border-radius:22px;border:1px solid var(--gold);
+  background:var(--emerald);color:var(--ivory);
+}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+dialog h3{color:var(--gold);margin-bottom:8px;font-size:18px}
+dialog p{font-size:14px;margin-bottom:14px}
+dialog button{width:100%;padding:11px;border-radius:14px;border:0;background:var(--gold);color:var(--emerald-deep);font-weight:800;cursor:pointer}
+
+@media(prefers-reduced-motion:reduce){
+  .splash::before{animation:none}
+  .card{transition:none}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- ═════════ سپلاش ٤ چرکە ═════════ -->
+<div class="splash" id="splash" aria-hidden="true">
+  <svg class="splash-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset=".45" stop-color="#e9c777"/><stop offset="1" stop-color="#b8892f"/></linearGradient>
+      <radialGradient id="sh" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f3d98a" stop-opacity=".6"/><stop offset="1" stop-color="#f3d98a" stop-opacity="0"/></radialGradient>
+      <mask id="sm"><rect width="512" height="512" fill="#000"/><circle cx="256" cy="262" r="62" fill="#fff"/><circle cx="278" cy="244" r="52" fill="#000"/></mask>
+    </defs>
+    <circle class="halo" cx="256" cy="256" r="240" fill="url(#sh)"/>
+    <g fill="none" stroke="url(#sg)" stroke-linejoin="round" stroke-width="9">
+      <rect class="fillbg" x="131" y="131" width="250" height="250" fill="#0a3b2d" fill-opacity=".6" stroke="none"/>
+      <rect class="fillbg" x="131" y="131" width="250" height="250" transform="rotate(45 256 256)" fill="#0a3b2d" fill-opacity=".4" stroke="none"/>
+      <rect class="draw" pathLength="1" x="131" y="131" width="250" height="250"/>
+      <rect class="draw d2" pathLength="1" x="131" y="131" width="250" height="250" transform="rotate(45 256 256)"/>
+      <circle class="ring" cx="256" cy="256" r="104" stroke-width="5"/>
+      <circle class="ring" cx="256" cy="256" r="96" stroke-width="2" opacity=".6"/>
+    </g>
+    <circle class="ring" cx="256" cy="256" r="94" fill="#06261d"/>
+    <g class="moon"><rect width="512" height="512" fill="#fdf6df" mask="url(#sm)"/></g>
+    <path class="star" d="M298 232 l5.5 13.5 14.5 1.2-11 9.5 3.5 14.2-12.5-7.8-12.5 7.8 3.5-14.2-11-9.5 14.5-1.2z" fill="url(#sg)" transform="translate(4 -6) scale(.95)"/>
+  </svg>
+  <div class="splash-title">نووری ئیمان</div>
+  <div class="splash-sub">ڕووناکی فێربوون و ئیمان</div>
+  <div class="splash-bar"><i></i></div>
+</div>
+
+<!-- ═════════ مینۆی سەرەکی ═════════ -->
+<div class="app" id="app">
+  <header class="topbar">
+    <div class="brand">
+      <img src="icons/icon-192.png" alt="" width="48" height="48">
+      <div class="grow">
+        <h1>نووری ئیمان</h1>
+        <small>هەموو بەشەکان لە یەک شوێن</small>
+      </div>
+      <button class="install" id="installBtn" type="button">⬇ دامەزراندنی ئەپ</button>
+    </div>
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="گەڕان لە بەشەکان…" autocomplete="off" aria-label="گەڕان لە بەشەکان">
+    </label>
+  </header>
+
+  <section class="intro">
+    <p><b>بەخێربێیت.</b> بەشێک هەڵبژێرە؛ لە هەر پەڕەیەکەوە دوگمەی «پەڕەی سەرەکی» دەتگەڕێنێتەوە بۆ ئێرە.</p>
+    <a href="quran.html">خوێندنەوەی قورئان</a>
+  </section>
+
+  <main id="groups"></main>
+
+  <div class="empty" id="empty"><b>هیچ بەشێک نەدۆزرایەوە</b>وشەیەکی تر تاقی بکەرەوە.</div>
+
+  <footer>نووری ئیمان © <span id="yr"></span></footer>
+</div>
+
+<dialog id="iosDlg">
+  <h3>دامەزراندن لە ئایفۆن و ئایپاد</h3>
+  <p>لە Safari دوگمەی <b>Share</b> (□↑) دابگرە، پاشان <b>Add to Home Screen</b> هەڵبژێرە.</p>
+  <button type="button" id="iosClose">باشە</button>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ——— کۆتایی سپلاش: ٤ چرکە ——— */
+  var splash = document.getElementById("splash");
+  var skip = document.documentElement.classList.contains("no-splash");
+  function finish(){
+    document.body.classList.remove("locked");
+    if (splash && splash.parentNode) splash.parentNode.removeChild(splash);
+    try { sessionStorage.setItem("ni_splash_done","1"); } catch(e){}
+  }
+  if (skip) { finish(); } else { setTimeout(finish, 4000); }
+
+  /* ——— لیستی بەشەکان ——— */
+  var groups = [
+    { t:"قورئان و زیکر", items:[
+      ["quran.html","📖","قورئانی پیرۆز","خوێندنەوەی قورئان"],
+      ["hadith.html","📜","حەدیسی پیرۆز","فەرموودەی پێغەمبەر ﷺ"],
+      ["tasbih.html","📿","سەبەحەی ئەلیکترۆنی","ژماردنی زیکر"],
+      ["zikrBaynyan.html","🌅","زیکری بەیانی و ئێواران","زیکری ڕۆژانە"],
+      ["dua.html","🤲","دوعا و زیکر","کۆمەڵە دوعایەک"],
+      ["du3a.html","🕊️","دوعاکانی بارودۆخەکان","دوعا بۆ هەر باردۆخێک"],
+      ["duayDastpek.html","✨","دوعای دەستپێک","دوعاکانی دەستپێکردن"]
+    ]},
+    { t:"نوێژ و پاکیی", items:[
+      ["ferbwni-nwez.html","🕌","فێربوونی نوێژ","هەنگاو بە هەنگاو"],
+      ["nwezh.html","🧎","نوێژ","ڕێنمایی نوێژکردن"],
+      ["takbirwDastpekrdnyNwezh.html","🙌","تەکبیر و دەستپێکردنی نوێژ","دەستپێکی نوێژ"],
+      ["jorakanynwezh.html","🌙","جۆرەکانی نوێژ","جۆر و ئادابەکانی"],
+      ["dastnwezh.html","💧","شێوازی دەستنوێژ","چۆنیەتی دەستنوێژ گرتن"],
+      ["nyatwDastnwezh.html","🤍","نیەتی دەستنوێژ","نیەت و دوعاکانی"],
+      ["katakanyBang.html","🔔","کاتەکانی بانگ","کاتی نوێژەکان"],
+      ["qiblanma.html","🧭","قیبلەنما","ئاڕاستەی قیبلە"],
+      ["ebadat.html","🗓️","خشتەی عیبادەت","ڕێکخستنی عیبادەت"]
+    ]},
+    { t:"فێربوون و زانیاری", items:[
+      ["naw.html","✦","ناوە جوانەکانی خودا","اسماء الله الحسنى"],
+      ["nawPexambaran.html","🌟","ناوی پێغەمبەران","پێغەمبەرانی خودا"],
+      ["chirokPexambaran.html","📚","چیرۆکی پێغەمبەران","ژیاننامەیان"],
+      ["mezhuwi-islam.html","🏛️","مێژووی ئیسلام","ڕووداوە گرنگەکان"],
+      ["payekaniBawar.html","🕋","پایەکانی ئیسلام و باوەڕ","بنەماکانی ئیمان"],
+      ["zhyanyRozhana.html","☀️","ژیانی ڕۆژانەی موسڵمان","ئاداب و ڕێنمایی"],
+      ["acadimyayislam.html","🎓","ئەکادیمیای نوری ئیمان","وانە و فێربوون"],
+      ["quiz.html","🧠","تاقیکردنەوەی ئیسلامی","زانیارییەکانت بپشکنە"]
+    ]},
+    { t:"ئامرازەکان و زیاتر", items:[
+      ["taqweem.html","📅","تقویمی هیجری","بەروار و ڕۆژە گرنگەکان"],
+      ["zakat.html","💰","زەکات","حیسابکردنی زەکات"],
+      ["talaq.html","⚖️","تەڵاق و مافەکان","ڕێنمایی ئایینی"],
+      ["website.html","🏠","ماڵپەڕی نوری ئیمان","پەڕەی ماڵپەڕ"],
+      ["about.html","💬","دەربارە","دەربارەی نوری ئیمان"]
+    ]}
+  ];
+
+  var root = document.getElementById("groups");
+  var empty = document.getElementById("empty");
+
+  function norm(s){ return (s||"").toLowerCase().replace(/[\u064B-\u065F\u0640]/g,"").replace(/ي/g,"ی").replace(/ك/g,"ک"); }
+
+  function render(filter){
+    var f = norm(filter).trim(), total = 0, html = "";
+    groups.forEach(function(g){
+      var its = g.items.filter(function(i){ return !f || norm(i[2]+" "+i[3]).indexOf(f) > -1; });
+      if (!its.length) return;
+      total += its.length;
+      html += '<section class="group"><h2>'+g.t+'</h2><div class="grid">' +
+        its.map(function(i){
+          return '<a class="card" href="'+i[0]+'"><span class="ico" aria-hidden="true">'+i[1]+'</span><strong>'+i[2]+'</strong><span class="d">'+i[3]+'</span></a>';
+        }).join("") + '</div></section>';
+    });
+    root.innerHTML = html;
+    empty.classList.toggle("show", total === 0);
+  }
+  render("");
+  document.getElementById("q").addEventListener("input", function(e){ render(e.target.value); });
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* ——— دامەزراندنی ئەپ ——— */
+  var btn = document.getElementById("installBtn"), deferred = null;
+  var standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  window.addEventListener("beforeinstallprompt", function(e){
+    e.preventDefault(); deferred = e;
+    if (!standalone) btn.classList.add("show");
+  });
+  window.addEventListener("appinstalled", function(){ btn.classList.remove("show"); });
+  if (isIOS && !standalone) btn.classList.add("show");
+  btn.addEventListener("click", function(){
+    if (deferred) { deferred.prompt(); deferred.userChoice.finally(function(){ deferred = null; btn.classList.remove("show"); }); }
+    else if (isIOS) { var d = document.getElementById("iosDlg"); if (d.showModal) d.showModal(); }
+  });
+  document.getElementById("iosClose").addEventListener("click", function(){ document.getElementById("iosDlg").close(); });
+
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function(){ navigator.serviceWorker.register("./service-worker.js").catch(function(){}); });
+  }
+})();
+</script>
+</body>
+</html>

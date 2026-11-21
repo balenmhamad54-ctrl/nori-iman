@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#061d18">
+<title>خشتەی عیبادەت | نووری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+ --bg:#061d18;
+ --panel:#0b2b23;
+ --panel2:#10372c;
+ --gold:#d9b86c;
+ --gold2:#f0d99d;
+ --white:#f5f4ed;
+ --muted:#a9b9af;
+ --green:#39b982;
+ --border:rgba(217,184,108,.17);
+ --red:#e68c83;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ font-family:'Noto Sans Arabic',sans-serif;
+ background:radial-gradient(ellipse at top,#12392c 0%,#061d18 55%);
+ color:var(--white);
+ min-height:100vh;
+ padding-bottom:40px;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.container{width:min(1100px,94%);margin:auto}
+header{
+ padding:25px 0 18px;
+ display:flex;align-items:center;justify-content:space-between;
+ gap:15px;flex-wrap:wrap;
+ border-bottom:1px solid var(--border);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{
+ width:48px;height:48px;border-radius:16px;
+ background:linear-gradient(135deg,#d9b86c,#99743a);
+ display:grid;place-items:center;color:#092119;font-size:22px;
+}
+.brand h1{font-size:20px;color:var(--gold2)}
+.brand p{font-size:11px;color:var(--muted);margin-top:3px}
+.home-btn{
+ color:var(--gold2);text-decoration:none;
+ border:1px solid var(--border);padding:10px 15px;
+ border-radius:12px;font-size:13px;
+ background:#103328;
+}
+.home-btn:hover{background:var(--gold);color:#061d18}
+.hero{text-align:center;padding:38px 10px 25px}
+.hero .moon{font-size:32px;color:var(--gold)}
+.hero h2{font-size:clamp(23px,4vw,32px);color:var(--gold2);margin:10px 0}
+.hero p{color:var(--muted);font-size:13px;line-height:2}
+.date-row{
+ display:flex;justify-content:center;align-items:center;
+ gap:10px;margin:20px auto 0;flex-wrap:wrap;
+}
+.date-row input{
+ background:#103328;color:var(--white);
+ border:1px solid var(--border);border-radius:10px;
+ padding:10px 12px;direction:ltr;
+}
+.today-btn,.reset-btn{
+ background:transparent;color:var(--gold2);
+ border:1px solid var(--border);padding:10px 14px;
+ border-radius:10px;font-size:12px;
+}
+.stats{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:14px;margin:15px 0 25px;
+}
+.stat{
+ background:linear-gradient(145deg,#10372c,#09251e);
+ border:1px solid var(--border);border-radius:18px;
+ padding:20px;text-align:center;
+}
+.stat i{color:var(--gold);font-size:20px}
+.stat strong{display:block;font-size:25px;color:var(--gold2);margin:9px 0 3px}
+.stat span{font-size:11px;color:var(--muted)}
+.progress-card{
+ background:linear-gradient(120deg,#163d2e,#0b291f);
+ border:1px solid var(--border);border-radius:20px;
+ padding:22px;margin-bottom:25px;
+ display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+}
+.progress-info{flex:1;min-width:190px}
+.progress-info h3{color:var(--gold2);font-size:17px;margin-bottom:8px}
+.progress-info p{font-size:12px;color:var(--muted);line-height:2}
+.progress-track{
+ height:10px;background:#061b15;border-radius:20px;
+ margin-top:15px;overflow:hidden;
+}
+.progress-fill{
+ height:100%;width:0%;
+ background:linear-gradient(90deg,#b48c45,#f0d99d);
+ border-radius:20px;transition:width .3s;
+}
+.circle{
+ width:95px;height:95px;border-radius:50%;
+ display:grid;place-items:center;flex-shrink:0;
+ background:conic-gradient(var(--gold) 0deg,#183e30 0deg);
+ position:relative;
+}
+.circle:before{
+ content:"";position:absolute;inset:7px;
+ border-radius:50%;background:#103328;
+}
+.circle span{position:relative;color:var(--gold2);font-size:21px;font-weight:800}
+.section-title{
+ display:flex;align-items:center;gap:10px;
+ color:var(--gold2);font-size:18px;margin:25px 0 14px;
+}
+.section-title i{color:var(--gold)}
+.tasks{
+ display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+}
+.task{
+ display:flex;align-items:center;gap:13px;
+ padding:16px;background:linear-gradient(145deg,#10372c,#0a261f);
+ border:1px solid var(--border);border-radius:15px;
+ transition:.2s;min-width:0;
+}
+.task.done{
+ border-color:rgba(57,185,130,.55);
+ background:linear-gradient(145deg,#123c2e,#0b2b22);
+}
+.task-check{
+ width:28px;height:28px;flex-shrink:0;
+ border:1px solid rgba(217,184,108,.5);
+ border-radius:9px;display:grid;place-items:center;
+ color:transparent;background:#071e17;
+}
+.task.done .task-check{
+ background:var(--green);color:#062118;border-color:var(--green);
+}
+.task-info{flex:1;min-width:0}
+.task-info strong{font-size:13px;display:block}
+.task-info small{font-size:10px;color:var(--muted);display:block;margin-top:4px}
+.task-icon{color:var(--gold);font-size:19px}
+.task.done .task-info strong{color:#9de2be}
+.extra-info{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;margin-top:12px;flex-wrap:wrap;
+}
+.counter{
+ display:flex;align-items:center;gap:7px;
+ color:var(--muted);font-size:11px;
+}
+.counter input{
+ width:75px;padding:7px;border-radius:8px;
+ border:1px solid var(--border);background:#061d18;
+ color:white;text-align:center;direction:ltr;
+}
+.report{
+ margin-top:28px;padding:20px;
+ background:#0b2b23;border:1px solid var(--border);
+ border-radius:18px;
+}
+.report h3{color:var(--gold2);margin-bottom:15px;font-size:16px}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.day{
+ background:#061d18;border-radius:10px;padding:12px 3px;text-align:center;
+ border:1px solid var(--border);
+}
+.day small{font-size:10px;color:var(--muted)}
+.day strong{display:block;color:var(--gold2);font-size:14px;margin-top:5px}
+.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:30px;line-height:2}
+.footer span{color:var(--gold)}
+.toast{
+ position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);
+ background:#d9b86c;color:#061d18;padding:12px 20px;
+ border-radius:12px;font-size:12px;transition:.3s;z-index:10;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:600px){
+ .container{width:92%}
+ header{padding-top:17px}
+ .brand h1{font-size:17px}
+ .home-btn{font-size:11px;padding:9px}
+ .hero{padding-top:28px}
+ .stats{gap:8px}
+ .stat{padding:14px 5px}
+ .stat strong{font-size:20px}
+ .stat span{font-size:10px}
+ .tasks{grid-template-columns:1fr}
+ .progress-card{padding:17px}
+ .circle{width:78px;height:78px}
+ .week-grid{gap:4px}
+ .day{padding:9px 2px}
+ .day small{font-size:9px}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+ <div class="brand">
+  <div class="brand-icon"><i class="fa-solid fa-moon"></i></div>
+  <div>
+   <h1>نووری ئیمان</h1>
+   <p>بە زانست، دڵ ڕووناک بکەوە</p>
+  </div>
+ </div>
+ <a href="index.html" class="home-btn">
+  <i class="fa-solid fa-house"></i> گەڕانەوە بۆ سەرەکی
+ </a>
+</header>
+
+<section class="hero">
+ <div class="moon">☪</div>
+ <h2>خشتەی عیبادەتی ڕۆژانە</h2>
+ <p>هەنگاو بە هەنگاو، دڵت بە عیبادەت ڕووناک بکەوە</p>
+ <div class="date-row">
+  <input type="date" id="datePicker">
+  <button class="today-btn" id="todayBtn">ئەمڕۆ</button>
+ </div>
+</section>
+
+<section class="stats">
+ <div class="stat">
+  <i class="fa-solid fa-check-double"></i>
+  <strong id="doneCount">0</strong>
+  <span>عیبادەتی تەواوکراو</span>
+ </div>
+ <div class="stat">
+  <i class="fa-solid fa-list-check"></i>
+  <strong id="totalCount">13</strong>
+  <span>کۆی عیبادەتەکان</span>
+ </div>
+ <div class="stat">
+  <i class="fa-solid fa-star"></i>
+  <strong id="percentCount">0%</strong>
+  <span>ڕێژەی پێشکەوتن</span>
+ </div>
+</section>
+
+<section class="progress-card">
+ <div class="progress-info">
+  <h3>پێشکەوتنی ئەمڕۆت 🌿</h3>
+  <p id="progressMessage">بە ناوی خوای گەورە دەست پێ بکە. هەر هەنگاوێک گرنگە.</p>
+  <div class="progress-track">
+   <div class="progress-fill" id="progressFill"></div>
+  </div>
+ </div>
+ <div class="circle" id="progressCircle">
+  <span id="circleText">0%</span>
+ </div>
+</section>
+
+<h3 class="section-title"><i class="fa-solid fa-mosque"></i> نوێژە فەرزەکان</h3>
+<div class="tasks" id="prayerTasks"></div>
+
+<h3 class="section-title"><i class="fa-solid fa-book-quran"></i> قورئان و زیکر</h3>
+<div class="tasks" id="quranTasks"></div>
+
+<h3 class="section-title"><i class="fa-solid fa-hands-praying"></i> عیبادەتە زیادەکان</h3>
+<div class="tasks" id="extraTasks"></div>
+
+<div class="extra-info">
+ <button class="reset-btn" id="resetBtn">
+  <i class="fa-solid fa-rotate-left"></i> سفرکردنەوەی تۆمارەکانی ئەم ڕۆژە
+ </button>
+ <span style="font-size:10px;color:var(--muted)">تۆمارەکان بە خۆکار پاشەکەوت دەکرێن</span>
+</div>
+
+<section class="report">
+ <h3><i class="fa-solid fa-chart-column"></i> ڕاپۆرتی حەوت ڕۆژی ڕابردوو</h3>
+ <div class="week-grid" id="weekReport"></div>
+</section>
+
+<div class="footer">
+ <p>«وَاعْبُدْ رَبَّكَ حَتَّىٰ يَأْتِيَكَ الْيَقِينُ»</p>
+ <p>الحجر: ٩٩</p>
+ <p><span>نووری ئیمان</span> — بە زانست، دڵ ڕووناک بکەوە</p>
+</div>
+
+</div>
+
+<div class="toast" id="toast">پاشەکەوت کرا ✓</div>
+
+<script>
+const tasks = [
+ {id:"fajr",name:"نوێژی بەیانی",group:"prayer",icon:"fa-sun",desc:"نوێژی فەرزی بەیانی"},
+ {id:"dhuhr",name:"نوێژی نیوەڕۆ",group:"prayer",icon:"fa-sun",desc:"نوێژی فەرزی نیوەڕۆ"},
+ {id:"asr",name:"نوێژی عەسر",group:"prayer",icon:"fa-cloud-sun",desc:"نوێژی فەرزی عەسر"},
+ {id:"maghrib",name:"نوێژی مەغریب",group:"prayer",icon:"fa-cloud-moon",desc:"نوێژی فەرزی مەغریب"},
+ {id:"isha",name:"نوێژی عیشا",group:"prayer",icon:"fa-moon",desc:"نوێژی فەرزی عیشا"},
+ {id:"quran",name:"خوێندنەوەی قورئان",group:"quran",icon:"fa-book-quran",desc:"خوێندنەوەی بەشێک لە قورئانی پیرۆز"},
+ {id:"morning",name:"زیکری بەیانی",group:"quran",icon:"fa-sun",desc:"زیکرەکانی بەیانی"},
+ {id:"evening",name:"زیکری ئێوارە",group:"quran",icon:"fa-cloud-moon",desc:"زیکرەکانی ئێوارە"},
+ {id:"tasbeeh",name:"زیکر و تەسبیح",group:"quran",icon:"fa-hands-praying",desc:"سوپاس و زیکری خوای گەورە"},
+ {id:"sunnah",name:"نوێژی سوننەت",group:"extra",icon:"fa-mosque",desc:"نوێژە سوننەتەکان"},
+ {id:"dua",name:"دوعا و پاڕانەوە",group:"extra",icon:"fa-hands",desc:"دوعا بۆ خۆت و خێزان"},
+ {id:"charity",name:"خێر و خێرات",group:"extra",icon:"fa-heart",desc:"یارمەتی و چاکەکردن"},
+ {id:"learning",name:"فێربوونی زانیاری ئاینی",group:"extra",icon:"fa-lightbulb",desc:"خوێندنەوە یان فێربوونی شتێکی نوێ"}
+];
+
+const $ = id => document.getElementById(id);
+const today = new Date();
+const dateString = d => {
+ const y=d.getFullYear();
+ const m=String(d.getMonth()+1).padStart(2,"0");
+ const day=String(d.getDate()).padStart(2,"0");
+ return `${y}-${m}-${day}`;
+};
+
+let selectedDate=dateString(today);
+$("datePicker").value=selectedDate;
+
+function getData(date){
+ try{return JSON.parse(localStorage.getItem("noori_ebadat_"+date))||{}}
+ catch(e){return {}}
+}
+function saveData(data){
+ localStorage.setItem("noori_ebadat_"+selectedDate,JSON.stringify(data));
+}
+function renderTasks(){
+ const data=getData(selectedDate);
+ const groups={prayer:"prayerTasks",quran:"quranTasks",extra:"extraTasks"};
+ Object.keys(groups).forEach(group=>{
+  $(groups[group]).innerHTML="";
+  tasks.filter(t=>t.group===group).forEach(task=>{
+   const done=!!data[task.id];
+   const el=document.createElement("div");
+   el.className="task"+(done?" done":"");
+   el.innerHTML=`
+    <button class="task-check" aria-label="تۆمارکردنی ${task.name}" aria-pressed="${done}">
+     <i class="fa-solid fa-check"></i>
+    </button>
+    <div class="task-info">
+     <strong>${task.name}</strong>
+     <small>${task.desc}</small>
+    </div>
+    <i class="task-icon fa-solid ${task.icon}"></i>`;
+   el.querySelector("button").addEventListener("click",()=>{
+    const current=getData(selectedDate);
+    current[task.id]=!current[task.id];
+    saveData(current);
+    renderTasks();
+    showToast(current[task.id]?"عیبادەتەکە تۆمار کرا ✓":"تۆمارەکە گۆڕدرا");
+   });
+   $(groups[group]).appendChild(el);
+  });
+ });
+ updateStats();
+ renderWeek();
+}
+
+function updateStats(){
+ const data=getData(selectedDate);
+ const done=tasks.filter(t=>data[t.id]).length;
+ const total=tasks.length;
+ const percent=Math.round(done/total*100);
+ $("doneCount").textContent=done;
+ $("totalCount").textContent=total;
+ $("percentCount").textContent=percent+"%";
+ $("circleText").textContent=percent+"%";
+ $("progressFill").style.width=percent+"%";
+ $("progressCircle").style.background=
+ `conic-gradient(var(--gold) ${percent*3.6}deg,#183e30 0deg)`;
+ $("progressMessage").textContent=
+ percent===100?"ماشاءالله! هەموو ئامانجەکانی ئەمڕۆت تەواو کردووە. خوا قبووڵی بکات 🌙":
+ percent>=60?"بەردەوام بە! زۆر باش پێش دەچیت. 🌿":
+ percent>=30?"هەنگاوەکانت باشن، بەردەوام بە. 🌱":
+ "بە ناوی خوای گەورە دەست پێ بکە. هەر هەنگاوێک گرنگە.";
+}
+
+function renderWeek(){
+ const names=["یەکشەممە","دووشەممە","سێشەممە","چوارشەممە","پێنجشەممە","هەینی","شەممە"];
+ const box=$("weekReport");
+ box.innerHTML="";
+ for(let i=6;i>=0;i--){
+  const d=new Date(selectedDate+"T12:00:00");
+  d.setDate(d.getDate()-i);
+  const key=dateString(d);
+  const data=getData(key);
+  const count=tasks.filter(t=>data[t.id]).length;
+  const percent=Math.round(count/tasks.length*100);
+  const el=document.createElement("div");
+  el.className="day";
+  el.innerHTML=`<small>${names[d.getDay()].slice(0,3)}</small><strong>${percent}%</strong>`;
+  box.appendChild(el);
+ }
+}
+
+function showToast(message){
+ $("toast").textContent=message;
+ $("toast").classList.add("show");
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>$("toast").classList.remove("show"),1800);
+}
+
+$("datePicker").addEventListener("change",e=>{
+ if(!e.target.value)return;
+ selectedDate=e.target.value;
+ renderTasks();
+});
+$("todayBtn").addEventListener("click",()=>{
+ selectedDate=dateString(new Date());
+ $("datePicker").value=selectedDate;
+ renderTasks();
+});
+$("resetBtn").addEventListener("click",()=>{
+ if(!confirm("دڵنیایت دەتەوێت تۆمارەکانی ئەم ڕۆژە بسڕیتەوە؟"))return;
+ localStorage.removeItem("noori_ebadat_"+selectedDate);
+ renderTasks();
+ showToast("تۆمارەکانی ئەم ڕۆژە سفر کرانەوە");
+});
+
+renderTasks();
+</script>
+<script src="app-shell.js" defer></script>
+</body>
+</html>
