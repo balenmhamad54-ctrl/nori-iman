@@ -1,718 +1,579 @@
-
 <!DOCTYPE html>
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071b1b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#061d18">
 <title>کاتەکانی بانگ | نوری ئیمان</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 
 <style>
 :root{
---bg:#071b1b;
---panel:#102a27;
---green:#43c69a;
---gold:#dfbd78;
---text:#f4f4ed;
---muted:#a4b8ad;
---border:rgba(255,255,255,.09);
+  --bg:#061d18;--panel:#0b2b23;--card:#10382d;
+  --gold:#e9c777;--text:#f7f3e8;--muted:#c0d0c4;
+  --border:rgba(233,199,119,.22);--ok:#3ddc97;
 }
-
-*{box-sizing:border-box}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;width:100%;overflow-x:clip;-webkit-text-size-adjust:100%}
 body{
-margin:0;
-background:radial-gradient(ellipse at 20% 0%,rgba(67,198,154,.13),transparent 40%),var(--bg);
-color:var(--text);
-font-family:'Noto Sans Arabic',sans-serif;
+  width:100%;overflow-x:clip;
+  background:
+    radial-gradient(ellipse at 12% 8%,rgba(35,105,76,.22),transparent 32%),
+    radial-gradient(ellipse at 90% 55%,rgba(194,151,67,.08),transparent 28%),
+    var(--bg);
+  color:var(--text);
+  font-family:"Noto Sans Arabic",sans-serif;
+  line-height:1.9;
+  padding-bottom:125px;
 }
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
 
-header{
-max-width:1100px;
-margin:auto;
-padding:20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
+/* Navbar */
+.navbar{
+  min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:10px 6%;border-bottom:1px solid var(--border);
+  background:rgba(4,25,20,.94);position:sticky;top:0;z-index:10;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
 }
-
-.brand{display:flex;align-items:center;gap:12px}
-
-.logo{
-width:46px;
-height:46px;
-border-radius:15px;
-background:linear-gradient(135deg,#43c69a,#176c55);
-display:grid;
-place-items:center;
-color:#06251b;
-font-size:24px;
+.logo{font-size:24px;font-weight:800;white-space:nowrap}
+.logo span{color:var(--gold)}
+.back{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:30px;font-size:13px;
+  color:var(--gold);border:1px solid #e9c77755;background:#e9c7770d;transition:.25s;
 }
+.back:hover{background:#e9c77722}
 
-.brand small{
-display:block;
-color:var(--muted);
-font-size:11px;
+.page{max-width:1100px;margin:0 auto;padding:36px 5% 20px}
+.head{text-align:center;margin-bottom:26px}
+.eyebrow{color:var(--gold);font-size:13px;font-weight:700}
+.head h1{font-size:clamp(32px,6vw,54px);line-height:1.5;margin:4px 0 6px;font-weight:800}
+.head h1 span{color:var(--gold)}
+.head p{color:var(--muted);font-size:14px;max-width:560px;margin:auto}
+
+/* City tabs */
+.tabs{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:0 auto 26px;
+  padding:6px;width:fit-content;max-width:100%;
+  border:1px solid var(--border);border-radius:40px;background:#ffffff06;
 }
-
-a.home{
-color:var(--gold);
-text-decoration:none;
-border:1px solid var(--border);
-padding:10px 14px;
-border-radius:11px;
-font-size:12px;
+.tab{
+  min-height:44px;padding:8px 26px;border-radius:30px;border:0;background:transparent;
+  color:#d0ddd2;font-size:15px;font-weight:600;transition:.3s;
 }
+.tab:hover{color:var(--gold)}
+.tab.active{background:linear-gradient(135deg,#f1d48d,#c69b4d);color:#10271d;font-weight:800;box-shadow:0 8px 25px #d6b46a30}
 
-/* HERO IMAGE */
-
-main{
-max-width:950px;
-margin:25px auto 60px;
-padding:0 17px;
+/* Boxes */
+.box{
+  position:relative;overflow:hidden;border:1px solid #e9c77755;border-radius:28px;
+  background:
+    radial-gradient(circle at 50% 45%,#23604455,transparent 60%),
+    linear-gradient(135deg,#0b3025,#061b17 65%,#123b2d);
+  box-shadow:0 20px 55px #00000030;
 }
+.box::before{content:"";position:absolute;inset:10px;border:1px solid #e9c77726;border-radius:20px;pointer-events:none}
 
+/* Hero (countdown) */
 .hero{
-position:relative;
-min-height:310px;
-border-radius:25px;
-overflow:hidden;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-margin-bottom:25px;
-border:1px solid #dfbd7850;
-background:#102a27;
+  display:grid;grid-template-columns:auto 1fr;align-items:center;gap:34px;
+  padding:34px 40px;margin-bottom:24px;
 }
-
-.hero img{
-position:absolute;
-width:100%;
-height:100%;
-object-fit:cover;
-inset:0;
+.ring{position:relative;width:210px;height:210px;flex-shrink:0}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .bg{fill:none;stroke:#e9c77722;stroke-width:8}
+.ring .fg{
+  fill:none;stroke:url(#gold);stroke-width:8;stroke-linecap:round;
+  stroke-dasharray:565.5;stroke-dashoffset:565.5;transition:stroke-dashoffset 1s linear;
+  filter:drop-shadow(0 0 8px rgba(233,199,119,.5));
 }
-
-.hero::after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(
-180deg,
-rgba(3,17,16,.35),
-rgba(3,17,16,.88)
-);
+.ring-center{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
-
-.hero-content{
-position:relative;
-z-index:2;
-padding:35px 15px;
+.ring-center small{color:var(--muted);font-size:12px}
+.ring-center strong{
+  color:var(--gold);font-size:34px;font-weight:800;line-height:1.4;
+  font-variant-numeric:tabular-nums;direction:ltr;
 }
-
-.hero-icon{
-font-size:48px;
-margin-bottom:8px;
-filter:drop-shadow(0 0 12px #dfbd78);
+.hero-info .lab{color:var(--gold);font-size:13px;font-weight:700}
+.hero-info h2{font-size:clamp(30px,5vw,48px);line-height:1.5;margin:2px 0 4px}
+.hero-info .at{color:var(--muted);font-size:15px}
+.hero-info .at b{color:var(--text)}
+.dates{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.chip{
+  padding:6px 16px;border-radius:30px;font-size:12.5px;color:#e5e5d8;
+  border:1px solid #d7bd7650;background:#ffffff06;
 }
+.chip.clock{color:var(--gold);font-weight:700;direction:ltr;font-variant-numeric:tabular-nums}
 
-.hero h1{
-font-size:34px;
-color:var(--gold);
-margin:8px;
-text-shadow:0 3px 15px #000;
+/* Prayer cards */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:34px}
+.pcard{
+  --accent:#e9c777;
+  position:relative;overflow:hidden;min-height:150px;padding:20px 22px;
+  display:flex;align-items:center;gap:16px;
+  border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);border-radius:22px;
+  background:
+    radial-gradient(ellipse at 10% 90%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 65%),
+    linear-gradient(145deg,#123a2d,#0a281f);
+  box-shadow:0 12px 30px #00000012;transition:.3s;
 }
-
-.hero p{
-font-size:13px;
-color:#f1eee4;
-line-height:2.2;
-max-width:600px;
-margin:auto;
+.pcard:hover{transform:translateY(-5px);border-color:var(--accent)}
+.picon{
+  flex-shrink:0;width:62px;height:62px;display:grid;place-items:center;border-radius:20px;
+  color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);
+  background:color-mix(in srgb,var(--accent) 10%,transparent);
 }
-
-.hero-line{
-width:120px;
-height:2px;
-margin:18px auto;
-background:linear-gradient(90deg,transparent,var(--gold),transparent);
+.picon svg{width:32px;height:32px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.pbody{flex:1;min-width:0}
+.pbody h3{font-size:17px;margin-bottom:0}
+.pbody small{color:var(--muted);font-size:12px}
+.ptime{
+  display:block;margin-top:2px;color:var(--text);font-size:clamp(26px,3.4vw,34px);
+  font-weight:800;line-height:1.4;font-variant-numeric:tabular-nums;direction:ltr;text-align:right;
 }
-
-/* PANELS */
-
-.panel{
-background:linear-gradient(145deg,#12312c,#0c2421);
-border:1px solid var(--border);
-border-radius:19px;
-padding:22px;
-margin-bottom:18px;
-box-shadow:0 12px 30px #0003;
+.ptime em{font-style:normal;font-size:.45em;font-weight:600;color:var(--muted);margin-right:6px}
+.badge{
+  position:absolute;top:12px;left:14px;padding:1px 12px;border-radius:20px;
+  font-size:11px;font-weight:800;background:var(--accent);color:#08241b;opacity:0;transition:.3s;
 }
+.pcard.next{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 14px 40px color-mix(in srgb,var(--accent) 22%,transparent)}
+.pcard.next .badge{opacity:1}
+.pcard.past{opacity:.55}
+.pcard.past:hover{opacity:.9}
 
-.controls{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:12px;
+/* Monthly table */
+.sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.sec-head h2{font-size:clamp(22px,3.4vw,32px)}
+.sec-head h2 span{color:var(--gold);margin-left:8px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:8px 22px;
+  border-radius:35px;border:1px solid #e9c77755;background:#ffffff08;color:var(--gold);
+  font-weight:700;font-size:13px;transition:.3s;
 }
-
-label{
-display:block;
-color:var(--muted);
-font-size:12px;
-margin-bottom:8px;
+.btn:hover{background:#e9c7771a}
+.table-box{padding:12px}
+.twrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-height:560px;overflow-y:auto;border-radius:16px;position:relative}
+table{width:100%;min-width:560px;border-collapse:collapse;text-align:center;font-size:14px}
+th{
+  position:sticky;top:0;z-index:2;background:#0d3328;color:var(--gold);font-size:13px;
+  padding:12px 6px;border-bottom:1px solid var(--border);white-space:nowrap;
 }
-
-select{
-width:100%;
-padding:13px;
-border-radius:11px;
-background:#091f1c;
-color:white;
-border:1px solid var(--border);
-font-family:inherit;
-outline:none;
-}
-
-select:focus{
-border-color:var(--gold);
-}
-
-.date{
-text-align:center;
-margin:20px 0 6px;
-color:var(--gold);
-font-size:17px;
-}
-
-.greg{
-text-align:center;
-color:var(--muted);
-font-size:12px;
-}
-
-/* KAABA IMAGE */
-
-.kaaba-banner{
-position:relative;
-height:160px;
-border-radius:15px;
-overflow:hidden;
-margin-bottom:20px;
-}
-
-.kaaba-banner img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.kaaba-banner::after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(90deg,rgba(3,20,17,.2),rgba(3,20,17,.8));
-}
-
-.kaaba-text{
-position:absolute;
-z-index:2;
-top:50%;
-right:20px;
-transform:translateY(-50%);
-}
-
-.kaaba-text h3{
-color:var(--gold);
-font-size:21px;
-margin:0 0 8px;
-}
-
-.kaaba-text p{
-font-size:12px;
-color:white;
-margin:0;
-}
-
-/* NEXT PRAYER */
-
-.next{
-margin:15px 0 20px;
-padding:22px;
-text-align:center;
-border-radius:15px;
-background:linear-gradient(120deg,rgba(67,198,154,.14),rgba(223,189,120,.08));
-border:1px solid rgba(67,198,154,.2);
-}
-
-.next small{color:var(--muted);font-size:12px}
-
-.next h2{
-color:var(--green);
-font-size:25px;
-margin:9px;
-}
-
-#nextTime{
-font-size:27px;
-color:var(--gold);
-direction:ltr;
-}
-
-/* PRAYER TIMES */
-
-.times{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:11px;
-}
-
-.time{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
-background:#0b2420;
-border:1px solid var(--border);
-border-radius:13px;
-padding:16px;
-transition:.3s;
-}
-
-.time:hover{
-border-color:var(--gold);
-transform:translateY(-3px);
-}
-
-.time.active{
-border-color:var(--green);
-background:rgba(67,198,154,.12);
-box-shadow:0 0 15px #43c69a20;
-}
-
-.time-name{font-size:14px}
-
-.time small{
-display:block;
-color:var(--muted);
-font-size:10px;
-margin-top:4px;
-}
-
-.time strong{
-direction:ltr;
-color:var(--gold);
-font-size:20px;
-}
-
-.status{
-padding:13px;
-background:rgba(255,255,255,.04);
-border-radius:11px;
-color:var(--muted);
-font-size:12px;
-line-height:2;
-margin-top:14px;
-}
-
-button{
-font-family:inherit;
-cursor:pointer;
-}
-
-.refresh{
-width:100%;
-padding:14px;
-border:0;
-border-radius:11px;
-background:linear-gradient(100deg,#43c69a,#8cdbb2);
-color:#06251b;
-font-weight:800;
-margin-top:15px;
-font-size:14px;
-transition:.3s;
-}
-
-.refresh:hover{
-transform:translateY(-2px);
-box-shadow:0 5px 20px #43c69a35;
-}
+td{padding:10px 6px;border-bottom:1px solid #e9c77712;font-variant-numeric:tabular-nums;color:#e8eadc;white-space:nowrap}
+td:first-child{color:var(--muted);font-size:12.5px}
+tr.today td{background:#e9c7771c;color:var(--gold);font-weight:800}
+tr:hover td{background:#e9c77710}
+.tl{direction:ltr;display:inline-block}
 
 .note{
-color:var(--muted);
-font-size:11px;
-line-height:2;
-margin-top:15px;
+  margin-top:26px;padding:16px 20px;border-right:3px solid var(--gold);color:#e1e7d9;
+  background:linear-gradient(90deg,#e9c77706,#e9c77712);border-radius:14px;font-size:13px;
 }
+.verse{margin:30px 0 0;padding:24px 16px;text-align:center}
+.verse p{font-family:"Amiri",serif;font-size:clamp(20px,3vw,27px);color:#f7e5b6;line-height:2}
+.verse small{color:var(--muted);font-size:12px}
 
-.dua{
-text-align:center;
-padding:25px 15px;
-border:1px solid #dfbd7840;
-border-radius:18px;
-background:linear-gradient(145deg,#102b27,#0a201e);
-margin-top:20px;
-}
-
-.dua .arabic{
-color:var(--gold);
-font-size:23px;
-line-height:2;
-}
-
-.dua p{
-color:var(--muted);
-font-size:12px;
-margin-top:10px;
-}
-
-footer{
-text-align:center;
-padding:25px;
-color:var(--muted);
-font-size:11px;
-}
-
-@media(max-width:650px){
-.controls{grid-template-columns:1fr}
-.times{grid-template-columns:1fr}
-.panel{padding:16px}
-.hero{min-height:260px}
-.hero h1{font-size:27px}
-.kaaba-banner{height:140px}
-.kaaba-text h3{font-size:17px}
-}
-
-/* ===== Responsive mobile refinement: نوری ئیمان ===== */
-html{width:100%;max-width:100%;overflow-x:clip;-webkit-text-size-adjust:100%}
-body{width:100%;max-width:100%;overflow-x:clip}
-img,video,iframe,canvas,svg{max-width:100%}
-img,video{height:auto}
-input,select,textarea,button{max-width:100%}
-pre,code{white-space:pre-wrap;overflow-wrap:anywhere}
-table{max-width:100%}
+/* Tablet */
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){
- body{font-size:14px}
- header,nav,main,footer,section{max-width:100%}
- .container,.content,.main-content,.page-container,.wrapper{width:100%!important;max-width:100%!important;padding-left:14px!important;padding-right:14px!important}
- .navbar,.nav-inner,.header-top{gap:10px!important}
- .nav-links{max-width:100%}
- .hero{min-height:0!important;padding-top:34px!important;padding-bottom:34px!important}
- .hero h1,header h1,h1{overflow-wrap:anywhere;font-size:clamp(26px,7vw,42px)!important;line-height:1.55!important}
- h2{font-size:clamp(21px,5.5vw,30px)!important;line-height:1.6!important}
- h3,p,li,a,button,label{overflow-wrap:anywhere}
- .grid,.cards,.dua-grid,.prayer-grid,.names-grid,.features-grid,.content-grid,.cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
- .stats{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
- .stat{padding:12px 6px!important}.stat strong{font-size:clamp(17px,5vw,24px)!important}
- .controls,.search-box,.form-row{flex-wrap:wrap!important}
- .controls>*,.search-box>*{min-width:0}
- table{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
- .table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
- .card,.dua-card,.prayer-card,.stat{min-width:0!important}
+  .hero{grid-template-columns:1fr;justify-items:center;text-align:center;padding:30px 18px;gap:20px}
+  .dates{justify-content:center}
 }
+/* Phone */
 @media(max-width:520px){
- .navbar,.nav-inner{flex-wrap:wrap!important}
- .logo{font-size:20px!important;white-space:normal!important}
- .hero{padding-left:14px!important;padding-right:14px!important}
- .hero p,header p{font-size:13px!important}
- .hero-buttons,.actions,.button-group{gap:8px!important}
- .hero-buttons>*,.actions>*,.button-group>*{max-width:100%}
- .grid,.cards,.dua-grid,.prayer-grid,.names-grid,.features-grid,.content-grid,.cards-grid{grid-template-columns:minmax(0,1fr)!important}
- .stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
- .card,.dua-card,.prayer-card{padding:17px 14px!important}
- .quran-section,.quote,.intro-card{margin-left:10px!important;margin-right:10px!important;padding:22px 14px!important}
- .theme-area{gap:8px!important}
- .main-btn,button,.btn{min-height:42px}
- input,select,textarea{min-width:0!important;width:100%}
+  .navbar{padding:10px 4%}.logo{font-size:20px}
+  .page{padding:24px 14px 10px}
+  .grid{grid-template-columns:1fr;gap:12px}
+  .pcard{min-height:110px;padding:16px}
+  .tab{padding:8px 18px;font-size:14px}
+  .ring{width:190px;height:190px}.ring-center strong{font-size:30px}
 }
-@media(max-width:360px){.stats{grid-template-columns:minmax(0,1fr)!important}.logo{font-size:18px!important}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
+/* ===== Taskbar ===== */
+:root{--ni-gold:#d6b46a;--ni-glass:rgba(8,31,29,.88)}
+.ni-taskbar{
+  position:fixed;bottom:max(14px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
+  width:min(94%,590px);min-height:76px;padding:9px 12px;
+  display:flex;align-items:center;justify-content:space-around;gap:4px;z-index:9999;
+  background:var(--ni-glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border:1px solid rgba(214,180,106,.27);border-radius:25px;
+  box-shadow:0 12px 40px rgba(0,0,0,.35),inset 0 1px 1px rgba(255,255,255,.12);
+}
+.ni-item{
+  flex:1;min-width:0;min-height:56px;padding:6px 2px;border:0;background:transparent;
+  color:rgba(255,255,255,.65);font-family:inherit;font-size:11px;font-weight:600;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  border-radius:17px;transition:.3s ease;
+}
+.ni-icon{line-height:1.2;transition:.3s ease}
+.ni-icon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ni-item.active{color:var(--ni-gold);background:rgba(214,180,106,.12)}
+.ni-item.active .ni-icon{transform:translateY(-2px)}
+.ni-item.active .ni-icon svg{filter:drop-shadow(0 0 6px rgba(214,180,106,.6))}
+.ni-item:active{transform:scale(.92)}
+.ni-more-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(3px);z-index:10000;opacity:0;visibility:hidden;transition:.3s}
+.ni-more-overlay.show{opacity:1;visibility:visible}
+.ni-more-panel{
+  position:fixed;z-index:10001;bottom:105px;left:50%;transform:translate(-50%,20px);
+  width:min(92%,520px);padding:20px;border-radius:25px;
+  background:rgba(8,31,29,.97);border:1px solid rgba(214,180,106,.3);
+  box-shadow:0 15px 45px rgba(0,0,0,.4);opacity:0;visibility:hidden;transition:.3s ease;
+}
+.ni-more-panel.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.ni-panel-head{display:flex;justify-content:space-between;align-items:center;color:var(--ni-gold);font-size:16px;font-weight:bold;margin-bottom:18px}
+.ni-panel-head button{border:0;background:rgba(255,255,255,.08);color:#fff;border-radius:10px;width:34px;height:34px}
+.ni-more-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.ni-more-grid a{color:#eee9dc;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:15px 10px;text-align:center;font-size:13px;transition:.25s}
+.ni-more-grid a:hover{background:rgba(214,180,106,.15);border-color:var(--ni-gold);color:var(--ni-gold)}
+@media(min-width:768px){.ni-taskbar{width:570px;bottom:22px}.ni-item{font-size:13px}}
+@media(max-width:360px){.ni-taskbar{width:96%;padding:7px 5px}.ni-item{font-size:10px}}
 </style>
-
-<link rel="manifest" href="./manifest.webmanifest">
-<meta name="theme-color" content="#081c20">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-
 </head>
 
 <body>
 
-<header>
-<div class="brand">
-<div class="logo">☪</div>
-<div>
-<strong>نوری ئیمان</strong>
-<small>کاتەکانی نوێژ</small>
-</div>
-</div>
-<a class="home" href="index.html">گەڕانەوەبۆسەرەتا</a>
+<header class="navbar">
+  <a class="logo" href="index.html">نوری ئیمان <span>✦</span></a>
+  <a class="back" href="index.html">پەڕەی سەرەکی ←</a>
 </header>
 
-<main>
+<main class="page">
 
-<!-- HERO -->
+  <div class="head">
+    <span class="eyebrow">✦ کاتی نوێژەکان ✦</span>
+    <h1>کاتەکانی <span>بانگ</span></h1>
+    <p>کاتی نوێژەکانی ڕۆژانە بۆ سلێمانی، هەولێر و هەڵەبجە، لەگەڵ ژمێرەری کاتی نوێژی داهاتوو.</p>
+  </div>
 
-<section class="hero">
+  <div class="tabs" id="tabs" role="tablist">
+    <button class="tab active" data-city="sul" role="tab">سلێمانی</button>
+    <button class="tab" data-city="erb" role="tab">هەولێر</button>
+    <button class="tab" data-city="hal" role="tab">هەڵەبجە</button>
+  </div>
 
-<img
-src="https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1600&q=90"
-alt="وێنەی مزگەوت"
->
+  <!-- Countdown -->
+  <section class="box hero">
+    <div class="ring">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f1d48d"/><stop offset="1" stop-color="#c69b4d"/>
+          </linearGradient>
+        </defs>
+        <circle class="bg" cx="100" cy="100" r="90"/>
+        <circle class="fg" id="ringFg" cx="100" cy="100" r="90"/>
+      </svg>
+      <div class="ring-center">
+        <small>ماوە ماوە</small>
+        <strong id="countdown">--:--:--</strong>
+      </div>
+    </div>
 
-<div class="hero-content">
-<div class="hero-icon"></div>
-<h1>کاتەکانی بانگ</h1>
-<div class="hero-line"></div>
-<p>
-لەگەڵ کاتی نوێژەکانت بە. کاتی بانگی پێنج نوێژەکە
-بۆ شارەکانی کوردستان بە وردی ببینە.
-</p>
-</div>
+    <div class="hero-info">
+      <div class="lab">نوێژی داهاتوو</div>
+      <h2 id="nextName">—</h2>
+      <div class="at">کاتژمێر <b id="nextTime">—</b> · <span id="cityName">سلێمانی</span></div>
+      <div class="dates">
+        <span class="chip clock" id="clock">--:--:--</span>
+        <span class="chip" id="dateG">—</span>
+        <span class="chip" id="dateH">—</span>
+      </div>
+    </div>
+  </section>
 
-</section>
+  <!-- Prayer cards -->
+  <section class="grid" id="grid"></section>
 
-<!-- CITY SETTINGS -->
+  <!-- Monthly table -->
+  <section>
+    <div class="sec-head">
+      <h2><span>✦</span> خشتەی مانگانە</h2>
+      <button class="btn" id="fmtBtn" type="button">کاتژمێری ٢٤ ‌کاتی</button>
+    </div>
+    <div class="box table-box">
+      <div class="twrap">
+        <table>
+          <thead>
+            <tr><th>ڕۆژ</th><th>بەیانی</th><th>خۆرهەڵات</th><th>نیوەڕۆ</th><th>عەسر</th><th>مەغریب</th><th>عیشا</th></tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
-<section class="panel">
+  <div class="box verse">
+    <p>إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا</p>
+    <small>سورەتی النساء — ئایەتی ١٠٣</small>
+  </div>
 
-<div class="controls">
-
-<div>
-<label for="city">شار هەڵبژێرە</label>
-<select id="city">
-<option value="sulaymaniyah">سلێمانی</option>
-<option value="erbil">هەولێر</option>
-<option value="duhok">دهۆک</option>
-<option value="halabja">هەڵەبجە</option>
-<option value="kirkuk">کەرکووک</option>
-<option value="zakho">زاخۆ</option>
-<option value="ranya">ڕانیە</option>
-<option value="kalar">کەلار</option>
-<option value="akre">ئاکرێ</option>
-<option value="chamchamal">چەمچەماڵ</option>
-</select>
-</div>
-
-<div>
-<label for="method">شێوازی هەژمارکردن</label>
-<select id="method">
-<option value="3">Muslim World League</option>
-<option value="1">کراچی</option>
-<option value="5">میسر</option>
-<option value="13">Diyanet - تورکیا</option>
-<option value="0">جعفەری</option>
-</select>
-</div>
-
-<div>
-<label for="school">هەژمارکردنی عەسر</label>
-<select id="school">
-<option value="0">شافعی</option>
-<option value="1">حەنەفی</option>
-</select>
-</div>
-
-</div>
-
-<div class="date" id="hijriDate">...</div>
-<div class="greg" id="gregDate">...</div>
-
-</section>
-
-<!-- PRAYER TIMES -->
-
-<section class="panel">
-
-<div class="kaaba-banner">
-<img
-src="https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=90"
-alt="کەعبەی پیرۆز"
->
-<div class="kaaba-text">
-<h3>بە ئارامی دڵت نوێژ بکە</h3>
-<p>نوێژ ڕووناکی دڵ و ڕێگای ئیمانە</p>
-</div>
-</div>
-
-<div class="next">
-<small>نوێژی داهاتوو</small>
-<h2 id="nextName">...</h2>
-<div id="nextTime">--:--</div>
-</div>
-
-<div class="times" id="times">
-<div class="time">چاوەڕێ بکە...</div>
-</div>
-
-<div class="status" id="status">
-کاتەکانی نوێژ وەردەگیرێن...
-</div>
-
-<button class="refresh" id="refresh">
-⟳ نوێکردنەوەی کاتەکان
-</button>
-
-<div class="note">
-تێبینی: کاتەکان بە پێی شوێنی شار و شێوازی هەژمارکردنی هەڵبژێردراوە. بۆ گونجاندنی تەواو لەگەڵ مزگەوتەکەت، کاتەکان لەگەڵ خشتەی فەرمیی ناوچەکەت بەراورد بکە.
-</div>
-
-</section>
-
-<section class="dua">
-<div class="arabic">
-إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا
-</div>
-<p>سورەتی نیساء، ئایەتی ١٠٣</p>
-</section>
+  <div class="note">
+    💡 کاتەکان بە ژمێرەی ئەستێرەناسی (ڕێبازی ڕابیتەی جیهانی ئیسلامی: بەیانی ١٨° و عیشا ١٧°، عەسر بە ڕێبازی شافیعی) ژمێردراون،
+    بۆیە ڕەنگە ١ تا ٣ خولەک جیاواز بن لە خشتەی مزگەوت یان وەزارەتی ئەوقاف. بۆ ئاگاداری، هەمیشە کاتی مزگەوتی ناوچەکەت چاودێری بکە.
+  </div>
 
 </main>
 
-<footer>
-✦ نوری ئیمان © 2026
-</footer>
+<!-- Taskbar -->
+<nav class="ni-taskbar" aria-label="مینۆی سەرەکی">
+  <a href="index.html" class="ni-item">
+    <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span>
+    <span>سەرەکی</span>
+  </a>
+  <a href="quran.html" class="ni-item">
+    <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-2-8-1.5v14c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-14c-3-.5-6 0-8 1.5z"/><path d="M12 6v14"/></svg></span>
+    <span>قورئان</span>
+  </a>
+  <a href="qiblanma.html" class="ni-item">
+    <span class="ni-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
+    <span>قیبلە</span>
+  </a>
+  <a href="katakanyBang.html" class="ni-item active">
+    <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21v-7a7 7 0 0 1 14 0v7"/><path d="M12 7V4"/><path d="M12 14v4"/><path d="M9 21v-3h6v3"/></svg></span>
+    <span>بانگ</span>
+  </a>
+  <a href="quiz.html" class="ni-item">
+    <span class="ni-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg></span>
+    <span>تاقیکردنەوە</span>
+  </a>
+  <button class="ni-item" id="niMoreBtn" type="button">
+    <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg></span>
+    <span>زیاتر</span>
+  </button>
+</nav>
+
+<div class="ni-more-overlay" id="niOverlay"></div>
+<div class="ni-more-panel" id="niMorePanel">
+  <div class="ni-panel-head">
+    <span>☾ بەشەکانی نوری ئیمان</span>
+    <button id="niCloseBtn" type="button">✕</button>
+  </div>
+  <div class="ni-more-grid">
+    <a href="dua.html">🤲 دوعا و زیکر</a>
+    <a href="hadith.html">📜 فەرموودە</a>
+    <a href="nwezh.html">🕌 فێربوونی نوێژ</a>
+    <a href="dastnwezh.html">💧 دەستنوێژ</a>
+    <a href="naw.html">✨ ناوەکانی خودا</a>
+    <a href="zakat.html">🌙 زەکات</a>
+    <a href="quiz.html">🧠 تاقیکردنەوەی ئیسلامی</a>
+    <a href="about.html">ℹ️ دەربارەی ئێمە</a>
+  </div>
+</div>
 
 <script>
+(() => {
+  const $ = id => document.getElementById(id);
 
-const cities={
-sulaymaniyah:{name:'سلێمانی',lat:35.5613,lon:45.4300},
-erbil:{name:'هەولێر',lat:36.1901,lon:44.0091},
-duhok:{name:'دهۆک',lat:36.8671,lon:42.9507},
-halabja:{name:'هەڵەبجە',lat:35.1778,lon:45.9861},
-kirkuk:{name:'کەرکووک',lat:35.4681,lon:44.3922},
-zakho:{name:'زاخۆ',lat:37.1487,lon:42.6853},
-ranya:{name:'ڕانیە',lat:36.2550,lon:44.8830},
-kalar:{name:'کەلار',lat:34.6270,lon:45.3230},
-akre:{name:'ئاکرێ',lat:36.7400,lon:43.8950},
-chamchamal:{name:'چەمچەماڵ',lat:35.5300,lon:44.8300}
-};
+  /* ---------- Cities (Iraq = UTC+3, no DST) ---------- */
+  const CITIES = {
+    sul: { name: "سلێمانی", lat: 35.5613, lon: 45.4305 },
+    erb: { name: "هەولێر",  lat: 36.1911, lon: 44.0092 },
+    hal: { name: "هەڵەبجە", lat: 35.1796, lon: 45.9863 }
+  };
+  const TZ = 3;
+  const FAJR_ANGLE = 18, ISHA_ANGLE = 17, ASR_FACTOR = 1; // Shafi'i
 
-const prayerNames={
-Fajr:'بەیانی',
-Sunrise:'هەڵاتنی خۆر',
-Dhuhr:'نیوەڕۆ',
-Asr:'عەسر',
-Maghrib:'مەغریب',
-Isha:'عیشا'
-};
+  /* ---------- Prayer definitions ---------- */
+  const PRAYERS = [
+    { key: "fajr",    name: "بەیانی",    sub: "فەجر",       color: "#8fa8ff", icon: '<path d="M3 18h18"/><path d="M6 18a6 6 0 0 1 12 0"/><path d="M12 6v3M4.9 10.9l1.8 1.8M19.1 10.9l-1.8 1.8"/>' },
+    { key: "sunrise", name: "خۆرهەڵاتن", sub: "کۆتایی بەیانی", color: "#ffad42", icon: '<path d="M3 19h18"/><path d="M7 19a5 5 0 0 1 10 0"/><path d="M12 5v4M9.5 7.5L12 5l2.5 2.5"/>' },
+    { key: "dhuhr",   name: "نیوەڕۆ",    sub: "ظوهر",       color: "#ffd84a", icon: '<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/>' },
+    { key: "asr",     name: "عەسر",      sub: "پاشنیوەڕۆ",  color: "#35aaff", icon: '<circle cx="12" cy="10" r="3.5"/><path d="M12 3v1.5M5 6l1 1M19 6l-1 1M3 16h18M6 20h12"/>' },
+    { key: "maghrib", name: "مەغریب",    sub: "ئاوابوونی خۆر", color: "#ff7a6b", icon: '<path d="M3 18h18"/><path d="M7 18a5 5 0 0 1 10 0"/><path d="M12 8v4M9.5 10.5L12 13l2.5-2.5"/>' },
+    { key: "isha",    name: "عیشا",      sub: "ئێواران",    color: "#c18aff", icon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="M17 4v3M15.5 5.5h3"/>' }
+  ];
 
-const $=id=>document.getElementById(id);
+  /* ---------- Digits & names ---------- */
+  const ar = s => String(s).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+  const pad = n => String(n).padStart(2, "0");
+  const MONTHS = ["کانوونی دووەم","شوبات","ئازار","نیسان","ئایار","حوزەیران","تەممووز","ئاب","ئەیلوول","تشرینی یەکەم","تشرینی دووەم","کانوونی یەکەم"];
+  const DAYS = ["یەکشەمە","دووشەمە","سێشەمە","چوارشەمە","پێنجشەمە","هەینی","شەممە"];
 
-function todayString(){
-const d=new Date();
-return String(d.getDate()).padStart(2,'0')+'-'+
-String(d.getMonth()+1).padStart(2,'0')+'-'+d.getFullYear();
-}
+  /* ---------- Astronomy ---------- */
+  const rad = d => d * Math.PI / 180, deg = r => r * 180 / Math.PI;
+  const sin = d => Math.sin(rad(d)), cos = d => Math.cos(rad(d)), tan = d => Math.tan(rad(d));
+  const fix = (a, b) => { a = a - b * Math.floor(a / b); return a < 0 ? a + b : a; };
 
-function cleanTime(t){
-return (t||'--:--').split(' ')[0].slice(0,5);
-}
+  function sunPos(D) {
+    const g = fix(357.529 + 0.98560028 * D, 360);
+    const q = fix(280.459 + 0.98564736 * D, 360);
+    const L = fix(q + 1.915 * sin(g) + 0.020 * sin(2 * g), 360);
+    const e = 23.439 - 0.00000036 * D;
+    let RA = deg(Math.atan2(cos(e) * sin(L), cos(L))) / 15;
+    RA = fix(RA, 24);
+    return { decl: deg(Math.asin(sin(e) * sin(L))), eqt: q / 15 - RA };
+  }
 
-function minutes(t){
-const p=cleanTime(t).split(':').map(Number);
-return p[0]*60+p[1];
-}
+  function times(y, m, d, c) { // m: 0-11 ; returns hours (float, local time)
+    const jd = Date.UTC(y, m, d, 12) / 86400000 + 2440587.5;
+    const D = jd - 2451545.0 - c.lon / 360;
+    const { decl, eqt } = sunPos(D);
+    const noon = 12 + TZ - c.lon / 15 - eqt;
+    const T = ang => {
+      const x = (-sin(ang) - sin(decl) * sin(c.lat)) / (cos(decl) * cos(c.lat));
+      return deg(Math.acos(Math.max(-1, Math.min(1, x)))) / 15;
+    };
+    const asrAng = -deg(Math.atan(1 / (ASR_FACTOR + tan(Math.abs(c.lat - decl)))));
+    return {
+      fajr:    noon - T(FAJR_ANGLE),
+      sunrise: noon - T(0.833),
+      dhuhr:   noon + 1 / 60,       // +1 min safety margin
+      asr:     noon + T(asrAng),
+      maghrib: noon + T(0.833) + 1 / 60,
+      isha:    noon + T(ISHA_ANGLE)
+    };
+  }
 
-function render(data){
+  /* ---------- Baghdad "now" (independent of device timezone) ---------- */
+  function nowBaghdad() {
+    const p = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Baghdad", hourCycle: "h23",
+      year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric"
+    }).formatToParts(new Date()).reduce((o, x) => (o[x.type] = x.value, o), {});
+    return { y: +p.year, m: +p.month - 1, d: +p.day, h: +p.hour, mi: +p.minute, s: +p.second };
+  }
 
-const timings=data.timings;
-const hijri=data.date.hijri;
+  /* ---------- Formatting ---------- */
+  let use24 = false;
+  try { use24 = localStorage.getItem("niFmt24") === "1"; } catch (e) {}
 
-$('hijriDate').textContent=
-hijri.day+' '+hijri.month.ar+' '+hijri.year+' کۆچی';
+  function fmt(h, parts) {
+    let mins = Math.round(h * 60);
+    let hh = Math.floor(mins / 60) % 24, mm = mins % 60;
+    if (use24) return parts ? { t: ar(pad(hh) + ":" + pad(mm)), ap: "" } : ar(pad(hh) + ":" + pad(mm));
+    const ap = hh >= 12 ? "ئێوارە" : "بەیانی";
+    const h12 = hh % 12 === 0 ? 12 : hh % 12;
+    const t = ar(h12 + ":" + pad(mm));
+    return parts ? { t, ap: ap } : t + " " + ap;
+  }
 
-$('gregDate').textContent=
-data.date.readable+' — '+cities[$('city').value].name;
+  /* ---------- State ---------- */
+  let cityKey = "sul";
+  try { const s = localStorage.getItem("niCity"); if (s && CITIES[s]) cityKey = s; } catch (e) {}
 
-const keys=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+  /* ---------- Build cards once ---------- */
+  const grid = $("grid");
+  grid.innerHTML = PRAYERS.map(p => `
+    <article class="pcard" id="c-${p.key}" style="--accent:${p.color}">
+      <span class="badge">داهاتوو</span>
+      <div class="picon"><svg viewBox="0 0 24 24">${p.icon}</svg></div>
+      <div class="pbody">
+        <h3>${p.name}</h3>
+        <small>${p.sub}</small>
+        <span class="ptime" id="t-${p.key}">--</span>
+      </div>
+    </article>`).join("");
 
-const now=new Date();
-const nowMinutes=now.getHours()*60+now.getMinutes();
+  /* ---------- Render table ---------- */
+  function renderTable(n, c) {
+    const days = new Date(n.y, n.m + 1, 0).getDate();
+    let html = "";
+    for (let d = 1; d <= days; d++) {
+      const t = times(n.y, n.m, d, c);
+      html += `<tr class="${d === n.d ? "today" : ""}"><td>${ar(d)} ${MONTHS[n.m]}</td>` +
+        ["fajr","sunrise","dhuhr","asr","maghrib","isha"].map(k => `<td><span class="tl">${fmt(t[k])}</span></td>`).join("") + "</tr>";
+    }
+    $("tbody").innerHTML = html;
+    const row = document.querySelector("tr.today");
+    if (row) { const w = row.closest(".twrap"); w.scrollTop = row.offsetTop - w.clientHeight / 2; }
+  }
 
-let next=null;
+  /* ---------- Main render ---------- */
+  let lastDayKey = "", lastCity = "", lastFmt = null;
 
-for(const key of ['Fajr','Dhuhr','Asr','Maghrib','Isha']){
-if(minutes(timings[key])>nowMinutes){
-next=key;
-break;
-}
-}
+  function tick() {
+    const n = nowBaghdad(), c = CITIES[cityKey];
+    const nowH = n.h + n.mi / 60 + n.s / 3600;
+    const dayKey = n.y + "-" + n.m + "-" + n.d;
 
-const boxes=keys.map(key=>{
-const active=key===next;
+    const today = times(n.y, n.m, n.d, c);
 
-return `<div class="time ${active?'active':''}">
-<div>
-<div class="time-name">${prayerNames[key]}</div>
-<small>${key==='Sunrise'?'کاتی هەڵاتنی خۆر':'کاتی نوێژ'}</small>
-</div>
-<strong>${cleanTime(timings[key])}</strong>
-</div>`;
-}).join('');
+    // cards (only when something changed)
+    if (dayKey !== lastDayKey || cityKey !== lastCity || use24 !== lastFmt) {
+      PRAYERS.forEach(p => {
+        const f = fmt(today[p.key], true);
+        $("t-" + p.key).innerHTML = f.t + (f.ap ? `<em>${f.ap}</em>` : "");
+      });
+      renderTable(n, c);
+      const dt = new Date(Date.UTC(n.y, n.m, n.d));
+      $("dateG").textContent = `${DAYS[dt.getUTCDay()]}، ${ar(n.d)} ${MONTHS[n.m]} ${ar(n.y)}`;
+      try {
+        $("dateH").textContent = new Intl.DateTimeFormat("ar-u-ca-islamic-umalqura-nu-arab", { day: "numeric", month: "long", year: "numeric" }).format(dt) + " هـ";
+      } catch (e) { $("dateH").style.display = "none"; }
+      lastDayKey = dayKey; lastCity = cityKey; lastFmt = use24;
+    }
 
-$('times').innerHTML=boxes;
+    // timeline: today's six + tomorrow's fajr + yesterday's isha
+    const order = PRAYERS.map(p => p.key);
+    let nextIdx = order.findIndex(k => today[k] > nowH);
+    let nextH, prevH, nextKey;
+    if (nextIdx === -1) {                       // after isha -> tomorrow fajr
+      const tm = new Date(Date.UTC(n.y, n.m, n.d + 1));
+      const t2 = times(tm.getUTCFullYear(), tm.getUTCMonth(), tm.getUTCDate(), c);
+      nextKey = "fajr"; nextH = t2.fajr + 24; prevH = today.isha;
+    } else {
+      nextKey = order[nextIdx]; nextH = today[nextKey];
+      if (nextIdx > 0) prevH = today[order[nextIdx - 1]];
+      else {                                    // before fajr -> yesterday isha
+        const ym = new Date(Date.UTC(n.y, n.m, n.d - 1));
+        prevH = times(ym.getUTCFullYear(), ym.getUTCMonth(), ym.getUTCDate(), c).isha - 24;
+      }
+    }
 
-if(next){
-$('nextName').textContent=prayerNames[next];
-$('nextTime').textContent=cleanTime(timings[next]);
-}else{
-$('nextName').textContent='نوێژی بەیانیی سبەی';
-$('nextTime').textContent=cleanTime(timings.Fajr);
-}
+    const left = Math.max(0, Math.round((nextH - nowH) * 3600));
+    $("countdown").textContent = ar(pad(Math.floor(left / 3600)) + ":" + pad(Math.floor(left % 3600 / 60)) + ":" + pad(left % 60));
+    const prog = Math.min(1, Math.max(0, (nowH - prevH) / (nextH - prevH)));
+    $("ringFg").style.strokeDashoffset = 565.5 * (1 - prog);
 
-$('status').textContent=
-'کاتەکان بە سەرکەوتوویی وەرگیران. شاری '+
-cities[$('city').value].name+
-' — شێوازی هەژمارکردن: '+
-$('method').selectedOptions[0].text;
+    const np = PRAYERS.find(p => p.key === nextKey);
+    $("nextName").textContent = np.name;
+    $("nextTime").textContent = fmt(nextH % 24);
+    $("cityName").textContent = c.name;
+    $("clock").textContent = ar(pad(n.h) + ":" + pad(n.mi) + ":" + pad(n.s));
 
-}
+    PRAYERS.forEach(p => {
+      const el = $("c-" + p.key);
+      // after Isha, tomorrow's Fajr is next but today's cards all count as passed
+      el.classList.toggle("next", nextIdx !== -1 && p.key === nextKey);
+      el.classList.toggle("past", today[p.key] <= nowH);
+    });
+  }
 
-async function loadTimes(){
+  /* ---------- Events ---------- */
+  function setActiveTab() {
+    document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.city === cityKey));
+  }
+  $("tabs").addEventListener("click", e => {
+    const b = e.target.closest(".tab"); if (!b) return;
+    cityKey = b.dataset.city;
+    try { localStorage.setItem("niCity", cityKey); } catch (e) {}
+    setActiveTab(); tick();
+  });
 
-const city=cities[$('city').value];
+  function updateFmtBtn() { $("fmtBtn").textContent = use24 ? "کاتژمێری ١٢ کاتی" : "کاتژمێری ٢٤ کاتی"; }
+  $("fmtBtn").addEventListener("click", () => {
+    use24 = !use24;
+    try { localStorage.setItem("niFmt24", use24 ? "1" : "0"); } catch (e) {}
+    updateFmtBtn(); tick();
+  });
 
-$('status').textContent='کاتەکانی نوێژ وەردەگیرێن...';
+  setActiveTab(); updateFmtBtn(); tick();
+  setInterval(tick, 1000);
 
-$('times').innerHTML=
-'<div class="time">تکایە چاوەڕێ بکە...</div>';
-
-const method=$('method').value;
-const school=$('school').value;
-
-const url=`https://api.aladhan.com/v1/timings/${todayString()}?latitude=${city.lat}&longitude=${city.lon}&method=${method}&school=${school}&timezonestring=Asia/Baghdad`;
-
-try{
-
-const response=await fetch(url);
-
-if(!response.ok)throw new Error('API error');
-
-const json=await response.json();
-
-if(json.code!==200)throw new Error('Invalid response');
-
-render(json.data);
-
-}catch(e){
-
-$('status').textContent=
-'نەتوانرا کاتەکان وەربگیرێن. ئینتەرنێت بپشکنە و دووبارە هەوڵ بدە.';
-
-$('times').innerHTML='';
-
-}
-
-}
-
-$('city').addEventListener('change',loadTimes);
-$('method').addEventListener('change',loadTimes);
-$('school').addEventListener('change',loadTimes);
-$('refresh').addEventListener('click',loadTimes);
-
-loadTimes();
-
+  /* ---------- Taskbar ---------- */
+  const moreBtn = $("niMoreBtn"), panel = $("niMorePanel"), overlay = $("niOverlay"), closeBtn = $("niCloseBtn");
+  const openMore = () => { panel.classList.add("show"); overlay.classList.add("show"); };
+  const closeMore = () => { panel.classList.remove("show"); overlay.classList.remove("show"); };
+  moreBtn.addEventListener("click", openMore);
+  closeBtn.addEventListener("click", closeMore);
+  overlay.addEventListener("click", closeMore);
+})();
 </script>
 
 <script>
@@ -723,6 +584,5 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<script src="app-shell.js" defer></script>
 </body>
 </html>
