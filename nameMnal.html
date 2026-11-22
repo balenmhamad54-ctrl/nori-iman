@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#081c20">
+<title>ناوی منداڵان | نووری ئیمان</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#081c20;
+ --panel:#102b2b;
+ --gold:#e5c477;
+ --green:#1c6650;
+ --white:#fffdf5;
+ --muted:#afc1b9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ font-family:'Noto Sans Arabic',sans-serif;
+ background:var(--bg);color:var(--white);
+ min-height:100vh;overflow-x:hidden
+}
+button,input,select{font-family:inherit}
+.hero{
+ position:relative;text-align:center;padding:65px 15px 38px;
+ background:radial-gradient(ellipse at top,#235b45,#0b2927 65%,#081c20);
+ border-bottom:1px solid #e5c47750;overflow:hidden
+}
+.hero:before,.hero:after{
+ content:"۞";position:absolute;font-size:150px;
+ color:#e5c47712;pointer-events:none
+}
+.hero:before{right:3%;top:-40px}
+.hero:after{left:3%;bottom:-65px}
+.back{
+ position:absolute;right:16px;top:16px;
+ color:var(--gold);text-decoration:none;
+ background:#ffffff10;border:1px solid #e5c47755;
+ padding:9px 15px;border-radius:12px;font-size:12px
+}
+.logo{
+ width:65px;height:65px;border:1px solid var(--gold);
+ color:var(--gold);border-radius:22px;
+ display:grid;place-items:center;font-size:32px;
+ margin:0 auto 14px;transform:rotate(45deg)
+}
+.logo span{transform:rotate(-45deg)}
+.hero h1{font-size:clamp(24px,4vw,36px);color:var(--gold);margin-bottom:8px}
+.hero p{font-size:13px;color:var(--muted);line-height:2}
+.container{max-width:1200px;margin:auto;padding:25px 18px 55px}
+.stats{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:12px;margin-bottom:24px
+}
+.stat{
+ text-align:center;padding:15px 8px;
+ border-radius:17px;background:linear-gradient(140deg,#194337,#102a2a);
+ border:1px solid #e5c47735
+}
+.stat strong{display:block;font-size:25px;color:var(--gold)}
+.stat span{font-size:12px;color:var(--muted)}
+.search{
+ position:relative;margin-bottom:18px
+}
+.search input{
+ width:100%;padding:16px 48px 16px 15px;
+ border-radius:15px;border:1px solid #d9b96a65;
+ outline:none;background:#102b2b;color:white;font-size:14px
+}
+.search input:focus{border-color:var(--gold);box-shadow:0 0 15px #e5c47718}
+.search span{position:absolute;right:16px;top:11px;font-size:22px;color:var(--gold)}
+.tabs{
+ display:grid;grid-template-columns:repeat(5,1fr);
+ gap:9px;margin-bottom:17px
+}
+.tab{
+ padding:12px 5px;border:1px solid #e5c47735;
+ border-radius:12px;background:#102b2b;color:#c4d1c9;
+ font-size:12px;cursor:pointer;transition:.2s
+}
+.tab.active,.tab:hover{
+ background:linear-gradient(135deg,#e5c477,#b8954c);
+ color:#13271f;border-color:var(--gold);font-weight:800
+}
+.filter-row{
+ display:flex;align-items:center;gap:10px;
+ flex-wrap:wrap;margin:20px 0
+}
+.filter-row label{font-size:12px;color:var(--muted)}
+.filter-row select{
+ background:#102b2b;color:white;border:1px solid #e5c47755;
+ border-radius:10px;padding:10px 13px;outline:none
+}
+.section-head{
+ display:flex;justify-content:space-between;
+ align-items:center;margin:25px 0 15px;gap:10px
+}
+.section-head h2{font-size:17px;color:var(--gold)}
+.section-head span{font-size:12px;color:var(--muted)}
+.grid{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:14px
+}
+.card{
+ position:relative;overflow:hidden;
+ padding:18px 15px;border-radius:18px;
+ background:linear-gradient(145deg,#163e35,#102728 80%);
+ border:1px solid #d7b86645;
+ min-height:170px;transition:.25s
+}
+.card:nth-child(4n+2){
+ background:linear-gradient(145deg,#263d3d,#142a31)
+}
+.card:nth-child(4n+3){
+ background:linear-gradient(145deg,#3a3340,#192a32)
+}
+.card:nth-child(4n+4){
+ background:linear-gradient(145deg,#3d3525,#172c2a)
+}
+.card:after{
+ content:"۞";position:absolute;left:-9px;bottom:-29px;
+ font-size:80px;color:#e5c4770d;pointer-events:none
+}
+.card:hover{
+ transform:translateY(-5px);
+ border-color:var(--gold);
+ box-shadow:0 10px 28px #0004
+}
+.card-top{
+ display:flex;justify-content:space-between;
+ align-items:center;margin-bottom:13px
+}
+.num{font-size:10px;color:#d9c58c99}
+.tag{
+ font-size:10px;padding:5px 9px;border-radius:20px;
+ background:#e5c47719;color:var(--gold)
+}
+.name{
+ color:var(--gold);font-size:28px;
+ font-weight:800;margin-bottom:8px;
+ position:relative;z-index:1
+}
+.meaning{
+ color:#e3e9e2;font-size:12px;line-height:2;
+ position:relative;z-index:1
+}
+.card-bottom{
+ margin-top:12px;padding-top:9px;
+ border-top:1px solid #ffffff12;
+ color:#a9c2b4;font-size:10px
+}
+.empty{
+ display:none;text-align:center;padding:55px 10px;
+ color:var(--muted);line-height:2
+}
+.empty b{font-size:40px;display:block}
+.footer{
+ text-align:center;padding:23px;
+ border-top:1px solid #ffffff15;
+ color:var(--muted);font-size:12px;line-height:2
+}
+.footer strong{color:var(--gold)}
+@media(max-width:900px){
+ .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .tabs{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px){
+ .container{padding:18px 12px 40px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .card{padding:14px 11px;min-height:165px}
+ .name{font-size:24px}
+ .meaning{font-size:11px}
+ .stats{gap:7px}
+ .stat{padding:12px 5px}
+ .stat strong{font-size:21px}
+ .stat span{font-size:10px}
+ .tabs{grid-template-columns:repeat(2,1fr)}
+ .hero{padding-top:70px}
+}
+@media(max-width:340px){
+ .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+ <a href="index.html" class="back">↩ گەڕانەوە بۆ سەرەتا</a>
+ <div class="logo"><span>۞</span></div>
+ <h1>گەنجینەی ناوی منداڵان</h1>
+ <p>باشترین ناوە ئاینی و کوردی و مۆدێرنەکان لەگەڵ ماناکانیان</p>
+</header>
+
+<main class="container">
+
+ <section class="stats">
+  <div class="stat"><strong id="total">0</strong><span>کۆی ناوەکان</span></div>
+  <div class="stat"><strong id="boys">0</strong><span>ناوی کوڕان</span></div>
+  <div class="stat"><strong id="girls">0</strong><span>ناوی کچان</span></div>
+ </section>
+
+ <div class="search">
+  <span>⌕</span>
+  <input id="search" type="search" placeholder="بەدوای ناو یان ماناکەیدا بگەڕێ...">
+ </div>
+
+ <div class="tabs">
+  <button class="tab active" data-filter="all">🌟 هەموو ناوەکان</button>
+  <button class="tab" data-filter="boy-religious">🕌 کوڕی ئاینی</button>
+  <button class="tab" data-filter="boy-modern">✨ کوڕی مۆدێرن</button>
+  <button class="tab" data-filter="girl-religious">🕌 کچی ئاینی</button>
+  <button class="tab" data-filter="girl-modern">🌸 کچی مۆدێرن</button>
+ </div>
+
+ <div class="filter-row">
+  <label>فلتەر بە پیت:</label>
+  <select id="letter">
+   <option value="all">هەموو پیتەکان</option>
+   <option>ئ</option><option>ا</option><option>ب</option>
+   <option>پ</option><option>ت</option><option>ج</option>
+   <option>ح</option><option>خ</option><option>د</option>
+   <option>ر</option><option>ز</option><option>س</option>
+   <option>ش</option><option>ع</option><option>غ</option>
+   <option>ف</option><option>ک</option><option>گ</option>
+   <option>ل</option><option>م</option><option>ن</option>
+   <option>ه</option><option>و</option><option>ی</option>
+  </select>
+ </div>
+
+ <div class="section-head">
+  <h2 id="heading">هەموو ناوەکان</h2>
+  <span id="count">0 ناو</span>
+ </div>
+
+ <div class="grid" id="grid"></div>
+ <div class="empty" id="empty"><b>🔎</b>هیچ ناوێک نەدۆزرایەوە<br>ناوێکی تر تاقی بکەرەوە</div>
+</main>
+
+<footer class="footer">
+ <strong>نووری ئیمان ۞</strong>
+ <p>بە زانست، دڵ ڕووناک بکەوە</p>
+</footer>
+
+<script>
+const names = [
+ // کوڕانی ئاینی
+ ["محمد","ستایشکراو؛ ناوی پێغەمبەری ئیسلام ﷺ","boy","religious"],
+ ["ئەحمەد","زۆر ستایشکراو؛ لە ناوەکانی پێغەمبەر ﷺ","boy","religious"],
+ ["ئادەم","یەکەم مرۆڤ و پێغەمبەر","boy","religious"],
+ ["نوح","ناوی پێغەمبەر؛ بانگەوازکەری باوەڕ","boy","religious"],
+ ["ئیبراهیم","ناوی پێغەمبەر و خەلیلی خودا","boy","religious"],
+ ["ئیسمائیل","ناوی پێغەمبەر؛ خودا گوێی لێ بووە","boy","religious"],
+ ["ئیسحاق","ناوی پێغەمبەر","boy","religious"],
+ ["یەعقوب","ناوی پێغەمبەر","boy","religious"],
+ ["یوسف","ناوی پێغەمبەر؛ جوانی و پاکی","boy","religious"],
+ ["موسا","ناوی پێغەمبەر","boy","religious"],
+ ["هارون","ناوی پێغەمبەر و برای موسا","boy","religious"],
+ ["داوود","ناوی پێغەمبەر؛ خاوەنی زەبوور","boy","religious"],
+ ["سلێمان","ناوی پێغەمبەر؛ پاشای دادپەروەر","boy","religious"],
+ ["ئەیوب","ناوی پێغەمبەر؛ نموونەی خۆڕاگری","boy","religious"],
+ ["یونس","ناوی پێغەمبەر","boy","religious"],
+ ["زەکەریا","ناوی پێغەمبەر","boy","religious"],
+ ["یەحیا","زیندوو؛ ناوی پێغەمبەر","boy","religious"],
+ ["عیسا","ناوی پێغەمبەر","boy","religious"],
+ ["ئیلیاس","ناوی پێغەمبەر","boy","religious"],
+ ["ئەدریس","ناوی پێغەمبەر","boy","religious"],
+ ["عەلی","بەرز و پایەبەرز","boy","religious"],
+ ["عومەر","ژیان و تەمەن؛ ناوی خەلیفە","boy","religious"],
+ ["عوسمان","ناوی خەلیفەی سێیەمی ڕاشیدین","boy","religious"],
+ ["ئەبوبەکر","ناوی خەلیفەی یەکەمی ڕاشیدین","boy","religious"],
+ ["حەمزە","ناوی هاوەڵی پێغەمبەر؛ ئازا و بەهێز","boy","religious"],
+ ["بلال","ناوی موەزینی پێغەمبەر ﷺ","boy","religious"],
+ ["زەید","زیادبوون و گەشەکردن","boy","religious"],
+ ["خالد","مانەوە و هەمیشەیی","boy","religious"],
+ ["سەلمان","سەلامەتی و ئاسوودەیی","boy","religious"],
+ ["معاذ","پارێزراو و پەنابراو","boy","religious"],
+ ["ئەنەس","ئۆنس و دۆستایەتی","boy","religious"],
+ ["حوسەین","جوان و خۆشەویست","boy","religious"],
+ ["حەسەن","جوان و چاک","boy","religious"],
+ ["عەبدولڵا","بەندەی خودا","boy","religious"],
+ ["عەبدولڕەحمان","بەندەی خودای میهرەبان","boy","religious"],
+ ["سەعد","بەختەوەر و خۆشحاڵ","boy","religious"],
+ ["سەعید","خۆشحاڵ و بەختەوەر","boy","religious"],
+ ["فەرهەد","ناوی باوی کوردی","boy","religious"],
+ ["یاسین","ناوی سوورەتێکی قورئانی؛ واتای پیتەکانی لای خودایە","boy","religious"],
+ ["تاهە","لە پیتە بڕاوەکانی قورئان؛ واتای ڕاستەقینەی لای خودایە","boy","religious"],
+
+ // کوڕانی مۆدێرن
+ ["ئارام","ئاسوودە و هێمن","boy","modern"],
+ ["ئاسۆ","ئەو شوێنەی ئاسمان و زەوی یەکدەگرن","boy","modern"],
+ ["ئاریان","ناوێکی مۆدێرنی کوردی","boy","modern"],
+ ["ئاراس","ناوی ڕووباری ئاراس","boy","modern"],
+ ["ئاکۆ","ناوێکی کوردی و باو","boy","modern"],
+ ["ئازاد","سەربەست و ئازاد","boy","modern"],
+ ["ئازەر","ناوێکی کوردی","boy","modern"],
+ ["ئاکام","ئەنجام و کۆتایی","boy","modern"],
+ ["ئارین","ناوێکی کوردی و مۆدێرن","boy","modern"],
+ ["ئاسمان","ئاسمانی فراوان","boy","modern"],
+ ["ئاوێر","ناوێکی کوردی","boy","modern"],
+ ["بەختیار","خاوەن بەخت و سەعادەت","boy","modern"],
+ ["بەهرام","ناوێکی کۆن و ناسراو","boy","modern"],
+ ["بروسک","ڕووناکی و تیشکی ئاسمان","boy","modern"],
+ ["پەشێو","ناوی شاعیری کوردی؛ ناوێکی ئەدەبی","boy","modern"],
+ ["کاروان","کۆمەڵەی گەشتیاران","boy","modern"],
+ ["کەیوان","ناوی ئەستێرەی زوحەل","boy","modern"],
+ ["کۆسار","ناوی کوردی؛ بە مانای شوێنی سەوز و جوان بەکاردێت","boy","modern"],
+ ["دیار","ئاشکرا و دیار","boy","modern"],
+ ["دڵشاد","دڵخۆش و شاد","boy","modern"],
+ ["ڕۆژ","خۆر و ڕووناکی","boy","modern"],
+ ["ڕۆژیار","هاوڕێی ڕۆژ و ڕووناکی","boy","modern"],
+ ["ڕێباز","ڕێگا و شێوازی ژیان","boy","modern"],
+ ["ژیار","ژیان و شارستانیبوون","boy","modern"],
+ ["سۆران","ناوی کوردی و ناوی ناوچەیەکی کوردستان","boy","modern"],
+ ["سەروە","سەرکەوتن و بەرزی","boy","modern"],
+ ["هێمن","ئارام و بێدەنگ","boy","modern"],
+ ["هەڵۆ","باڵندەیەکی بەهێز و ئازا","boy","modern"],
+ ["هەژار","ناوی کوردی؛ ناوی نووسەرێکی ناسراو","boy","modern"],
+ ["نەوزاد","لەدایکبووی نوێ","boy","modern"],
+ ["نەوشیروان","ناوی مێژوویی و کۆن","boy","modern"],
+ ["شەهریار","پاشا و فەرمانڕەوا","boy","modern"],
+ ["شوان","شوانی مەڕ و ماڵات","boy","modern"],
+ ["فەرهاد","ناوی کوردی و ئەدەبی","boy","modern"],
+ ["گەلاوێژ","ناوی ئەستێرە و مانگی کوردی","boy","modern"],
+ ["ئومێد","هیوا و چاوەڕوانی","boy","modern"],
+ ["پەیام","نامە و هەواڵ","boy","modern"],
+ ["بەرزان","بەرز و پایەبەرز","boy","modern"],
+ ["سەربەست","ئازاد و سەربەخۆ","boy","modern"],
+ ["هەورام","ناوێکی کوردی","boy","modern"],
+
+ // کچانی ئاینی
+ ["مەریم","ناوی دایکە پیرۆزەکەی پێغەمبەر عیسا","girl","religious"],
+ ["فاطیمە","ناوی کچی پێغەمبەر ﷺ","girl","religious"],
+ ["خەدیجە","ناوی هاوسەری پێغەمبەر ﷺ","girl","religious"],
+ ["عائیشە","زیندوو و پڕ لە ژیان؛ ناوی دایکی باوەڕداران","girl","religious"],
+ ["زەینەب","ناوی کچی پێغەمبەر ﷺ","girl","religious"],
+ ["ڕەقیە","ناوی کچی پێغەمبەر ﷺ","girl","religious"],
+ ["ئومەکولسوم","ناوی کچی پێغەمبەر ﷺ","girl","religious"],
+ ["حەفصە","ناوی هاوسەری پێغەمبەر ﷺ","girl","religious"],
+ ["سەفیە","پاک و هەڵبژێردراو","girl","religious"],
+ ["ئاسیا","ناوی ژنی باوەڕداری فیرعەون","girl","religious"],
+ ["هەاجر","ناوی دایکی ئیسماعیل","girl","religious"],
+ ["سارە","ناوی هاوسەری ئیبراهیم","girl","religious"],
+ ["ئامینە","دڵنیا و جێی متمانە؛ ناوی دایکی پێغەمبەر ﷺ","girl","religious"],
+ ["نور","ڕووناکی","girl","religious"],
+ ["ئیمان","باوەڕ و دڵنیایی","girl","religious"],
+ ["هۆدا","ڕێنمایی و ڕێنیشاندان","girl","religious"],
+ ["بوشرا","مژدە و هەواڵی خۆش","girl","religious"],
+ ["ئایەت","نیشانە و بەڵگە؛ ئایەتی قورئان","girl","religious"],
+ ["کوثر","خێری زۆر و بەخششی زۆر","girl","religious"],
+ ["تسنیم","ناوی کانیاوێک لە بەهەشت","girl","religious"],
+ ["سەلسەبیل","ناوی کانیاوێک لە بەهەشت","girl","religious"],
+ ["فردەوس","بەرزترین باخچەی بەهەشت","girl","religious"],
+ ["جەنان","باخچەکانی بەهەشت","girl","religious"],
+ ["سەجیدە","زۆر سوجدەبەر","girl","religious"],
+ ["تەقوا","خواپارێزی","girl","religious"],
+ ["ڕەحیمە","میهرەبان و بەبەزەیی","girl","religious"],
+ ["سەکینە","ئارامی و ئاسوودەیی","girl","religious"],
+ ["دوعا","پاڕانەوە و داواکردن لە خودا","girl","religious"],
+ ["حەیا","شەرم و پاکدامەنی","girl","religious"],
+ ["ڕەوان","ناوێکی باو؛ ماناکەی بە پێی ڕەچەڵەک دەگۆڕێت","girl","religious"],
+ ["جەننەت","باخچەی بەهەشت","girl","religious"],
+
+ // کچانی مۆدێرن
+ ["ئاوین","خۆشەویستی","girl","modern"],
+ ["ئەڤین","خۆشەویستی","girl","modern"],
+ ["ئارین","ناوێکی کوردی و مۆدێرن","girl","modern"],
+ ["ئارزوو","ئارەزوو و هیوا","girl","modern"],
+ ["ئاسۆ","ئاسۆ و دووربینین","girl","modern"],
+ ["ئالین","ناوێکی مۆدێرنی کوردی","girl","modern"],
+ ["ئارام","ئاسوودەیی و هێمنی","girl","modern"],
+ ["بەهار","وەرزی گوڵدان و نوێبوونەوە","girl","modern"],
+ ["بەفرین","وەک بەفر سپی و پاک","girl","modern"],
+ ["گوڵان","گوڵەکان و جوانی سروشت","girl","modern"],
+ ["گوڵنار","گوڵی نارنج","girl","modern"],
+ ["گوڵاڵە","گوڵێکی جوانی کێوی","girl","modern"],
+ ["دیلان","ناوی کوردی؛ پەیوەندی بە سەماوە هەیە","girl","modern"],
+ ["دڵنیا","دڵئارام و جێی متمانە","girl","modern"],
+ ["دڵشاد","دڵخۆش و شاد","girl","modern"],
+ ["ڕۆژان","ڕۆژەکان و ڕووناکی","girl","modern"],
+ ["ڕۆژین","ڕووناکی و پەیوەندی بە ڕۆژەوە","girl","modern"],
+ ["ژینا","ژیان و زیندوویی","girl","modern"],
+ ["شیلان","ناوی گوڵ و ڕووەکێکی کێوی","girl","modern"],
+ ["شەونم","شەونم و تەرزەی بەیانی","girl","modern"],
+ ["نارین","ناسک و نەرم","girl","modern"],
+ ["نیشتمان","وڵات و خاکی خۆشەویست","girl","modern"],
+ ["نیلوفەر","گوڵی نیلوفەر","girl","modern"],
+ ["هانا","ناوێکی باو؛ ماناکەی بە پێی زمان دەگۆڕێت","girl","modern"],
+ ["هەڵین","ناوێکی مۆدێرنی کوردی","girl","modern"],
+ ["هەتاو","خۆر و ڕووناکی","girl","modern"],
+ ["وەرین","ناوێکی کوردی","girl","modern"],
+ ["سەما","سەما و جوڵەی جوان","girl","modern"],
+ ["سۆز","هەست و خۆشەویستی","girl","modern"],
+ ["سەروە","ناوی دارێکی سەوز و جوان","girl","modern"],
+ ["مانا","واتا و مەبەست","girl","modern"],
+ ["مینا","ناوی گوڵ و باڵندە","girl","modern"],
+ ["ئاڤا","ناوێکی مۆدێرنی کوردی","girl","modern"],
+ ["هەورین","پەیوەندیدار بە هەور و ئاسمان","girl","modern"],
+ ["پەری","بوونەوەرێکی ئەفسانەیی جوان","girl","modern"],
+ ["پەروین","ناوی کۆمەڵە ئەستێرەیەک","girl","modern"],
+ ["شەهناز","ناوی جوانی کۆن","girl","modern"],
+ ["ئارزوو","هیوا و داخوازی","girl","modern"],
+ ["ئارزوو","ئارەزوو و خەون","girl","modern"]
+];
+
+let current="all";
+const grid=document.getElementById("grid");
+const search=document.getElementById("search");
+const letter=document.getElementById("letter");
+
+function render(){
+ const q=search.value.trim().toLocaleLowerCase();
+ const l=letter.value;
+
+ const filtered=names.filter(x=>{
+  let category=x[2]+"-"+x[3];
+  let categoryOK=current==="all"||category===current;
+  let searchOK=x[0].toLocaleLowerCase().includes(q)||
+               x[1].toLocaleLowerCase().includes(q);
+  let letterOK=l==="all"||x[0].startsWith(l);
+  return categoryOK&&searchOK&&letterOK;
+ });
+
+ grid.innerHTML="";
+ filtered.forEach((x,i)=>{
+  const card=document.createElement("article");
+  card.className="card";
+
+  const top=document.createElement("div");
+  top.className="card-top";
+
+  const number=document.createElement("span");
+  number.className="num";
+  number.textContent="NO. "+String(i+1).padStart(3,"0");
+
+  const tag=document.createElement("span");
+  tag.className="tag";
+  tag.textContent=x[3]==="religious"?"ناوی ئاینی":"ناوی مۆدێرن";
+
+  top.append(number,tag);
+
+  const name=document.createElement("div");
+  name.className="name";
+  name.textContent=x[0];
+
+  const meaning=document.createElement("p");
+  meaning.className="meaning";
+  meaning.textContent="مانا: "+x[1];
+
+  const bottom=document.createElement("div");
+  bottom.className="card-bottom";
+  bottom.textContent=x[2]==="boy"?"👦 ناوی کوڕ":"👧 ناوی کچ";
+
+  card.append(top,name,meaning,bottom);
+  grid.append(card);
+ });
+
+ document.getElementById("count").textContent=filtered.length+" ناو";
+ document.getElementById("empty").style.display=filtered.length?"none":"block";
+ grid.style.display=filtered.length?"grid":"none";
+
+ const headings={
+  all:"هەموو ناوەکان",
+  "boy-religious":"ناوە ئاینییەکانی کوڕان",
+  "boy-modern":"ناوە مۆدێرنەکانی کوڕان",
+  "girl-religious":"ناوە ئاینییەکانی کچان",
+  "girl-modern":"ناوە مۆدێرنەکانی کچان"
+ };
+ document.getElementById("heading").textContent=headings[current];
+}
+
+document.querySelectorAll(".tab").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  current=btn.dataset.filter;
+  render();
+ });
+});
+
+search.addEventListener("input",render);
+letter.addEventListener("change",render);
+
+document.getElementById("total").textContent=names.length;
+document.getElementById("boys").textContent=names.filter(x=>x[2]==="boy").length;
+document.getElementById("girls").textContent=names.filter(x=>x[2]==="girl").length;
+
+render();
+</script>
+</body>
+</html>

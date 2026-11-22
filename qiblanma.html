@@ -1,238 +1,355 @@
+
 <!DOCTYPE html>
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#061d18">
-<title>قیبلە نما | نوری ئیمان</title>
+<title>قیبلەنما | نوری ئیمان</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
 
 <style>
 :root{
-  --bg:#061d18;--panel:#0b2b23;--card:#10382d;
-  --gold:#e9c777;--text:#f7f3e8;--muted:#c0d0c4;
-  --border:rgba(233,199,119,.22);--ok:#3ddc97;
+  --t-bg:#061d18;
+  --t-panel:#0b2b23;
+  --t-card:#12382d;
+  --t-acc:#e9c777;
+  --t-acc2:#f5dfa0;
+  --bg:var(--t-bg);
+  --gold:var(--t-acc);
+  --text:#f7f4e9;
+  --muted:#bdcfc4;
+  --border:rgba(233,199,119,.2);
+  --green:#42dfa0;
+  --red:#ff8175;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;width:100%;overflow-x:clip;-webkit-text-size-adjust:100%}
+html{width:100%;overflow-x:clip;scroll-behavior:smooth}
 body{
-  width:100%;overflow-x:clip;
-  background:
-    radial-gradient(ellipse at 12% 8%,rgba(35,105,76,.22),transparent 32%),
-    radial-gradient(ellipse at 90% 55%,rgba(194,151,67,.08),transparent 28%),
-    var(--bg);
+  min-height:100vh;width:100%;overflow-x:clip;
   color:var(--text);
   font-family:"Noto Sans Arabic",sans-serif;
   line-height:1.9;
+  background:
+    radial-gradient(ellipse at 10% 5%,rgba(233,199,119,.09),transparent 35%),
+    radial-gradient(ellipse at 90% 50%,rgba(34,120,87,.16),transparent 40%),
+    var(--bg);
   padding-bottom:125px;
 }
+button,select{font:inherit}
 a{color:inherit;text-decoration:none}
-button,select{font:inherit;cursor:pointer}
+button{cursor:pointer}
 
-/* Navbar */
+/* Header */
 .navbar{
-  min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:10px 6%;border-bottom:1px solid var(--border);
-  background:rgba(4,25,20,.94);position:sticky;top:0;z-index:10;
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  position:sticky;top:0;z-index:20;
+  min-height:70px;padding:10px 5%;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:rgba(6,29,24,.88);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(18px);
 }
-.logo{font-size:24px;font-weight:800;white-space:nowrap}
+.logo{font-size:23px;font-weight:900;white-space:nowrap}
 .logo span{color:var(--gold)}
 .back{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:8px 16px;border-radius:30px;font-size:13px;
-  color:var(--gold);border:1px solid #e9c77755;background:#e9c7770d;transition:.25s;
+  display:flex;align-items:center;gap:8px;
+  padding:8px 15px;border:1px solid var(--border);
+  border-radius:30px;color:var(--gold);font-size:13px;
+  background:rgba(233,199,119,.06);transition:.25s;
 }
-.back:hover{background:#e9c77722}
+.back:hover{background:rgba(233,199,119,.14)}
 
-/* Page */
-.page{max-width:1100px;margin:0 auto;padding:36px 5% 20px}
-.head{text-align:center;margin-bottom:30px}
-.eyebrow{color:var(--gold);font-size:13px;font-weight:700}
-.head h1{font-size:clamp(32px,6vw,54px);line-height:1.5;margin:4px 0 6px;font-weight:800}
-.head h1 span{color:var(--gold)}
-.head p{color:var(--muted);font-size:14px;max-width:560px;margin:auto}
+/* Main */
+.page{width:min(1100px,92%);margin:auto;padding:35px 0 25px}
+.heading{text-align:center;margin-bottom:28px}
+.eyebrow{
+  display:inline-block;color:var(--gold);font-size:13px;
+  font-weight:800;letter-spacing:.5px;
+  padding:5px 15px;border:1px solid var(--border);
+  border-radius:30px;background:rgba(233,199,119,.06);
+}
+.heading h1{font-size:clamp(32px,6vw,52px);font-weight:900;line-height:1.6;margin:7px 0}
+.heading h1 span{color:var(--gold)}
+.heading p{max-width:600px;margin:auto;color:var(--muted);font-size:14px}
 
-/* Layout: mobile 1 col, tablet+desktop 2 cols */
-.layout{display:grid;grid-template-columns:1fr;gap:22px;align-items:start}
-@media(min-width:820px){.layout{grid-template-columns:1.1fr .9fr;gap:28px}}
-
-.box{
+/* Layout */
+.layout{
+  display:grid;grid-template-columns:1fr;gap:22px;
+  align-items:start;
+}
+@media(min-width:850px){
+  .layout{grid-template-columns:1.05fr .95fr;gap:25px}
+}
+.panel{
   position:relative;overflow:hidden;
-  border:1px solid #e9c77755;border-radius:28px;
-  background:
-    radial-gradient(circle at 50% 45%,#23604455,transparent 60%),
-    linear-gradient(135deg,#0b3025,#061b17 65%,#123b2d);
-  box-shadow:0 20px 55px #00000030;
+  border:1px solid rgba(233,199,119,.24);
+  border-radius:26px;
+  background:linear-gradient(145deg,rgba(18,56,45,.95),rgba(6,29,24,.97));
+  box-shadow:0 18px 55px rgba(0,0,0,.25);
 }
-.box::before{
-  content:"";position:absolute;inset:10px;border:1px solid #e9c77726;
-  border-radius:20px;pointer-events:none;
+.panel:before{
+  content:"";position:absolute;inset:9px;
+  border:1px solid rgba(233,199,119,.09);
+  border-radius:19px;pointer-events:none;
 }
 
-/* Compass */
-.compass-box{padding:34px 18px 26px;text-align:center}
+/* Compass area */
+.compass-panel{text-align:center;padding:25px 18px 24px}
 .status{
-  display:inline-block;margin-bottom:18px;padding:6px 16px;border-radius:30px;
-  font-size:13px;color:var(--muted);border:1px solid var(--border);background:#ffffff08;
-  transition:.3s;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:38px;padding:6px 15px;margin-bottom:20px;
+  border-radius:30px;border:1px solid var(--border);
+  color:var(--muted);background:rgba(255,255,255,.035);
+  font-size:12px;font-weight:700;
 }
-.status.ok{color:#08241b;background:var(--ok);border-color:var(--ok);font-weight:700}
+.status:before{
+  content:"";width:8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 10px var(--gold);
+}
+.status.ok{background:rgba(66,223,160,.12);color:var(--green);border-color:rgba(66,223,160,.35)}
+.status.ok:before{background:var(--green);box-shadow:0 0 10px var(--green)}
+.status.error{color:var(--red);border-color:rgba(255,129,117,.3)}
+.status.error:before{background:var(--red);box-shadow:0 0 10px var(--red)}
+
 .compass-wrap{
-  position:relative;width:min(100%,380px);aspect-ratio:1;margin:0 auto;
+  width:min(100%,370px);aspect-ratio:1;
+  position:relative;margin:0 auto;
+  filter:drop-shadow(0 15px 25px rgba(0,0,0,.3));
 }
-.pointer{
-  position:absolute;top:-6px;left:50%;transform:translateX(-50%);z-index:5;
-  width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;
-  border-top:22px solid var(--gold);filter:drop-shadow(0 0 8px rgba(233,199,119,.7));
+.compass-frame{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px solid rgba(233,199,119,.23);
+  background:
+    radial-gradient(circle,rgba(233,199,119,.08),transparent 65%),
+    rgba(2,18,14,.45);
+  box-shadow:inset 0 0 35px rgba(0,0,0,.35),0 0 35px rgba(233,199,119,.05);
+}
+.compass-frame:before{
+  content:"";position:absolute;inset:8px;border-radius:50%;
+  border:1px dashed rgba(233,199,119,.22);
 }
 .dial{
-  position:absolute;inset:14px;border-radius:50%;
-  border:2px solid #e9c77777;
+  position:absolute;inset:15px;border-radius:50%;
+  border:2px solid rgba(233,199,119,.5);
   background:
-    radial-gradient(circle,#0f3a2d 0%,#082a21 62%,#061d18 100%);
-  box-shadow:0 0 60px #e9c7771a,inset 0 0 40px #00000055;
+    radial-gradient(circle at center,rgba(233,199,119,.1),transparent 60%),
+    linear-gradient(145deg,#0b3027,#061b16);
   transition:transform .12s linear;
   will-change:transform;
 }
-.dial svg{position:absolute;inset:0;width:100%;height:100%}
-.tick{stroke:#e9c77766;stroke-width:1.2}
-.tick.big{stroke:var(--gold);stroke-width:2.2}
-.dir{fill:var(--gold);font-weight:800;font-size:15px;font-family:"Noto Sans Arabic",sans-serif}
-.dir.n{fill:#ff7a6b}
-.qibla-marker{
-  position:absolute;inset:0;transition:transform .2s ease;
+.dial svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.tick{stroke:rgba(233,199,119,.45);stroke-width:1.1}
+.tick.big{stroke:var(--gold);stroke-width:2.3}
+.direction{
+  fill:var(--gold);font-family:"Noto Sans Arabic",sans-serif;
+  font-weight:900;font-size:13px;
 }
-.qibla-marker .line{
-  position:absolute;left:50%;top:9%;width:3px;height:41%;
+.direction.north{fill:#ff897c;font-size:17px}
+.center-dot{
+  position:absolute;top:50%;left:50%;
+  width:12px;height:12px;transform:translate(-50%,-50%);
+  background:var(--gold);border:3px solid #fff0c9;
+  border-radius:50%;box-shadow:0 0 15px var(--gold);z-index:5;
+}
+.top-pointer{
+  position:absolute;z-index:8;top:-3px;left:50%;
   transform:translateX(-50%);
-  background:linear-gradient(to bottom,var(--gold),transparent);border-radius:3px;
+  width:0;height:0;
+  border-left:12px solid transparent;
+  border-right:12px solid transparent;
+  border-top:25px solid var(--gold);
+  filter:drop-shadow(0 0 8px rgba(233,199,119,.6));
 }
-.qibla-marker .kaaba{
-  position:absolute;top:1.5%;left:50%;transform:translateX(-50%);
-  width:15%;aspect-ratio:1;display:grid;place-items:center;
-  border-radius:16%;background:#10110f;border:2px solid var(--gold);
-  box-shadow:0 0 22px rgba(233,199,119,.55);
+.qibla-marker{
+  position:absolute;inset:0;
+  transform:rotate(0deg);
+  transition:transform .15s linear;
 }
-.qibla-marker .kaaba::before{
-  content:"";position:absolute;left:0;right:0;top:28%;height:14%;background:var(--gold);
+.qibla-line{
+  position:absolute;left:50%;top:10%;height:39%;width:3px;
+  transform:translateX(-50%);
+  border-radius:5px;
+  background:linear-gradient(to bottom,var(--gold),rgba(233,199,119,.05));
+  box-shadow:0 0 10px rgba(233,199,119,.35);
 }
-.qibla-marker .kaaba i{display:block;width:100%;height:100%}
-.hub{
-  position:absolute;left:50%;top:50%;width:16px;height:16px;transform:translate(-50%,-50%);
-  border-radius:50%;background:var(--gold);box-shadow:0 0 14px rgba(233,199,119,.7);
+.kaaba{
+  position:absolute;left:50%;top:2%;
+  transform:translateX(-50%);
+  width:48px;height:48px;border-radius:10px;
+  background:linear-gradient(145deg,#28241c,#090a08);
+  border:2px solid var(--gold);
+  box-shadow:0 0 20px rgba(233,199,119,.4);
+  display:grid;place-items:center;
 }
-.compass-wrap.aligned .dial{border-color:var(--ok);box-shadow:0 0 70px rgba(61,220,151,.35),inset 0 0 40px #00000055}
-.compass-wrap.aligned .pointer{border-top-color:var(--ok);filter:drop-shadow(0 0 10px var(--ok))}
-
-.hint{color:var(--muted);font-size:12.5px;margin-top:20px;padding:0 8px}
+.kaaba:before{
+  content:"";position:absolute;top:27%;left:0;right:0;height:6px;
+  background:var(--gold);box-shadow:0 2px 5px #000;
+}
+.kaaba:after{
+  content:"";position:absolute;top:38%;left:0;right:0;height:2px;
+  background:rgba(233,199,119,.6);
+}
+.kaaba span{font-size:20px;position:relative;z-index:1}
+.compass-wrap.aligned .dial{
+  border-color:var(--green);
+  box-shadow:0 0 35px rgba(66,223,160,.22),inset 0 0 35px rgba(0,0,0,.3);
+}
+.compass-wrap.aligned .top-pointer{
+  border-top-color:var(--green);
+  filter:drop-shadow(0 0 9px var(--green));
+}
+.compass-wrap.aligned .kaaba{
+  border-color:var(--green);
+  box-shadow:0 0 22px rgba(66,223,160,.5);
+}
+.compass-hint{font-size:12px;color:var(--muted);margin:18px auto 0;max-width:380px}
 
 /* Buttons */
-.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px}
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:46px;padding:10px 24px;border-radius:35px;border:0;
-  background:linear-gradient(135deg,#f1d48d,#c69b4d);color:#10271d;
-  font-weight:800;font-size:14px;box-shadow:0 8px 25px #d6b46a25;transition:.3s;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:48px;padding:10px 22px;border:0;border-radius:30px;
+  color:#10251c;font-size:14px;font-weight:900;
+  background:linear-gradient(135deg,#f4dfa0,#d5ad57);
+  box-shadow:0 8px 22px rgba(233,199,119,.17);
+  transition:.25s;
 }
-.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px #d6b46a40}
-.btn.ghost{background:#ffffff08;color:var(--gold);border:1px solid #e9c77755;box-shadow:none}
-.btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(233,199,119,.27)}
+.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.btn.secondary{
+  color:var(--gold);background:rgba(233,199,119,.07);
+  border:1px solid var(--border);box-shadow:none;
+}
+.btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-/* Info side */
-.side{display:grid;gap:18px}
-.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:20px}
+/* Information cards */
+.side{display:grid;gap:17px}
+.stats{padding:20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
 .stat{
-  padding:14px 10px;text-align:center;border:1px solid #e9c77730;
-  border-radius:16px;background:#ffffff08;min-width:0;
+  min-width:0;text-align:center;padding:15px 9px;
+  border-radius:17px;border:1px solid rgba(233,199,119,.15);
+  background:rgba(255,255,255,.035);
 }
-.stat small{display:block;color:var(--muted);font-size:12px}
-.stat strong{display:block;color:var(--gold);font-size:clamp(20px,3vw,26px);line-height:1.5;overflow-wrap:anywhere}
 .stat.wide{grid-column:1/-1}
-
+.stat small{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
+.stat strong{
+  display:block;color:var(--gold);font-size:clamp(20px,3vw,27px);
+  line-height:1.6;overflow-wrap:anywhere;
+}
+.stat.place strong{font-size:16px}
 .manual{padding:22px}
-.manual h2{font-size:18px;margin-bottom:4px}
-.manual h2 span{color:var(--gold)}
-.manual p{color:var(--muted);font-size:13px;margin-bottom:12px}
+.section-title{font-size:18px;font-weight:900;margin-bottom:5px}
+.section-title span{color:var(--gold)}
+.description{font-size:12px;color:var(--muted);margin-bottom:14px}
 .select{
-  width:100%;min-height:46px;padding:8px 14px;border-radius:14px;
-  color:var(--text);background:#08271f;border:1px solid var(--border);
+  width:100%;min-height:48px;padding:9px 13px;
+  border-radius:14px;background:#071e18;
+  border:1px solid var(--border);color:var(--text);
+  outline:none;
 }
-.select option{background:#08271f}
-
-.verse{
-  padding:22px 16px;text-align:center;
+.select:focus{border-color:var(--gold)}
+.select option{background:#071e18;color:#fff}
+.verse{padding:22px 15px;text-align:center}
+.verse .arabic{
+  font-family:"Amiri",serif;font-size:clamp(22px,4vw,29px);
+  line-height:2.1;color:var(--t-acc2);
 }
-.verse p{font-family:"Amiri",serif;font-size:clamp(20px,3vw,26px);color:#f7e5b6;line-height:2}
-.verse small{color:var(--muted);font-size:12px}
-
-.note{
-  margin-top:22px;padding:16px 20px;border-right:3px solid var(--gold);
-  color:#e1e7d9;background:linear-gradient(90deg,#e9c77706,#e9c77712);
-  border-radius:14px;font-size:13px;
+.verse small{display:block;color:var(--muted);font-size:12px;margin-top:7px}
+.info-note{
+  margin-top:20px;padding:16px 18px;
+  border-right:3px solid var(--gold);border-radius:14px;
+  background:rgba(233,199,119,.055);
+  color:#d8e4da;font-size:12px;line-height:2;
 }
+.info-note strong{color:var(--gold)}
 
-/* Phones */
-@media(max-width:520px){
-  .navbar{padding:10px 4%}
-  .logo{font-size:20px}
-  .page{padding:24px 14px 10px}
-  .compass-box{padding:28px 10px 22px}
-  .btn{width:100%}
-  .stats{padding:14px;gap:8px}
-}
-@media(min-width:1100px){.compass-wrap{width:420px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-
-/* ===== Taskbar ===== */
-:root{--ni-gold:#d6b46a;--ni-glass:rgba(8,31,29,.88)}
+/* Taskbar */
 .ni-taskbar{
-  position:fixed;bottom:max(14px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
-  width:min(94%,590px);min-height:76px;padding:9px 12px;
-  display:flex;align-items:center;justify-content:space-around;gap:4px;z-index:9999;
-  background:var(--ni-glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
-  border:1px solid rgba(214,180,106,.27);border-radius:25px;
-  box-shadow:0 12px 40px rgba(0,0,0,.35),inset 0 1px 1px rgba(255,255,255,.12);
+  position:fixed;bottom:max(12px,env(safe-area-inset-bottom));
+  left:50%;transform:translateX(-50%);
+  width:min(94%,590px);min-height:75px;padding:8px 10px;
+  display:flex;align-items:center;justify-content:space-around;gap:4px;
+  z-index:9999;border-radius:24px;
+  background:rgba(6,29,24,.91);
+  border:1px solid rgba(233,199,119,.25);
+  box-shadow:0 12px 40px rgba(0,0,0,.4);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
 }
 .ni-item{
-  flex:1;min-width:0;min-height:56px;padding:6px 2px;border:0;background:transparent;
-  color:rgba(255,255,255,.65);font-family:inherit;font-size:11px;font-weight:600;
+  flex:1;min-width:0;min-height:55px;padding:5px 2px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
-  border-radius:17px;transition:.3s ease;
+  border:0;border-radius:15px;background:transparent;
+  color:rgba(255,255,255,.65);font-family:inherit;
+  font-size:11px;font-weight:700;transition:.25s;
 }
-.ni-icon{line-height:1.2;transition:.3s ease}
-.ni-icon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.ni-item.active{color:var(--ni-gold);background:rgba(214,180,106,.12)}
-.ni-item.active .ni-icon{transform:translateY(-2px)}
-.ni-item.active .ni-icon svg{filter:drop-shadow(0 0 6px rgba(214,180,106,.6))}
-.ni-item:active{transform:scale(.92)}
+.ni-icon{line-height:1}
+.ni-icon svg{
+  width:25px;height:25px;fill:none;stroke:currentColor;
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+}
+.ni-item.active{color:var(--gold);background:rgba(233,199,119,.1)}
+.ni-item:active{transform:scale(.93)}
 .ni-more-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(3px);
-  z-index:10000;opacity:0;visibility:hidden;transition:.3s;
+  position:fixed;inset:0;z-index:10000;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(4px);
+  opacity:0;visibility:hidden;transition:.25s;
 }
 .ni-more-overlay.show{opacity:1;visibility:visible}
 .ni-more-panel{
-  position:fixed;z-index:10001;bottom:105px;left:50%;transform:translate(-50%,20px);
-  width:min(92%,520px);padding:20px;border-radius:25px;
-  background:rgba(8,31,29,.97);border:1px solid rgba(214,180,106,.3);
-  box-shadow:0 15px 45px rgba(0,0,0,.4);opacity:0;visibility:hidden;transition:.3s ease;
+  position:fixed;z-index:10001;bottom:105px;left:50%;
+  transform:translate(-50%,18px);
+  width:min(92%,520px);padding:20px;border-radius:24px;
+  background:#08251d;border:1px solid rgba(233,199,119,.3);
+  box-shadow:0 15px 45px rgba(0,0,0,.45);
+  opacity:0;visibility:hidden;transition:.25s;
 }
 .ni-more-panel.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
-.ni-panel-head{display:flex;justify-content:space-between;align-items:center;color:var(--ni-gold);font-size:16px;font-weight:bold;margin-bottom:18px}
-.ni-panel-head button{border:0;background:rgba(255,255,255,.08);color:#fff;border-radius:10px;width:34px;height:34px}
-.ni-more-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.ni-more-grid a{
-  color:#eee9dc;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);
-  border-radius:14px;padding:15px 10px;text-align:center;font-size:13px;transition:.25s;
+.ni-panel-head{
+  display:flex;justify-content:space-between;align-items:center;
+  color:var(--gold);font-size:15px;font-weight:900;margin-bottom:15px;
 }
-.ni-more-grid a:hover{background:rgba(214,180,106,.15);border-color:var(--ni-gold);color:var(--ni-gold)}
-@media(min-width:768px){.ni-taskbar{width:570px;bottom:22px}.ni-item{font-size:13px}}
-@media(max-width:360px){.ni-taskbar{width:96%;padding:7px 5px}.ni-item{font-size:10px}}
+.ni-panel-head button{
+  width:35px;height:35px;border:0;border-radius:10px;
+  background:rgba(255,255,255,.08);color:#fff;
+}
+.ni-more-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.ni-more-grid a{
+  padding:13px 8px;text-align:center;border-radius:13px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.08);
+  color:#eee9dc;font-size:12px;transition:.2s;
+}
+.ni-more-grid a:hover{border-color:var(--gold);color:var(--gold)}
+
+@media(min-width:768px){
+  .ni-taskbar{width:570px;bottom:20px}
+  .ni-item{font-size:13px}
+}
+@media(max-width:520px){
+  .navbar{padding:10px 4%}
+  .logo{font-size:20px}
+  .back{font-size:11px;padding:7px 11px}
+  .page{width:93%;padding-top:24px}
+  .compass-panel{padding:22px 10px}
+  .compass-wrap{width:min(100%,340px)}
+  .btn{width:100%}
+  .stats{padding:13px;gap:8px}
+}
+@media(max-width:360px){
+  .ni-taskbar{width:97%;padding:6px 4px}
+  .ni-item{font-size:9px}
+  .ni-icon svg{width:22px;height:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition:none!important}
+}
 </style>
 </head>
 
@@ -240,74 +357,82 @@ button,select{font:inherit;cursor:pointer}
 
 <header class="navbar">
   <a class="logo" href="index.html">نوری ئیمان <span>✦</span></a>
-  <a class="back" href="index.html">پەڕەی سەرەکی ←</a>
+  <a class="back" href="index.html">← پەڕەی سەرەکی</a>
 </header>
 
 <main class="page">
 
-  <div class="head">
+  <section class="heading">
     <span class="eyebrow">✦ ڕووەو کەعبەی پیرۆز ✦</span>
     <h1>قیبلە <span>نما</span></h1>
-    <p>ئاڕاستەی قیبلە بە ڕێکی بدۆزەرەوە. مۆبایلەکەت لەسەر شوێنێکی تەخت ڕابگرە تا کۆمپاسەکە ڕاست کار بکات.</p>
-  </div>
+    <p>بە یارمەتی کۆمپاس و شوێنی جوگرافیایی، ئاڕاستەی قیبلە بدۆزەرەوە و ڕوو لە کەعبەی پیرۆز بکە.</p>
+  </section>
 
   <div class="layout">
 
     <!-- Compass -->
-    <section class="box compass-box">
+    <section class="panel compass-panel">
       <div class="status" id="status">ئامادەیە بۆ دەستپێکردن</div>
 
       <div class="compass-wrap" id="compassWrap">
-        <div class="pointer"></div>
+        <div class="compass-frame"></div>
+        <div class="top-pointer"></div>
 
         <div class="dial" id="dial">
-          <svg viewBox="0 0 200 200" aria-hidden="true" id="ticks"></svg>
+          <svg viewBox="0 0 200 200" id="ticks" aria-hidden="true"></svg>
 
           <div class="qibla-marker" id="qiblaMarker">
-            <div class="line"></div>
-            <div class="kaaba"><i></i></div>
+            <div class="qibla-line"></div>
+            <div class="kaaba"><span>🕋</span></div>
           </div>
         </div>
-        <div class="hub"></div>
+
+        <div class="center-dot"></div>
       </div>
 
-      <p class="hint" id="hint">دوگمەی خوارەوە دابگرە بۆ دیاریکردنی شوێنەکەت و کردنەوەی کۆمپاس.</p>
+      <p class="compass-hint" id="hint">
+        دوگمەی «دەستپێکردن» دابگرە و ڕێگە بە شوێن و کۆمپاس بدە.
+      </p>
 
       <div class="actions">
         <button class="btn" id="startBtn" type="button">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>
-          دۆزینەوەی قیبلە
+          دەستپێکردنی کۆمپاس
+        </button>
+        <button class="btn secondary" id="calibrateBtn" type="button">
+          ↻ نوێکردنەوە
         </button>
       </div>
     </section>
 
-    <!-- Info -->
+    <!-- Information -->
     <aside class="side">
 
-      <div class="box">
+      <section class="panel">
         <div class="stats">
           <div class="stat wide">
-            <small>ئاڕاستەی قیبلە (لە باکوورەوە)</small>
+            <small>ئاڕاستەی قیبلە لە باکوورەوە</small>
             <strong id="qiblaDeg">—</strong>
           </div>
           <div class="stat">
-            <small>ئاڕاستەی ئێستات</small>
+            <small>ئاڕاستەی مۆبایل</small>
             <strong id="headingDeg">—</strong>
           </div>
           <div class="stat">
             <small>دووری تا مەککە</small>
             <strong id="distance">—</strong>
           </div>
-          <div class="stat wide">
+          <div class="stat wide place">
             <small>شوێنی تۆ</small>
-            <strong id="place" style="font-size:16px">—</strong>
+            <strong id="place">هێشتا دیاری نەکراوە</strong>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="box manual">
-        <h2><span>✦</span> هەڵبژاردنی شار بە دەستی</h2>
-        <p>ئەگەر ڕێگە بە شوێن نادەیت، یان لە کۆمپیوتەریت، شارەکەت هەڵبژێرە.</p>
+      <section class="panel manual">
+        <h2 class="section-title"><span>✦</span> هەڵبژاردنی شار</h2>
+        <p class="description">ئەگەر نەتەوێت GPS بەکاربهێنیت، شارەکەت لەم لیستە هەڵبژێرە.</p>
+
         <select class="select" id="citySelect" aria-label="هەڵبژاردنی شار">
           <option value="">— شار هەڵبژێرە —</option>
           <option value="35.5613,45.4305">سلێمانی</option>
@@ -324,45 +449,52 @@ button,select{font:inherit;cursor:pointer}
           <option value="51.5074,-0.1278">لەندەن</option>
           <option value="59.3293,18.0686">ستۆکهۆڵم</option>
         </select>
-      </div>
+      </section>
 
-      <div class="box verse">
-        <p>فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ</p>
+      <section class="panel verse">
+        <p class="arabic">فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ</p>
         <small>سورەتی البقرة — ئایەتی ١٤٤</small>
-      </div>
+      </section>
 
     </aside>
   </div>
 
-  <div class="note">
-    💡 بۆ ورد بوونەوە: مۆبایلەکەت دوور بخەرەوە لە ئاسن و موگناتیس، و ئەگەر کۆمپاسەکە ڕاست نەبوو، مۆبایلەکەت بە شێوەی «٨» بجووڵێنە تا کالیبرەیت بێت.
-    لە کۆمپیوتەر کۆمپاس نییە، بۆیە ڕێژەی قیبلە لە باکوورەوە پیشان دەدرێت.
+  <div class="info-note">
+    <strong>💡 تێبینی گرنگ:</strong>
+    بۆ ئەنجامی وردتر، مۆبایلەکەت لە ئاسن و موگناتیس دوور بگرە. ئەگەر کۆمپاسەکە نائاسایی بوو، مۆبایلەکەت چەند جار بە شێوەی ژمارەی ٨ بجووڵێنە بۆ کالیبرەکردن.
+    <br>
+    ئەگەر کۆمپاس لە ئامێرەکەتدا نەبوو، ژمارەی قیبلە لە باکوورەوە هێشتا پیشان دەدرێت، بەڵام سووڕانی مۆبایل نیشان نادرێت.
   </div>
 
 </main>
 
-<!-- Taskbar -->
+<!-- Bottom navigation -->
 <nav class="ni-taskbar" aria-label="مینۆی سەرەکی">
   <a href="index.html" class="ni-item">
     <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span>
     <span>سەرەکی</span>
   </a>
+
   <a href="quran.html" class="ni-item">
-    <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-2-8-1.5v14c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-14c-3-.5-6 0-8 1.5z"/><path d="M12 6v14"/></svg></span>
+    <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-2-8-1.5v14c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-14c-3-.5-6-2-8 1.5z"/><path d="M12 6v14"/></svg></span>
     <span>قورئان</span>
   </a>
+
   <a href="qiblanma.html" class="ni-item active">
     <span class="ni-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
     <span>قیبلە</span>
   </a>
+
   <a href="katakanyBang.html" class="ni-item">
     <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21v-7a7 7 0 0 1 14 0v7"/><path d="M12 7V4"/><path d="M12 14v4"/><path d="M9 21v-3h6v3"/></svg></span>
     <span>بانگ</span>
   </a>
+
   <a href="quiz.html" class="ni-item">
     <span class="ni-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg></span>
     <span>تاقیکردنەوە</span>
   </a>
+
   <button class="ni-item" id="niMoreBtn" type="button">
     <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg></span>
     <span>زیاتر</span>
@@ -370,6 +502,7 @@ button,select{font:inherit;cursor:pointer}
 </nav>
 
 <div class="ni-more-overlay" id="niOverlay"></div>
+
 <div class="ni-more-panel" id="niMorePanel">
   <div class="ni-panel-head">
     <span>☾ بەشەکانی نوری ئیمان</span>
@@ -389,180 +522,395 @@ button,select{font:inherit;cursor:pointer}
 
 <script>
 (() => {
-  /* ---------- Constants ---------- */
+  "use strict";
+
+  /* ==============================
+     QIBLA CALCULATOR
+  ============================== */
+
   const KAABA = { lat: 21.422487, lon: 39.826206 };
   const $ = id => document.getElementById(id);
-  const dial = $("dial"), marker = $("qiblaMarker"), wrap = $("compassWrap");
-  const statusEl = $("status"), hintEl = $("hint"), startBtn = $("startBtn");
 
-  /* ---------- Helpers ---------- */
+  const dial = $("dial");
+  const marker = $("qiblaMarker");
+  const compassWrap = $("compassWrap");
+  const statusEl = $("status");
+  const hintEl = $("hint");
+  const startBtn = $("startBtn");
+  const calibrateBtn = $("calibrateBtn");
+
   const toRad = d => d * Math.PI / 180;
   const toDeg = r => r * 180 / Math.PI;
-  const norm = d => (d % 360 + 360) % 360;
-  const ar = n => String(n).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+  const normalize = d => (d % 360 + 360) % 360;
 
-  function bearing(lat, lon) {
-    const p1 = toRad(lat), p2 = toRad(KAABA.lat), dl = toRad(KAABA.lon - lon);
-    const y = Math.sin(dl) * Math.cos(p2);
-    const x = Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl);
-    return norm(toDeg(Math.atan2(y, x)));
-  }
-  function distanceKm(lat, lon) {
-    const R = 6371, dLat = toRad(KAABA.lat - lat), dLon = toRad(KAABA.lon - lon);
-    const a = Math.sin(dLat / 2) ** 2 +
-      Math.cos(toRad(lat)) * Math.cos(toRad(KAABA.lat)) * Math.sin(dLon / 2) ** 2;
-    return 2 * R * Math.asin(Math.sqrt(a));
+  function kurdishNumber(number) {
+    return String(number).replace(/[0-9]/g, d => "٠١٢٣٤٥٦٧٨٩"[Number(d)]);
   }
 
-  /* ---------- Draw dial ticks ---------- */
-  (function drawTicks() {
+  // Calculate the true initial bearing from the selected location to Kaaba.
+  function calculateBearing(lat, lon) {
+    const lat1 = toRad(lat);
+    const lat2 = toRad(KAABA.lat);
+    const deltaLon = toRad(KAABA.lon - lon);
+
+    const y = Math.sin(deltaLon) * Math.cos(lat2);
+    const x =
+      Math.cos(lat1) * Math.sin(lat2) -
+      Math.sin(lat1) * Math.cos(lat2) * Math.cos(deltaLon);
+
+    return normalize(toDeg(Math.atan2(y, x)));
+  }
+
+  // Calculate great-circle distance.
+  function calculateDistance(lat, lon) {
+    const earthRadius = 6371;
+    const dLat = toRad(KAABA.lat - lat);
+    const dLon = toRad(KAABA.lon - lon);
+
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRad(lat)) *
+      Math.cos(toRad(KAABA.lat)) *
+      Math.sin(dLon / 2) ** 2;
+
+    return 2 * earthRadius * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  /* ==============================
+     DRAW COMPASS
+  ============================== */
+
+  function drawCompass() {
     const svg = $("ticks");
-    let out = "";
+    let html = "";
+
     for (let i = 0; i < 72; i++) {
-      const a = i * 5, big = a % 90 === 0, mid = a % 30 === 0;
-      const len = big ? 14 : mid ? 10 : 5;
-      out += `<line class="tick ${big ? "big" : ""}" x1="100" y1="${big ? 3 : 4}" x2="100" y2="${(big ? 3 : 4) + len}" transform="rotate(${a} 100 100)"/>`;
+      const angle = i * 5;
+      const isMajor = angle % 90 === 0;
+      const isMedium = angle % 30 === 0;
+      const length = isMajor ? 14 : isMedium ? 9 : 5;
+      const start = 5;
+
+      html += `
+        <line
+          class="tick ${isMajor ? "big" : ""}"
+          x1="100" y1="${start}"
+          x2="100" y2="${start + length}"
+          transform="rotate(${angle} 100 100)"
+        />
+      `;
     }
-    const labels = [["ب", 0, "n"], ["ڕ", 90, ""], ["خ", 180, ""], ["چ", 270, ""]];
-    labels.forEach(([t, a, c]) => {
-      out += `<text class="dir ${c}" x="100" y="38" text-anchor="middle" transform="rotate(${a} 100 100)">${t}</text>`;
+
+    const directions = [
+      ["ب", 0, "north"],
+      ["ڕ", 90, ""],
+      ["خ", 180, ""],
+      ["چ", 270, ""]
+    ];
+
+    directions.forEach(([label, angle, className]) => {
+      html += `
+        <text
+          class="direction ${className}"
+          x="100" y="34"
+          text-anchor="middle"
+          transform="rotate(${angle} 100 100)"
+        >${label}</text>
+      `;
     });
-    svg.innerHTML = out;
-  })();
 
-  /* ---------- State ---------- */
-  let qibla = null;      // bearing from north
-  let heading = 0;       // device heading
-  let hasCompass = false;
-  let listening = false;
+    svg.innerHTML = html;
+  }
+
+  /* ==============================
+     STATE
+  ============================== */
+
+  let qiblaBearing = null;
+  let heading = null;
+  let hasReliableCompass = false;
+  let orientationStarted = false;
   let wasAligned = false;
+  let locationLabel = "";
 
-  function setStatus(text, ok) {
-    statusEl.textContent = text;
-    statusEl.classList.toggle("ok", !!ok);
+  function setStatus(message, type = "") {
+    statusEl.textContent = message;
+    statusEl.classList.remove("ok", "error");
+    if (type) statusEl.classList.add(type);
   }
 
-  function render() {
-    dial.style.transform = `rotate(${-heading}deg)`;
-    if (qibla !== null) {
-      marker.style.transform = `rotate(${qibla}deg)`;
-      let diff = Math.abs(norm(qibla - heading));
-      if (diff > 180) diff = 360 - diff;
-      const aligned = hasCompass && diff <= 3;
-      wrap.classList.toggle("aligned", aligned);
-      if (hasCompass) {
-        setStatus(aligned ? "✓ ڕووت لە قیبلەیە" : "مۆبایلەکەت بسوڕێنە تا کەعبە دەگاتە سەرەوە", aligned);
-        if (aligned && !wasAligned && navigator.vibrate) navigator.vibrate(60);
-        wasAligned = aligned;
+  function renderCompass() {
+    if (qiblaBearing === null) return;
+
+    // The dial rotates opposite to the device heading.
+    // The Qibla marker rotates by the calculated bearing.
+    if (hasReliableCompass && heading !== null) {
+      dial.style.transform = `rotate(${-heading}deg)`;
+      $("headingDeg").textContent = kurdishNumber(Math.round(heading)) + "°";
+
+      let difference = normalize(qiblaBearing - heading);
+      if (difference > 180) difference = 360 - difference;
+
+      // Small tolerance because sensors can fluctuate.
+      const aligned = difference <= 4;
+      compassWrap.classList.toggle("aligned", aligned);
+
+      if (aligned) {
+        setStatus("✓ ڕووت لە قیبلەیە", "ok");
+        if (!wasAligned && navigator.vibrate) {
+          navigator.vibrate(80);
+        }
+      } else {
+        setStatus("مۆبایلەکەت بە هێواشی بسووڕێنە");
       }
-      $("headingDeg").textContent = hasCompass ? ar(Math.round(heading)) + "°" : "—";
-    }
-  }
 
-  function setLocation(lat, lon, label) {
-    qibla = bearing(lat, lon);
-    $("qiblaDeg").textContent = ar(Math.round(qibla)) + "°";
-    $("distance").textContent = ar(Math.round(distanceKm(lat, lon)).toLocaleString("en")) + " کم";
-    $("place").textContent = label || (ar(lat.toFixed(3)) + "، " + ar(lon.toFixed(3)));
-    render();
-  }
-
-  /* ---------- Orientation ---------- */
-  function onOrient(e) {
-    let h = null;
-    if (typeof e.webkitCompassHeading === "number") {
-      h = e.webkitCompassHeading;                 // iOS
-    } else if (e.absolute === true && e.alpha !== null) {
-      h = 360 - e.alpha;                          // Android absolute
-    } else if (e.alpha !== null && !hasCompass && e.type === "deviceorientation") {
-      h = 360 - e.alpha;                          // fallback
-    }
-    if (h === null || isNaN(h)) return;
-    // account for screen rotation (tablet landscape)
-    const so = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
-    h = norm(h + so);
-    // smooth, shortest path
-    if (hasCompass) {
-      let d = norm(h - heading);
-      if (d > 180) d -= 360;
-      heading = norm(heading + d * 0.25);
+      wasAligned = aligned;
     } else {
-      heading = h;
+      dial.style.transform = "rotate(0deg)";
+      $("headingDeg").textContent = "بەردەست نییە";
+      compassWrap.classList.remove("aligned");
     }
-    hasCompass = true;
-    render();
+
+    marker.style.transform = `rotate(${qiblaBearing}deg)`;
   }
 
-  async function startOrientation() {
-    if (listening) return true;
-    if (typeof DeviceOrientationEvent === "undefined") return false;
-    try {
-      if (typeof DeviceOrientationEvent.requestPermission === "function") {
-        const res = await DeviceOrientationEvent.requestPermission();
-        if (res !== "granted") return false;
+  function setLocation(lat, lon, label = "") {
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
+
+    qiblaBearing = calculateBearing(lat, lon);
+
+    const distance = calculateDistance(lat, lon);
+
+    $("qiblaDeg").textContent =
+      kurdishNumber(qiblaBearing.toFixed(1)) + "°";
+
+    $("distance").textContent =
+      kurdishNumber(Math.round(distance).toLocaleString("en")) + " کم";
+
+    locationLabel = label || "شوێنی دیاریکراو";
+    $("place").textContent = locationLabel;
+
+    renderCompass();
+
+    if (!hasReliableCompass) {
+      setStatus("ئاڕاستەی قیبلە دیاری کرا");
+      hintEl.textContent =
+        "ئاڕاستەی قیبلە لە باکوورەوە دیاری کرا. بۆ سووڕانی کۆمپاس پێویستت بە هەستەوەری کۆمپاسە.";
+    }
+  }
+
+  /* ==============================
+     DEVICE COMPASS
+  ============================== */
+
+  function getScreenAngle() {
+    if (screen.orientation && typeof screen.orientation.angle === "number") {
+      return screen.orientation.angle;
+    }
+    return typeof window.orientation === "number" ? window.orientation : 0;
+  }
+
+  function onOrientation(event) {
+    let newHeading = null;
+
+    // iPhone / iPad Safari: use the native compass heading.
+    if (typeof event.webkitCompassHeading === "number") {
+      newHeading = event.webkitCompassHeading;
+    }
+
+    // Android: only accept absolute compass data.
+    // Do not treat ordinary relative alpha as a real compass heading.
+    else if (
+      event.type === "deviceorientationabsolute" ||
+      event.absolute === true
+    ) {
+      if (event.alpha !== null && Number.isFinite(event.alpha)) {
+        newHeading = 360 - event.alpha;
       }
-    } catch (e) { return false; }
-    window.addEventListener("deviceorientationabsolute", onOrient, true);
-    window.addEventListener("deviceorientation", onOrient, true);
-    listening = true;
-    // if no sensor data arrives, tell the user
+    }
+
+    if (newHeading === null || !Number.isFinite(newHeading)) return;
+
+    // Adjust for screen rotation.
+    newHeading = normalize(newHeading + getScreenAngle());
+
+    // Smooth the movement, taking the shortest path around 360 degrees.
+    if (heading === null) {
+      heading = newHeading;
+    } else {
+      let delta = normalize(newHeading - heading);
+      if (delta > 180) delta -= 360;
+      heading = normalize(heading + delta * 0.25);
+    }
+
+    hasReliableCompass = true;
+    renderCompass();
+  }
+
+  async function startCompass() {
+    if (orientationStarted) return true;
+
+    if (!("DeviceOrientationEvent" in window)) {
+      setStatus("ئامێرەکەت پشتگیری کۆمپاس ناکات", "error");
+      return false;
+    }
+
+    // iOS requires permission from a direct user action.
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      try {
+        const permission = await DeviceOrientationEvent.requestPermission();
+
+        if (permission !== "granted") {
+          setStatus("مۆڵەتی کۆمپاس ڕەتکرایەوە", "error");
+          hintEl.textContent =
+            "لە ڕێکخستنەکانی وێبگەڕەکەت مۆڵەتی Motion & Orientation چالاک بکە.";
+          return false;
+        }
+      } catch (error) {
+        setStatus("نەتوانرا مۆڵەتی کۆمپاس وەربگیرێت", "error");
+        return false;
+      }
+    }
+
+    window.addEventListener("deviceorientationabsolute", onOrientation, true);
+    window.addEventListener("deviceorientation", onOrientation, true);
+
+    orientationStarted = true;
+
     setTimeout(() => {
-      if (!hasCompass) {
-        setStatus("کۆمپاس نییە — ئاڕاستە لە باکوورەوە پیشان دەدرێت");
-        hintEl.textContent = "ئامێرەکەت ھەستەوەری کۆمپاسی نییە. کەعبە ئاڕاستەی قیبلە لە باکوورەوە نیشان دەدات.";
+      if (!hasReliableCompass) {
+        setStatus("هەستەوەری کۆمپاس بەردەست نییە", "error");
+        hintEl.textContent =
+          "شوێنی تۆ و ئاڕاستەی قیبلە دیاریکراون، بەڵام ئامێرەکەت زانیاریی کۆمپاسی ڕاستەقینە نادات. دەتوانیت ژمارەی قیبلە لە باکوورەوە بەکاربهێنیت.";
       }
-    }, 2500);
+    }, 3500);
+
     return true;
   }
 
-  /* ---------- Start ---------- */
-  function start() {
-    startBtn.disabled = true;
-    setStatus("دیاریکردنی شوێن...");
-    // iOS needs permission requested from a user gesture
-    startOrientation();
+  /* ==============================
+     LOCATION
+  ============================== */
 
-    if (!navigator.geolocation) {
-      setStatus("شوێن پشتگیری ناکرێت — شارەکەت هەڵبژێرە");
-      startBtn.disabled = false;
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        setLocation(pos.coords.latitude, pos.coords.longitude);
-        hintEl.textContent = "کەعبە لە سەرەوە دەرکەوت کاتێک ڕووت لە قیبلە بێت.";
-        startBtn.disabled = false;
-        startBtn.lastChild.textContent = " نوێکردنەوەی شوێن";
-        if (!hasCompass) setStatus("ئاڕاستەی قیبلە دیاری کرا");
-      },
-      () => {
-        setStatus("ڕێگە بە شوێن نەدرا — شارەکەت هەڵبژێرە");
-        hintEl.textContent = "دەتوانیت لە لیستی شارەکان شارەکەت هەڵبژێریت.";
-        startBtn.disabled = false;
-      },
-      { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 }
-    );
+  function getGPSLocation() {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error("GPS پشتگیری ناکرێت"));
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          resolve({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude
+          });
+        },
+        error => reject(error),
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 0
+        }
+      );
+    });
   }
-  startBtn.addEventListener("click", start);
 
-  $("citySelect").addEventListener("change", e => {
-    if (!e.target.value) return;
-    const [lat, lon] = e.target.value.split(",").map(Number);
-    setLocation(lat, lon, e.target.options[e.target.selectedIndex].text);
-    startOrientation();
-    if (!hasCompass) setStatus("ئاڕاستەی قیبلە دیاری کرا");
+  async function startAll() {
+    startBtn.disabled = true;
+    setStatus("داوای شوێن و کۆمپاس دەکرێت...");
+    hintEl.textContent = "تکایە چەند چرکە چاوەڕێ بکە.";
+
+    // Start compass directly from the button click for iOS permission.
+    const compassPromise = startCompass();
+
+    try {
+      const location = await getGPSLocation();
+
+      setLocation(location.lat, location.lon, "شوێنی ئێستا (GPS)");
+
+      hintEl.textContent =
+        "شوێنەکەت دیاری کرا. مۆبایلەکەت بە شێوەی ئاسایی ڕابگرە و بە هێواشی بیسووڕێنە.";
+
+      await compassPromise;
+
+      if (!hasReliableCompass) {
+        setStatus("شوێن دیاری کرا؛ کۆمپاس بەردەست نییە", "error");
+      }
+    } catch (error) {
+      setStatus("نەتوانرا شوێن دیاری بکرێت", "error");
+      hintEl.textContent =
+        "ڕێگە بە شوێن نەدرا یان GPS بەردەست نییە. تکایە شارەکەت لە لیستی خوارەوە هەڵبژێرە.";
+
+      await compassPromise;
+    }
+
+    startBtn.disabled = false;
+  }
+
+  startBtn.addEventListener("click", startAll);
+
+  calibrateBtn.addEventListener("click", async () => {
+    heading = null;
+    hasReliableCompass = false;
+    wasAligned = false;
+
+    dial.style.transform = "rotate(0deg)";
+    compassWrap.classList.remove("aligned");
+    $("headingDeg").textContent = "—";
+
+    setStatus("کۆمپاس نوێ دەکرێتەوە...");
+    hintEl.textContent =
+      "مۆبایلەکەت بە شێوەی ٨ بجووڵێنە و دووبارە کۆمپاس تاقی بکەرەوە.";
+
+    orientationStarted = false;
+    await startCompass();
   });
 
-  // draw default (north-up) dial
-  render();
+  $("citySelect").addEventListener("change", async event => {
+    const value = event.target.value;
+    if (!value) return;
 
-  /* ---------- Taskbar ---------- */
-  const moreBtn = $("niMoreBtn"), panel = $("niMorePanel"), overlay = $("niOverlay"), closeBtn = $("niCloseBtn");
-  const openMore = () => { panel.classList.add("show"); overlay.classList.add("show"); };
-  const closeMore = () => { panel.classList.remove("show"); overlay.classList.remove("show"); };
+    const [lat, lon] = value.split(",").map(Number);
+    const label = event.target.options[event.target.selectedIndex].text;
+
+    setLocation(lat, lon, label);
+
+    hintEl.textContent =
+      "شارەکەت دیاری کرا. بۆ دیاریکردنی سووڕانی مۆبایل، کۆمپاس دەستپێبکە.";
+
+    await startCompass();
+  });
+
+  /* ==============================
+     TASKBAR
+  ============================== */
+
+  const moreBtn = $("niMoreBtn");
+  const panel = $("niMorePanel");
+  const overlay = $("niOverlay");
+  const closeBtn = $("niCloseBtn");
+
+  function openMore() {
+    panel.classList.add("show");
+    overlay.classList.add("show");
+  }
+
+  function closeMore() {
+    panel.classList.remove("show");
+    overlay.classList.remove("show");
+  }
+
   moreBtn.addEventListener("click", openMore);
   closeBtn.addEventListener("click", closeMore);
   overlay.addEventListener("click", closeMore);
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeMore();
+  });
+
+  /* Initial display */
+  drawCompass();
 })();
 </script>
 

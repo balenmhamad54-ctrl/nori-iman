@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl" data-lite>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#061d18">
+<title>نوری ئیمان | دوعای دەستپێکی نوێژ</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
+<style>body{margin:0;background:var(--t-bg);color:#f8f3e6}.opening-duas{max-width:900px;box-sizing:border-box;width:calc(100% - 24px)}</style>
+</head>
+<body>
 
 <!-- ================================
      نوری ئیمان | دوعای دەستپێکی نوێژ
@@ -8,11 +21,11 @@
 
 <style>
 .opening-duas {
-  --dua-bg: #071b19;
-  --dua-green: #103b30;
+  --dua-bg: var(--t-bg);
+  --dua-green: var(--t-panel);
   --dua-green-light: #e8efdc;
-  --dua-gold: #d9b45d;
-  --dua-gold-light: #f5dfa0;
+  --dua-gold: var(--t-acc);
+  --dua-gold-light: var(--t-acc2);
   --dua-text: #f8f3e6;
   --dua-muted: #52645a;
 
@@ -22,9 +35,9 @@
   margin: 28px auto;
   border-radius: 25px;
   background:
-    radial-gradient(ellipse at top, #194a39 0%, transparent 48%),
-    linear-gradient(150deg, #071b19, #0b2822);
-  border: 1px solid rgba(217,180,93,.45);
+    radial-gradient(ellipse at top, var(--t-card) 0%, transparent 48%),
+    linear-gradient(150deg, var(--t-bg), var(--t-bg));
+  border: 1px solid color-mix(in srgb,var(--t-acc) 45%,transparent);
   box-shadow: 0 18px 55px rgba(0,0,0,.22);
   overflow: hidden;
 }
@@ -52,7 +65,7 @@
 .opening-duas .dua-label {
   display: inline-block;
   padding: 5px 18px;
-  border: 1px solid rgba(217,180,93,.5);
+  border: 1px solid color-mix(in srgb,var(--t-acc) 50%,transparent);
   border-radius: 30px;
   color: var(--dua-gold-light);
   background: #ffffff08;
@@ -80,7 +93,7 @@
 
 .opening-duas .dua-note {
   background: rgba(255,255,255,.045);
-  border: 1px solid rgba(217,180,93,.3);
+  border: 1px solid color-mix(in srgb,var(--t-acc) 30%,transparent);
   border-right: 4px solid var(--dua-gold);
   border-radius: 13px;
   padding: 14px 17px;
@@ -100,7 +113,7 @@
   border-radius: 19px;
   margin: 24px 0;
   padding: clamp(15px, 3vw, 28px);
-  color: #17382d;
+  color: var(--t-panel);
   box-shadow: 0 10px 30px rgba(0,0,0,.12);
   overflow-wrap: anywhere;
 }
@@ -128,7 +141,7 @@
 }
 
 .opening-duas .dua-card-header h3 {
-  color: #164332;
+  color: var(--t-card);
   font-size: 20px;
   line-height: 1.7;
   margin: 0;
@@ -145,7 +158,7 @@
   font-size: clamp(23px, 3.3vw, 31px);
   line-height: 2.2;
   text-align: center;
-  color: #103a2c;
+  color: var(--t-panel);
   background: #e2e9d6;
   border: 1px solid #d8dfca;
   border-radius: 13px;
@@ -165,7 +178,7 @@
 }
 
 .opening-duas .dua-meaning {
-  color: #34483b;
+  color: var(--t-card);
   font-size: 15px;
   line-height: 2.25;
   margin: 0;
@@ -199,7 +212,7 @@
   margin-top: 15px;
   padding: 10px 21px;
   background: var(--dua-gold);
-  color: #183729;
+  color: var(--t-panel);
   border-radius: 11px;
   font-size: 14px;
   font-weight: 800;
@@ -287,7 +300,7 @@ table{max-width:100%}
 
   <!-- سەردێڕ -->
   <header class="dua-hero">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <div class="dua-symbol">۞</div>
     <div class="dua-label">نوری ئیمان · فێربوونی نوێژ</div>
 
@@ -453,4 +466,6 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
-<script src="app-shell.js" defer></script>
+
+</body>
+</html>

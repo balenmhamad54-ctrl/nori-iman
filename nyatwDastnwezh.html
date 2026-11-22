@@ -3,7 +3,7 @@
 <html lang="ckb" dir="rtl" data-theme="emerald">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="فێربوونی نیەتی دەستنوێژگرتن و هەنگاوەکانی دەستنوێژ">
   <title>نیەتی دەستنوێژگرتن | نوری ئیمان</title>
 
@@ -14,29 +14,29 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #071914;
-      --surface: #102820;
-      --surface-2: #18392e;
-      --accent: #d9b76b;
-      --accent-soft: rgba(217,183,107,.12);
+      --bg: var(--t-bg);
+      --surface: var(--t-bg);
+      --surface-2: var(--t-panel);
+      --accent: var(--t-acc);
+      --accent-soft: color-mix(in srgb,var(--t-acc) 12%,transparent);
       --text: #f5f6ee;
       --muted: #b6c8bf;
-      --border: rgba(217,183,107,.24);
-      --hero-glow: #214b38;
+      --border: color-mix(in srgb,var(--t-acc) 24%,transparent);
+      --hero-glow: var(--t-card);
       --shadow: rgba(0,0,0,.22);
     }
 
     html[data-theme="blue"] {
       color-scheme: dark;
-      --bg: #091522;
-      --surface: #122438;
-      --surface-2: #1a334b;
+      --bg: var(--t-bg);
+      --surface: var(--t-panel);
+      --surface-2: var(--t-card);
       --accent: #79c8ed;
       --accent-soft: rgba(121,200,237,.12);
       --text: #eff7ff;
       --muted: #b6c9da;
       --border: rgba(121,200,237,.25);
-      --hero-glow: #204665;
+      --hero-glow: var(--t-card);
       --shadow: rgba(0,0,0,.24);
     }
 
@@ -61,11 +61,11 @@
       --surface-2: #f0f3ec;
       --accent: #947027;
       --accent-soft: rgba(148,112,39,.10);
-      --text: #24352d;
+      --text: var(--t-card);
       --muted: #65756b;
       --border: rgba(148,112,39,.25);
       --hero-glow: #dbe9d9;
-      --shadow: rgba(35,50,40,.08);
+      --shadow: color-mix(in srgb,var(--t-panel) 8%,transparent);
     }
 
     * {
@@ -662,6 +662,8 @@ table{max-width:100%}
 <meta name="theme-color" content="#081c20">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
 </head>
 
 <body>
@@ -952,6 +954,5 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<script src="app-shell.js" defer></script>
 </body>
 </html>

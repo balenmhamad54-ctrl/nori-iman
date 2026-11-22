@@ -3,22 +3,22 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#071b1b">
 <title>تقویمی هیجری | نوری ئیمان</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
- --bg:#071b1b;--panel:#102a27;--panel2:#15352f;
- --green:#43c69a;--gold:#dfbd78;--text:#f4f4ed;
+ --bg:var(--t-bg);--panel:var(--t-panel);--panel2:var(--t-panel);
+ --green:#43c69a;--gold:var(--t-acc);--text:#f4f4ed;
  --muted:#a4b8ad;--border:rgba(255,255,255,.09);
 }
 *{box-sizing:border-box}
 body{
  margin:0;background:
  radial-gradient(ellipse at 10% 0%,rgba(67,198,154,.13),transparent 35%),
- radial-gradient(ellipse at 90% 40%,rgba(223,189,120,.08),transparent 35%),var(--bg);
+ radial-gradient(ellipse at 90% 40%,color-mix(in srgb,var(--t-acc) 8%,transparent),transparent 35%),var(--bg);
  color:var(--text);font-family:'Noto Sans Arabic',sans-serif;
 }
 header{
@@ -28,8 +28,8 @@ header{
 .brand{display:flex;align-items:center;gap:12px}
 .logo{
  width:47px;height:47px;border-radius:15px;display:grid;place-items:center;
- background:linear-gradient(135deg,#43c69a,#176c55);
- color:#06251b;font-size:25px
+ background:linear-gradient(135deg,#43c69a,var(--t-card));
+ color:var(--t-bg);font-size:25px
 }
 .brand strong{font-size:19px}
 .brand small{display:block;color:var(--muted);font-size:11px}
@@ -40,13 +40,13 @@ header{
 main{max-width:1100px;margin:20px auto 60px;padding:0 18px}
 .hero{text-align:center;padding:25px 10px 30px}
 .hero .moon{font-size:40px;color:var(--gold)}
-.hero h1{font-size:clamp(26px,5vw,39px);color:#f3dfae;margin:10px 0}
+.hero h1{font-size:clamp(26px,5vw,39px);color:var(--t-acc2);margin:10px 0}
 .hero p{color:var(--muted);font-size:13px;line-height:2}
 .today{
  display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:22px
 }
 .today-card{
- background:linear-gradient(135deg,#143c32,#102722);
+ background:linear-gradient(135deg,var(--t-panel),var(--t-bg));
  border:1px solid rgba(67,198,154,.17);border-radius:18px;
  padding:22px;text-align:center
 }
@@ -55,7 +55,7 @@ main{max-width:1100px;margin:20px auto 60px;padding:0 18px}
 .today-card p{margin:0;color:var(--muted);font-size:12px}
 .today-card.hijri h2{font-family:'Amiri',serif;font-size:32px}
 .panel{
- background:rgba(16,42,39,.94);border:1px solid var(--border);
+ background:color-mix(in srgb,var(--t-panel) 94%,transparent);border:1px solid var(--border);
  border-radius:19px;padding:22px;margin-bottom:20px
 }
 .panel-title{font-size:17px;margin:0 0 18px}
@@ -65,7 +65,7 @@ main{max-width:1100px;margin:20px auto 60px;padding:0 18px}
 }
 .calendar-head h2{font-size:20px;color:var(--gold);margin:0}
 .nav-btn{
- border:1px solid var(--border);background:#183a32;color:var(--text);
+ border:1px solid var(--border);background:var(--t-panel);color:var(--text);
  width:40px;height:40px;border-radius:11px;cursor:pointer;font-size:18px
 }
 .nav-btn:hover{border-color:var(--green);color:var(--green)}
@@ -75,7 +75,7 @@ main{max-width:1100px;margin:20px auto 60px;padding:0 18px}
 .weekdays div{text-align:center;color:var(--muted);font-size:11px;padding:9px 0}
 .day{
  min-height:75px;border:1px solid var(--border);border-radius:11px;
- background:#0b2420;padding:8px 5px;text-align:center;
+ background:var(--t-bg);padding:8px 5px;text-align:center;
  display:flex;flex-direction:column;align-items:center;justify-content:center;
  gap:5px;position:relative
 }
@@ -94,11 +94,11 @@ main{max-width:1100px;margin:20px auto 60px;padding:0 18px}
 }
 .event{
  display:flex;align-items:center;gap:13px;padding:14px;
- border:1px solid var(--border);border-radius:14px;background:#0b2420
+ border:1px solid var(--border);border-radius:14px;background:var(--t-bg)
 }
 .event-icon{
  width:43px;height:43px;flex-shrink:0;border-radius:13px;
- display:grid;place-items:center;background:rgba(223,189,120,.12);
+ display:grid;place-items:center;background:color-mix(in srgb,var(--t-acc) 12%,transparent);
  color:var(--gold);font-size:21px
 }
 .event strong{display:block;font-size:13px}
@@ -110,7 +110,7 @@ main{max-width:1100px;margin:20px auto 60px;padding:0 18px}
 .field label{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}
 input{
  width:100%;padding:13px;border:1px solid var(--border);
- border-radius:11px;background:#091f1c;color:white;
+ border-radius:11px;background:var(--t-bg);color:white;
  font-family:inherit;font-size:14px;outline:none
 }
 input:focus{border-color:var(--green)}
@@ -189,6 +189,8 @@ table{max-width:100%}
 <meta name="theme-color" content="#081c20">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
 </head>
 
 <body>
@@ -390,6 +392,5 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<script src="app-shell.js" defer></script>
 </body>
 </html>

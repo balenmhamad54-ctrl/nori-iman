@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#081c20">
+<title>فێربوونی عومرە | نوری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+ --bg:#081c20;
+ --card:#102a2c;
+ --card2:#153537;
+ --gold:#d9b76a;
+ --gold2:#f4d997;
+ --white:#f8f6ef;
+ --muted:#a9b9b5;
+ --green:#56c59a;
+ --line:rgba(217,183,106,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:var(--bg);
+ color:var(--white);
+ font-family:'Noto Sans Arabic',sans-serif;
+ overflow-x:hidden;
+}
+button{font-family:inherit;cursor:pointer}
+a{text-decoration:none;color:inherit}
+.top{
+ padding:17px 5%;
+ display:flex;align-items:center;justify-content:space-between;
+ border-bottom:1px solid var(--line);
+ background:#091f22;
+}
+.logo{color:var(--gold);font-size:20px;font-weight:800}
+.back{
+ color:var(--gold2);border:1px solid var(--line);
+ padding:9px 17px;border-radius:12px;font-size:13px;
+}
+.container{width:min(1100px,92%);margin:auto}
+.hero{
+ text-align:center;padding:55px 15px 35px;
+ position:relative;overflow:hidden;
+}
+.hero:before{
+ content:"";position:absolute;width:330px;height:330px;
+ background:rgba(217,183,106,.07);filter:blur(70px);
+ border-radius:50%;top:-100px;left:calc(50% - 165px);
+}
+.hero-icon{
+ width:75px;height:75px;border-radius:25px;
+ display:grid;place-items:center;margin:0 auto 18px;
+ background:linear-gradient(145deg,#d9b76a,#96733c);
+ color:#102323;font-size:31px;
+ box-shadow:0 10px 40px #d9b76a35;
+}
+.hero h1{font-size:clamp(25px,5vw,40px);color:var(--gold2);margin-bottom:12px}
+.hero p{color:var(--muted);line-height:2;font-size:14px;max-width:620px;margin:auto}
+.hero .ayah{
+ font-family:Amiri,serif;color:var(--gold2);
+ font-size:23px;line-height:2.1;margin-top:20px;
+}
+.progress-box{
+ background:var(--card);padding:18px;border-radius:18px;
+ border:1px solid var(--line);margin:15px 0 25px;
+}
+.progress-head{display:flex;justify-content:space-between;font-size:13px;margin-bottom:12px}
+.progress-head span:last-child{color:var(--gold)}
+.progress{height:7px;background:#253b3a;border-radius:20px;overflow:hidden}
+.progress-fill{
+ height:100%;width:0;background:linear-gradient(90deg,#a6813e,#f3d991);
+ border-radius:20px;transition:.5s;
+}
+.steps{
+ display:grid;grid-template-columns:repeat(6,1fr);
+ gap:9px;margin-bottom:25px;
+}
+.step-tab{
+ background:var(--card);border:1px solid var(--line);
+ border-radius:13px;padding:13px 5px;color:var(--muted);
+ font-size:12px;transition:.3s;
+}
+.step-tab i{display:block;font-size:19px;margin-bottom:8px}
+.step-tab.active{
+ background:#283b32;border-color:var(--gold);
+ color:var(--gold2);transform:translateY(-3px);
+}
+.step-tab.done{border-color:var(--green);color:var(--green)}
+.lesson{
+ background:linear-gradient(145deg,#102b2d,#0c2427);
+ border:1px solid var(--line);border-radius:25px;
+ overflow:hidden;margin-bottom:25px;
+}
+.lesson-top{
+ padding:25px 25px 15px;display:flex;
+ align-items:center;justify-content:space-between;
+}
+.lesson-number{color:var(--gold);font-size:13px}
+.lesson h2{font-size:24px;margin-top:8px;color:var(--gold2)}
+.lesson-content{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:25px;padding:10px 25px 25px;align-items:center;
+}
+.visual{
+ min-height:260px;background:radial-gradient(circle,#24423d,#0a2023 70%);
+ border-radius:20px;display:flex;align-items:center;
+ justify-content:center;position:relative;overflow:hidden;
+}
+.visual .visual-caption{
+ position:absolute;bottom:13px;color:var(--gold2);
+ font-size:12px;
+}
+.lesson-text h3{font-size:17px;margin-bottom:12px;color:var(--gold2)}
+.lesson-text p{font-size:14px;line-height:2.1;color:#d0d9d4;margin-bottom:13px}
+.info{
+ padding:13px;border-radius:13px;
+ background:#d9b76a12;border-right:3px solid var(--gold);
+ font-size:12px;line-height:2;color:#e7d9b8;margin-top:12px;
+}
+.dua{
+ background:#071a1d;border:1px solid var(--line);
+ padding:15px;border-radius:14px;margin-top:13px;
+}
+.dua small{color:var(--gold);display:block;margin-bottom:8px}
+.dua .arabic{font-family:Amiri,serif;font-size:22px;line-height:2;color:var(--gold2)}
+.dua p{font-size:12px;margin-top:8px}
+.controls{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;padding:18px 25px;border-top:1px solid var(--line);
+}
+.btn{
+ border:0;border-radius:12px;padding:12px 19px;
+ font-size:13px;font-weight:700;
+}
+.next{background:linear-gradient(135deg,#e9c978,#b18b49);color:#172725}
+.prev{background:#1b393b;color:#eee;border:1px solid var(--line)}
+.finish{background:#1b493b;color:#a9f2d1}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.counter{
+ color:var(--gold2);font-size:13px;
+}
+.counter-area{text-align:center;padding:20px}
+.counter-area h3{color:var(--gold2);margin-bottom:8px}
+.counter-area p{color:var(--muted);font-size:12px;margin-bottom:16px}
+.count-number{font-size:45px;color:var(--gold);font-weight:800}
+.count-buttons{display:flex;justify-content:center;gap:10px;margin-top:15px}
+.count-buttons button{
+ width:48px;height:48px;border-radius:50%;
+ border:1px solid var(--line);background:#1b393b;color:var(--gold);
+ font-size:20px;
+}
+.count-dots{display:flex;justify-content:center;gap:8px;margin:15px 0}
+.count-dots span{
+ width:12px;height:12px;border-radius:50%;
+ background:#344b47;
+}
+.count-dots span.active{background:var(--gold)}
+.kaaba{
+ width:155px;height:175px;position:relative;
+ background:linear-gradient(90deg,#090909,#292929,#080808);
+ border:3px solid #37332a;
+ box-shadow:0 18px 35px #0008;
+ animation:float 3s ease-in-out infinite;
+}
+.kaaba:before{
+ content:"";position:absolute;top:30px;left:0;width:100%;
+ height:19px;background:linear-gradient(90deg,#a6813e,#f3d58c,#9c7838);
+ border-top:3px solid #e9c778;border-bottom:3px solid #9d783a;
+}
+.kaaba:after{
+ content:"";position:absolute;top:55px;left:50%;
+ width:25px;height:45px;transform:translateX(-50%);
+ border:2px solid #b99a58;border-radius:2px;
+}
+.kaaba .door{
+ position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+ height:65px;width:32px;background:#5c4725;
+ border:2px solid #b99a58;
+}
+@keyframes float{50%{transform:translateY(-9px)}}
+.tawaf-visual{position:relative;width:260px;height:245px;display:grid;place-items:center}
+.orbit{
+ position:absolute;width:225px;height:190px;
+ border:2px dashed #d9b76a77;border-radius:50%;
+ animation:spin 10s linear infinite;
+}
+.orbit:before,.orbit:after{
+ content:"";position:absolute;width:10px;height:10px;
+ background:var(--gold);border-radius:50%;
+}
+.orbit:before{top:25px;right:10px}
+.orbit:after{bottom:25px;left:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sai-visual{
+ width:90%;display:flex;align-items:center;justify-content:space-between;
+ position:relative;
+}
+.hill{
+ width:65px;height:65px;border-radius:50% 50% 15px 15px;
+ background:linear-gradient(145deg,#d5c49a,#776747);
+ display:grid;place-items:center;color:#172724;font-weight:bold;
+}
+.path{height:4px;flex:1;background:linear-gradient(90deg,#d9b76a,#f5d99a);position:relative}
+.runner{position:absolute;top:-28px;left:40%;font-size:25px;color:var(--gold);animation:run 2s ease-in-out infinite alternate}
+@keyframes run{to{left:65%}}
+.hair-visual{font-size:95px;color:var(--gold);animation:float 3s infinite}
+.checklist{
+ background:var(--card);border:1px solid var(--line);
+ border-radius:20px;padding:20px;margin-bottom:30px;
+}
+.checklist h3{color:var(--gold2);margin-bottom:15px}
+.check{
+ display:flex;gap:12px;align-items:center;
+ padding:12px 0;border-bottom:1px solid var(--line);
+ font-size:13px;color:#d6e1da;
+}
+.check:last-child{border:0}
+.check input{accent-color:#d9b76a;width:18px;height:18px}
+.footer{text-align:center;padding:25px;color:#9eaaa3;font-size:12px}
+@media(max-width:700px){
+ .steps{grid-template-columns:repeat(3,1fr)}
+ .lesson-content{grid-template-columns:1fr;padding:5px 15px 20px;gap:15px}
+ .visual{min-height:230px}
+ .lesson-top{padding:20px 16px 12px}
+ .lesson h2{font-size:21px}
+ .controls{padding:15px;flex-wrap:wrap}
+ .btn{padding:11px 14px}
+ .hero{padding-top:38px}
+}
+@media(max-width:380px){
+ .step-tab{font-size:11px}
+ .counter{font-size:11px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="top">
+ <div class="logo"><i class="fa-solid fa-moon"></i> نوری ئیمان</div>
+ <a href="index.html" class="back"><i class="fa-solid fa-arrow-right"></i> گەڕانەوە</a>
+</header>
+
+<section class="hero">
+ <div class="hero-icon"><i class="fa-solid fa-kaaba"></i></div>
+ <h1>فێربوونی شێوازی عومرەکردن</h1>
+ <p>بە هەنگاوێک هەنگاو، بە ئەنیمەیشن و ڕوونکردنەوەی ئاسان، فێری ئەنجامدانی عومرە ببە.</p>
+ <div class="ayah">وَأَتِمُّوا الْحَجَّ وَالْعُمْرَةَ لِلَّهِ</div>
+ <p>سورەتی بەقەرە – ئایەتی ١٩٦</p>
+</section>
+
+<main class="container">
+
+ <div class="progress-box">
+  <div class="progress-head">
+   <span>پێشکەوتنی فێرکاری</span>
+   <span id="progressText">هەنگاوی ١ لە ٦</span>
+  </div>
+  <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+ </div>
+
+ <div class="steps" id="stepTabs">
+  <button class="step-tab active" data-step="0"><i class="fa-solid fa-shirt"></i>ئیحرام</button>
+  <button class="step-tab" data-step="1"><i class="fa-solid fa-kaaba"></i>تەواف</button>
+  <button class="step-tab" data-step="2"><i class="fa-solid fa-person-praying"></i>نوێژ</button>
+  <button class="step-tab" data-step="3"><i class="fa-solid fa-person-walking"></i>سەعی</button>
+  <button class="step-tab" data-step="4"><i class="fa-solid fa-scissors"></i>قژکورتکردن</button>
+  <button class="step-tab" data-step="5"><i class="fa-solid fa-check-circle"></i>تەواوکردن</button>
+ </div>
+
+ <section class="lesson">
+  <div class="lesson-top">
+   <div>
+    <div class="lesson-number" id="lessonNumber">هەنگاوی ٠١</div>
+    <h2 id="lessonTitle">ئیحرام و نیەت</h2>
+   </div>
+   <i class="fa-solid fa-star" style="color:var(--gold);font-size:25px"></i>
+  </div>
+
+  <div class="lesson-content">
+   <div class="visual" id="visual">
+    <i class="fa-solid fa-shirt" style="font-size:100px;color:#f5f0df;animation:float 3s infinite"></i>
+    <div class="visual-caption">دەستپێکردنی گەشتی پیرۆزی عومرە</div>
+   </div>
+   <div class="lesson-text">
+    <h3 id="textHeading">چۆن ئامادە دەبین؟</h3>
+    <p id="lessonDescription"></p>
+    <div class="info" id="lessonInfo"></div>
+    <div class="dua" id="lessonDua">
+     <small>زیکری عومرە</small>
+     <div class="arabic" id="duaArabic"></div>
+     <p id="duaTranslation"></p>
+    </div>
+   </div>
+  </div>
+
+  <div id="counterArea" class="counter-area" style="display:none">
+   <h3 id="counterTitle">ژمێرەری تەواف</h3>
+   <p id="counterDescription">بۆ تۆمارکردنی سووڕەکان دوگمەی زیادکردن دابگرە.</p>
+   <div class="count-number" id="countNumber">٠ / ٧</div>
+   <div class="count-dots" id="countDots"></div>
+   <div class="count-buttons">
+    <button id="minusCount" aria-label="کەمکردنەوە"><i class="fa-solid fa-minus"></i></button>
+    <button id="plusCount" aria-label="زیادکردن"><i class="fa-solid fa-plus"></i></button>
+    <button id="resetCount" aria-label="سفرکردنەوە"><i class="fa-solid fa-rotate-left"></i></button>
+   </div>
+   <div class="info" id="counterInfo">تەواف ٧ سووڕە، دەستپێک و کۆتایی لە لای بەردی ڕەشەوەیە.</div>
+  </div>
+
+  <div class="controls">
+   <button class="btn prev" id="prevBtn"><i class="fa-solid fa-arrow-right"></i> پێشتر</button>
+   <span class="counter" id="stepCounter">١ / ٦</span>
+   <button class="btn next" id="nextBtn">هەنگاوی دواتر <i class="fa-solid fa-arrow-left"></i></button>
+  </div>
+ </section>
+
+ <section class="checklist">
+  <h3><i class="fa-solid fa-clipboard-check"></i> لیستی ئامادەکاری عومرە</h3>
+  <label class="check"><input type="checkbox"> پاکوخاوێنی و غوسڵی ئامادەکاری ئەنجام بدە</label>
+  <label class="check"><input type="checkbox"> جل و بەرگی ئیحرام ئامادە بکە</label>
+  <label class="check"><input type="checkbox"> کاتی میقات و شوێنی ئیحرام بزانە</label>
+  <label class="check"><input type="checkbox"> دوعا و زیکرەکان فێربە</label>
+  <label class="check"><input type="checkbox"> ڕێنماییەکانی سەلامەتی و ڕێکخستنی گەشت بخوێنەوە</label>
+ </section>
+
+</main>
+
+<footer class="footer">
+ <div style="color:var(--gold);font-size:19px;margin-bottom:8px">نوری ئیمان</div>
+ بە زانست، دڵ ڕووناک بکەوە
+ <p style="margin-top:8px">خوا عومرە و عیبادەتتان قبوڵ بکات 🤍</p>
+</footer>
+
+<script>
+const lessons = [
+{
+ title:"ئیحرام و نیەت",
+ heading:"چۆن ئامادە دەبین؟",
+ description:"یەکەم هەنگاو ئامادەکارییە. پێش گەیشتن بە میقات، غوسڵکردن و پاکوخاوێنی مستەحەبە. پیاوان دوو پارچە جلەی ئیحرام لەبەر دەکەن. ئافرەتان جلێکی شەرعی و داپۆشراوی ئاسایی لەبەر دەکەن.",
+ info:"نیەت شوێنی دڵە. کاتێک لە میقات دەچیتە ئیحرام و نیەتی عومرە دەکەیت، تەلبیە دەڵێیت. بۆ ئەوانەی بە فڕۆکە دەچن، پێویستە پێش تێپەڕبوونی میقات ئیحرام ببەستن.",
+ dua:"لَبَّيْكَ اللَّهُمَّ عُمْرَةً",
+ translation:"واتە: ئەی خوایە، بۆ ئەنجامدانی عومرە وەڵامی بانگت دەدەمەوە.",
+ visual:"shirt"
+},
+{
+ title:"تەواف لە دەوری کەعبە",
+ heading:"چۆن تەواف دەکەین؟",
+ description:"لە بەردی ڕەشەوە دەست پێ دەکەیت، کەعبە لە لای چەپت دەبێت و بە ئاراستەی پێچەوانەی سووڕی کاتژمێر ٧ سووڕ لە دەوری کەعبە دەکەیت. لە هەر سووڕێکدا زیکر و دوعا دەکەیت.",
+ info:"ئەگەر نەتوانیت بەردی ڕەش ماچ بکەیت یان دەستی لێ بدەیت، لە دوورەوە ئاماژەی بۆ بکە و ئەللّٰهُ أَکبَر بڵێ. خۆت بە خەڵک مەگەیەنە و ئازاری کەس مەدە. پیاوان لە سێ سووڕی یەکەمدا بە شێوەی سوننەت خێراتر دەڕۆن ئەگەر بتوانن.",
+ dua:"بِسْمِ اللَّهِ، اللَّهُ أَكْبَرُ",
+ translation:"بە ناوی خوا، خوا گەورەترە.",
+ visual:"tawaf",
+ counter:true
+},
+{
+ title:"دوو ڕەکعەت نوێژ و زەمزەم",
+ heading:"دوای تەواف چی بکەین؟",
+ description:"دوای تەواوکردنی ٧ سووڕی تەواف، ئەگەر ئاسان بوو دوو ڕەکعەت نوێژ لە نزیک مەقامی ئیبراهیم بکە؛ ئەگەر قەرەباڵغی هەبوو، لە شوێنێکی تر لە مزگەوتی حەرام نوێژەکە ئەنجام بدە. پاشان دەتوانیت ئاوی زەمزەم بخۆیت.",
+ info:"نوێژکردن لە پشت مەقامی ئیبراهیم ئەگەر بکرێت باشە، بەڵام پێویست نییە شوێنەکە قەرەباڵغ بکەیت. سەلامەتی و ئاسوودەیی خەڵک بپارێزە.",
+ dua:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+ translation:"پەروەردگارمان، لە دونیا و دواڕۆژدا خێرمان پێ ببەخشە و لە سزای دۆزەخمان بپارێزە.",
+ visual:"prayer"
+},
+{
+ title:"سەعی لە نێوان سەفا و مەروە",
+ heading:"٧ هەنگاوی سەعی",
+ description:"سەعی لە سەفا دەست پێ دەکات. لە سەفاوە بۆ مەروە دەڕۆیت، ئەمە یەک هەنگاوە. لە مەروەوە دەگەڕێیتەوە سەفا، ئەمە دووەمە. بە هەمان شێوە بەردەوام دەبیت تا هەنگاوی حەوتەم لە مەروە کۆتایی پێ دێت.",
+ info:"پیاوان لە نێوان دوو نیشانەی سەوزدا بە شێوەیەکی خێراتر دەڕۆن ئەگەر توانایان هەبێت. ئافرەتان بە ڕێکخراوی بە ئاسایی دەڕۆن. سەعی ٧ هەنگاوە، نەک ٧ جار چوون و هاتن.",
+ dua:"إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ",
+ translation:"بەڕاستی سەفا و مەروە لە نیشانەکانی خواون.",
+ visual:"sai",
+ counter:true
+},
+{
+ title:"قژتاشین یان کورتکردنەوە",
+ heading:"چۆن عومرەکە تەواو دەکەین؟",
+ description:"دوای تەواوکردنی سەعی، پیاوان سەری خۆیان دەتاشن یان قژی تەواوی سەر کورت دەکەنەوە. تاشینی تەواوی سەر باشترە. ئافرەتان بەشێکی کەم لە کۆتایی قژی خۆیان کورت دەکەنەوە.",
+ info:"بۆ ئافرەتان کورتکردنەوەی نزیکەی ١–٢ سانتیمەتر لە کۆتایی قژەکەیان بەسە. تا ئەم هەنگاوە تەواو نەکەیت، لە ئیحرام دەمێنیتەوە.",
+ dua:"تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ",
+ translation:"خوا لە ئێمە و ئێوە قبوڵی بکات.",
+ visual:"hair"
+},
+{
+ title:"عومرەکەت تەواو بوو",
+ heading:"پیرۆزە! عومرەکەت تەواو کرد",
+ description:"بە تەواوکردنی تەواف و سەعی و قژتاشین یان کورتکردنەوەی قژ، عومرەکەت تەواو دەبێت و لە ئیحرام دەردەچیت. دەتوانیت جل و بەرگی ئاسایی لەبەر بکەیت و ئەو شتانەی لە کاتی ئیحرام قەدەغە بوون، بۆت ڕێگەپێدراو دەبنەوە.",
+ info:"هەموو عیبادەتەکانت بە دڵسۆزی بۆ خوا ئەنجام بدە. لە عومرەدا ئارامی و ڕێزگرتن لە کەسانی تر گرنگە.",
+ dua:"اللَّهُمَّ تَقَبَّلْ عُمْرَتَنَا وَاغْفِرْ لَنَا",
+ translation:"ئەی خوایە، عومرەکەمان قبوڵ بکە و لێمان خۆش بە.",
+ visual:"finish"
+}
+];
+
+let current=0;
+let tawaf=0;
+let sai=0;
+
+const $=id=>document.getElementById(id);
+
+function visualHTML(type){
+ const captions={
+ shirt:"ئامادەبوون بۆ ئیحرام",
+ tawaf:"تەواف لە دەوری کەعبە",
+ prayer:"دوو ڕەکعەت نوێژ",
+ sai:"سەفا ← مەروە",
+ hair:"کورتکردنەوەی قژ",
+ finish:"کۆتایی گەشتی عومرە"
+ };
+ let art="";
+ if(type==="shirt") art='<i class="fa-solid fa-shirt" style="font-size:100px;color:#f5f0df;animation:float 3s infinite"></i>';
+ if(type==="tawaf") art='<div class="tawaf-visual"><div class="orbit"></div><div class="kaaba"><div class="door"></div></div></div>';
+ if(type==="prayer") art='<i class="fa-solid fa-person-praying" style="font-size:100px;color:#d9b76a;animation:float 3s infinite"></i>';
+ if(type==="sai") art='<div class="sai-visual"><div class="hill">سەفا</div><div class="path"><i class="fa-solid fa-person-walking runner"></i></div><div class="hill">مەروە</div></div>';
+ if(type==="hair") art='<i class="fa-solid fa-scissors hair-visual"></i>';
+ if(type==="finish") art='<div style="text-align:center"><i class="fa-solid fa-kaaba" style="font-size:85px;color:var(--gold);animation:float 3s infinite"></i><div style="font-size:28px;color:var(--gold2);margin-top:10px">الحمد لله</div></div>';
+ return art+'<div class="visual-caption">'+captions[type]+'</div>';
+}
+
+function render(){
+ const l=lessons[current];
+ $("lessonNumber").textContent="هەنگاوی "+String(current+1).padStart(2,"0");
+ $("lessonTitle").textContent=l.title;
+ $("textHeading").textContent=l.heading;
+ $("lessonDescription").textContent=l.description;
+ $("lessonInfo").textContent=l.info;
+ $("duaArabic").textContent=l.dua;
+ $("duaTranslation").textContent=l.translation;
+ $("visual").innerHTML=visualHTML(l.visual);
+ $("lessonDua").style.display="block";
+ $("counterArea").style.display=l.counter?"block":"none";
+ $("progressText").textContent="هەنگاوی "+(current+1)+" لە ٦";
+ $("progressFill").style.width=((current+1)/6*100)+"%";
+ $("stepCounter").textContent=(current+1)+" / ٦";
+ $("prevBtn").disabled=current===0;
+ $("nextBtn").innerHTML=current===5?'تەواوکردن <i class="fa-solid fa-check"></i>':'هەنگاوی دواتر <i class="fa-solid fa-arrow-left"></i>';
+ $("nextBtn").className=current===5?"btn finish":"btn next";
+ document.querySelectorAll(".step-tab").forEach((b,i)=>{
+  b.classList.toggle("active",i===current);
+  b.classList.toggle("done",i<current);
+ });
+ if(current===1) updateCount("tawaf");
+ if(current===3) updateCount("sai");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function updateCount(type){
+ const count=type==="tawaf"?tawaf:sai;
+ $("counterTitle").textContent=type==="tawaf"?"ژمێرەری ٧ سووڕی تەواف":"ژمێرەری ٧ هەنگاوی سەعی";
+ $("counterDescription").textContent=type==="tawaf"?"هەر جارێک سووڕێک تەواو دەکەیت، زیادکردن دابگرە.":"هەر گەشتێک لە سەفا بۆ مەروە یان لە مەروە بۆ سەفا تەواو بوو، زیادکردن دابگرە.";
+ $("countNumber").textContent=count+" / ٧";
+ $("countDots").innerHTML=Array.from({length:7},(_,i)=>'<span class="'+(i<count?"active":"")+'"></span>').join("");
+ $("counterInfo").textContent=count===7?"ماشاءالله! ژمێرەکە تەواو بوو.":"تۆمارکراو: "+count+" لە ٧.";
+}
+$("plusCount").onclick=()=>{
+ if(current===1&&tawaf<7)tawaf++;
+ if(current===3&&sai<7)sai++;
+ updateCount(current===1?"tawaf":"sai");
+};
+$("minusCount").onclick=()=>{
+ if(current===1&&tawaf>0)tawaf--;
+ if(current===3&&sai>0)sai--;
+ updateCount(current===1?"tawaf":"sai");
+};
+$("resetCount").onclick=()=>{
+ if(current===1)tawaf=0;
+ if(current===3)sai=0;
+ updateCount(current===1?"tawaf":"sai");
+};
+$("prevBtn").onclick=()=>{if(current>0){current--;render()}};
+$("nextBtn").onclick=()=>{
+ if(current<5){current++;render()}
+ else{
+  current=0;tawaf=0;sai=0;render();
+  alert("سوپاس بۆ بەکارهێنانی فێرکاری عومرەی نوری ئیمان. خوا عومرەت قبوڵ بکات.");
+ }
+};
+document.querySelectorAll(".step-tab").forEach(b=>{
+ b.onclick=()=>{current=Number(b.dataset.step);render()};
+});
+render();
+</script>
+</body>
+</html>

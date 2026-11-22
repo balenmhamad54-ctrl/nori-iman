@@ -3,7 +3,7 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#091c16">
 <title>مێژووی ئیسلام | نوری ئیمان</title>
 
@@ -13,25 +13,25 @@
 
 <style>
 :root{
- --bg:#091c16;
- --surface:#10291f;
- --surface2:#19392b;
- --gold:#d9b875;
- --gold2:#f1dfb2;
+ --bg:var(--t-bg);
+ --surface:var(--t-panel);
+ --surface2:var(--t-panel);
+ --gold:var(--t-acc);
+ --gold2:var(--t-acc2);
  --text:#f8f3e7;
  --muted:#c2c9bd;
- --border:rgba(217,184,117,.25);
+ --border:color-mix(in srgb,var(--t-acc) 25%,transparent);
  --shadow:0 16px 40px rgba(0,0,0,.30);
- --hero-glow:rgba(217,184,117,.12);
+ --hero-glow:color-mix(in srgb,var(--t-acc) 12%,transparent);
 }
 
 body.blue{
- --bg:#101c2c;
- --surface:#182d43;
- --surface2:#23415b;
- --gold:#c5b17d;
- --gold2:#f1dfb2;
- --border:rgba(197,177,125,.27);
+ --bg:var(--t-panel);
+ --surface:var(--t-card);
+ --surface2:var(--t-card);
+ --gold:var(--t-acc);
+ --gold2:var(--t-acc2);
+ --border:color-mix(in srgb,var(--t-acc) 27%,transparent);
  --hero-glow:rgba(113,164,205,.13);
 }
 
@@ -39,9 +39,9 @@ body.purple{
  --bg:#21172a;
  --surface:#30223b;
  --surface2:#453052;
- --gold:#d7b77e;
- --gold2:#f1dfb2;
- --border:rgba(215,183,126,.27);
+ --gold:var(--t-acc);
+ --gold2:var(--t-acc2);
+ --border:color-mix(in srgb,var(--t-acc) 27%,transparent);
  --hero-glow:rgba(178,130,204,.13);
 }
 
@@ -80,12 +80,12 @@ header{
  position:sticky;
  top:0;
  z-index:20;
- background:rgba(9,28,22,.91);
+ background:color-mix(in srgb,var(--t-bg) 91%,transparent);
  backdrop-filter:blur(18px);
  border-bottom:1px solid var(--border);
 }
 
-body.blue header{background:rgba(16,28,44,.92)}
+body.blue header{background:color-mix(in srgb,var(--t-panel) 92%,transparent)}
 body.purple header{background:rgba(33,23,42,.92)}
 
 .nav{
@@ -143,7 +143,7 @@ body.purple header{background:rgba(33,23,42,.92)}
  position:absolute;
  width:250px;
  height:250px;
- border:1px solid rgba(217,184,117,.08);
+ border:1px solid color-mix(in srgb,var(--t-acc) 8%,transparent);
  border-radius:50%;
  top:15px;
  left:50%;
@@ -220,8 +220,8 @@ body.purple header{background:rgba(33,23,42,.92)}
  display:inline-block;
 }
 
-.green-dot{background:#1c563b}
-.blue-dot{background:#294e77}
+.green-dot{background:var(--t-card)}
+.blue-dot{background:var(--t-card)}
 .purple-dot{background:#62416f}
 
 /* MAIN */
@@ -271,7 +271,7 @@ body.purple header{background:rgba(33,23,42,.92)}
 
 .search:focus{
  border-color:var(--gold);
- box-shadow:0 0 0 3px rgba(217,184,117,.08);
+ box-shadow:0 0 0 3px color-mix(in srgb,var(--t-acc) 8%,transparent);
 }
 
 .search::placeholder{color:#98a89b}
@@ -297,7 +297,7 @@ body.purple header{background:rgba(33,23,42,.92)}
 
 .filter.active{
  background:linear-gradient(135deg,var(--gold2),var(--gold));
- color:#19251c;
+ color:var(--t-panel);
  border-color:var(--gold);
  font-weight:800;
 }
@@ -352,7 +352,7 @@ body.purple header{background:rgba(33,23,42,.92)}
  inset:0;
  background:linear-gradient(
  to top,
- rgba(5,17,12,.85),
+ color-mix(in srgb,var(--t-bg) 85%,transparent),
  transparent 75%
  );
 }
@@ -382,7 +382,7 @@ body.purple header{background:rgba(33,23,42,.92)}
 }
 
 .period{
- background:rgba(217,184,117,.12);
+ background:color-mix(in srgb,var(--t-acc) 12%,transparent);
  border:1px solid var(--border);
  color:var(--gold2);
  border-radius:20px;
@@ -410,7 +410,7 @@ body.purple header{background:rgba(33,23,42,.92)}
  border:1px solid var(--border);
  border-radius:12px;
  background:linear-gradient(135deg,var(--gold2),var(--gold));
- color:#19251c;
+ color:var(--t-panel);
  font-size:12px;
  font-weight:800;
  transition:.2s;
@@ -636,6 +636,8 @@ footer strong{
  *{scroll-behavior:auto!important;transition:none!important}
 }
 </style>
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
 </head>
 
 <body>
@@ -1181,6 +1183,5 @@ document.querySelectorAll(".filter").forEach(button=>{
 
 </script>
 
-<script src="app-shell.js" defer></script>
 </body>
 </html>

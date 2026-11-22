@@ -3,7 +3,7 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#081c20">
 <title>چیرۆکی پێغەمبەران | نوری ئیمان</title>
 
@@ -12,14 +12,14 @@
 
 <style>
 :root{
- --bg:#071a1e;
- --panel:#102a2d;
- --panel2:#163a37;
- --gold:#d6b46a;
- --gold2:#f0d99c;
+ --bg:var(--t-bg);
+ --panel:var(--t-panel);
+ --panel2:var(--t-panel);
+ --gold:var(--t-acc);
+ --gold2:var(--t-acc2);
  --text:#f6f1e6;
  --muted:#b0c1b9;
- --border:rgba(214,180,106,.23);
+ --border:color-mix(in srgb,var(--t-acc) 23%,transparent);
 }
 *{box-sizing:border-box}
 body{
@@ -27,15 +27,15 @@ body{
  color:var(--text);
  font-family:'Noto Sans Arabic',sans-serif;
  background:
- radial-gradient(ellipse at top,#164039 0%,transparent 50%),
- linear-gradient(145deg,#061619,#0b2529 60%,#07191c);
+ radial-gradient(ellipse at top,var(--t-panel) 0%,transparent 50%),
+ linear-gradient(145deg,var(--t-bg),var(--t-bg) 60%,var(--t-bg));
  min-height:100vh;
 }
 header{
  text-align:center;
  padding:28px 15px 22px;
  border-bottom:1px solid var(--border);
- background:linear-gradient(135deg,#102f2d,#071b20);
+ background:linear-gradient(135deg,var(--t-panel),var(--t-bg));
 }
 .logo{
  width:60px;height:60px;
@@ -56,7 +56,7 @@ header p{color:var(--muted);font-size:13px;margin:0}
 .intro{
  text-align:center;
  padding:22px 16px;
- background:linear-gradient(135deg,#153c35,#0c2428);
+ background:linear-gradient(135deg,var(--t-panel),var(--t-bg));
  border:1px solid var(--border);
  border-radius:19px;
  margin-bottom:18px;
@@ -74,7 +74,7 @@ header p{color:var(--muted);font-size:13px;margin:0}
 .search-box input{
  width:100%;
  padding:13px;
- background:#091f22;
+ background:var(--t-bg);
  color:white;
  border:1px solid var(--border);
  border-radius:11px;
@@ -95,14 +95,14 @@ header p{color:var(--muted);font-size:13px;margin:0}
  padding:9px 15px;
  border:1px solid var(--border);
  border-radius:20px;
- background:#102a2d;
+ background:var(--t-panel);
  color:var(--muted);
  font-family:inherit;
  font-size:12px;
  cursor:pointer;
 }
 .filter.active{
- color:#14251e;
+ color:var(--t-panel);
  background:var(--gold);
  border-color:var(--gold);
  font-weight:800;
@@ -119,7 +119,7 @@ header p{color:var(--muted);font-size:13px;margin:0}
 }
 .prophet-card{
  min-width:0;
- background:linear-gradient(145deg,#123230,#0d2528);
+ background:linear-gradient(145deg,var(--t-panel),var(--t-bg));
  border:1px solid var(--border);
  border-radius:17px;
  padding:16px;
@@ -165,7 +165,7 @@ header p{color:var(--muted);font-size:13px;margin:0}
 }
 .reference{
  color:var(--gold2);
- background:rgba(214,180,106,.08);
+ background:color-mix(in srgb,var(--t-acc) 8%,transparent);
  border-radius:9px;
  padding:9px 10px;
  font-size:11px;
@@ -177,8 +177,8 @@ header p{color:var(--muted);font-size:13px;margin:0}
  padding:11px;
  border:1px solid var(--gold);
  border-radius:11px;
- background:linear-gradient(135deg,#b8954e,#e0c47d);
- color:#17251e;
+ background:linear-gradient(135deg,var(--t-acc),var(--t-acc));
+ color:var(--t-panel);
  font-family:inherit;
  font-size:12px;
  font-weight:800;
@@ -207,7 +207,7 @@ header p{color:var(--muted);font-size:13px;margin:0}
  max-width:720px;
  max-height:90vh;
  overflow-y:auto;
- background:#102a2d;
+ background:var(--t-panel);
  border:1px solid var(--gold);
  border-radius:19px;
  padding:20px;
@@ -220,7 +220,7 @@ header p{color:var(--muted);font-size:13px;margin:0}
  width:36px;height:36px;
  border:1px solid var(--border);
  border-radius:10px;
- background:#173a39;
+ background:var(--t-panel);
  color:var(--gold2);
  font-size:19px;
  cursor:pointer;
@@ -249,11 +249,11 @@ header p{color:var(--muted);font-size:13px;margin:0}
  white-space:pre-line;
 }
 .lesson{
- background:rgba(214,180,106,.08);
+ background:color-mix(in srgb,var(--t-acc) 8%,transparent);
  border:1px solid var(--border);
  border-radius:13px;
  padding:13px;
- color:#f1e5c8;
+ color:var(--t-acc2);
  font-size:13px;
  line-height:2;
 }
@@ -289,6 +289,8 @@ footer{text-align:center;color:#849a91;font-size:11px;padding:15px}
  .modal-title{font-size:21px}
 }
 </style>
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
 </head>
 
 <body>
@@ -669,6 +671,5 @@ document.querySelectorAll(".filter").forEach(button=>{
 render();
 </script>
 
-<script src="app-shell.js" defer></script>
 </body>
 </html>

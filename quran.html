@@ -3,7 +3,7 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#071f1b">
 <title>قورئانی پیرۆز | نوری ئیمان</title>
 
@@ -11,27 +11,27 @@
 
 <style>
 :root {
-  --bg:#071f1b;
-  --panel:#0c3028;
-  --card:#103b30;
-  --gold:#e6c477;
+  --bg:var(--t-bg);
+  --panel:var(--t-panel);
+  --card:var(--t-panel);
+  --gold:var(--t-acc);
   --text:#f7f2e6;
   --muted:#b5c9bd;
-  --border:rgba(230,196,119,.3);
-  --hover:#1a493b;
-  --button:#dcb766;
+  --border:color-mix(in srgb,var(--t-acc) 30%,transparent);
+  --hover:var(--t-card);
+  --button:var(--t-acc);
 }
 
 /* شێوازی شین */
 [data-theme="blue"] {
-  --bg:#081b2d;
-  --panel:#102b43;
-  --card:#163957;
+  --bg:var(--t-bg);
+  --panel:var(--t-panel);
+  --card:var(--t-card);
   --gold:#83c9ee;
   --text:#eff8ff;
   --muted:#b3c9dc;
   --border:rgba(131,201,238,.3);
-  --hover:#204b68;
+  --hover:var(--t-card);
   --button:#83c9ee;
 }
 
@@ -52,13 +52,13 @@
 [data-theme="light"] {
   --bg:#f3eee1;
   --panel:#fffaf0;
-  --card:#eee4cf;
-  --gold:#99702e;
-  --text:#28362e;
+  --card:var(--t-acc2);
+  --gold:var(--t-acc);
+  --text:var(--t-card);
   --muted:#6e796e;
-  --border:rgba(153,112,46,.3);
-  --hover:#e7dcc4;
-  --button:#d8bd83;
+  --border:color-mix(in srgb,var(--t-acc) 30%,transparent);
+  --hover:var(--t-acc2);
+  --button:var(--t-acc);
 }
 
 * {
@@ -86,7 +86,7 @@ header {
   text-align:center;
   padding:30px 15px 35px;
   background:
-    radial-gradient(ellipse at top,rgba(230,196,119,.12),transparent 65%),
+    radial-gradient(ellipse at top,color-mix(in srgb,var(--t-acc) 12%,transparent),transparent 65%),
     linear-gradient(145deg,var(--panel),var(--bg));
   border-bottom:1px solid var(--border);
 }
@@ -185,10 +185,10 @@ header p {
   border:3px solid var(--bg);
 }
 
-.theme-green {background:#174b3c}
+.theme-green {background:var(--t-card)}
 .theme-blue {background:#2475a5}
 .theme-purple {background:#70418b}
-.theme-light {background:#e8d5ae}
+.theme-light {background:var(--t-acc2)}
 
 /* Container */
 .container {
@@ -258,7 +258,7 @@ input::placeholder {
 
 .main-btn {
   background:var(--button);
-  color:#14251c;
+  color:var(--t-panel);
   border:1px solid var(--gold);
   border-radius:12px;
   padding:12px 20px;
@@ -321,7 +321,7 @@ input::placeholder {
 
 .surah-item.active {
   background:var(--button);
-  color:#14251c;
+  color:var(--t-panel);
   font-weight:bold;
 }
 
@@ -331,7 +331,7 @@ input::placeholder {
 }
 
 .surah-item.active small {
-  color:#263b2d;
+  color:var(--t-card);
 }
 
 .message {
@@ -346,7 +346,7 @@ input::placeholder {
   text-align:center;
   min-height:500px;
   background:
-    radial-gradient(ellipse at center,rgba(230,196,119,.05),transparent 70%),
+    radial-gradient(ellipse at center,color-mix(in srgb,var(--t-acc) 5%,transparent),transparent 70%),
     var(--panel);
 }
 
@@ -599,6 +599,8 @@ table{max-width:100%}
 <meta name="theme-color" content="#081c20">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
 </head>
 
 <body data-theme="green">
@@ -1016,6 +1018,5 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<script src="app-shell.js" defer></script>
 </body>
 </html>

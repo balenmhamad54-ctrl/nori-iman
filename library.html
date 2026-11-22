@@ -1,0 +1,860 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101329">
+<title>ڤیدیۆکان | نوری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+ --bg:#101329;
+ --card:#1c2140;
+ --purple:#9c83ff;
+ --purple2:#c3b4ff;
+ --white:#f8f8ff;
+ --muted:#a7abc4;
+ --line:rgba(174,155,255,.17);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+ min-height:100vh;
+ background:
+ radial-gradient(ellipse at 15% 0%,#49347a55,transparent 35%),
+ radial-gradient(ellipse at 90% 30%,#22568a30,transparent 35%),
+ var(--bg);
+ color:var(--white);
+ font-family:'Noto Sans Arabic',sans-serif;
+ overflow-x:hidden;
+}
+
+button,input{font-family:inherit}
+button{cursor:pointer}
+
+/* HEADER */
+
+.topbar{
+ height:76px;
+ padding:0 5%;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ background:#101329ef;
+ border-bottom:1px solid var(--line);
+ position:sticky;
+ top:0;
+ z-index:20;
+ backdrop-filter:blur(18px);
+}
+
+.logo{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ font-size:19px;
+ font-weight:800;
+}
+
+.logo-icon{
+ width:43px;height:43px;
+ display:grid;place-items:center;
+ border-radius:14px;
+ background:linear-gradient(145deg,#b5a3ff,#7052d5);
+ box-shadow:0 5px 20px #8c72ff55;
+}
+
+.back{
+ text-decoration:none;
+ color:var(--purple2);
+ border:1px solid var(--line);
+ border-radius:12px;
+ padding:10px 16px;
+ font-size:12px;
+ transition:.3s;
+}
+
+.back:hover{
+ background:#a18aff20;
+ border-color:var(--purple);
+}
+
+.container{
+ width:min(1120px,93%);
+ margin:auto;
+}
+
+/* HERO */
+
+.hero{
+ text-align:center;
+ padding:55px 15px 35px;
+}
+
+.hero-icon{
+ width:90px;height:90px;
+ margin:0 auto 20px;
+ border-radius:28px;
+ display:grid;place-items:center;
+ font-size:38px;
+ background:linear-gradient(145deg,#a88cff,#5543b8);
+ box-shadow:0 15px 45px #7658ff45;
+ animation:float 4s ease-in-out infinite;
+}
+
+.hero h1{
+ font-size:clamp(25px,5vw,40px);
+ font-weight:800;
+ background:linear-gradient(90deg,#fff,#c4b3ff,#83b9ff);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+}
+
+.hero p{
+ color:var(--muted);
+ max-width:580px;
+ margin:15px auto 23px;
+ font-size:13px;
+ line-height:2.3;
+}
+
+.hero-line{
+ width:90px;height:3px;
+ margin:auto;
+ border-radius:20px;
+ background:linear-gradient(90deg,#7c5cff,#67b4ff);
+}
+
+.stats{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:12px;
+ margin-top:25px;
+}
+
+.stat{
+ display:flex;
+ align-items:center;
+ gap:9px;
+ padding:11px 18px;
+ border:1px solid var(--line);
+ border-radius:14px;
+ background:#ffffff08;
+ color:var(--muted);
+ font-size:12px;
+}
+
+.stat i{color:var(--purple2)}
+.stat strong{color:white}
+
+/* SEARCH */
+
+.search-section{margin:15px 0 30px}
+
+.search-box{
+ position:relative;
+ max-width:650px;
+ margin:auto;
+}
+
+.search-box i{
+ position:absolute;
+ right:18px;
+ top:50%;
+ transform:translateY(-50%);
+ color:var(--purple2);
+ font-size:16px;
+}
+
+.search-box input{
+ width:100%;
+ padding:16px 48px 16px 16px;
+ border-radius:16px;
+ border:1px solid var(--line);
+ background:#1b2040;
+ color:white;
+ outline:none;
+ font-size:13px;
+ transition:.3s;
+}
+
+.search-box input:focus{
+ border-color:var(--purple);
+ box-shadow:0 0 0 4px #9c83ff18;
+}
+
+.search-box input::placeholder{color:#858aa9}
+
+/* SECTION */
+
+.section-head{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ margin:25px 0 20px;
+}
+
+.section-head h2{font-size:17px;color:#eeeaff}
+.section-head h2 i{color:var(--purple2);margin-left:8px}
+
+.count{
+ font-size:11px;
+ color:var(--muted);
+ padding:7px 12px;
+ border:1px solid var(--line);
+ border-radius:20px;
+}
+
+/* VIDEO CARDS */
+
+.video-grid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:24px;
+ margin-bottom:40px;
+}
+
+.video-card{
+ min-width:0;
+ overflow:hidden;
+ border-radius:22px;
+ background:linear-gradient(150deg,#222747,#191d38);
+ border:1px solid var(--line);
+ transition:.35s;
+ animation:appear .5s ease both;
+}
+
+.video-card:hover{
+ transform:translateY(-5px);
+ border-color:#a18aff88;
+ box-shadow:0 18px 45px #0005;
+}
+
+/* VERTICAL VIDEO COVER - 9:16 */
+
+.cover{
+ width:min(100%,420px);
+ aspect-ratio:9 / 16;
+ position:relative;
+ overflow:hidden;
+ display:block;
+ margin:0 auto;
+ background:#080a18;
+ border-radius:12px;
+}
+
+.cover iframe{
+ width:100%;
+ height:100%;
+ display:block;
+ border:0;
+ background:#080a18;
+}
+
+/* VIDEO LABEL */
+
+.cover-overlay{
+ position:absolute;
+ top:10px;
+ right:10px;
+ z-index:5;
+ padding:6px 11px;
+ border-radius:20px;
+ background:#101329e8;
+ color:#d9d0ff;
+ font-size:10px;
+ pointer-events:none;
+ border:1px solid #ffffff20;
+}
+
+/* CONTENT */
+
+.card-content{padding:17px}
+
+.card-content h3{
+ color:#eeeaff;
+ font-size:14px;
+ line-height:2;
+ margin-bottom:8px;
+}
+
+.card-content p{
+ color:var(--muted);
+ font-size:11px;
+ line-height:2.1;
+ min-height:44px;
+ overflow-wrap:anywhere;
+}
+
+.card-footer{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:8px;
+ border-top:1px solid #ffffff10;
+ margin-top:15px;
+ padding-top:13px;
+}
+
+.source{
+ color:#83aaff;
+ font-size:10px;
+ display:flex;
+ align-items:center;
+ gap:6px;
+}
+
+.watch{
+ border:0;
+ border-radius:11px;
+ padding:10px 15px;
+ color:white;
+ background:linear-gradient(135deg,#967aff,#6350c6);
+ font-size:11px;
+ font-weight:700;
+ transition:.3s;
+}
+
+.watch:hover{
+ box-shadow:0 5px 20px #8c72ff55;
+ transform:scale(1.04);
+}
+
+/* EMPTY */
+
+.empty{
+ grid-column:1/-1;
+ padding:55px 15px;
+ text-align:center;
+ border-radius:20px;
+ background:var(--card);
+ border:1px dashed var(--line);
+}
+
+.empty i{
+ font-size:40px;
+ color:var(--purple2);
+ margin-bottom:15px;
+}
+
+.empty h3{font-size:15px;margin-bottom:9px}
+.empty p{color:var(--muted);font-size:12px;line-height:2}
+
+/* MODAL */
+
+.modal{
+ position:fixed;
+ inset:0;
+ z-index:100;
+ display:none;
+ justify-content:center;
+ align-items:center;
+ padding:12px;
+ background:#070817ed;
+ backdrop-filter:blur(12px);
+}
+
+.modal.show{
+ display:flex;
+ animation:fade .25s ease;
+}
+
+.modal-box{
+ width:min(540px,100%);
+ max-height:96vh;
+ background:#1a1e39;
+ border:1px solid #a18aff55;
+ border-radius:20px;
+ overflow:hidden;
+ box-shadow:0 25px 90px #0009;
+ animation:zoom .3s ease;
+ display:flex;
+ flex-direction:column;
+}
+
+.modal-head{
+ flex-shrink:0;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ padding:12px 16px;
+}
+
+.modal-head h3{
+ font-size:13px;
+ color:#e7e0ff;
+ line-height:2;
+}
+
+.close{
+ width:38px;height:38px;
+ flex-shrink:0;
+ border:1px solid var(--line);
+ border-radius:11px;
+ background:#303554;
+ color:white;
+ font-size:17px;
+}
+
+.close:hover{background:#9a4545}
+
+/* LARGE VERTICAL PLAYER */
+
+.player{
+ height:min(70vh,760px);
+ width:auto;
+ max-width:100%;
+ aspect-ratio:9 / 16;
+ margin:0 auto;
+ background:#050505;
+ overflow:hidden;
+}
+
+.player iframe{
+ width:100%;
+ height:100%;
+ display:block;
+ border:0;
+ background:#050505;
+}
+
+.modal-footer{
+ flex-shrink:0;
+ padding:11px 18px;
+ display:flex;
+ justify-content:space-between;
+ color:var(--muted);
+ font-size:11px;
+}
+
+.modal-footer i{color:var(--purple2);margin-left:6px}
+
+/* FOOTER */
+
+.footer{
+ text-align:center;
+ padding:30px 15px;
+ border-top:1px solid var(--line);
+ background:#0c1024;
+ color:var(--muted);
+ font-size:12px;
+ line-height:2.2;
+}
+
+.footer strong{
+ display:block;
+ font-size:21px;
+ color:#c3b4ff;
+ margin-bottom:5px;
+}
+
+/* ANIMATIONS */
+
+@keyframes float{50%{transform:translateY(-9px)}}
+
+@keyframes appear{
+ from{opacity:0;transform:translateY(18px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+@keyframes zoom{
+ from{transform:scale(.96)}
+ to{transform:scale(1)}
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+ .video-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+ }
+}
+
+@media(max-width:550px){
+ .topbar{height:65px;padding:0 4%}
+ .logo{font-size:16px}
+ .logo-icon{width:38px;height:38px}
+ .back{font-size:11px;padding:9px 12px}
+ .container{width:92%}
+ .hero{padding:37px 8px 28px}
+ .hero-icon{width:73px;height:73px;border-radius:23px;font-size:30px}
+ .hero p{font-size:12px}
+
+ .video-grid{
+  grid-template-columns:1fr;
+  gap:17px;
+ }
+
+ .cover{
+  width:min(100%,390px);
+  aspect-ratio:9 / 16;
+ }
+
+ .card-content{padding:15px}
+ .section-head h2{font-size:14px}
+
+ .modal{padding:5px}
+
+ .modal-box{
+  width:min(100%,430px);
+  max-height:98vh;
+  border-radius:14px;
+ }
+
+ .modal-head{padding:9px 12px}
+
+ .player{
+  height:min(74vh,680px);
+  max-width:100%;
+  aspect-ratio:9 / 16;
+ }
+
+ .modal-footer{font-size:10px;padding:9px 12px}
+}
+
+@media(max-width:360px){
+ .cover{width:100%}
+ .player{height:68vh}
+ .watch{padding:9px 11px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{
+  animation:none!important;
+  transition:none!important;
+ }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+ <div class="logo">
+  <div class="logo-icon">
+   <i class="fa-solid fa-moon"></i>
+  </div>
+  نوری ئیمان
+ </div>
+
+ <a href="index.html" class="back">
+  <i class="fa-solid fa-arrow-right"></i>
+  گەڕانەوە
+ </a>
+</header>
+
+<section class="hero">
+ <div class="hero-icon">
+  <i class="fa-brands fa-facebook-f"></i>
+ </div>
+
+ <h1>کتێبخانەی ڤیدیۆ</h1>
+ <div class="hero-line"></div>
+
+ <p>
+  کۆمەڵێک ڤیدیۆی بەسوود و فێرکاری لە فەیسبووک.
+  لێرەوە بە ئاسانی ڤیدیۆکان ببینە و سوود لە کاتەکانت وەربگرە.
+ </p>
+
+ <div class="stats">
+  <div class="stat">
+   <i class="fa-solid fa-circle-play"></i>
+   کۆی ڤیدیۆکان:
+   <strong id="totalVideos">٠</strong>
+  </div>
+
+  <div class="stat">
+   <i class="fa-brands fa-facebook"></i>
+   سەرچاوە: Facebook
+  </div>
+ </div>
+</section>
+
+<main class="container">
+
+ <div class="search-section">
+  <div class="search-box">
+   <i class="fa-solid fa-magnifying-glass"></i>
+   <input id="search" type="search"
+    placeholder="گەڕان بە ناوی ڤیدیۆ..."
+    autocomplete="off">
+  </div>
+ </div>
+
+ <div class="section-head">
+  <h2>
+   <i class="fa-solid fa-clapperboard"></i>
+   هەموو ڤیدیۆکان
+  </h2>
+  <span class="count" id="resultCount">٠ ڤیدیۆ</span>
+ </div>
+
+ <div class="video-grid" id="videoGrid"></div>
+</main>
+
+<footer class="footer">
+ <strong>نوری ئیمان</strong>
+ بە زانست، دڵ ڕووناک بکەوە
+ <p>کتێبخانەی ڤیدیۆی فەیسبووک 🤍</p>
+</footer>
+
+<!-- VIDEO MODAL -->
+
+<div class="modal" id="videoModal">
+ <div class="modal-box">
+
+  <div class="modal-head">
+   <h3 id="modalTitle">بینینی ڤیدیۆ</h3>
+
+   <button class="close" id="closeModal" aria-label="داخستن">
+    <i class="fa-solid fa-xmark"></i>
+   </button>
+  </div>
+
+  <div class="player" id="player"></div>
+
+  <div class="modal-footer">
+   <span><i class="fa-solid fa-moon"></i> نوری ئیمان</span>
+   <span>Facebook Video</span>
+  </div>
+
+ </div>
+</div>
+
+<script>
+
+/* =====================================
+   بەشی تایبەت بە بەڕێوەبەر
+   تەنها لێرە ڤیدیۆ زیاد بکە
+===================================== */
+
+const videos = [
+
+ {
+  id:1,
+  title:"حاجی خالید",
+  description:"قۆناغبەندی مرۆڤ لە سکی دایکیدا",
+  url:"https://www.facebook.com/reel/1456432329186210"
+ },
+
+ {
+  id:2,
+  title:"حاجی خالید",
+  description:"ئیعجازی ڕێگەی قوڵ لە قورئانی پیرۆزدا؟",
+  url:"https://www.facebook.com/reel/1627111689092729"
+ },
+
+ {
+  id:3,
+  title:"حاجی خالید",
+  description:"ئایا وشەی (يقلب) بەڵگەی گۆیی بوونی زەوییە؟",
+  url:"https://www.facebook.com/reel/974398742348413"
+ },
+
+{
+  id:4,
+  title:"هەشت بەڵگەی فیزیایی",
+  description:"بۆ تاکوتەنیایی پەروەردگار",
+  url:"https://www.facebook.com/reel/1017400484570218"
+ }
+
+
+
+
+];
+
+/* =====================================
+   کۆتایی بەشی بەڕێوەبەر
+===================================== */
+
+const $ = id => document.getElementById(id);
+
+function digits(number){
+ return String(number).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+}
+
+function validFacebookUrl(value){
+ try{
+  const url = new URL(value);
+  const host = url.hostname.toLowerCase().replace(/^www\./,"");
+
+  return url.protocol === "https:" &&
+   (
+    host === "facebook.com" ||
+    host === "m.facebook.com" ||
+    host === "fb.watch"
+   );
+ }catch(e){
+  return false;
+ }
+}
+
+/* FACEBOOK EMBED */
+
+function facebookEmbedUrl(videoUrl){
+ return "https://www.facebook.com/plugins/video.php?href=" +
+  encodeURIComponent(videoUrl) +
+  "&show_text=false&width=420";
+}
+
+/* CREATE VIDEO CARD */
+
+function createCard(video,index){
+
+ const card = document.createElement("article");
+ card.className = "video-card";
+ card.style.animationDelay = (index * .07) + "s";
+
+ const cover = document.createElement("div");
+ cover.className = "cover";
+
+ const iframe = document.createElement("iframe");
+ iframe.src = facebookEmbedUrl(video.url);
+ iframe.title = video.title;
+ iframe.allow = "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
+ iframe.allowFullscreen = true;
+ iframe.loading = "lazy";
+ iframe.referrerPolicy = "strict-origin-when-cross-origin";
+
+ cover.appendChild(iframe);
+
+ const label = document.createElement("span");
+ label.className = "cover-overlay";
+ label.textContent = "Facebook Video";
+ cover.appendChild(label);
+
+ const content = document.createElement("div");
+ content.className = "card-content";
+
+ const title = document.createElement("h3");
+ title.textContent = video.title;
+
+ const description = document.createElement("p");
+ description.textContent =
+  video.description || "ڤیدیۆیەکی بەسوود لە کتێبخانەی نوری ئیمان.";
+
+ const footer = document.createElement("div");
+ footer.className = "card-footer";
+
+ const source = document.createElement("span");
+ source.className = "source";
+ source.innerHTML = '<i class="fa-brands fa-facebook"></i> فەیسبووک';
+
+ const button = document.createElement("button");
+ button.className = "watch";
+ button.innerHTML = '<i class="fa-solid fa-expand"></i> بینینی گەورە';
+ button.onclick = () => playVideo(video.id);
+
+ footer.append(source,button);
+ content.append(title,description,footer);
+ card.append(cover,content);
+
+ return card;
+}
+
+/* RENDER */
+
+function render(){
+
+ const query = $("search").value.trim().toLowerCase();
+
+ const filtered = videos.filter(video=>{
+  return (
+   video.title + " " + (video.description || "")
+  ).toLowerCase().includes(query);
+ });
+
+ const grid = $("videoGrid");
+ grid.replaceChildren();
+
+ $("totalVideos").textContent = digits(videos.length);
+ $("resultCount").textContent = digits(filtered.length) + " ڤیدیۆ";
+
+ if(!filtered.length){
+  const empty = document.createElement("div");
+  empty.className = "empty";
+
+  const icon = document.createElement("i");
+  icon.className = "fa-solid fa-video-slash";
+
+  const title = document.createElement("h3");
+  title.textContent = "هیچ ڤیدیۆیەک نەدۆزرایەوە";
+
+  const text = document.createElement("p");
+  text.textContent = "تکایە ناوی ڤیدیۆیەکی تر بگەڕێ.";
+
+  empty.append(icon,title,text);
+  grid.append(empty);
+  return;
+ }
+
+ filtered.forEach((video,index)=>{
+  grid.append(createCard(video,index));
+ });
+}
+
+/* OPEN VIDEO */
+
+function playVideo(id){
+
+ const video = videos.find(item=>item.id===id);
+ if(!video) return;
+
+ if(!validFacebookUrl(video.url)){
+  alert("لینکی فەیسبووک دروست نییە. تکایە لینکەکە بپشکنە.");
+  return;
+ }
+
+ $("modalTitle").textContent = video.title;
+
+ const iframe = document.createElement("iframe");
+ iframe.src = facebookEmbedUrl(video.url) + "&autoplay=true";
+ iframe.title = video.title;
+ iframe.allow = "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
+ iframe.allowFullscreen = true;
+ iframe.loading = "eager";
+ iframe.referrerPolicy = "strict-origin-when-cross-origin";
+
+ $("player").replaceChildren(iframe);
+ $("videoModal").classList.add("show");
+ document.body.style.overflow = "hidden";
+}
+
+/* CLOSE */
+
+function closeVideo(){
+ $("videoModal").classList.remove("show");
+ $("player").replaceChildren();
+ document.body.style.overflow = "";
+}
+
+$("closeModal").onclick = closeVideo;
+
+$("videoModal").onclick = function(event){
+ if(event.target===this) closeVideo();
+};
+
+document.addEventListener("keydown",event=>{
+ if(event.key==="Escape") closeVideo();
+});
+
+$("search").addEventListener("input",render);
+
+render();
+
+</script>
+</body>
+</html>

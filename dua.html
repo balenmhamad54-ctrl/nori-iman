@@ -3,7 +3,7 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>دوعا و زیکر | نوری ئیمان</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,25 +12,25 @@
 :root {
   --bg: #f8f7f1;
   --card: #fffefa;
-  --text: #102d2d;
+  --text: var(--t-panel);
   --muted: #617572;
-  --green: #075c55;
-  --deep: #032c2e;
-  --gold: #e6bd68;
-  --border: #e9e1d0;
+  --green: var(--t-card);
+  --deep: var(--t-bg);
+  --gold: var(--t-acc);
+  --border: var(--t-acc2);
   --soft: #e5efe8;
 }
 
 body.dark {
-  --bg: #07191b;
-  --card: #102729;
+  --bg: var(--t-bg);
+  --card: var(--t-panel);
   --text: #f4f2e8;
   --muted: #bdcbc5;
   --green: #3bc2a4;
-  --deep: #021314;
-  --gold: #edc978;
-  --border: #294545;
-  --soft: #193a38;
+  --deep: var(--t-bg);
+  --gold: var(--t-acc);
+  --border: var(--t-card);
+  --soft: var(--t-panel);
 }
 
 * {
@@ -117,7 +117,7 @@ button {
 .nav-links a.active {
   color: var(--gold);
   background: #ffffff12;
-  border: 1px solid #b9964c88;
+  border: 1px solid color-mix(in srgb,var(--t-acc) 53%,transparent);
 }
 
 .theme-btn {
@@ -139,9 +139,9 @@ button {
   display: flex;
   align-items: center;
   background:
-    radial-gradient(ellipse at 15% 20%, #d5b06433, transparent 30%),
-    radial-gradient(ellipse at 80% 90%, #218d7c55, transparent 40%),
-    linear-gradient(115deg, #031d25, #07554f 65%, #092e30);
+    radial-gradient(ellipse at 15% 20%, color-mix(in srgb,var(--t-acc) 20%,transparent), transparent 30%),
+    radial-gradient(ellipse at 80% 90%, color-mix(in srgb,var(--t-card) 33%,transparent), transparent 40%),
+    linear-gradient(115deg, var(--t-bg), var(--t-card) 65%, var(--t-panel));
   color: white;
   border-bottom: 5px solid var(--gold);
 }
@@ -152,7 +152,7 @@ button {
   left: 8%;
   top: -55px;
   font-size: 180px;
-  color: #f2d58b;
+  color: var(--t-acc2);
   opacity: .14;
 }
 
@@ -274,7 +274,7 @@ button {
   border-radius: 27px;
   padding: 25px 22px;
   text-align: center;
-  box-shadow: 0 7px 22px #173d3010;
+  box-shadow: 0 7px 22px color-mix(in srgb,var(--t-panel) 6%,transparent);
   transition: transform .25s, border-color .25s;
 }
 
@@ -334,7 +334,7 @@ button {
 .meaning-label {
   display: inline-block;
   background: var(--gold);
-  color: #26352b;
+  color: var(--t-card);
   border-radius: 25px;
   padding: 2px 13px;
   font-size: 12px;
@@ -390,8 +390,8 @@ button {
   border: 2px solid var(--gold);
   border-radius: 24px;
   background:
-    radial-gradient(ellipse at 5% 100%, #22836f66, transparent 38%),
-    linear-gradient(100deg, #032e30, #07544e);
+    radial-gradient(ellipse at 5% 100%, color-mix(in srgb,var(--t-card) 40%,transparent), transparent 38%),
+    linear-gradient(100deg, var(--t-bg), var(--t-card));
   color: white;
   overflow: hidden;
 }
@@ -446,7 +446,7 @@ footer {
 
 .back-top {
   color: var(--gold);
-  border: 1px solid #d6ad5c88;
+  border: 1px solid color-mix(in srgb,var(--t-acc) 53%,transparent);
   border-radius: 10px;
   padding: 5px 12px;
   font-size: 13px;
@@ -551,6 +551,8 @@ footer {
 <meta name="theme-color" content="#081c20">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
 </head>
 
 <body id="top">
@@ -567,9 +569,9 @@ footer {
       <a href="namaz.html">نوێژ</a>
       <a href="prayer-types.html">جۆرەکانی نوێژ</a>
       <a class="active" href="dua.html">دوعا و زیکر</a>
-      <a href="website.html#zakat">زەکات</a>
-      <a href="website.html#names">ناوەکان</a>
-      <a href="website.html#society">زمان و کۆمەڵگا</a>
+      <a href="index.html#zakat">زەکات</a>
+      <a href="index.html#names">ناوەکان</a>
+      <a href="index.html#society">زمان و کۆمەڵگا</a>
     </div>
 
     <button class="theme-btn" id="themeToggle" type="button">
@@ -738,15 +740,15 @@ footer {
   gap: 12px;
   padding: 13px 25px;
   margin: 25px 0;
-  border: 1px solid #e8c675;
+  border: 1px solid var(--t-acc);
   border-radius: 16px;
-  background: linear-gradient(135deg, #064e48, #032c2e);
+  background: linear-gradient(135deg, var(--t-panel), var(--t-bg));
   color: #fffdf5;
   font-family: "Noto Sans Arabic", sans-serif;
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 7px 20px #003b3026;
+  box-shadow: 0 7px 20px color-mix(in srgb,var(--t-panel) 15%,transparent);
   transition: all .3s ease;
   position: relative;
   overflow: hidden;
@@ -754,9 +756,9 @@ footer {
 
 .home-back-btn:hover {
   transform: translateY(-4px);
-  background: linear-gradient(135deg, #087568, #06433e);
-  box-shadow: 0 12px 25px #003b3040;
-  color: #ffe4a0;
+  background: linear-gradient(135deg, var(--t-card), var(--t-panel));
+  box-shadow: 0 12px 25px color-mix(in srgb,var(--t-panel) 25%,transparent);
+  color: var(--t-acc2);
 }
 
 .home-back-btn .home-icon {
@@ -765,14 +767,14 @@ footer {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 1px solid #e8c675;
+  border: 1px solid var(--t-acc);
   background: #ffffff12;
-  color: #f5d17c;
+  color: var(--t-acc2);
   font-size: 21px;
 }
 
 .home-back-btn .home-arrow {
-  color: #f5d17c;
+  color: var(--t-acc2);
   font-size: 20px;
   transition: transform .3s ease;
 }
@@ -927,6 +929,5 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<script src="app-shell.js" defer></script>
 </body>
 </html>

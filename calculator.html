@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#081c20">
+<title>ژمێرەر | نووری ئیمان</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ font-family:'Noto Sans Arabic',sans-serif;
+ background:
+ radial-gradient(circle at 10% 10%,#174a3c 0,transparent 35%),
+ radial-gradient(circle at 90% 90%,#3c321b 0,transparent 30%),
+ #07191d;
+ color:#fff;
+ min-height:100vh;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ overflow-x:hidden;
+}
+.header{
+ width:100%;padding:20px;
+ display:flex;justify-content:space-between;
+ align-items:center;max-width:600px;
+}
+.brand{color:#e5c477;font-size:17px;font-weight:800}
+.back{
+ text-decoration:none;color:#e5c477;
+ border:1px solid #e5c47755;
+ padding:8px 13px;border-radius:12px;font-size:12px;
+}
+.main{
+ width:100%;max-width:420px;padding:10px 15px 35px;
+}
+.heading{text-align:center;margin:12px 0 22px}
+.heading .symbol{font-size:35px;color:#e5c477}
+.heading h1{font-size:25px;color:#e5c477;margin:5px 0}
+.heading p{font-size:12px;color:#a9bdb4}
+.calculator{
+ background:linear-gradient(145deg,#153a34dd,#10272beF);
+ border:1px solid #e5c47750;
+ border-radius:28px;padding:20px;
+ box-shadow:0 20px 70px #0007, inset 0 1px #ffffff15;
+}
+.display{
+ min-height:135px;
+ background:#061b1c;
+ border:1px solid #ffffff12;
+ border-radius:19px;
+ padding:17px;
+ display:flex;flex-direction:column;
+ justify-content:flex-end;align-items:flex-end;
+ margin-bottom:18px;overflow:hidden;
+}
+.previous{
+ min-height:25px;color:#94aaa0;
+ font-size:14px;word-break:break-all;
+}
+.current{
+ color:#fff;font-size:38px;font-weight:700;
+ direction:ltr;text-align:right;
+ width:100%;word-break:break-all;
+}
+.keys{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:10px;direction:ltr;
+}
+.key{
+ height:67px;border:1px solid #ffffff12;
+ border-radius:17px;background:#ffffff0c;
+ color:#fff;font-size:21px;font-weight:600;
+ cursor:pointer;transition:.18s;
+ box-shadow:0 4px 8px #0002;
+}
+.key:hover{background:#ffffff20;transform:translateY(-2px)}
+.key:active{transform:scale(.94)}
+.operator{
+ color:#e5c477;background:#e5c47713;
+ border-color:#e5c47725;
+}
+.special{
+ color:#e5c477;background:#26473c;
+}
+.equal{
+ background:linear-gradient(140deg,#e8cb82,#b68c40);
+ color:#172820;border:0;
+ font-size:25px;
+}
+.zero{grid-column:span 2}
+.history{
+ margin-top:17px;
+ background:#ffffff08;border:1px solid #ffffff13;
+ padding:13px;border-radius:14px;
+}
+.history-title{
+ display:flex;justify-content:space-between;
+ color:#e5c477;font-size:12px;margin-bottom:9px;
+}
+.history-title button{
+ color:#aabbb4;background:none;border:0;
+ font-family:inherit;cursor:pointer;font-size:11px;
+}
+.history-list{
+ display:flex;flex-direction:column;gap:6px;
+ max-height:120px;overflow:auto;
+}
+.history-item{
+ display:flex;justify-content:space-between;
+ font-size:12px;color:#c6d2ca;
+ padding:6px;border-bottom:1px solid #ffffff0c;
+ direction:ltr;
+}
+.history-item strong{color:#e5c477}
+.footer{
+ color:#80968d;font-size:11px;
+ text-align:center;padding:20px;
+}
+@media(max-width:380px){
+ .main{padding:8px 10px 25px}
+ .calculator{padding:14px}
+ .key{height:59px;font-size:19px;border-radius:14px}
+ .current{font-size:32px}
+ .keys{gap:8px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+ <div class="brand">۞ نووری ئیمان</div>
+ <a href="index.html" class="back">↩ گەڕانەوە</a>
+</header>
+
+<main class="main">
+ <div class="heading">
+  <div class="symbol">✧</div>
+  <h1>ژمێرەری زیرەک</h1>
+  <p>ژمێریاری بە شێوازێکی جوان و ئاسان</p>
+ </div>
+
+ <section class="calculator">
+  <div class="display">
+   <div class="previous" id="previous"></div>
+   <div class="current" id="current">0</div>
+  </div>
+
+  <div class="keys">
+   <button class="key special" data-action="clear">AC</button>
+   <button class="key special" data-action="sign">+/−</button>
+   <button class="key special" data-action="percent">%</button>
+   <button class="key operator" data-action="operator" data-value="÷">÷</button>
+
+   <button class="key" data-number="7">7</button>
+   <button class="key" data-number="8">8</button>
+   <button class="key" data-number="9">9</button>
+   <button class="key operator" data-action="operator" data-value="×">×</button>
+
+   <button class="key" data-number="4">4</button>
+   <button class="key" data-number="5">5</button>
+   <button class="key" data-number="6">6</button>
+   <button class="key operator" data-action="operator" data-value="−">−</button>
+
+   <button class="key" data-number="1">1</button>
+   <button class="key" data-number="2">2</button>
+   <button class="key" data-number="3">3</button>
+   <button class="key operator" data-action="operator" data-value="+">+</button>
+
+   <button class="key zero" data-number="0">0</button>
+   <button class="key" data-action="decimal">.</button>
+   <button class="key equal" data-action="equals">=</button>
+  </div>
+
+  <div class="history">
+   <div class="history-title">
+    <span>🕘 مێژووی ژمێریاری</span>
+    <button id="clearHistory">پاککردنەوە</button>
+   </div>
+   <div class="history-list" id="history"></div>
+  </div>
+ </section>
+</main>
+
+<footer class="footer">
+ نووری ئیمان ۞ بە زانست، دڵ ڕووناک بکەوە
+</footer>
+
+<script>
+const current=document.getElementById("current");
+const previous=document.getElementById("previous");
+const historyBox=document.getElementById("history");
+
+let display="0";
+let first=null;
+let operator=null;
+let waiting=false;
+let expression="";
+let history=[];
+
+function update(){
+ current.textContent=display;
+ previous.textContent=expression;
+}
+
+function number(n){
+ if(display==="0"||waiting){
+  display=n;
+  waiting=false;
+ }else if(display.replace("-","").replace(".","").length<14){
+  display+=n;
+ }
+ update();
+}
+
+function decimal(){
+ if(waiting){
+  display="0.";
+  waiting=false;
+ }else if(!display.includes(".")){
+  display+=".";
+ }
+ update();
+}
+
+function chooseOperator(op){
+ const value=Number(display);
+ if(operator && !waiting){
+  calculate();
+ }
+ first=Number(display);
+ operator=op;
+ waiting=true;
+ expression=first+" "+op;
+ update();
+}
+
+function calculate(){
+ if(operator===null||first===null)return;
+ const second=Number(display);
+ let result;
+
+ switch(operator){
+  case "+":result=first+second;break;
+  case "−":result=first-second;break;
+  case "×":result=first*second;break;
+  case "÷":
+   if(second===0){
+    display="ناتوانرێت";
+    first=null;operator=null;waiting=true;
+    expression="دابەشکردن بە سفر";
+    update();return;
+   }
+   result=first/second;break;
+ }
+
+ if(!Number.isFinite(result)){
+  display="هەڵە";
+ }else{
+  result=Number(result.toPrecision(12));
+  const old=first+" "+operator+" "+second;
+  display=String(result);
+  history.unshift({equation:old,result:display});
+  history=history.slice(0,10);
+  renderHistory();
+ }
+ expression="";
+ first=null;
+ operator=null;
+ waiting=true;
+ update();
+}
+
+function renderHistory(){
+ historyBox.innerHTML="";
+ history.forEach(item=>{
+  const row=document.createElement("div");
+  row.className="history-item";
+  const equation=document.createElement("span");
+  equation.textContent=item.equation+" =";
+  const result=document.createElement("strong");
+  result.textContent=item.result;
+  row.append(equation,result);
+  historyBox.append(row);
+ });
+}
+
+function clear(){
+ display="0";
+ first=null;operator=null;
+ waiting=false;expression="";
+ update();
+}
+
+function action(type,value){
+ switch(type){
+  case "clear":clear();break;
+  case "sign":
+   if(display!=="0"&&display!=="هەڵە"&&display!=="ناتوانرێت"){
+    display=String(-Number(display));
+   }
+   update();break;
+  case "percent":
+   display=String(Number(display)/100);
+   update();break;
+  case "decimal":decimal();break;
+  case "operator":chooseOperator(value);break;
+  case "equals":calculate();break;
+ }
+}
+
+document.querySelectorAll(".key").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  if(btn.dataset.number!==undefined){
+   if(!Number.isFinite(Number(display)))clear();
+   number(btn.dataset.number);
+  }else{
+   action(btn.dataset.action,btn.dataset.value);
+  }
+ });
+});
+
+document.getElementById("clearHistory").addEventListener("click",()=>{
+ history=[];
+ renderHistory();
+});
+
+document.addEventListener("keydown",e=>{
+ if(/^[0-9]$/.test(e.key)){
+  number(e.key);
+ }else if(e.key==="."){
+  decimal();
+ }else if(e.key==="+"){
+  chooseOperator("+");
+ }else if(e.key==="-"){
+  chooseOperator("−");
+ }else if(e.key==="*"){
+  chooseOperator("×");
+ }else if(e.key==="/"){
+  e.preventDefault();
+  chooseOperator("÷");
+ }else if(e.key==="Enter"||e.key==="="){
+  calculate();
+ }else if(e.key==="Escape"){
+  clear();
+ }else if(e.key==="Backspace"){
+  if(!waiting){
+   display=display.length>1?display.slice(0,-1):"0";
+   update();
+  }
+ }
+});
+</script>
+</body>
+</html>

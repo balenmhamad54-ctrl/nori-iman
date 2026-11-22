@@ -3,7 +3,7 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#081c20">
 <title>تاقیکردنەوەی ئیسلامی | نوری ئیمان</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,16 +11,16 @@
 
 <style>
 :root {
-  --bg:#061817;
-  --card:#102c29;
-  --card2:#163934;
-  --gold:#e2c47e;
-  --gold-light:#f4dfaa;
+  --bg:var(--t-bg);
+  --card:var(--t-panel);
+  --card2:var(--t-panel);
+  --gold:var(--t-acc);
+  --gold-light:var(--t-acc2);
   --text:#fffaf0;
   --muted:#a9bbb3;
   --green:#35b987;
   --red:#e47777;
-  --border:rgba(226,196,126,.22);
+  --border:color-mix(in srgb,var(--t-acc) 22%,transparent);
 }
 
 *{box-sizing:border-box}
@@ -34,9 +34,9 @@ body{
   color:var(--text);
   font-family:'Noto Sans Arabic',sans-serif;
   background:
-    radial-gradient(ellipse at top,rgba(42,112,86,.35),transparent 55%),
-    radial-gradient(circle at bottom left,rgba(226,196,126,.08),transparent 35%),
-    linear-gradient(145deg,#061817,#0a2421,#071a19);
+    radial-gradient(ellipse at top,color-mix(in srgb,var(--t-card) 35%,transparent),transparent 55%),
+    radial-gradient(circle at bottom left,color-mix(in srgb,var(--t-acc) 8%,transparent),transparent 35%),
+    linear-gradient(145deg,var(--t-bg),var(--t-bg),var(--t-bg));
   overflow-x:hidden;
 }
 
@@ -61,7 +61,7 @@ button{font-family:inherit}
   margin:0 0 20px auto;
   text-decoration:none;
   color:var(--gold);
-  background:linear-gradient(135deg,rgba(226,196,126,.13),rgba(226,196,126,.04));
+  background:linear-gradient(135deg,color-mix(in srgb,var(--t-acc) 13%,transparent),color-mix(in srgb,var(--t-acc) 4%,transparent));
   border:1px solid var(--border);
   border-radius:15px;
   font-size:13px;
@@ -70,7 +70,7 @@ button{font-family:inherit}
 }
 
 .back-home:hover{
-  background:rgba(226,196,126,.2);
+  background:color-mix(in srgb,var(--t-acc) 20%,transparent);
   border-color:var(--gold);
   transform:translateY(-3px);
 }
@@ -100,8 +100,8 @@ button{font-family:inherit}
   place-items:center;
   margin:0 auto 17px;
   border-radius:27px;
-  background:linear-gradient(145deg,rgba(226,196,126,.2),rgba(226,196,126,.04));
-  border:1px solid rgba(226,196,126,.45);
+  background:linear-gradient(145deg,color-mix(in srgb,var(--t-acc) 20%,transparent),color-mix(in srgb,var(--t-acc) 4%,transparent));
+  border:1px solid color-mix(in srgb,var(--t-acc) 45%,transparent);
   color:var(--gold);
   font-size:42px;
   box-shadow:0 12px 40px rgba(0,0,0,.3);
@@ -127,7 +127,7 @@ button{font-family:inherit}
   overflow:hidden;
   padding:30px;
   border-radius:30px;
-  background:linear-gradient(145deg,rgba(20,55,50,.96),rgba(9,32,30,.97));
+  background:linear-gradient(145deg,color-mix(in srgb,var(--t-panel) 96%,transparent),color-mix(in srgb,var(--t-bg) 97%,transparent));
   border:1px solid var(--border);
   box-shadow:0 25px 70px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.06);
   backdrop-filter:blur(20px);
@@ -158,9 +158,9 @@ button{font-family:inherit}
   place-items:center;
   margin:0 auto 22px;
   border-radius:35px;
-  background:radial-gradient(circle,rgba(226,196,126,.2),rgba(226,196,126,.035));
+  background:radial-gradient(circle,color-mix(in srgb,var(--t-acc) 20%,transparent),color-mix(in srgb,var(--t-acc) 4%,transparent));
   border:1px solid var(--border);
-  box-shadow:0 0 0 10px rgba(226,196,126,.025);
+  box-shadow:0 0 0 10px color-mix(in srgb,var(--t-acc) 2%,transparent);
 }
 
 .intro h2{
@@ -221,18 +221,18 @@ button{font-family:inherit}
   padding:15px 20px;
   border:1px solid rgba(255,255,255,.2);
   border-radius:18px;
-  background:linear-gradient(120deg,#f0d99e,#c4a35c);
-  color:#172c23;
+  background:linear-gradient(120deg,var(--t-acc2),var(--t-acc));
+  color:var(--t-panel);
   font-size:15px;
   font-weight:800;
   cursor:pointer;
-  box-shadow:0 10px 28px rgba(196,163,92,.18);
+  box-shadow:0 10px 28px color-mix(in srgb,var(--t-acc) 18%,transparent);
   transition:.25s;
 }
 
 .primary-btn:hover{
   transform:translateY(-3px);
-  box-shadow:0 15px 32px rgba(196,163,92,.27);
+  box-shadow:0 15px 32px color-mix(in srgb,var(--t-acc) 27%,transparent);
   filter:brightness(1.05);
 }
 
@@ -268,7 +268,7 @@ button{font-family:inherit}
 .progress{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,#b08b43,#f1d998);
+  background:linear-gradient(90deg,var(--t-acc),var(--t-acc2));
   border-radius:20px;
   transition:width .4s ease;
 }
@@ -277,8 +277,8 @@ button{font-family:inherit}
   display:inline-block;
   padding:8px 16px;
   border-radius:30px;
-  background:rgba(226,196,126,.11);
-  border:1px solid rgba(226,196,126,.22);
+  background:color-mix(in srgb,var(--t-acc) 11%,transparent);
+  border:1px solid color-mix(in srgb,var(--t-acc) 22%,transparent);
   color:var(--gold);
   font-size:12px;
   margin-bottom:18px;
@@ -317,7 +317,7 @@ button{font-family:inherit}
 }
 
 .option:hover:not(:disabled){
-  background:rgba(226,196,126,.09);
+  background:color-mix(in srgb,var(--t-acc) 9%,transparent);
   border-color:var(--gold);
   transform:translateX(-4px);
 }
@@ -329,7 +329,7 @@ button{font-family:inherit}
   display:grid;
   place-items:center;
   border-radius:13px;
-  background:rgba(226,196,126,.12);
+  background:color-mix(in srgb,var(--t-acc) 12%,transparent);
   color:var(--gold);
   font-size:12px;
   font-weight:800;
@@ -413,7 +413,7 @@ button{font-family:inherit}
   margin:10px auto 20px;
   border-radius:35px;
   font-size:58px;
-  background:rgba(226,196,126,.12);
+  background:color-mix(in srgb,var(--t-acc) 12%,transparent);
   border:1px solid var(--border);
 }
 
@@ -427,15 +427,15 @@ button{font-family:inherit}
   height:175px;
   margin:30px auto;
   border-radius:50%;
-  border:7px solid rgba(226,196,126,.3);
-  outline:1px solid rgba(226,196,126,.2);
+  border:7px solid color-mix(in srgb,var(--t-acc) 30%,transparent);
+  outline:1px solid color-mix(in srgb,var(--t-acc) 20%,transparent);
   outline-offset:7px;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:radial-gradient(circle,rgba(226,196,126,.12),transparent);
-  box-shadow:0 0 45px rgba(226,196,126,.12);
+  background:radial-gradient(circle,color-mix(in srgb,var(--t-acc) 12%,transparent),transparent);
+  box-shadow:0 0 45px color-mix(in srgb,var(--t-acc) 12%,transparent);
 }
 
 .score-circle strong{
@@ -569,6 +569,8 @@ button{font-family:inherit}
   }
 }
 </style>
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
 </head>
 
 <body>

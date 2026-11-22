@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#081c20">
+<meta name="description" content="فێربوونی مناسیک و هەنگاوەکانی حەج بە زمانی کوردی">
+<title>فێربوونی حەج | نوری ئیمان</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+ --bg:#071c20;
+ --surface:#102b2e;
+ --surface2:#163638;
+ --gold:#dfbd70;
+ --gold2:#f6dfa3;
+ --green:#50bd91;
+ --blue:#73bde1;
+ --white:#f7f7f0;
+ --muted:#a9bdb7;
+ --line:rgba(223,189,112,.19);
+ --shadow:0 15px 40px #0003;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:
+ radial-gradient(ellipse at 50% -10%,#1d4640 0%,transparent 42%),
+ var(--bg);
+ color:var(--white);
+ font-family:'Noto Sans Arabic',sans-serif;
+ overflow-x:hidden;
+}
+button,a{font-family:inherit}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer}
+.topbar{
+ height:67px;padding:0 5%;
+ display:flex;align-items:center;justify-content:space-between;
+ background:#091f22ed;border-bottom:1px solid var(--line);
+ position:relative;z-index:5;
+}
+.logo{font-size:20px;font-weight:800;color:var(--gold)}
+.logo i{margin-left:7px}
+.back{
+ border:1px solid var(--line);padding:9px 15px;
+ border-radius:12px;color:var(--gold2);font-size:13px;
+}
+.container{width:min(1100px,92%);margin:auto}
+.hero{
+ position:relative;text-align:center;
+ padding:55px 15px 42px;overflow:hidden;
+}
+.hero:before,.hero:after{
+ content:"";position:absolute;border-radius:50%;
+ border:1px solid #dfbd7020;pointer-events:none;
+}
+.hero:before{width:360px;height:360px;top:-180px;right:-120px}
+.hero:after{width:300px;height:300px;bottom:-220px;left:-100px}
+.hero-icon{
+ width:85px;height:85px;margin:auto auto 19px;
+ border-radius:28px;display:grid;place-items:center;
+ background:linear-gradient(140deg,#f3d998,#a77c3c);
+ color:#17312c;font-size:37px;
+ box-shadow:0 12px 45px #dfbd7035;
+ animation:float 4s ease-in-out infinite;
+}
+.hero h1{font-size:clamp(27px,5vw,43px);color:var(--gold2)}
+.hero p{max-width:650px;margin:13px auto;color:var(--muted);line-height:2;font-size:14px}
+.hero-arabic{
+ font-family:Amiri,serif;font-size:27px;color:var(--gold2);
+ line-height:2.1;margin-top:15px;
+}
+.hero-caption{font-size:12px;color:var(--muted)}
+.hero-stats{
+ display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+ margin-top:24px;
+}
+.stat{
+ background:#ffffff09;border:1px solid var(--line);
+ border-radius:13px;padding:10px 17px;font-size:12px;color:var(--gold2);
+}
+.stat i{margin-left:7px}
+.section-title{
+ font-size:19px;color:var(--gold2);margin-bottom:16px;
+}
+.section-title i{color:var(--gold);margin-left:8px}
+.progress-card{
+ padding:18px;background:var(--surface);
+ border:1px solid var(--line);border-radius:18px;
+ margin-bottom:23px;
+}
+.progress-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:12px}
+.progress-top span:last-child{color:var(--gold2)}
+.progress-track{height:8px;background:#294442;border-radius:20px;overflow:hidden}
+.progress-fill{
+ height:100%;width:0;
+ background:linear-gradient(90deg,#54b98c,#e8c978);
+ transition:width .5s;border-radius:20px;
+}
+.tabs{
+ display:grid;grid-template-columns:repeat(6,1fr);
+ gap:9px;margin-bottom:25px;
+}
+.tab{
+ border:1px solid var(--line);background:var(--surface);
+ border-radius:14px;color:var(--muted);
+ min-height:76px;padding:12px 4px;font-size:11px;
+ transition:.3s;
+}
+.tab i{font-size:20px;display:block;margin-bottom:8px}
+.tab.active{
+ color:var(--gold2);border-color:var(--gold);
+ background:#283d35;transform:translateY(-3px);
+ box-shadow:0 7px 20px #0002;
+}
+.tab.done{color:var(--green);border-color:#50bd9166}
+.lesson{
+ border:1px solid var(--line);
+ background:linear-gradient(140deg,#143336,#0c2428);
+ border-radius:25px;overflow:hidden;
+ box-shadow:var(--shadow);margin-bottom:28px;
+}
+.lesson-head{
+ padding:24px 25px 16px;
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #ffffff0b;
+}
+.lesson-num{font-size:12px;color:var(--gold)}
+.lesson-head h2{font-size:23px;color:var(--gold2);margin-top:7px}
+.day-label{
+ background:#dfbd7017;border:1px solid var(--line);
+ color:var(--gold2);border-radius:30px;
+ padding:7px 12px;font-size:11px;
+}
+.lesson-body{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:25px;padding:24px;align-items:center;
+}
+.visual{
+ min-height:285px;position:relative;
+ background:radial-gradient(circle at center,#294d43,#0a2225 72%);
+ border:1px solid #ffffff0b;border-radius:20px;
+ display:flex;align-items:center;justify-content:center;
+ overflow:hidden;
+}
+.visual:before{
+ content:"";position:absolute;inset:15px;
+ border:1px solid #dfbd7020;border-radius:15px;
+}
+.visual-caption{
+ position:absolute;bottom:15px;z-index:2;
+ font-size:12px;color:var(--gold2);
+ background:#071b20d9;padding:7px 15px;border-radius:20px;
+}
+.explain h3{font-size:17px;color:var(--gold2);margin-bottom:12px}
+.explain p{font-size:13px;line-height:2.2;color:#d1ded7}
+.note{
+ background:#dfbd7010;border-right:3px solid var(--gold);
+ padding:13px;border-radius:10px;margin-top:15px;
+ color:#eadbb9;font-size:12px;line-height:2.1;
+}
+.note i{color:var(--gold);margin-left:5px}
+.dua{
+ background:#071a1e;border:1px solid var(--line);
+ border-radius:15px;padding:15px;margin-top:14px;
+}
+.dua small{font-size:11px;color:var(--green)}
+.dua-arabic{
+ font-family:Amiri,serif;color:var(--gold2);
+ font-size:23px;line-height:2.1;margin:8px 0;
+}
+.dua-meaning{font-size:12px;color:var(--muted);line-height:2}
+.counter{
+ background:#091e21;padding:22px 15px;
+ text-align:center;border-top:1px solid var(--line);
+}
+.counter h3{color:var(--gold2);font-size:16px}
+.counter p{color:var(--muted);font-size:12px;margin:8px}
+.count-number{font-size:40px;font-weight:800;color:var(--gold);margin:12px}
+.dots{display:flex;justify-content:center;gap:8px;margin:12px}
+.dots span{width:11px;height:11px;background:#35504a;border-radius:50%}
+.dots span.on{background:var(--gold);box-shadow:0 0 10px #dfbd7080}
+.count-actions{display:flex;justify-content:center;gap:10px}
+.count-actions button{
+ width:45px;height:45px;border:1px solid var(--line);
+ border-radius:50%;background:#1a3939;color:var(--gold2);
+ font-size:17px;
+}
+.controls{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;padding:17px 24px;border-top:1px solid var(--line);
+}
+.btn{
+ border:0;border-radius:12px;padding:12px 17px;
+ font-weight:700;font-size:12px;
+}
+.prev{background:#1b393b;color:#eee;border:1px solid var(--line)}
+.next{background:linear-gradient(130deg,#f3d998,#b68b49);color:#162b25}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.step-count{color:var(--gold2);font-size:12px}
+.map-card{
+ background:var(--surface);border:1px solid var(--line);
+ border-radius:20px;padding:20px;margin:28px 0;
+}
+.route{
+ display:flex;align-items:center;gap:7px;
+ overflow-x:auto;padding:15px 0 8px;
+}
+.route-item{
+ min-width:90px;text-align:center;font-size:11px;color:var(--muted);
+}
+.route-item i{
+ display:grid;place-items:center;margin:0 auto 9px;
+ width:43px;height:43px;border-radius:50%;
+ background:#dfbd7015;border:1px solid var(--line);
+ color:var(--gold);font-size:17px;
+}
+.route-arrow{color:var(--gold);font-size:13px;flex-shrink:0}
+.types{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:13px;
+ margin:30px 0;
+}
+.type-card{
+ background:var(--surface);border:1px solid var(--line);
+ border-radius:17px;padding:18px 15px;
+ transition:.3s;
+}
+.type-card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.type-card i{color:var(--gold);font-size:23px;margin-bottom:12px}
+.type-card h3{color:var(--gold2);font-size:15px;margin-bottom:9px}
+.type-card p{font-size:12px;line-height:2;color:var(--muted)}
+.checklist{
+ background:var(--surface);border:1px solid var(--line);
+ padding:20px;border-radius:20px;margin:30px 0;
+}
+.checklist h3{color:var(--gold2);margin-bottom:14px}
+.checklist label{
+ display:flex;gap:12px;align-items:center;
+ border-bottom:1px solid var(--line);
+ padding:13px 0;font-size:12px;color:#d5e1d9;
+}
+.checklist label:last-child{border:0}
+.checklist input{width:18px;height:18px;accent-color:var(--gold)}
+.checklist label:has(input:checked){color:var(--green);text-decoration:line-through}
+.footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:12px}
+.footer strong{display:block;color:var(--gold);font-size:19px;margin-bottom:9px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes walk{0%{left:15%}100%{left:75%}}
+@keyframes pulse{50%{opacity:.5;transform:scale(1.08)}}
+@keyframes sun{50%{transform:translateY(-13px);filter:drop-shadow(0 0 18px #e7c77a)}}
+@keyframes cloud{50%{transform:translateX(18px)}}
+@keyframes glow{50%{box-shadow:0 0 25px #dfbd7066}}
+@media(max-width:700px){
+ .tabs{grid-template-columns:repeat(3,1fr)}
+ .lesson-body{grid-template-columns:1fr;padding:16px;gap:17px}
+ .visual{min-height:240px}
+ .lesson-head{padding:18px}
+ .lesson-head h2{font-size:20px}
+ .controls{padding:14px}
+ .btn{padding:11px 12px}
+ .types{grid-template-columns:1fr}
+ .hero{padding-top:38px}
+}
+@media(max-width:380px){
+ .tab{font-size:10px}
+ .lesson-head h2{font-size:18px}
+ .step-count{font-size:11px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+ <div class="logo"><i class="fa-solid fa-moon"></i> نوری ئیمان</div>
+ <a href="index.html" class="back"><i class="fa-solid fa-arrow-right"></i> گەڕانەوە</a>
+</header>
+
+<section class="hero">
+ <div class="hero-icon"><i class="fa-solid fa-kaaba"></i></div>
+ <h1>فێربوونی مناسیکەکانی حەج</h1>
+ <p>گەشتێکی پیرۆز بۆ فێربوونی هەنگاوەکانی حەج، لە ئیحرامەوە تا تەواوکردنی مناسیکەکان، بە ڕوونکردنەوەی ئاسان و ئەنیمەیشنی جوان.</p>
+ <div class="hero-arabic">وَأَذِّنْ فِي النَّاسِ بِالْحَجِّ</div>
+ <div class="hero-caption">سورەتی حەج – ئایەتی ٢٧</div>
+ <div class="hero-stats">
+  <div class="stat"><i class="fa-solid fa-calendar-days"></i> ٨ تا ١٣ی ذی الحیجە</div>
+  <div class="stat"><i class="fa-solid fa-list-check"></i> ١٢ هەنگاوی فێرکاری</div>
+  <div class="stat"><i class="fa-solid fa-play"></i> فێربوونی کارلێککەر</div>
+ </div>
+</section>
+
+<main class="container">
+
+ <div class="progress-card">
+  <div class="progress-top">
+   <span>پێشکەوتنی فێربوونی حەج</span>
+   <span id="progressText">١ / ١٢</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+ </div>
+
+ <h3 class="section-title"><i class="fa-solid fa-route"></i> هەنگاوەکانی مناسیکی حەج</h3>
+ <div class="tabs" id="tabs">
+  <button class="tab active" data-i="0"><i class="fa-solid fa-shirt"></i>ئیحرام</button>
+  <button class="tab" data-i="1"><i class="fa-solid fa-kaaba"></i>تەواف</button>
+  <button class="tab" data-i="2"><i class="fa-solid fa-person-walking"></i>سەعی</button>
+  <button class="tab" data-i="3"><i class="fa-solid fa-campground"></i>مینا</button>
+  <button class="tab" data-i="4"><i class="fa-solid fa-mountain-sun"></i>عەرەفات</button>
+  <button class="tab" data-i="5"><i class="fa-solid fa-moon"></i>مزدەلیفە</button>
+  <button class="tab" data-i="6"><i class="fa-solid fa-stone"></i>ڕەمی جەمەرات</button>
+  <button class="tab" data-i="7"><i class="fa-solid fa-hand-holding-heart"></i>قوربانی</button>
+  <button class="tab" data-i="8"><i class="fa-solid fa-scissors"></i>قژکورتکردن</button>
+  <button class="tab" data-i="9"><i class="fa-solid fa-kaaba"></i>تەوافی زیارە</button>
+  <button class="tab" data-i="10"><i class="fa-solid fa-calendar-check"></i>ڕۆژانی تەشریق</button>
+  <button class="tab" data-i="11"><i class="fa-solid fa-flag-checkered"></i>تەوافی وەداع</button>
+ </div>
+
+ <section class="lesson" id="lesson">
+  <div class="lesson-head">
+   <div>
+    <div class="lesson-num" id="number">هەنگاوی ٠١</div>
+    <h2 id="title">ئیحرام و نیەتی حەج</h2>
+   </div>
+   <span class="day-label" id="day">پێش دەستپێکی مناسیک</span>
+  </div>
+
+  <div class="lesson-body">
+   <div class="visual" id="visual"></div>
+   <div class="explain">
+    <h3 id="heading"></h3>
+    <p id="description"></p>
+    <div class="note" id="note"></div>
+    <div class="dua">
+     <small><i class="fa-solid fa-hands-praying"></i> دوعا و زیکر</small>
+     <div class="dua-arabic" id="arabic"></div>
+     <div class="dua-meaning" id="meaning"></div>
+    </div>
+   </div>
+  </div>
+
+  <div class="counter" id="counter" style="display:none">
+   <h3 id="counterTitle">ژمێرەر</h3>
+   <p id="counterDescription"></p>
+   <div class="count-number" id="countNumber">٠ / ٧</div>
+   <div class="dots" id="dots"></div>
+   <div class="count-actions">
+    <button id="minus" aria-label="کەمکردنەوە"><i class="fa-solid fa-minus"></i></button>
+    <button id="plus" aria-label="زیادکردن"><i class="fa-solid fa-plus"></i></button>
+    <button id="reset" aria-label="سفرکردنەوە"><i class="fa-solid fa-rotate-left"></i></button>
+   </div>
+  </div>
+
+  <div class="controls">
+   <button class="btn prev" id="prev"><i class="fa-solid fa-arrow-right"></i> پێشتر</button>
+   <span class="step-count" id="stepCount">١ / ١٢</span>
+   <button class="btn next" id="next">هەنگاوی دواتر <i class="fa-solid fa-arrow-left"></i></button>
+  </div>
+ </section>
+
+ <section class="map-card">
+  <h3 class="section-title"><i class="fa-solid fa-map-location-dot"></i> ڕێڕەوی گەشتی حەج</h3>
+  <p style="font-size:12px;color:var(--muted);line-height:2">شوێنە سەرەکییەکانی گەشتی حەج بە ڕیزبەندی ببینە.</p>
+  <div class="route">
+   <div class="route-item"><i class="fa-solid fa-kaaba"></i>مەککە</div>
+   <i class="fa-solid fa-arrow-left route-arrow"></i>
+   <div class="route-item"><i class="fa-solid fa-campground"></i>مینا</div>
+   <i class="fa-solid fa-arrow-left route-arrow"></i>
+   <div class="route-item"><i class="fa-solid fa-mountain-sun"></i>عەرەفات</div>
+   <i class="fa-solid fa-arrow-left route-arrow"></i>
+   <div class="route-item"><i class="fa-solid fa-moon"></i>مزدەلیفە</div>
+   <i class="fa-solid fa-arrow-left route-arrow"></i>
+   <div class="route-item"><i class="fa-solid fa-campground"></i>مینا</div>
+   <i class="fa-solid fa-arrow-left route-arrow"></i>
+   <div class="route-item"><i class="fa-solid fa-kaaba"></i>مەککە</div>
+  </div>
+ </section>
+
+ <h3 class="section-title"><i class="fa-solid fa-book-open"></i> جۆرەکانی حەج</h3>
+ <section class="types">
+  <div class="type-card">
+   <i class="fa-solid fa-kaaba"></i>
+   <h3>حەجی تەمەتوع</h3>
+   <p>یەکەم عومرە ئەنجام دەدرێت و لە ئیحرام دەردەچیت، پاشان لە کاتی حەجدا جارێکی تر ئیحرام بۆ حەج دەبەستیت. هەدی بۆ ئەوانەی توانایان هەیە پێویستە.</p>
+  </div>
+  <div class="type-card">
+   <i class="fa-solid fa-mosque"></i>
+   <h3>حەجی قیران</h3>
+   <p>نیەتی عومرە و حەج پێکەوە دەکەیت و بەردەوام لە ئیحرام دەمێنیتەوە تا کاتی دەرهاتن لە ئیحرام. هەدی پێویستە بۆ ئەوانەی حەجی قیران دەکەن.</p>
+  </div>
+  <div class="type-card">
+   <i class="fa-solid fa-person-praying"></i>
+   <h3>حەجی ئیفراد</h3>
+   <p>تەنها نیەتی حەج دەکەیت و عومرە لەگەڵیدا ناکەیت. هەدی بەهۆی خودی ئیفرادەوە پێویست نییە.</p>
+  </div>
+ </section>
+
+ <section class="checklist">
+  <h3><i class="fa-solid fa-clipboard-check"></i> لیستی ئامادەکاری بۆ حەج</h3>
+  <label><input type="checkbox"> فێربوونی مناسیک و ڕێنماییەکانی حەج</label>
+  <label><input type="checkbox"> ئامادەکردنی پاسپۆرت و بەڵگەنامەکان</label>
+  <label><input type="checkbox"> زانینی میقات و بەستنەوەی ئیحرام</label>
+  <label><input type="checkbox"> فێربوونی تەلبیە و دوعاکان</label>
+  <label><input type="checkbox"> ئامادەکردنی پێداویستییە پزیشکی و کەسییەکان</label>
+  <label><input type="checkbox"> ڕێکخستنی گەشت لەگەڵ کاروانی فەرمی</label>
+  <label><input type="checkbox"> گوێڕایەڵی ڕێنماییەکانی کاروان و دەسەڵاتدارانی حەج</label>
+ </section>
+
+ <section class="note" style="margin-bottom:25px">
+  <i class="fa-solid fa-circle-info"></i>
+  ئەم بەشە بۆ فێربوونی گشتییە. وردەکارییەکانی فەرز و واجب و سوننەت و ڕیزبەندی هەندێک مناسیک لە نێوان مەزهەبەکاندا جیاوازییان هەیە. بۆ ئەنجامدانی حەجی ڕاستەقینە، ڕێنمایی مامۆستایەکی زانای باوەڕپێکراو و کاروانی فەرمی شوێن بکەوە.
+ </section>
+
+</main>
+
+<footer class="footer">
+ <strong>نوری ئیمان</strong>
+ بە زانست، دڵ ڕووناک بکەوە
+ <p style="margin-top:10px">خوا حەج و عیبادەتتان قبوڵ بکات 🤍</p>
+</footer>
+
+<script>
+const lessons=[
+{
+ title:"ئیحرام و نیەتی حەج",
+ day:"پێش دەستپێکی مناسیک",
+ heading:"چۆن دەچینە ئیحرام؟",
+ description:"لە میقاتەوە ئیحرام دەبەسترێت و نیەتی حەج لە دڵدا دەکرێت. پیاوان دوو پارچە جلەی ئیحرام لەبەر دەکەن، ئافرەتانیش جل و بەرگی شەرعی و داپۆشراوی ئاسایی لەبەر دەکەن. دوای نیەتکردن تەلبیە دەخوێندرێتەوە.",
+ note:"نیەت شوێنی دڵە. غوسڵ و پاکوخاوێنی پێش ئیحرام لە سوننەتەکانن. ئەوانەی حەجی تەمەتوع دەکەن، پێشتر عومرە ئەنجام دەدەن.",
+ arabic:"لَبَّيْكَ اللَّهُمَّ حَجًّا",
+ meaning:"واتە: ئەی خوایە، بۆ حەج وەڵامی بانگت دەدەمەوە.",
+ art:"ihram"
+},
+{
+ title:"تەوافی قودووم",
+ day:"کاتی گەیشتن بە مەککە",
+ heading:"گەڕان بە دەوری کەعبە",
+ description:"تەوافی قودووم تەوافی گەیشتنە و بۆ ئەو حەجاجانەی لە دەرەوەی مەککەوە دێن لە حەجی ئیفراد و قیراندا سوننەتە. ٧ سووڕ لە دەوری کەعبە ئەنجام دەدرێت. کەعبە لە لای چەپ دەبێت.",
+ note:"لە حەجی تەمەتوعدا تەوافی عومرە پێشتر ئەنجام دراوە. پاش تەواف، دوو ڕەکعەت نوێژ لە شوێنێکی گونجاو بکە ئەگەر ئاسان بوو.",
+ arabic:"بِسْمِ اللَّهِ، اللَّهُ أَكْبَرُ",
+ meaning:"بە ناوی خوا، خوا گەورەترە.",
+ art:"tawaf",counter:"tawaf"
+},
+{
+ title:"سەعی لە سەفا و مەروە",
+ day:"دوای تەواف",
+ heading:"٧ هەنگاوی سەعی",
+ description:"سەعی لە سەفا دەست پێ دەکات و لە مەروە کۆتایی دێت. لە سەفا بۆ مەروە یەک هەنگاوە و لە مەروە بۆ سەفا دووەمە. بەردەوام دەبیت تا ٧ هەنگاو تەواو دەکەیت.",
+ note:"بۆ حەجی ئیفراد و قیران، ئەگەر سەعی دوای تەوافی قودووم ئەنجام بدرێت، زۆرجار دووبارەکردنەوەی پێویست نابێت. بەپێی جۆری حەج و مەزهەبەکەت ڕێنمایی وەربگرە.",
+ arabic:"إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ",
+ meaning:"بەڕاستی سەفا و مەروە لە نیشانەکانی خوای گەورەن.",
+ art:"sai",counter:"sai"
+},
+{
+ title:"ڕۆژی هەشتی ذی الحیجە – مینا",
+ day:"٨ی ذی الحیجە",
+ heading:"مانەوە لە مینا",
+ description:"لە ڕۆژی هەشتی ذی الحیجە، حەجاج بۆ مینا دەڕۆن و نوێژەکانی نیوەڕۆ، عەسر، مەغریب، عیشا و بەیانی لەوێ ئەنجام دەدەن. نوێژەکانی چوار ڕەکعەتی بە قەسر دوو ڕەکعەت دەکرێن بێ ئەوەی لەگەڵ یەکدا کۆ بکرێنەوە.",
+ note:"ئەم ڕۆژە بە ڕۆژی تەروویە ناسراوە. مانەوە لە مینا و ئامادەکاری بۆ عەرەفات بەشێکە لە ڕێڕەوی حەج.",
+ arabic:"لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ",
+ meaning:"وەڵامی بانگت دەدەمەوە، ئەی خوایە.",
+ art:"mina"
+},
+{
+ title:"ڕۆژی عەرەفات",
+ day:"٩ی ذی الحیجە",
+ heading:"گرنگترین ڕۆژی حەج",
+ description:"حەجاج لە ڕۆژی نۆی ذی الحیجە دەگەنە عەرەفات و تا خۆرئاوابوون لە سنووری عەرەفاتدا دەمێننەوە، بە دوعا و زیکر و داوای لێخۆشبوون لە خوای گەورە. وەقوف لە عەرەفات ڕوکنی سەرەکیی حەجە.",
+ note:"بێ وەقوف لە عەرەفات، حەج تەواو نابێت. لە قەرەباڵغی و لە گواستنەوەدا ڕێنمایی کاروانی فەرمی شوێن بکەوە.",
+ arabic:"لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ",
+ meaning:"هیچ پەرستراوێکی ڕاست نییە جگە لە خوای تاک و بێ هاوبەش.",
+ art:"arafat"
+},
+{
+ title:"مزدەلیفە",
+ day:"شەوی ٩ بۆ ١٠",
+ heading:"شەو بەسەربردن لە مزدەلیفە",
+ description:"دوای خۆرئاوابوون لە عەرەفات، حەجاج بۆ مزدەلیفە دەڕۆن. نوێژی مەغریب و عیشا بە شێوەی کۆکردنەوە و قەسر ئەنجام دەدرێن، پاشان شەو بەسەر دەبەن و دوای نوێژی بەیانی بە زیکر و دوعا بەردەوام دەبن.",
+ note:"هەندێک کەس وەک نەخۆش و لاواز و ژنان بە پێی ڕێنمایی فقهی مۆڵەتی تایبەتیان هەیە. وردەکارییەکان لە مامۆستا بپرسە.",
+ arabic:"فَاذْكُرُوا اللَّهَ عِنْدَ الْمَشْعَرِ الْحَرَامِ",
+ meaning:"یادی خوا بکەن لە مەشعەری حەرام.",
+ art:"muzdalifah"
+},
+{
+ title:"ڕەمی جەمەرەتی عەقەبە",
+ day:"١٠ی ذی الحیجە",
+ heading:"فڕێدانی حەوت بەردۆکە",
+ description:"لە بەیانی ڕۆژی جەژن، حەجاج دەچنە مینا و ٧ بەردۆکە لە جەمەرەتی عەقەبە دەدەن. لەگەڵ هەر بەردێکدا ئەللّٰهُ أَکبَر دەڵێن.",
+ note:"ئەم کارە نیشانەی گوێڕایەڵی و ڕەتکردنەوەی شەیتانە. بەردۆکەکان بچووک بن. بەهۆی قەرەباڵغییەوە خۆت و کەسانی تر مەخەرە مەترسییەوە و کاتی دیاریکراوی کاروانت ڕەچاو بکە.",
+ arabic:"اللَّهُ أَكْبَرُ",
+ meaning:"خوا گەورەترە. لە هەر فڕێدانێکدا دەوترێت.",
+ art:"jamarat",counter:"jamarat"
+},
+{
+ title:"قوربانی",
+ day:"١٠ی ذی الحیجە",
+ heading:"هەدی و قوربانی",
+ description:"لە حەجی تەمەتوع و قیراندا هەدی پێویستە بۆ ئەو کەسانەی توانایان هەیە. ئەمە لە ڕێگای سیستەمی فەرمی و شوێنە مۆڵەتپێدراوەکانەوە ئەنجام دەدرێت. حەجی ئیفراد بەهۆی خودی ئیفرادەوە قوربانیی هەدی پێویست نییە.",
+ note:"قوربانیی حەج هەموو جارێک بە شێوەیەکی تاکەکەسی و بێ ڕێکخستن ئەنجام مەدە. ڕێنمایی کاروان و دەسەڵاتدارانی فەرمی شوێن بکەوە.",
+ arabic:"فَصَلِّ لِرَبِّكَ وَانْحَرْ",
+ meaning:"بۆ پەروەردگارت نوێژ بکە و قوربانی بکە.",
+ art:"sacrifice"
+},
+{
+ title:"قژتاشین یان کورتکردنەوە",
+ day:"١٠ی ذی الحیجە",
+ heading:"دەرهاتن لە ئیحرام",
+ description:"پیاوان سەریان دەتاشن یان قژیان کورت دەکەنەوە، تاشینی تەواوی سەر باشترە. ئافرەتان بەشێکی کەم لە کۆتایی قژیان کورت دەکەنەوە. ئەمە یەکێکە لە هەنگاوەکانی دەرهاتن لە ئیحرام.",
+ note:"ڕیزبەندی هەندێک لە کارەکانی ڕۆژی ١٠ دەتوانێت بە پێی بارودۆخ بگۆڕێت. بۆ جیاوازی دەرهاتن لە ئیحرام و وردەکارییەکان، ڕێنمایی فقهی وەربگرە.",
+ arabic:"اللَّهُمَّ اغْفِرْ لِلْمُحَلِّقِينَ",
+ meaning:"ئەی خوایە، لێخۆشبوون ببەخشە بەوانەی سەریان دەتاشن.",
+ art:"hair"
+},
+{
+ title:"تەوافی ئیفازە",
+ day:"لە ڕۆژی ١٠ و دواتر",
+ heading:"تەوافی سەرەکیی حەج",
+ description:"حەجاج بۆ مەککە دەگەڕێنەوە و ٧ سووڕ تەواف لە دەوری کەعبە ئەنجام دەدەن. ئەم تەوافە بە تەوافی ئیفازە یان زیارە ناسراوە و یەکێکە لە ڕوکنەکانی حەج. دوای ئەوە، سەعی بۆ ئەوانەی پێویستیان هەیە ئەنجام دەدرێت.",
+ note:"تەوافی ئیفازە ڕوکنی حەجە. کاتی ئەنجامدانی و پەیوەندییەکەی بە جۆری حەج و سەعیی پێشووەوە پێویستی بە ڕێنمایی زانایەکی باوەڕپێکراو هەیە.",
+ arabic:"وَلْيَطَّوَّفُوا بِالْبَيْتِ الْعَتِيقِ",
+ meaning:"با بە دەوری ئەم ماڵە کۆنەدا تەواف بکەن.",
+ art:"tawaf2",counter:"tawaf2"
+},
+{
+ title:"ڕۆژانی تەشریق",
+ day:"١١ و ١٢ و ١٣ی ذی الحیجە",
+ heading:"مانەوە لە مینا و ڕەمی جەمەرات",
+ description:"حەجاج لە ڕۆژانی تەشریق لە مینا دەمێننەوە و لە دوای نیوەڕۆدا ڕەمی سێ جەمەرە دەکەن: جەمەرەی بچووک، ناوەند و عەقەبە. هەر یەکەیان بە ٧ بەردۆکە دەدرێن.",
+ note:"ئەوانەی لە ڕۆژی ١٢ پەلە دەکەن دەتوانن بڕۆن، ئەوانەی دەمێننەوە تا ١٣یش ڕەمی جەمەرەکان دەکەن. ڕێنمایی کاروانی فەرمی گرنگە.",
+ arabic:"وَاذْكُرُوا اللَّهَ فِي أَيَّامٍ مَعْدُودَاتٍ",
+ meaning:"یادی خوا بکەن لە ڕۆژانی ژمێردراودا.",
+ art:"three",counter:"three"
+},
+{
+ title:"تەوافی وەداع",
+ day:"پێش جێهێشتنی مەککە",
+ heading:"ماڵئاوایی لە کەعبە",
+ description:"پێش جێهێشتنی مەککە بۆ ئەوانەی حەج دەکەن، تەوافی وەداع ئەنجام دەدرێت. ٧ سووڕ لە دەوری کەعبە دەکەیت و بە دوعا و زیکر ماڵئاوایی لە ماڵی خوا دەکەیت.",
+ note:"ژنانی سووڕ و خوێنبینیی دوای منداڵبوون لە تەوافی وەداع بە پێی حوکمی شەرعی لە ئەرکیان بەخشراون. هەموو کەسێک بەپێی بارودۆخی خۆی ڕێنمایی فقهی وەربگرێت.",
+ arabic:"اللَّهُمَّ تَقَبَّلْ مِنَّا",
+ meaning:"ئەی خوایە، لە ئێمە قبوڵ بکە.",
+ art:"finish"
+}
+];
+
+let current=0;
+let counts={tawaf:0,sai:0,jamarat:0,tawaf2:0,three:0};
+const $=id=>document.getElementById(id);
+const arabicDigits=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+
+function art(type){
+ let a="";
+ if(type==="ihram") a='<div style="font-size:105px;color:#f6f3e8;animation:float 3s infinite"><i class="fa-solid fa-shirt"></i></div>';
+ if(type==="tawaf"||type==="tawaf2") a='<div class="kaaba-art"><div class="orbit"></div><div class="cube"><div class="gold-band"></div><div class="door"></div></div></div>';
+ if(type==="sai") a='<div class="sai-art"><div class="hill">سەفا</div><div class="road"><i class="fa-solid fa-person-walking"></i></div><div class="hill">مەروە</div></div>';
+ if(type==="mina") a='<div class="camp-art"><i class="fa-solid fa-campground"></i><div>مینا</div></div>';
+ if(type==="arafat") a='<div class="desert-art"><i class="fa-solid fa-sun"></i><i class="fa-solid fa-mountain-sun"></i><div>عەرەفات</div></div>';
+ if(type==="muzdalifah") a='<div class="night-art"><i class="fa-solid fa-moon"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><div>مزدەلیفە</div></div>';
+ if(type==="jamarat") a='<div class="stones"><div class="pillar">١</div><div class="pillar">٢</div><div class="pillar">٣</div></div>';
+ if(type==="sacrifice") a='<div class="sacrifice-art"><i class="fa-solid fa-hand-holding-heart"></i><div>قوربانی</div><small>بە ڕێگای فەرمی</small></div>';
+ if(type==="hair") a='<i class="fa-solid fa-scissors" style="font-size:100px;color:var(--gold);animation:float 3s infinite"></i>';
+ if(type==="three") a='<div class="stones"><div class="pillar">١</div><div class="pillar">٢</div><div class="pillar">٣</div></div>';
+ if(type==="finish") a='<div style="text-align:center"><i class="fa-solid fa-kaaba" style="font-size:95px;color:var(--gold);animation:float 3s infinite"></i><div style="font-family:Amiri;font-size:30px;color:var(--gold2);margin-top:10px">الحمد لله</div></div>';
+ return a+'<div class="visual-caption">'+({ihram:"ئیحرام",tawaf:"تەواف",tawaf2:"تەوافی ئیفازە",sai:"سەفا و مەروە",mina:"مینا",arafat:"عەرەفات",muzdalifah:"مزدەلیفە",jamarat:"ڕەمی جەمەرە",sacrifice:"قوربانی",hair:"قژتاشین",three:"جەمەرە سێکان",finish:"تەواوکردنی حەج"}[type])+'</div>';
+}
+
+function addVisualStyles(){
+ const style=document.createElement("style");
+ style.textContent=`
+ .kaaba-art{width:220px;height:210px;display:grid;place-items:center;position:relative}
+ .cube{width:120px;height:140px;background:linear-gradient(90deg,#080808,#292929,#080808);position:relative;box-shadow:0 15px 30px #0008;animation:float 3s infinite}
+ .gold-band{position:absolute;top:28px;width:100%;height:15px;background:linear-gradient(90deg,#987239,#f5dc9b,#987239);border:2px solid #d6b56c}
+ .door{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:29px;height:55px;background:#765626;border:2px solid #c9a85e}
+ .orbit{position:absolute;width:205px;height:175px;border:2px dashed #dfbd7090;border-radius:50%;animation:spin 9s linear infinite}
+ .sai-art{display:flex;align-items:center;width:90%;gap:7px;justify-content:space-between}
+ .hill{width:64px;height:70px;background:linear-gradient(145deg,#d9c49b,#766345);border-radius:50% 50% 15px 15px;display:grid;place-items:center;color:#152923;font-size:12px;font-weight:bold}
+ .road{height:4px;flex:1;background:var(--gold);position:relative}
+ .road i{position:absolute;top:-27px;left:20%;color:var(--gold2);font-size:25px;animation:walk 2.5s infinite alternate}
+ .camp-art,.sacrifice-art{text-align:center;font-size:70px;color:var(--gold);animation:float 3s infinite}
+ .camp-art div,.sacrifice-art div{font-size:22px;color:var(--gold2);margin-top:10px}
+ .sacrifice-art small{font-size:12px;display:block;color:var(--muted)}
+ .desert-art{text-align:center;position:relative;font-size:75px;color:#dfbd70}
+ .desert-art i:first-child{display:block;animation:sun 3s infinite}
+ .desert-art i:nth-child(2){display:block;color:#a58d64}
+ .desert-art div,.night-art div{font-size:22px;color:var(--gold2)}
+ .night-art{font-size:60px;color:#f5d98d;text-align:center;animation:float 3s infinite}
+ .night-art i{margin:7px}
+ .night-art i:nth-child(2){font-size:18px}
+ .night-art i:nth-child(3){font-size:12px}
+ .stones{display:flex;gap:17px;align-items:end}
+ .pillar{width:42px;height:110px;background:linear-gradient(90deg,#8a8a83,#e6e4d9,#99998d);border-radius:25px 25px 7px 7px;display:grid;place-items:center;color:#25312d;font-weight:bold;box-shadow:0 10px 22px #0005;animation:glow 2.5s infinite}
+ .pillar:nth-child(2){height:130px}
+ .pillar:nth-child(3){height:150px}
+ `;
+ document.head.appendChild(style);
+}
+addVisualStyles();
+
+function renderCounter(type){
+ const value=counts[type];
+ let max=type==="three"?21:7;
+ $("counter").style.display="block";
+ $("counterTitle").textContent=type==="three"?"ژمێرەری سێ جەمەرە (٢١ بەردۆکە)":"ژمێرەری "+(type==="sai"?"سەعی":type==="tawaf"||type==="tawaf2"?"تەواف":"جەمەرە")+" (٧)";
+ $("counterDescription").textContent=type==="three"?"٧ بەردۆکە بۆ هەر یەک لە سێ جەمەرە. ئەم ژمێرەرە تەنها بۆ فێربوونە.":"ژمارەی ئەو سووڕ یان هەنگاوانە تۆمار بکە کە تەواوت کردوون.";
+ $("countNumber").textContent=arabicDigits(value)+" / "+arabicDigits(max);
+ $("dots").innerHTML=Array.from({length:max},(_,i)=>'<span class="'+(i<value?"on":"")+'"></span>').join("");
+}
+function render(){
+ const l=lessons[current];
+ $("number").textContent="هەنگاوی "+arabicDigits(current+1).padStart(2,"٠");
+ $("title").textContent=l.title;
+ $("day").textContent=l.day;
+ $("heading").textContent=l.heading;
+ $("description").textContent=l.description;
+ $("note").innerHTML='<i class="fa-solid fa-lightbulb"></i> '+l.note;
+ $("arabic").textContent=l.arabic;
+ $("meaning").textContent=l.meaning;
+ $("visual").innerHTML=art(l.art);
+ $("counter").style.display=l.counter?"block":"none";
+ if(l.counter)renderCounter(l.counter);
+ $("progressText").textContent=arabicDigits(current+1)+" / ١٢";
+ $("progressFill").style.width=((current+1)/12*100)+"%";
+ $("stepCount").textContent=arabicDigits(current+1)+" / ١٢";
+ $("prev").disabled=current===0;
+ $("next").innerHTML=current===11?'تەواوکردن <i class="fa-solid fa-check"></i>':'هەنگاوی دواتر <i class="fa-solid fa-arrow-left"></i>';
+ document.querySelectorAll(".tab").forEach((b,i)=>{
+  b.classList.toggle("active",i===current);
+  b.classList.toggle("done",i<current);
+ });
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+$("plus").onclick=()=>{
+ const type=lessons[current].counter;
+ const max=type==="three"?21:7;
+ if(counts[type]<max){counts[type]++;renderCounter(type)}
+};
+$("minus").onclick=()=>{
+ const type=lessons[current].counter;
+ if(counts[type]>0){counts[type]--;renderCounter(type)}
+};
+$("reset").onclick=()=>{
+ const type=lessons[current].counter;
+ counts[type]=0;renderCounter(type);
+};
+$("prev").onclick=()=>{if(current>0){current--;render()}};
+$("next").onclick=()=>{
+ if(current<11){current++;render()}
+ else{
+  alert("ماشاءالله! فێربوونی هەنگاوەکانی حەجت تەواو کرد. خوا عیبادەت و حەجت قبوڵ بکات.");
+  current=0;render();
+ }
+};
+document.querySelectorAll(".tab").forEach(b=>{
+ b.onclick=()=>{current=Number(b.dataset.i);render()};
+});
+render();
+</script>
+</body>
+</html>
