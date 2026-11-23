@@ -1,16 +1,25 @@
 {
   "id": "./",
-  "name": "نوری ئیمان",
-  "short_name": "نوری ئیمان",
-  "description": "ماڵپەڕی ئیسلامی نوری ئیمان",
+  "name": "نووری ئیمان",
+  "short_name": "نووری ئیمان",
+  "description": "ئەپی ئیسلامی نووری ئیمان",
   "lang": "ckb",
   "dir": "rtl",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "background_color": "#081c20",
-  "theme_color": "#081c20",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#04201a",
+  "theme_color": "#04201a",
+  "categories": [
+    "lifestyle",
+    "education",
+    "books"
+  ],
   "icons": [
     {
       "src": "./icons/icon-192.png",
@@ -23,6 +32,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

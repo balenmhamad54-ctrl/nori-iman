@@ -11,6 +11,7 @@
     head.appendChild(el);
   }
   add("link", { rel: "manifest", href: "./manifest.webmanifest" });
+  add("link", { rel: "icon", href: "./icons/icon-192.png", type: "image/png" });
   add("link", { rel: "apple-touch-icon", href: "./icons/apple-touch-icon.png" });
   add("meta", { name: "apple-mobile-web-app-capable", content: "yes" });
   add("meta", { name: "mobile-web-app-capable", content: "yes" });

@@ -3,7 +3,7 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="پێنج پایەکانی ئیسلام و شەش پایەکانی باوەڕ - نوری ئیمان">
 <title>پایەکانی ئیسلام و باوەڕ | نوری ئیمان</title>
 
@@ -13,27 +13,27 @@
 
 <style>
 :root {
-  --bg:var(--t-bg);
-  --bg2:var(--t-bg);
-  --card:var(--t-panel);
-  --gold:var(--t-acc);
-  --gold2:var(--t-acc2);
+  --bg:#061b1b;
+  --bg2:#092725;
+  --card:#0d302d;
+  --gold:#e5bd68;
+  --gold2:#f7dfa2;
   --white:#f8f5eb;
   --muted:#c1d0c9;
-  --border:color-mix(in srgb,var(--t-acc) 35%,transparent);
+  --border:rgba(229,189,104,.35);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   font-family:"Noto Sans Arabic",Tahoma,sans-serif;
-  background:radial-gradient(ellipse at top,var(--t-card) 0%,transparent 48%),var(--bg);
+  background:radial-gradient(ellipse at top,#17463b 0%,transparent 48%),var(--bg);
   color:var(--white);
   line-height:2;
 }
 a{color:inherit}
 .site-header{
   position:sticky;top:0;z-index:20;
-  background:color-mix(in srgb,var(--t-bg) 94%,transparent);
+  background:rgba(4,24,23,.94);
   backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);
   padding:14px 5%;
@@ -54,7 +54,7 @@ a{color:inherit}
   padding:7px 13px;border-radius:9px;font-size:13px;
   transition:.25s;
 }
-.nav-links a:hover{background:var(--t-panel);color:var(--gold)}
+.nav-links a:hover{background:#153a34;color:var(--gold)}
 .container{width:min(1150px,92%);margin:auto}
 
 /* Hero */
@@ -66,7 +66,7 @@ a{color:inherit}
   margin:28px auto 45px;border:1px solid var(--border);
   border-radius:25px;
   background:
-    linear-gradient(90deg,color-mix(in srgb,var(--t-bg) 83%,transparent),color-mix(in srgb,var(--t-bg) 48%,transparent)),
+    linear-gradient(90deg,rgba(3,25,23,.83),rgba(3,25,23,.48)),
     url("https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1800&q=85") center/cover;
 }
 .hero-content{padding:55px 20px;max-width:850px}
@@ -75,7 +75,7 @@ a{color:inherit}
   display:inline-block;padding:5px 17px;
   border:1px solid var(--border);border-radius:30px;
   color:var(--gold2);font-size:13px;
-  background:color-mix(in srgb,var(--t-acc) 8%,transparent);
+  background:rgba(229,189,104,.08);
 }
 .hero h1{
   color:var(--gold2);font-size:clamp(30px,5vw,49px);
@@ -87,13 +87,13 @@ a{color:inherit}
   text-decoration:none;padding:10px 21px;border-radius:10px;
   font-size:13px;font-weight:700;transition:.25s;
 }
-.btn-gold{background:var(--gold);color:var(--t-bg)}
+.btn-gold{background:var(--gold);color:#10241d}
 .btn-outline{border:1px solid var(--gold);color:var(--gold2)}
 .hero-buttons a:hover{transform:translateY(-3px)}
 
 /* Intro */
 .intro{
-  background:linear-gradient(120deg,var(--t-panel),var(--t-panel));
+  background:linear-gradient(120deg,#123d35,#102a2a);
   border:1px solid var(--border);
   border-right:4px solid var(--gold);
   padding:20px 24px;border-radius:15px;margin-bottom:45px;
@@ -121,7 +121,7 @@ a{color:inherit}
   gap:22px;
 }
 .card{
-  background:linear-gradient(155deg,var(--t-panel),var(--t-bg));
+  background:linear-gradient(155deg,#123b35,#092523);
   border:1px solid var(--border);
   border-radius:19px;overflow:hidden;
   transition:transform .3s,border-color .3s,box-shadow .3s;
@@ -131,7 +131,7 @@ a{color:inherit}
   border-color:var(--gold);
   box-shadow:0 14px 35px rgba(0,0,0,.25);
 }
-.card-image{height:205px;position:relative;overflow:hidden;background:var(--t-panel)}
+.card-image{height:205px;position:relative;overflow:hidden;background:#173a33}
 .card-image img{
   width:100%;height:100%;object-fit:cover;
   display:block;transition:transform .5s;
@@ -141,7 +141,7 @@ a{color:inherit}
   position:absolute;top:13px;right:13px;
   width:43px;height:43px;border-radius:50%;
   display:grid;place-items:center;
-  color:var(--t-panel);background:linear-gradient(135deg,var(--t-acc2),var(--t-acc));
+  color:#16251b;background:linear-gradient(135deg,#ffe6a4,#c99c45);
   font-size:20px;font-weight:800;
   border:2px solid rgba(255,255,255,.35);
 }
@@ -171,7 +171,7 @@ a{color:inherit}
   margin:55px 0;
   padding:35px 25px;text-align:center;
   border:1px solid var(--border);border-radius:20px;
-  background:linear-gradient(135deg,var(--t-panel),var(--t-bg));
+  background:linear-gradient(135deg,#123b34,#092321);
 }
 .hadith .icon{font-size:36px;color:var(--gold)}
 .hadith h2{color:var(--gold);font-size:22px;margin:8px 0}
@@ -183,7 +183,7 @@ a{color:inherit}
 .summary{
   border:1px solid var(--border);border-radius:20px;
   padding:28px;text-align:center;margin:45px 0;
-  background:color-mix(in srgb,var(--t-acc) 6%,transparent);
+  background:rgba(229,189,104,.06);
 }
 .summary h2{color:var(--gold);font-size:22px;margin-bottom:12px}
 .summary p{color:var(--muted);font-size:14px}
@@ -191,7 +191,7 @@ a{color:inherit}
 .back-button{
   display:inline-block;margin-top:22px;
   padding:10px 23px;border-radius:10px;
-  background:var(--gold);color:var(--t-bg);
+  background:var(--gold);color:#10241d;
   font-weight:800;text-decoration:none;transition:.25s;
 }
 .back-button:hover{background:var(--gold2);transform:translateY(-3px)}
@@ -268,8 +268,6 @@ table{max-width:100%}
 <meta name="theme-color" content="#081c20">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-<link rel="stylesheet" href="./app.css">
-<script src="./app.js"></script>
 </head>
 
 <body>
@@ -284,7 +282,7 @@ table{max-width:100%}
       <a href="index.html">⌂ سەرەکی</a>
       <a href="#islam">پایەکانی ئیسلام</a>
       <a href="#iman">پایەکانی باوەڕ</a>
-      <a href="prayer.html">فێربوونی نوێژ</a>
+      <a href="ferbwni-nwez.html">فێربوونی نوێژ</a>
     </div>
   </nav>
 </header>
@@ -583,5 +581,6 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
+<script src="app-shell.js" defer></script>
 </body>
 </html>

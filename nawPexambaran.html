@@ -3,7 +3,7 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#061b1b">
 <title>پێغەمبەران | نوری ئیمان</title>
 
@@ -13,10 +13,10 @@
 
 <style>
 :root {
- --bg:var(--t-bg);
- --card:var(--t-bg);
- --gold:var(--t-acc);
- --gold2:var(--t-acc2);
+ --bg:#061b1b;
+ --card:#0d2927;
+ --gold:#d9b568;
+ --gold2:#f4dfa5;
  --white:#f7f2df;
  --muted:#b7c3b9;
 }
@@ -41,7 +41,7 @@ body::before {
  pointer-events:none;
  opacity:.12;
  background-image:
- radial-gradient(circle at 50% 50%,transparent 0 35px,var(--t-acc) 36px,transparent 37px);
+ radial-gradient(circle at 50% 50%,transparent 0 35px,#c6a45d 36px,transparent 37px);
  background-size:65px 65px;
  z-index:-1;
 }
@@ -54,8 +54,8 @@ header {
  display:flex;
  justify-content:space-between;
  align-items:center;
- border-bottom:1px solid color-mix(in srgb,var(--t-acc) 33%,transparent);
- background:color-mix(in srgb,var(--t-bg) 94%,transparent);
+ border-bottom:1px solid #d9b56855;
+ background:#071d1ceF;
 }
 
 .logo {
@@ -67,7 +67,7 @@ header {
 .home {
  text-decoration:none;
  color:var(--gold2);
- border:1px solid var(--t-acc);
+ border:1px solid #c9a65e;
  padding:9px 18px;
  border-radius:12px;
  font-size:14px;
@@ -79,7 +79,7 @@ header {
  text-align:center;
  padding:65px 15px 35px;
  background:
- linear-gradient(color-mix(in srgb,var(--t-bg) 85%,transparent),color-mix(in srgb,var(--t-bg) 85%,transparent)),
+ linear-gradient(#061b1bd9,#061b1bd9),
  url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=85") center/cover;
 }
 
@@ -140,8 +140,8 @@ header {
  margin-top:15px;
  padding:8px 24px;
  color:var(--gold2);
- background:color-mix(in srgb,var(--t-acc) 9%,transparent);
- border:1px solid color-mix(in srgb,var(--t-acc) 40%,transparent);
+ background:#d9b56817;
+ border:1px solid #d9b56866;
  border-radius:30px;
 }
 
@@ -156,8 +156,8 @@ header {
  width:100%;
  padding:16px 20px;
  border-radius:14px;
- border:1px solid color-mix(in srgb,var(--t-acc) 44%,transparent);
- background:var(--t-panel);
+ border:1px solid #c9a65e70;
+ background:#102b29;
  color:white;
  outline:none;
  font-family:inherit;
@@ -166,7 +166,7 @@ header {
 
 .search-box input:focus {
  border-color:var(--gold);
- box-shadow:0 0 15px color-mix(in srgb,var(--t-acc) 15%,transparent);
+ box-shadow:0 0 15px #d9b56825;
 }
 
 /* GRID */
@@ -178,8 +178,8 @@ header {
 }
 
 .prophet-card {
- background:linear-gradient(145deg,var(--t-panel),var(--t-bg));
- border:1px solid color-mix(in srgb,var(--t-acc) 50%,transparent);
+ background:linear-gradient(145deg,#153631,#092321);
+ border:1px solid #c6a45b80;
  border-radius:24px;
  overflow:hidden;
  text-align:center;
@@ -191,7 +191,7 @@ header {
 .prophet-card:hover {
  transform:translateY(-8px);
  border-color:var(--gold2);
- box-shadow:0 15px 35px color-mix(in srgb,var(--t-acc) 15%,transparent);
+ box-shadow:0 15px 35px #d9b56825;
 }
 
 .image-box {
@@ -215,7 +215,7 @@ header {
  content:"";
  position:absolute;
  inset:0;
- background:linear-gradient(transparent 50%,var(--t-bg));
+ background:linear-gradient(transparent 50%,#092321);
 }
 
 .number {
@@ -228,8 +228,8 @@ header {
  border-radius:50%;
  display:grid;
  place-items:center;
- background:var(--t-acc);
- color:var(--t-bg);
+ background:#d9b568;
+ color:#092321;
  font-size:13px;
  font-weight:bold;
 }
@@ -265,7 +265,7 @@ header {
  border:1px solid var(--gold);
  border-radius:25px;
  background:
- linear-gradient(color-mix(in srgb,var(--t-bg) 94%,transparent),color-mix(in srgb,var(--t-bg) 94%,transparent)),
+ linear-gradient(#092321eF,#092321eF),
  url("https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=85") center/cover;
  box-shadow:0 10px 35px #0005;
 }
@@ -292,8 +292,8 @@ header {
  text-align:center;
  padding:30px 15px;
  margin:35px auto;
- border-top:1px solid color-mix(in srgb,var(--t-acc) 33%,transparent);
- border-bottom:1px solid color-mix(in srgb,var(--t-acc) 33%,transparent);
+ border-top:1px solid #c9a65e55;
+ border-bottom:1px solid #c9a65e55;
 }
 
 .verse .arabic {
@@ -314,7 +314,7 @@ footer {
  text-align:center;
  padding:35px 15px;
  color:var(--muted);
- border-top:1px solid color-mix(in srgb,var(--t-acc) 27%,transparent);
+ border-top:1px solid #c9a65e44;
 }
 
 footer strong {
@@ -460,8 +460,6 @@ table{max-width:100%}
 <meta name="theme-color" content="#081c20">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-<link rel="stylesheet" href="./app.css">
-<script src="./app.js"></script>
 </head>
 
 <body>
@@ -653,5 +651,6 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
+<script src="app-shell.js" defer></script>
 </body>
 </html>
