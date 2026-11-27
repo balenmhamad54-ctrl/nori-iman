@@ -1,9 +1,10 @@
-const CACHE_NAME = "nuri-iman-pwa-v4";
+const CACHE_NAME = "nuri-iman-pwa-v6";
 const CORE_FILES = [
   "./",
   "./index.html",
   "./app.css",
   "./app.js",
+  "./menu.js",
   "./quiz.html",
   "./quran.html",
   "./tasbih.html",
@@ -17,7 +18,6 @@ const CORE_FILES = [
   "./takbirwDastpekrdnyNwezh.html",
   "./about.html",
   "./taqweem.html",
-  "./farmuda.html",
   "./payekaniBawar.html",
   "./talaq.html",
   "./katakanyBang.html",

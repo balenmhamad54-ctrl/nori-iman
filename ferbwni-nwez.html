@@ -11,13 +11,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="./app.css">
 
 <style>
 :root{
  --bg:var(--t-bg);
- --bg2:var(--t-bg);
  --panel:var(--t-panel);
- --panel2:var(--t-panel);
  --gold:var(--t-acc);
  --gold2:var(--t-acc2);
  --white:#f8f5e9;
@@ -26,6 +25,7 @@
  --border:color-mix(in srgb,var(--t-acc) 32%,transparent);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
  background:var(--bg);
  color:var(--white);
@@ -47,7 +47,7 @@ header{
  gap:15px;
  padding:12px 20px;
  border-bottom:1px solid var(--border);
- background:color-mix(in srgb,var(--t-bg) 97%,transparent);
+ background:var(--t-bg);
 }
 .brand{display:flex;align-items:center;gap:13px}
 .logo{
@@ -70,12 +70,17 @@ nav a{
  transition:.2s;
 }
 nav a:hover,nav a.active{
- background:var(--t-card);color:var(--gold2);
+ background:var(--t-card);
+ color:var(--gold2);
 }
 nav i{margin-left:7px;color:var(--gold)}
 .menu-btn{
- display:none;background:transparent;border:1px solid var(--border);
- color:var(--gold);padding:10px 13px;border-radius:10px;
+ display:none;
+ background:transparent;
+ border:1px solid var(--border);
+ color:var(--gold);
+ padding:10px 13px;
+ border-radius:10px;
 }
 
 /* HERO */
@@ -90,7 +95,7 @@ nav i{margin-left:7px;color:var(--gold)}
  padding:28px 15px;
  background:
  radial-gradient(ellipse at 50% 110%,color-mix(in srgb,var(--t-acc) 22%,transparent),transparent 45%),
- linear-gradient(90deg,color-mix(in srgb,var(--t-bg) 40%,transparent),color-mix(in srgb,var(--t-bg) 5%,transparent),color-mix(in srgb,var(--t-bg) 40%,transparent)),
+ linear-gradient(90deg,transparent,color-mix(in srgb,var(--t-bg) 5%,transparent),transparent),
  linear-gradient(180deg,var(--t-card),var(--t-bg) 85%);
  border-bottom:1px solid var(--gold);
 }
@@ -99,6 +104,7 @@ nav i{margin-left:7px;color:var(--gold)}
  position:absolute;
  color:color-mix(in srgb,var(--t-acc) 16%,transparent);
  font-size:120px;
+ pointer-events:none;
 }
 .hero:before{right:7%;top:15px}
 .hero:after{left:7%;bottom:-30px}
@@ -129,18 +135,23 @@ nav i{margin-left:7px;color:var(--gold)}
 }
 .progress-area strong{font-size:13px;color:var(--gold2);white-space:nowrap}
 .progress-track{
- height:11px;background:var(--t-bg);
- flex:1;border-radius:30px;overflow:hidden;
+ height:11px;
+ background:var(--t-bg);
+ flex:1;
+ border-radius:30px;
+ overflow:hidden;
  border:1px solid rgba(255,255,255,.08);
 }
 .progress-fill{
- height:100%;width:0%;
+ height:100%;
+ width:0%;
  background:linear-gradient(90deg,var(--t-acc),var(--t-acc2));
- border-radius:30px;transition:.35s;
+ border-radius:30px;
+ transition:.35s;
 }
 .progress-number{font-size:13px;color:var(--gold2);direction:ltr}
 
-/* MAIN LAYOUT */
+/* MAIN */
 .layout{
  display:grid;
  grid-template-columns:220px minmax(0,1fr);
@@ -162,7 +173,9 @@ nav i{margin-left:7px;color:var(--gold)}
  margin-bottom:10px;
 }
 .side-link{
- display:flex;align-items:center;gap:12px;
+ display:flex;
+ align-items:center;
+ gap:12px;
  padding:14px 12px;
  margin-bottom:8px;
  border:1px solid color-mix(in srgb,var(--t-acc) 20%,transparent);
@@ -174,7 +187,7 @@ nav i{margin-left:7px;color:var(--gold)}
 }
 .side-link i{color:var(--gold);font-size:17px}
 .side-link:hover,.side-link.active{
- background:linear-gradient(120deg,var(--t-acc),var(--t-acc));
+ background:var(--t-acc);
  color:var(--t-bg);
 }
 .side-link:hover i,.side-link.active i{color:var(--t-bg)}
@@ -194,24 +207,40 @@ nav i{margin-left:7px;color:var(--gold)}
  min-height:350px;
 }
 .lesson-image{
+ width:100%;
  min-width:0;
- display:flex;align-items:center;justify-content:center;
+ min-height:250px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
  background:radial-gradient(ellipse,var(--t-card) 0%,var(--t-panel) 65%,transparent 100%);
  border-radius:16px;
  overflow:hidden;
+ padding:10px;
 }
 .lesson-image img{
  display:block;
  width:100%;
+ max-width:100%;
  height:310px;
  object-fit:contain;
+ object-position:center;
 }
-.lesson-info{display:flex;flex-direction:column;justify-content:center;gap:13px}
-.lesson-number{
- color:var(--gold);
- font-size:12px;
- font-weight:700;
+.image-error{
+ color:var(--gold2);
+ text-align:center;
+ padding:25px;
+ line-height:2;
+ font-size:13px;
 }
+.lesson-info{
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ gap:13px;
+}
+.lesson-number{color:var(--gold);font-size:12px;font-weight:700}
 .lesson-info h3{font-size:clamp(19px,2.5vw,27px);color:var(--gold2)}
 .lesson-description{font-size:13px;line-height:2.1;color:#e0e9df}
 .arabic-box{
@@ -240,9 +269,59 @@ nav i{margin-left:7px;color:var(--gold)}
 .tip-box strong{display:block;margin-bottom:5px;font-size:13px}
 .tip-box i{margin-left:7px}
 
+/* AUDIO */
+.audio-panel{
+ background:linear-gradient(135deg,var(--t-card),var(--t-panel));
+ border:1px solid var(--gold);
+ border-radius:16px;
+ padding:15px;
+ margin-top:5px;
+}
+.audio-title{
+ color:var(--gold2);
+ font-size:13px;
+ font-weight:800;
+ margin-bottom:12px;
+ display:flex;
+ align-items:center;
+ gap:8px;
+}
+.audio-buttons{
+ display:flex;
+ gap:9px;
+ flex-wrap:wrap;
+}
+.audio-btn{
+ border:1px solid var(--gold);
+ background:var(--t-acc);
+ color:var(--t-bg);
+ border-radius:11px;
+ padding:11px 15px;
+ font-size:12px;
+ font-weight:800;
+ flex:1;
+ min-width:100px;
+ transition:.2s;
+}
+.audio-btn.stop{
+ background:transparent;
+ color:var(--gold2);
+}
+.audio-btn:active{transform:scale(.97)}
+.audio-btn:disabled{opacity:.45;cursor:not-allowed}
+.audio-status{
+ margin-top:10px;
+ color:var(--muted);
+ font-size:11px;
+ line-height:1.9;
+}
+.audio-status i{margin-left:5px}
+
 /* STEPS */
 .section-heading{
- display:flex;align-items:center;gap:10px;
+ display:flex;
+ align-items:center;
+ gap:10px;
  color:var(--gold2);
  font-size:17px;
  margin:22px 0 13px;
@@ -272,8 +351,9 @@ nav i{margin-left:7px;color:var(--gold)}
 }
 .step-card img{
  width:100%;
- height:130px;
+ height:140px;
  object-fit:contain;
+ object-position:center;
  display:block;
  background:#fff;
 }
@@ -285,17 +365,21 @@ nav i{margin-left:7px;color:var(--gold)}
 }
 .step-number{
  position:absolute;
- top:7px;right:7px;
- width:25px;height:25px;
- display:grid;place-items:center;
+ top:7px;
+ right:7px;
+ width:25px;
+ height:25px;
+ display:grid;
+ place-items:center;
  background:var(--t-card);
  color:white;
  border:2px solid var(--t-acc2);
  border-radius:50%;
  font-size:11px;
+ z-index:2;
 }
 
-/* BOTTOM PANELS */
+/* BOTTOM */
 .bottom-grid{
  display:grid;
  grid-template-columns:repeat(3,minmax(0,1fr));
@@ -313,7 +397,9 @@ nav i{margin-left:7px;color:var(--gold)}
  color:var(--gold2);
  font-size:14px;
  margin-bottom:12px;
- display:flex;align-items:center;gap:8px;
+ display:flex;
+ align-items:center;
+ gap:8px;
 }
 .info-panel p{font-size:12px;color:#e3e9df;line-height:2}
 .info-panel .big-arabic{
@@ -322,22 +408,31 @@ nav i{margin-left:7px;color:var(--gold)}
  text-align:center;
  color:#fff;
  line-height:1.8;
+ overflow-wrap:anywhere;
 }
 .small-progress{
- height:8px;background:var(--t-bg);border-radius:20px;
- overflow:hidden;margin:12px 0 7px;
+ height:8px;
+ background:var(--t-bg);
+ border-radius:20px;
+ overflow:hidden;
+ margin:12px 0 7px;
 }
 .small-progress span{
- display:block;width:0%;height:100%;
+ display:block;
+ width:0%;
+ height:100%;
  background:linear-gradient(90deg,var(--t-acc),var(--t-acc2));
  transition:.3s;
 }
 .badge-done{color:#5be0a0;font-size:12px}
 
-/* NAV BUTTONS */
+/* BUTTONS */
 .controls{
- display:flex;align-items:center;justify-content:space-between;
- gap:10px;margin:20px 0;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ margin:20px 0;
 }
 .control-btn{
  border:1px solid var(--gold);
@@ -345,17 +440,19 @@ nav i{margin-left:7px;color:var(--gold)}
  color:var(--t-bg);
  padding:12px 22px;
  border-radius:12px;
- font-weight:800;font-size:12px;
+ font-weight:800;
+ font-size:12px;
 }
 .control-btn:disabled{opacity:.35;cursor:not-allowed}
-.control-btn.secondary{
- background:transparent;color:var(--gold2);
-}
+.control-btn.secondary{background:transparent;color:var(--gold2)}
 .control-btn:hover:not(:disabled){filter:brightness(1.08)}
 .complete-btn{
- background:var(--t-panel);color:#a8edc4;
+ background:var(--t-panel);
+ color:#a8edc4;
  border:1px solid #31b77b;
- padding:12px 17px;border-radius:12px;font-size:12px;
+ padding:12px 17px;
+ border-radius:12px;
+ font-size:12px;
 }
 
 /* QUIZ */
@@ -363,20 +460,25 @@ nav i{margin-left:7px;color:var(--gold)}
  margin-top:25px;
  background:linear-gradient(140deg,var(--t-panel),var(--t-bg));
  border:1px solid var(--border);
- border-radius:18px;padding:20px;
+ border-radius:18px;
+ padding:20px;
 }
 .quiz h3{color:var(--gold2);font-size:17px;margin-bottom:15px}
 .quiz-question{font-size:14px;line-height:2;margin-bottom:13px}
 .answers{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
 .answer{
- background:var(--t-bg);color:white;
+ background:var(--t-bg);
+ color:white;
  border:1px solid var(--border);
- border-radius:11px;padding:12px;
- text-align:right;font-size:12px;
+ border-radius:11px;
+ padding:12px;
+ text-align:right;
+ font-size:12px;
 }
 .answer:hover{border-color:var(--gold);color:var(--gold2)}
 .answer.correct{background:var(--t-card);border-color:#51d492}
 .answer.wrong{background:#642e2a;border-color:#e98d82}
+.answer:disabled{cursor:default}
 .quiz-result{margin-top:12px;font-size:12px;color:var(--gold2);line-height:2}
 
 /* FOOTER */
@@ -386,7 +488,8 @@ footer{
  border-top:1px solid var(--border);
  text-align:center;
  color:var(--muted);
- font-size:11px;line-height:2.2;
+ font-size:11px;
+ line-height:2.2;
 }
 footer span{color:var(--gold2)}
 footer a{color:var(--gold2);text-decoration:underline}
@@ -399,7 +502,14 @@ footer a{color:var(--gold2);text-decoration:underline}
  .layout{grid-template-columns:1fr}
  .sidebar{min-height:auto}
  .sidebar-links{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
- .side-link{justify-content:center;text-align:center;flex-direction:column;gap:5px;margin:0;padding:10px 4px}
+ .side-link{
+  justify-content:center;
+  text-align:center;
+  flex-direction:column;
+  gap:5px;
+  margin:0;
+  padding:10px 4px;
+ }
  .lesson-card{grid-template-columns:minmax(180px,.8fr) minmax(0,1.2fr)}
 }
 @media(max-width:600px){
@@ -423,28 +533,45 @@ footer a{color:var(--gold2);text-decoration:underline}
  .sidebar-links{grid-template-columns:repeat(3,1fr)}
  .side-link{font-size:10px}
  .side-link i{font-size:16px}
- .lesson-card{grid-template-columns:1fr;gap:12px;padding:12px}
- .lesson-image{max-height:240px}
- .lesson-image img{height:230px}
+ .lesson-card{
+  grid-template-columns:minmax(0,1fr) !important;
+  gap:12px;
+  padding:12px;
+ }
+ .lesson-image{
+  min-height:210px;
+  max-height:260px;
+  padding:8px;
+ }
+ .lesson-image img{
+  height:230px;
+  max-height:230px;
+  object-fit:contain;
+ }
+ .lesson-info{width:100%;min-width:0}
  .lesson-info h3{font-size:21px}
  .lesson-description{font-size:12px}
  .arabic-box .arabic{font-size:32px}
  .steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
- .step-card img{height:105px}
+ .step-card img{height:110px;object-fit:contain}
  .step-card .step-label{font-size:10px}
  .bottom-grid{grid-template-columns:1fr}
  .info-panel{padding:14px}
  .controls{flex-wrap:wrap}
  .control-btn{padding:11px 14px}
  .answers{grid-template-columns:1fr}
+ .audio-buttons{display:grid;grid-template-columns:1fr 1fr}
+ .audio-btn{min-width:0;padding:11px 7px}
+}
+@media(max-width:370px){
+ .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .audio-buttons{grid-template-columns:1fr}
+ .progress-area{gap:5px}
 }
 </style>
-<link rel="stylesheet" href="./app.css">
-<script src="./app.js"></script>
 </head>
 
 <body>
-
 <div class="container">
 
 <header>
@@ -456,7 +583,7 @@ footer a{color:var(--gold2);text-decoration:underline}
   </div>
  </div>
 
- <button class="menu-btn" id="menuBtn">
+ <button class="menu-btn" id="menuBtn" aria-label="کردنەوەی مێنیو">
   <i class="fa-solid fa-bars"></i>
  </button>
 
@@ -487,7 +614,6 @@ footer a{color:var(--gold2);text-decoration:underline}
 
 <div class="layout">
 
-<!-- SIDEBAR -->
 <aside class="sidebar">
  <div class="sidebar-title">
   <i class="fa-solid fa-list"></i> بەشەکانی فێربوون
@@ -511,19 +637,25 @@ footer a{color:var(--gold2);text-decoration:underline}
  </div>
 </aside>
 
-<!-- MAIN -->
 <main class="content" id="lessons">
 
 <section class="lesson-card">
- <div class="lesson-image">
-  <img id="mainImage" src="https://al-hijra.org.nz/assets/images/salah/salah-2-takbir-360.webp" alt="وێنەی هەنگاوی نوێژ" loading="eager">
+
+ <div class="lesson-image" id="mainImageContainer">
+  <img id="mainImage"
+   src="https://al-hijra.org.nz/assets/images/salah/salah-2-takbir-360.webp"
+   alt="وێنەی هەنگاوی نوێژ"
+   loading="eager">
  </div>
 
  <div class="lesson-info">
+
   <div class="lesson-number" id="lessonNumber">هەنگاوی ٢ لە ٩</div>
+
   <h3 id="lessonTitle">وەستان و تکبیرة الإحرام</h3>
+
   <p class="lesson-description" id="lessonDescription">
-   بە وەستانی ڕاست و ئارام، نوێژەکەت دەست پێ بکە. پاشان دەستەکانت بەرز بکەرەوە و تکبیرة الإحرام بڵێ.
+   بە وەستانی ڕاست و ئارام، نوێژەکەت دەست پێ بکە.
   </p>
 
   <div class="arabic-box">
@@ -534,9 +666,43 @@ footer a{color:var(--gold2);text-decoration:underline}
   <div class="tip-box" id="tips">
    <strong><i class="fa-solid fa-lightbulb"></i> تێبینی گرنگ</strong>
    <div id="lessonTip">
-    نیەت لە دڵەوەیە و پێویست ناکات بە دەنگ بیڵێیت. لە کاتی دەستپێکردندا دڵت ئامادەی نوێژ بکە.
+    نیەت لە دڵەوەیە و پێویست ناکات بە دەنگ بیڵێیت.
    </div>
   </div>
+
+  <!-- AUDIO PLAYER -->
+  <div class="audio-panel">
+
+   <div class="audio-title">
+    <i class="fa-solid fa-volume-high"></i>
+    گوێگرتن لە فێرکاریی نوێژ
+   </div>
+
+   <div class="audio-buttons">
+
+    <button class="audio-btn" id="speakBtn">
+     <i class="fa-solid fa-play"></i>
+     دەستپێکردنی خوێندنەوە
+    </button>
+
+    <button class="audio-btn stop" id="pauseBtn">
+     <i class="fa-solid fa-pause"></i>
+     وەستاندن
+    </button>
+
+    <button class="audio-btn stop" id="stopBtn">
+     <i class="fa-solid fa-stop"></i>
+     کۆتاییهێنان
+    </button>
+
+   </div>
+
+   <div class="audio-status" id="audioStatus">
+    دوگمەی دەستپێکردن دابگرە بۆ گوێگرتن لە فێرکارییەکە.
+   </div>
+
+  </div>
+
  </div>
 </section>
 
@@ -550,15 +716,16 @@ footer a{color:var(--gold2);text-decoration:underline}
  <button class="control-btn secondary" id="prevBtn">
   <i class="fa-solid fa-chevron-right"></i> پێشوو
  </button>
+
  <button class="complete-btn" id="completeBtn">
   <i class="fa-solid fa-check"></i> ئەم هەنگاوە فێربووم
  </button>
+
  <button class="control-btn" id="nextBtn">
   داهاتوو <i class="fa-solid fa-chevron-left"></i>
  </button>
 </div>
 
-<!-- BOTTOM INFORMATION -->
 <div class="bottom-grid">
 
  <section class="info-panel">
@@ -588,7 +755,6 @@ footer a{color:var(--gold2);text-decoration:underline}
 
 </div>
 
-<!-- QUIZ -->
 <section class="quiz" id="quiz">
  <h3><i class="fa-solid fa-graduation-cap"></i> تاقیکردنەوەی فێربوونی نوێژ</h3>
  <p class="quiz-question" id="quizQuestion">بە چی نوێژ دەست پێ دەکەین؟</p>
@@ -604,14 +770,20 @@ footer a{color:var(--gold2);text-decoration:underline}
  <p>نووری ئیمان — <span>بە زانست، دڵ ڕووناک بکەوە</span></p>
  <p>
   وێنەکانی فێرکاری:
-  <a href="https://al-hijra.org.nz/how-to-pray-salah" target="_blank" rel="noopener">Al-Hijra – How to Pray Salah</a>
+  <a href="https://al-hijra.org.nz/how-to-pray-salah" target="_blank" rel="noopener">
+   Al-Hijra – How to Pray Salah
+  </a>
  </p>
- <p>تکایە پێش بەکارهێرانی بازرگانی و بڵاوکردنەوەی وێنەکان، مۆڵەتی بەکارهێنانیان بپشکنە.</p>
+ <p>تکایە پێش بەکارهێنانی بازرگانی و بڵاوکردنەوەی وێنەکان، مۆڵەتی بەکارهێنانیان بپشکنە.</p>
 </footer>
 
 </div>
 
 <script>
+/* =================================
+   LESSON DATA
+================================= */
+
 const lessons = [
 {
  title:"نیەتی نوێژ",
@@ -696,35 +868,124 @@ const lessons = [
 }
 ];
 
+/* =================================
+   GENERAL SETTINGS
+================================= */
+
 let current=1;
-let completed=JSON.parse(localStorage.getItem("nooriPrayerLessons")||"[]");
+
+let completed=[];
+
+try{
+ const saved=JSON.parse(localStorage.getItem("nooriPrayerLessons")||"[]");
+ completed=Array.isArray(saved)
+  ? saved.filter(x=>Number.isInteger(x)&&x>=0&&x<lessons.length)
+  : [];
+}catch(e){
+ completed=[];
+}
 
 const $=id=>document.getElementById(id);
 
-function renderSteps(){
- $("stepsContainer").innerHTML="";
- lessons.forEach((lesson,index)=>{
-  const card=document.createElement("div");
-  card.className="step-card"+(index===current?" active":"");
-  card.innerHTML=`
-   <span class="step-number">${index+1}</span>
-   <img src="${lesson.image}" alt="${lesson.short}" loading="lazy">
-   <div class="step-label">${lesson.short}</div>
-  `;
-  card.addEventListener("click",()=>{
-   current=index;
-   renderLesson();
-  });
-  $("stepsContainer").appendChild(card);
- });
+/* =================================
+   IMAGE FALLBACK
+================================= */
+
+function showImageError(container){
+
+ if(container.querySelector(".image-error"))return;
+
+ const fallback=document.createElement("div");
+ fallback.className="image-error";
+
+ fallback.innerHTML=`
+  <i class="fa-solid fa-image"
+  style="font-size:38px;display:block;margin-bottom:10px"></i>
+  وێنەکە لە ئێستادا بەردەست نییە
+ `;
+
+ container.appendChild(fallback);
 }
 
+function fixLessonImage(img){
+
+ img.onerror=function(){
+
+  this.style.display="none";
+  showImageError(this.parentElement);
+
+ };
+}
+
+/* =================================
+   RENDER STEPS
+================================= */
+
+function renderSteps(){
+
+ $("stepsContainer").innerHTML="";
+
+ lessons.forEach((lesson,index)=>{
+
+  const card=document.createElement("div");
+
+  card.className="step-card"+(index===current?" active":"");
+
+  card.innerHTML=`
+   <span class="step-number">${index+1}</span>
+   <img src="${lesson.image}"
+        alt="${lesson.short}"
+        loading="lazy"
+        decoding="async">
+   <div class="step-label">${lesson.short}</div>
+  `;
+
+  fixLessonImage(card.querySelector("img"));
+
+  card.addEventListener("click",()=>{
+
+   current=index;
+   renderLesson();
+
+   $("lessons").scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+   });
+
+  });
+
+  $("stepsContainer").appendChild(card);
+
+ });
+
+}
+
+/* =================================
+   RENDER LESSON
+================================= */
+
 function renderLesson(){
+
  const lesson=lessons[current];
 
- $("mainImage").src=lesson.image;
- $("mainImage").alt=lesson.title;
- $("lessonNumber").textContent=`هەنگاوی ${current+1} لە ${lessons.length}`;
+ const mainImage=$("mainImage");
+
+ mainImage.style.display="block";
+
+ const oldError=$("mainImageContainer").querySelector(".image-error");
+
+ if(oldError)oldError.remove();
+
+ mainImage.src=lesson.image;
+ mainImage.alt=lesson.title;
+ mainImage.onerror=function(){
+  this.style.display="none";
+  showImageError($("mainImageContainer"));
+ };
+
+ $("lessonNumber").textContent=
+ `هەنگاوی ${current+1} لە ${lessons.length}`;
+
  $("lessonTitle").textContent=lesson.title;
  $("lessonDescription").textContent=lesson.description;
  $("arabicText").textContent=lesson.arabic;
@@ -743,100 +1004,450 @@ function renderLesson(){
 
  renderSteps();
  updateProgress();
+
 }
+
+/* =================================
+   PROGRESS
+================================= */
 
 function updateProgress(){
+
  const percent=Math.round(completed.length/lessons.length*100);
+
  $("mainProgress").style.width=percent+"%";
  $("smallProgress").style.width=percent+"%";
+
  $("progressText").textContent=percent+"%";
- $("completedText").textContent=`${completed.length} لە ${lessons.length} هەنگاو تەواو کراوە`;
+
+ $("completedText").textContent=
+ `${completed.length} لە ${lessons.length} هەنگاو تەواو کراوە`;
 
  $("completedMessage").textContent=percent===100
- ? "ماشاءالله! هەموو هەنگاوەکانت تەواو کردووە."
- : "بەردەوام بە، هەنگاو بە هەنگاو فێر دەبیت.";
+  ?"ماشاءالله! هەموو هەنگاوەکانت تەواو کردووە."
+  :"بەردەوام بە، هەنگاو بە هەنگاو فێر دەبیت.";
+
 }
 
+/* =================================
+   NAVIGATION
+================================= */
+
 $("prevBtn").addEventListener("click",()=>{
- if(current>0){current--;renderLesson();}
-});
-$("nextBtn").addEventListener("click",()=>{
- if(current<lessons.length-1){current++;renderLesson();}
-});
-$("completeBtn").addEventListener("click",()=>{
- if(!completed.includes(current)){
-  completed.push(current);
-  localStorage.setItem("nooriPrayerLessons",JSON.stringify(completed));
+
+ if(current>0){
+  current--;
+  renderLesson();
  }
+
+});
+
+$("nextBtn").addEventListener("click",()=>{
+
+ if(current<lessons.length-1){
+  current++;
+  renderLesson();
+ }
+
+});
+
+$("completeBtn").addEventListener("click",()=>{
+
+ if(!completed.includes(current)){
+
+  completed.push(current);
+
+  localStorage.setItem(
+   "nooriPrayerLessons",
+   JSON.stringify(completed)
+  );
+
+ }
+
  updateProgress();
  renderLesson();
+
 });
 
 $("menuBtn").addEventListener("click",()=>{
+
  $("mainNav").classList.toggle("open");
+
 });
 
-/* QUIZ */
+document.querySelectorAll("#mainNav a").forEach(link=>{
+
+ link.addEventListener("click",()=>{
+  $("mainNav").classList.remove("open");
+ });
+
+});
+
+/* =================================
+   AUDIO SYSTEM
+================================= */
+
+let speechQueue=[];
+let speechPosition=0;
+let isReading=false;
+let speechRun=0;
+
+function getAvailableVoices(){
+
+ if(!("speechSynthesis" in window))return [];
+
+ return window.speechSynthesis.getVoices();
+
+}
+
+function getArabicVoice(){
+
+ const voices=getAvailableVoices();
+
+ const arabicVoices=voices.filter(v=>
+  v.lang.toLowerCase().startsWith("ar")
+ );
+
+ // هەوڵی هەڵبژاردنی دەنگی پیاو
+ const maleVoice=arabicVoices.find(v=>
+  /male|masculine|maged|hamed|tarik|naif|majid|abdul/i.test(v.name)
+ );
+
+ return maleVoice||arabicVoices[0]||null;
+
+}
+
+function getKurdishVoice(){
+
+ const voices=getAvailableVoices();
+
+ return voices.find(v=>
+  /^(ku|ckb|kmr)/i.test(v.lang)
+ )||null;
+
+}
+
+function stopReading(){
+
+ speechRun++;
+
+ if("speechSynthesis" in window){
+  window.speechSynthesis.cancel();
+ }
+
+ speechQueue=[];
+ speechPosition=0;
+ isReading=false;
+
+ $("audioStatus").innerHTML=
+  '<i class="fa-solid fa-circle-stop"></i> خوێندنەوە وەستێنرا.';
+
+}
+
+function speakText(text,language,runId){
+
+ return new Promise(resolve=>{
+
+  if(!isReading||runId!==speechRun){
+   resolve();
+   return;
+  }
+
+  const utterance=new SpeechSynthesisUtterance(text);
+
+  utterance.rate=0.85;
+  utterance.pitch=0.85;
+  utterance.volume=1;
+
+  if(language==="ar-SA"){
+
+   utterance.lang="ar-SA";
+
+   const voice=getArabicVoice();
+
+   if(voice){
+    utterance.voice=voice;
+   }
+
+  }else{
+
+   utterance.lang="ckb-IQ";
+
+   const voice=getKurdishVoice();
+
+   if(voice){
+    utterance.voice=voice;
+   }
+
+  }
+
+  let finished=false;
+
+  function finish(){
+
+   if(finished)return;
+
+   finished=true;
+   resolve();
+
+  }
+
+  utterance.onend=finish;
+  utterance.onerror=finish;
+
+  try{
+   window.speechSynthesis.speak(utterance);
+  }catch(e){
+   finish();
+  }
+
+ });
+
+}
+
+async function readNext(runId){
+
+ if(!isReading||runId!==speechRun)return;
+
+ if(speechPosition>=speechQueue.length){
+
+  isReading=false;
+
+  $("audioStatus").innerHTML=
+   '<i class="fa-solid fa-circle-check"></i> خوێندنەوە تەواو بوو. خوا قبووڵی بکات.';
+
+  return;
+
+ }
+
+ const item=speechQueue[speechPosition];
+
+ $("audioStatus").textContent=
+ "ئێستا دەخوێندرێتەوە: "+item.label;
+
+ await speakText(item.text,item.lang,runId);
+
+ if(!isReading||runId!==speechRun)return;
+
+ speechPosition++;
+
+ readNext(runId);
+
+}
+
+function startReading(){
+
+ if(!("speechSynthesis" in window)){
+
+  $("audioStatus").textContent=
+   "وێبگەڕەکەت پشتگیری لە خوێندنەوەی دەنگ ناکات.";
+
+  return;
+
+ }
+
+ stopReading();
+
+ const lesson=lessons[current];
+
+ speechQueue=[
+
+  {
+   label:"ناونیشانی هەنگاو",
+   text:lesson.title,
+   lang:"ckb-IQ"
+  },
+
+  {
+   label:"ڕوونکردنەوە",
+   text:lesson.description,
+   lang:"ckb-IQ"
+  },
+
+  {
+   label:"زیکری عەرەبی",
+   text:lesson.arabic,
+   lang:"ar-SA"
+  },
+
+  {
+   label:"مانای زیکر",
+   text:lesson.meaning,
+   lang:"ckb-IQ"
+  },
+
+  {
+   label:"تێبینی گرنگ",
+   text:lesson.tip,
+   lang:"ckb-IQ"
+  }
+
+ ];
+
+ speechPosition=0;
+ isReading=true;
+
+ const runId=speechRun;
+
+ $("audioStatus").textContent="ئامادەکاری بۆ خوێندنەوە...";
+
+ readNext(runId);
+
+}
+
+/* PLAY */
+
+$("speakBtn").addEventListener("click",startReading);
+
+/* PAUSE / RESUME */
+
+$("pauseBtn").addEventListener("click",()=>{
+
+ if(!("speechSynthesis" in window))return;
+
+ const synth=window.speechSynthesis;
+
+ if(synth.speaking&&!synth.paused){
+
+  synth.pause();
+
+  $("audioStatus").innerHTML=
+   '<i class="fa-solid fa-pause"></i> خوێندنەوە وەستێنرا.';
+
+ }else if(synth.paused){
+
+  synth.resume();
+
+  $("audioStatus").innerHTML=
+   '<i class="fa-solid fa-play"></i> خوێندنەوە بەردەوامە.';
+
+ }else{
+
+  $("audioStatus").textContent=
+   "سەرەتا دوگمەی دەستپێکردن دابگرە.";
+
+ }
+
+});
+
+/* STOP */
+
+$("stopBtn").addEventListener("click",stopReading);
+
+/* LOAD VOICES */
+
+if("speechSynthesis" in window){
+
+ window.speechSynthesis.onvoiceschanged=()=>{
+  window.speechSynthesis.getVoices();
+ };
+
+ window.speechSynthesis.getVoices();
+
+}
+
+/* =================================
+   QUIZ
+================================= */
+
 const questions=[
+
  {
   q:"بە چی نوێژ دەست پێ دەکەین؟",
   a:["الله أكبر","سبحان ربي العظيم","السلام عليكم"],
   correct:0,
   explain:"تکبیرة الإحرام بە الله أكبر نوێژ دەست پێ دەکات."
  },
+
  {
   q:"لە ڕکوعدا کام زیکر دەخوێنرێتەوە؟",
   a:["سبحان ربي الأعلى","سبحان ربي العظيم","رب اغفر لي"],
   correct:1,
   explain:"زیکری ناسراوی ڕکوع سبحان ربي العظيم ـە."
  },
+
  {
   q:"لە سوژدەدا کام زیکر دەخوێنرێتەوە؟",
   a:["سبحان ربي الأعلى","الله أكبر","سمع الله لمن حمده"],
   correct:0,
   explain:"لە سوژدەدا سبحان ربي الأعلى دەخوێنرێتەوە."
  },
+
  {
   q:"نیەت لە کوێیە؟",
   a:["لە دڵ","بە دەنگی بەرز","لەسەر زەوی"],
   correct:0,
   explain:"نیەت لە دڵدایە و پێویست ناکات بە دەنگ بگوترێت."
  }
+
 ];
 
 let quizIndex=0;
+
 function renderQuiz(){
+
  const q=questions[quizIndex];
+
  $("quizQuestion").textContent=q.q;
  $("quizResult").textContent="";
  $("answers").innerHTML="";
 
  q.a.forEach((answer,index)=>{
+
   const btn=document.createElement("button");
+
   btn.className="answer";
   btn.textContent=answer;
+
   btn.addEventListener("click",()=>{
+
    const buttons=$("answers").querySelectorAll("button");
+
    buttons.forEach((b,i)=>{
+
     b.disabled=true;
-    if(i===q.correct)b.classList.add("correct");
-    if(i===index && index!==q.correct)b.classList.add("wrong");
+
+    if(i===q.correct){
+     b.classList.add("correct");
+    }
+
+    if(i===index&&index!==q.correct){
+     b.classList.add("wrong");
+    }
+
    });
+
    $("quizResult").textContent=
-    (index===q.correct?"✓ وەڵامەکەت ڕاستە! ":"✕ وەڵامەکە ڕاست نییە. ")+q.explain;
+    (index===q.correct
+     ?"✓ وەڵامەکەت ڕاستە! "
+     :"✕ وەڵامەکە ڕاست نییە. "
+    )+q.explain;
 
    setTimeout(()=>{
+
     quizIndex=(quizIndex+1)%questions.length;
     renderQuiz();
+
    },2800);
+
   });
+
   $("answers").appendChild(btn);
+
  });
+
 }
+
+/* =================================
+   INITIALIZE
+================================= */
 
 renderLesson();
 renderQuiz();
+
 </script>
 
+<script src="./app.js"></script>
+<script src="./menu.js" defer></script>
 </body>
 </html>
