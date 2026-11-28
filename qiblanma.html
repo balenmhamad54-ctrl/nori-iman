@@ -11,6 +11,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
+<script src="./menu.js" defer></script>
 
 <style>
 :root{
@@ -236,7 +239,7 @@ button,select{font:inherit;cursor:pointer}
 </style>
 </head>
 
-<body>
+<body class="ni-local-dock">
 
 <header class="navbar">
   <a class="logo" href="index.html">نوری ئیمان <span>✦</span></a>
@@ -368,24 +371,6 @@ button,select{font:inherit;cursor:pointer}
     <span>زیاتر</span>
   </button>
 </nav>
-
-<div class="ni-more-overlay" id="niOverlay"></div>
-<div class="ni-more-panel" id="niMorePanel">
-  <div class="ni-panel-head">
-    <span>☾ بەشەکانی نوری ئیمان</span>
-    <button id="niCloseBtn" type="button">✕</button>
-  </div>
-  <div class="ni-more-grid">
-    <a href="dua.html">🤲 دوعا و زیکر</a>
-    <a href="hadith.html">📜 فەرموودە</a>
-    <a href="nwezh.html">🕌 فێربوونی نوێژ</a>
-    <a href="dastnwezh.html">💧 دەستنوێژ</a>
-    <a href="naw.html">✨ ناوەکانی خودا</a>
-    <a href="zakat.html">🌙 زەکات</a>
-    <a href="quiz.html">🧠 تاقیکردنەوەی ئیسلامی</a>
-    <a href="about.html">ℹ️ دەربارەی ئێمە</a>
-  </div>
-</div>
 
 <script>
 (() => {
@@ -556,13 +541,6 @@ button,select{font:inherit;cursor:pointer}
   // draw default (north-up) dial
   render();
 
-  /* ---------- Taskbar ---------- */
-  const moreBtn = $("niMoreBtn"), panel = $("niMorePanel"), overlay = $("niOverlay"), closeBtn = $("niCloseBtn");
-  const openMore = () => { panel.classList.add("show"); overlay.classList.add("show"); };
-  const closeMore = () => { panel.classList.remove("show"); overlay.classList.remove("show"); };
-  moreBtn.addEventListener("click", openMore);
-  closeBtn.addEventListener("click", closeMore);
-  overlay.addEventListener("click", closeMore);
 })();
 </script>
 

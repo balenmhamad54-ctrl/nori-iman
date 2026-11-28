@@ -276,9 +276,12 @@ tr:hover td{background:#e9c77710}
 @media(min-width:768px){.ni-taskbar{width:570px;bottom:calc(22px + env(safe-area-inset-bottom))}.ni-item{font-size:13px}}
 @media(max-width:360px){.ni-taskbar{width:96%;padding:7px 5px}.ni-item{font-size:10px}}
 </style>
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
+<script src="./menu.js" defer></script>
 </head>
 
-<body>
+<body class="ni-local-dock">
 
 <header class="navbar">
   <a class="logo" href="index.html">نوری ئیمان <span>✦</span></a>
@@ -434,24 +437,6 @@ tr:hover td{background:#e9c77710}
     <span>زیاتر</span>
   </button>
 </nav>
-
-<div class="ni-more-overlay" id="niOverlay"></div>
-<div class="ni-more-panel" id="niMorePanel">
-  <div class="ni-panel-head">
-    <span>☾ بەشەکانی نوری ئیمان</span>
-    <button id="niCloseBtn" type="button">✕</button>
-  </div>
-  <div class="ni-more-grid">
-    <a href="dua.html">🤲 دوعا و زیکر</a>
-    <a href="hadith.html">📜 فەرموودە</a>
-    <a href="nwezh.html">🕌 فێربوونی نوێژ</a>
-    <a href="dastnwezh.html">💧 دەستنوێژ</a>
-    <a href="naw.html">✨ ناوەکانی خودا</a>
-    <a href="zakat.html">🌙 زەکات</a>
-    <a href="quiz.html">🧠 تاقیکردنەوەی ئیسلامی</a>
-    <a href="about.html">ℹ️ دەربارەی ئێمە</a>
-  </div>
-</div>
 
 <script src="./prayer-time-core.js"></script>
 <script src="./prayer-time-service.js"></script>
@@ -808,13 +793,6 @@ tr:hover td{background:#e9c77710}
     if (!city()) $("locationStatus").textContent = "لیستی شارەکان بەردەست نییە؛ شارێک هەڵبژێرە.";
   });
 
-  /* ---------- Taskbar ---------- */
-  const moreBtn = $("niMoreBtn"), panel = $("niMorePanel"), overlay = $("niOverlay"), closeBtn = $("niCloseBtn");
-  const openMore = () => { panel.classList.add("show"); overlay.classList.add("show"); };
-  const closeMore = () => { panel.classList.remove("show"); overlay.classList.remove("show"); };
-  moreBtn.addEventListener("click", openMore);
-  closeBtn.addEventListener("click", closeMore);
-  overlay.addEventListener("click", closeMore);
 })();
 </script>
 

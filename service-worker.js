@@ -1,8 +1,11 @@
-const CACHE_NAME = "nuri-iman-pwa-v17";
+const CACHE_NAME = "nuri-iman-pwa-v19";
 const CACHE_PREFIX = "nuri-iman-pwa-";
 const CORE_FILES = [
   "./",
   "./app-shell.js",
+  "./app.css",
+  "./app.js",
+  "./menu.js",
   "./prayer-time-core.js",
   "./prayer-time-service.js",
   "./prayer-timetable-activation.js",
@@ -20,6 +23,12 @@ const CORE_FILES = [
   "./icons/apple-touch-icon.png",
   "./balen.jpg",
   "./boss.jpeg",
+  "./calculator.html",
+  "./hajj.html",
+  "./library.html",
+  "./nameMnal.html",
+  "./umrah.html",
+  "./icon_transparent.png",
   "./about.html",
   "./acadimyayislam.html",
   "./chirokPexambaran.html",
